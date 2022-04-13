@@ -1,5 +1,7 @@
-import React from "react";
+import React from 'react'
 
 export default function FCSuperHomePage() {
-  return <div>FCSuperHomePage</div>;
+  return (
+    <div>FCSuperHomePage</div>
+  )
 }
