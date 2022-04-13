@@ -1,6 +1,6 @@
-import React from 'react'
-import { Card, Form, Button, Container } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
+import React from "react";
+import { Card, Form, Button } from "react-bootstrap";
+import { Link } from "react-router-dom";
 
 export default function FCLoginForm(props) {
   return (
@@ -9,15 +9,11 @@ export default function FCLoginForm(props) {
         <Card.Body>
           <h2 className="text-center mb-4">התחברות</h2>
           <Form>
-            <Form.Group id="text">
+            <Form.Group id="text" controlId="contolEmail">
               <Form.Label>Email</Form.Label>
-              <Form.Control
-                type="text"
-                onChange={props.UpdateEmail}
-                required
-              />
+              <Form.Control type="text" onChange={props.UpdateEmail} required />
             </Form.Group>
-            <Form.Group id="password">
+            <Form.Group id="password" controlId="contolPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
@@ -28,16 +24,18 @@ export default function FCLoginForm(props) {
             <Button
               className="w-100 text-center mt-2"
               variant="success"
-            onClick={props.VerifyUser}
+              onClick={props.VerifyUser}
             >
               התחבר
             </Button>
           </Form>
         </Card.Body>
       </Card>
-      <div id="errMsgLogin" style={{display:'none'}}>שם משתמש או סיסמה שגויים</div>
+      <div id="errMsgLogin" style={{ display: "none" }}>
+        שם משתמש או סיסמה שגויים
+      </div>
       <div className="w-100 text-center mt-2">לא רשומים למערכת</div>
       <Link to="/typeOfUser">לחצו כאן להירשם</Link>
     </div>
-  )
+  );
 }
