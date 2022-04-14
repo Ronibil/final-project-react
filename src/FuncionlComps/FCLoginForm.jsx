@@ -1,6 +1,5 @@
 import React from "react";
 import { Card, Form, Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
 export default function FCLoginForm(props) {
   return (
@@ -35,22 +34,17 @@ export default function FCLoginForm(props) {
           </Form>
         </Card.Body>
       </Card>
-<<<<<<< Updated upstream:src/Functional Components/FCLoginForm.jsx
       <div id="errMsgLogin" style={{ display: "none" }}>
         שם משתמש או סיסמה שגויים
       </div>
-=======
-      <div id="errMsgLogin" style={{ display: 'none' }}>שם משתמש או סיסמה שגויים</div>
->>>>>>> Stashed changes:src/FuncionlComps/FCLoginForm.jsx
       <div className="w-100 text-center mt-2">לא רשומים למערכת</div>
-      {/* <Link to="/typeOfUser">לחצו כאן להירשם</Link> */}
       <Button
-              className="w-100 text-center mt-2"
-              variant="success"
-              onClick={props.navigateToRegister}
-            >
-             לחצו כאן להירשם
-            </Button>
+        className="w-100 text-center mt-2"
+        variant="success"
+        onClick={props.navigateToRegister}
+      >
+        לחצו כאן להירשם
+      </Button>
     </div>
   );
 }
