@@ -52,10 +52,6 @@ export default function FCLoginPage() {
           console.log("err post=", error);
         }
       );
-
-
-
-
   }
 
   const PutDetailsToLocalStorage = (userDetails) => {

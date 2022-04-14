@@ -45,7 +45,7 @@ export default function FCDetailsForStudentSignUp(props) {
   const btnPostStudentRequest = () => {
     const LocalUrl = "http://localhost:49812/requestToJoin/newRequest";
     const currentDate = new Date();
-    const application = {
+    const newStudentRequest = {
       StudentId: sID,
       FullName: sFullName,
       Email: sEmail,
@@ -56,12 +56,12 @@ export default function FCDetailsForStudentSignUp(props) {
       RequestStatus: "onHold",
       RequestDate: currentDate,
     };
-    console.log(application);
+    console.log(newStudentRequest);
 
     console.log("start")
     fetch(LocalUrl, {
       method: "POST",
-      body: JSON.stringify(application),
+      body: JSON.stringify(newStudentRequest),
       headers: new Headers({
         "Content-Type": "application/json; charset=UTF-8",
         Accept: "application/json; charset=UTF-8",
@@ -86,20 +86,20 @@ export default function FCDetailsForStudentSignUp(props) {
   };
 
   //assign state according to client input
-  let ID = (i) => {
+  const ID = (i) => {
     setSID(i.target.value);
   };
-  let Email = (e) => {
+  const Email = (e) => {
     setSEmail(e.target.value);
   };
-  let Name = (n) => {
+  const Name = (n) => {
     setSFullName(n.target.value);
   };
-  let PhoneNumber = (pn) => {
+  const PhoneNumber = (pn) => {
     setSPhone(pn.target.value);
   };
   // transform gender chocie to one char
-  let Gender = (g) => {
+  const Gender = (g) => {
     let oneChar = "";
     if (g.target.value == "male") {
       oneChar = "m";
@@ -110,15 +110,15 @@ export default function FCDetailsForStudentSignUp(props) {
     }
     setSGender(oneChar);
   };
-  let BirthDate = (bd) => {
+  const BirthDate = (bd) => {
     setSBirthdate(bd.target.value);
   };
-  let City = (c) => {
+  const City = (c) => {
     setSCity(c.target.value);
   };
 
 
-  let superDetails = {
+  const superDetails = {
     StudentId: sID,
     FullName: sFullName,
     Email: sEmail,
@@ -126,8 +126,8 @@ export default function FCDetailsForStudentSignUp(props) {
     Gender: sGender,
     BirthDate: sBirthdate,
     City: sCity,
-
   }
+  
   const buttonToReturn = () => {
     if (props.type == "type1") {
       return (<Button id="subBtn" variant="success" onClick={() => btnPostStudentRequest()}>שליחה לאימות נתונים</Button>);

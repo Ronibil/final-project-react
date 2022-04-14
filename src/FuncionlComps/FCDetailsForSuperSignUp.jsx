@@ -1,12 +1,13 @@
 import React from 'react'
 import { Button, Container, Form, Card } from "react-bootstrap";
 import { useState, useEffect } from 'react';
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function FCDetailsForSuperSignUp(props) {
   //קבלה של הנתונים שהסופר סטודנט מהדף הקודם
   const { state } = useLocation()
   const superDetails = state;
+  const navigate = useNavigate();
 
   const [departments, setDepartments] = useState([]);
   // const [superImg, setSuperImg] = useState();// לטפל בהכנסת תמונה
@@ -44,7 +45,7 @@ export default function FCDetailsForSuperSignUp(props) {
   const btnPostSuperStudentRequest = () => {
     const LocalUrl = "http://localhost:49812/requestToJoin/newRequest";
     let currentDate = new Date();
-    let application = {
+    let newSuperRequest = {
       StudentId: superDetails.StudentId,
       FullName: superDetails.FullName,
       Email: superDetails.Email,
@@ -55,12 +56,12 @@ export default function FCDetailsForSuperSignUp(props) {
       RequestStatus: "onHold",
       RequestDate: currentDate,
     };
-    // console.log(application);
+    // console.log(newSuperRequest);
 
     console.log("start")
     fetch(LocalUrl, {
       method: "POST",
-      body: JSON.stringify(application),
+      body: JSON.stringify(newSuperRequest),
       headers: new Headers({
         "Content-Type": "application/json; charset=UTF-8",
         Accept: "application/json; charset=UTF-8",
@@ -89,7 +90,7 @@ export default function FCDetailsForSuperSignUp(props) {
   const PostSuper = (RequsetNum) => {
     const superUrl = "http://localhost:49812/RequestToJoinSuper/newSuperRequest"
 
-    let superRequest = {
+    const superRequest = {
       RequsetNum: RequsetNum,
       StudyYear: superStudyYear,
       Description: superDescription,
@@ -111,15 +112,12 @@ export default function FCDetailsForSuperSignUp(props) {
         console.log('res=', res);
         console.log('res.status', res.status);
         console.log('res.ok', res.ok);
-        if (res.ok) {
-          this.setState({ post: true })
-          setTimeout(this.movePage, 2500)
-        }
         return res.json();
       })
       .then(
         (result) => {
           console.log("FETCH PostSuperRequest= ", result);
+          navigate("/");
         },
         (error) => {
           console.log("err post=", error);
@@ -195,7 +193,7 @@ export default function FCDetailsForSuperSignUp(props) {
                 <Form.Control type="text" onChange={Description} placeholder="רקע קצר כדי שהסטודנטים יכירו אותך" required />
               </Form.Group>
               <br />
-              <Button id="subBtn" variant="success" onClick={()=>btnPostSuperStudentRequest()}>
+              <Button id="subBtn" variant="success" onClick={() => btnPostSuperStudentRequest()}>
                 שלח לאימות נתונים
               </Button>
               <br />
