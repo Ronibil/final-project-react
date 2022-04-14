@@ -4,7 +4,11 @@ import { Link } from "react-router-dom";
 
 export default function FCLoginForm(props) {
   return (
-    <div className="w-100" style={{ maxWidth: "400px" }}>
+    <div className="w-100" style={{
+      maxWidth: "400px",
+      textAlign: "center",
+      paddingTop: 120
+    }}>
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">התחברות</h2>
@@ -31,11 +35,22 @@ export default function FCLoginForm(props) {
           </Form>
         </Card.Body>
       </Card>
+<<<<<<< Updated upstream:src/Functional Components/FCLoginForm.jsx
       <div id="errMsgLogin" style={{ display: "none" }}>
         שם משתמש או סיסמה שגויים
       </div>
+=======
+      <div id="errMsgLogin" style={{ display: 'none' }}>שם משתמש או סיסמה שגויים</div>
+>>>>>>> Stashed changes:src/FuncionlComps/FCLoginForm.jsx
       <div className="w-100 text-center mt-2">לא רשומים למערכת</div>
-      <Link to="/typeOfUser">לחצו כאן להירשם</Link>
+      {/* <Link to="/typeOfUser">לחצו כאן להירשם</Link> */}
+      <Button
+              className="w-100 text-center mt-2"
+              variant="success"
+              onClick={props.navigateToRegister}
+            >
+             לחצו כאן להירשם
+            </Button>
     </div>
   );
 }

@@ -1,7 +1,15 @@
+<<<<<<< Updated upstream
 import { React, useState } from "react";
 import { Container } from "react-bootstrap";
 import FCLoginForm from "../Functional Components/FCLoginForm";
 import { useNavigate } from "react-router-dom";
+=======
+import { React, useState } from 'react'
+import { Container } from 'react-bootstrap'
+import { useNavigate } from 'react-router-dom';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import FCLoginForm from '../FuncionlComps/FCLoginForm';
+>>>>>>> Stashed changes
 
 export default function FCLoginPage() {
   const [Email, setEmail] = useState("");
@@ -50,7 +58,11 @@ export default function FCLoginPage() {
           console.log("err post=", error);
         }
       );
+<<<<<<< Updated upstream
   };
+=======
+  }
+>>>>>>> Stashed changes
 
   const PutDetailsToLocalStorage = (userDetails) => {
     if (localStorage.getItem("user") !== undefined) {
@@ -61,7 +73,11 @@ export default function FCLoginPage() {
 
   const MassegeErrorLogin = () => {
     document.getElementById("errMsgLogin").style.display = "block";
+<<<<<<< Updated upstream
   };
+=======
+  }
+>>>>>>> Stashed changes
 
   const CheckTypeUser = (TypeOfUser) => {
     const UserDetails = {
@@ -69,19 +85,34 @@ export default function FCLoginPage() {
       Password: Password,
     };
 
+    
+
     if (TypeOfUser === "student") {
+<<<<<<< Updated upstream
       Navigate("/studentHomePage", UserDetails);
     } else if (TypeOfUser === "superStudent") {
       Navigate("/SuperHomePage", UserDetails);
     } else if (TypeOfUser === "admin") {
       Navigate("/adminHomePage", UserDetails);
+=======
+      Navigate("/studentHomePage", UserDetails)
+    } else if (TypeOfUser === "superStudent") {
+      Navigate("/SuperHomePage", UserDetails)
+    } else if (TypeOfUser === "admin") {
+      Navigate("/adminHomePage", UserDetails)
+>>>>>>> Stashed changes
     } else {
       console.log("not found");
       MassegeErrorLogin();
     }
   };
 
+  const navigateToRegister = () =>{
+    Navigate("/typeOfUser")
+  }
+
   return (
+<<<<<<< Updated upstream
     <Container
       className="d-flex align-items-center justify-content-center"
       style={{ minHeight: "100vh" }}
@@ -95,4 +126,12 @@ export default function FCLoginPage() {
       }
     </Container>
   );
+=======
+
+    <Container className="d-flex align-items-center justify-content-center"
+      style={{ minHeight: "100vh" }}>
+      <FCLoginForm UpdateEmail={UpdateEmail} UpdatePassword={UpdatePassword} VerifyUser={VerifyUser} navigateToRegister={navigateToRegister} />
+    </Container>
+  )
+>>>>>>> Stashed changes
 }
