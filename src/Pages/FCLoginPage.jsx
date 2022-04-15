@@ -9,7 +9,6 @@ export default function FCLoginPage() {
   const [Password, setPassword] = useState("");
   const Navigate = useNavigate();
 
-
   const UpdateEmail = (e) => {
     let NewEmail = e.target.value;
     setEmail(NewEmail);
@@ -61,30 +60,28 @@ export default function FCLoginPage() {
     localStorage.setItem("user", JSON.stringify(userDetails))
   }
 
-  const MassegeErrorLogin=()=>{
-    document.getElementById("errMsgLogin").style.display="block";
+  const MassegeErrorLogin = () => {
+    document.getElementById("errMsgLogin").style.display = "block";
   }
 
   const CheckTypeUser = (TypeOfUser) => {
-
     const UserDetails = {
       Email: Email,
       Password: Password
     }
-
     if (TypeOfUser === "student") {
-      Navigate("/studentHomePage",UserDetails)
+      Navigate("/studentHomePage", { state: UserDetails })
     } else if (TypeOfUser === "superStudent") {
-      Navigate("/SuperHomePage",UserDetails)
+      Navigate("/SuperHomePage", { state: UserDetails })
     } else if (TypeOfUser === "admin") {
-      Navigate("/adminHomePage",UserDetails)
+      Navigate("/adminHomePage", { state: UserDetails })
     } else {
       console.log("not found");
       MassegeErrorLogin();
     }
   }
 
-  const navigateToRegister = () =>{
+  const navigateToRegister = () => {
     Navigate("/typeOfUser")
   }
 
@@ -92,7 +89,7 @@ export default function FCLoginPage() {
 
     <Container className="d-flex align-items-center justify-content-center"
       style={{ minHeight: "100vh" }}>
-      {<FCLoginForm UpdateEmail={UpdateEmail} UpdatePassword={UpdatePassword} VerifyUser={VerifyUser} navigateToRegister={navigateToRegister}/>}
+      {<FCLoginForm UpdateEmail={UpdateEmail} UpdatePassword={UpdatePassword} VerifyUser={VerifyUser} navigateToRegister={navigateToRegister} />}
     </Container>
 
   )
