@@ -1,11 +1,10 @@
-import React from 'react'
+import React from "react";
 import { Button, Container, Form, Card } from "react-bootstrap";
-import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-
+import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 export default function FCDetailsForStudentSignUp(props) {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const [cities, setCities] = useState([]);
   const [sID, setSID] = useState("");
@@ -39,7 +38,8 @@ export default function FCDetailsForStudentSignUp(props) {
         },
         (error) => {
           console.log("err post=", error);
-        });
+        }
+      );
   }, []);
   // post new student request to db - fetch post
   const btnPostStudentRequest = () => {
@@ -58,7 +58,7 @@ export default function FCDetailsForStudentSignUp(props) {
     };
     console.log(newStudentRequest);
 
-    console.log("start")
+    console.log("start");
     fetch(LocalUrl, {
       method: "POST",
       body: JSON.stringify(newStudentRequest),
@@ -82,7 +82,7 @@ export default function FCDetailsForStudentSignUp(props) {
           console.log("err post=", error);
         }
       );
-    console.log("end")
+    console.log("end");
   };
 
   //assign state according to client input
@@ -101,9 +101,9 @@ export default function FCDetailsForStudentSignUp(props) {
   // transform gender chocie to one char
   const Gender = (g) => {
     let oneChar = "";
-    if (g.target.value == "male") {
+    if (g.target.value === "male") {
       oneChar = "m";
-    } else if (g.target.value == "female") {
+    } else if (g.target.value === "female") {
       oneChar = "f";
     } else {
       oneChar = "o";
@@ -117,7 +117,6 @@ export default function FCDetailsForStudentSignUp(props) {
     setSCity(c.target.value);
   };
 
-
   const superDetails = {
     StudentId: sID,
     FullName: sFullName,
@@ -126,14 +125,31 @@ export default function FCDetailsForStudentSignUp(props) {
     Gender: sGender,
     BirthDate: sBirthdate,
     City: sCity,
-  }
-  
+  };
+
   const buttonToReturn = () => {
-    if (props.type == "type1") {
-      return (<Button id="subBtn" variant="success" onClick={() => btnPostStudentRequest()}>שליחה לאימות נתונים</Button>);
-    }
-    else {
-      return (<Button id="subBtn" variant="success" onClick={() => navigate("/SuperStudentRequestPage2", { state: superDetails })}>המשך למילוי פרופיל אישי</Button>);
+    if (props.type === "type1") {
+      return (
+        <Button
+          id="subBtn"
+          variant="success"
+          onClick={() => btnPostStudentRequest()}
+        >
+          שליחה לאימות נתונים
+        </Button>
+      );
+    } else {
+      return (
+        <Button
+          id="subBtn"
+          variant="success"
+          onClick={() =>
+            navigate("/SuperStudentRequestPage2", { state: superDetails })
+          }
+        >
+          המשך למילוי פרופיל אישי
+        </Button>
+      );
     }
   };
 
@@ -158,7 +174,7 @@ export default function FCDetailsForStudentSignUp(props) {
       className="d-flex align-items-center justify-content-center"
       style={{
         marginTop: 50,
-        marginBottom: 10
+        marginBottom: 10,
       }}
     >
       <div className="w-100" style={{ maxWidth: "400px" }}>
@@ -166,26 +182,47 @@ export default function FCDetailsForStudentSignUp(props) {
           <Card.Body align="center">
             <h2 className="text-center mb-4">HelpMeStudent הרשמה</h2>
             <Form>
-              <Form.Group className="mb-1" >
+              <Form.Group className="mb-1">
                 <Form.Label>תעודת זהות</Form.Label>
-                <Form.Control type="text" placeholder="תעודת זהות" required onChange={ID} />
+                <Form.Control
+                  type="text"
+                  placeholder="תעודת זהות"
+                  required
+                  onChange={ID}
+                />
               </Form.Group>
-              <Form.Group className="mb-1" >
+              <Form.Group className="mb-1">
                 <Form.Label>כתובת מייל</Form.Label>
-                <Form.Control type="email" placeholder="הכנס מייל" required onChange={Email} />
+                <Form.Control
+                  type="email"
+                  placeholder="הכנס מייל"
+                  required
+                  onChange={Email}
+                />
                 <Form.Text className="text-muted">
                   המייל שלך ישמש כאמצאי ההתחברות שלך וקבלת התראות על שיעורים
                 </Form.Text>
               </Form.Group>
-              <Form.Group className="mb-1" >
+              <Form.Group className="mb-1">
                 <Form.Label>שם מלא</Form.Label>
-                <Form.Control type="text" placeholder="שם מלא" required onChange={Name} />
+                <Form.Control
+                  type="text"
+                  placeholder="שם מלא"
+                  required
+                  onChange={Name}
+                />
               </Form.Group>
-              <Form.Group className="mb-1" >
+              <Form.Group className="mb-1">
                 <Form.Label>מספר טלפון</Form.Label>
-                <Form.Control type="text" placeholder="מספר טלפון" required onChange={PhoneNumber} />
+                <Form.Control
+                  type="text"
+                  placeholder="מספר טלפון"
+                  required
+                  onChange={PhoneNumber}
+                />
               </Form.Group>
-              <Form.Group className="mb-1" ><br />
+              <Form.Group className="mb-1">
+                <br />
                 <Form.Label>מין</Form.Label>
                 <Form.Select size="sm" onChange={Gender} required>
                   <option value="" defaultValue hidden>
@@ -196,11 +233,16 @@ export default function FCDetailsForStudentSignUp(props) {
                   <option value="else"> אחר </option>
                 </Form.Select>
               </Form.Group>
-              <Form.Group className="mb-1" >
+              <Form.Group className="mb-1">
                 <Form.Label>תאריך לידה</Form.Label>
-                <Form.Control type="date" placeholder="תאריך לידה" required onChange={BirthDate} />
+                <Form.Control
+                  type="date"
+                  placeholder="תאריך לידה"
+                  required
+                  onChange={BirthDate}
+                />
               </Form.Group>
-              <Form.Group className="mb-1" >
+              <Form.Group className="mb-1">
                 <Form.Label>מקום מגורים</Form.Label>
                 {cityList()}
               </Form.Group>{" "}
@@ -210,5 +252,5 @@ export default function FCDetailsForStudentSignUp(props) {
         </Card>{" "}
       </div>
     </Container>
-  )
+  );
 }
