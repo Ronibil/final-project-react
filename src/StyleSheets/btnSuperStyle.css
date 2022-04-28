@@ -1,0 +1,8 @@
+.btnSuper {
+  border-width: 5px;
+  border-color: rgba(0,0,0,0.2);
+  width: 210px;
+  height: 210px;
+  background-color: #FFFFFF;
+  border-radius: 50px;
+}

@@ -1,6 +1,5 @@
 import { Routes, Route } from "react-router-dom";
 import FCLoginPage from "./Pages/FCLoginPage";
-// import FCRequestPage from "./Pages/FCRequestPage";
 import FCSuperHomePage from "./Pages/FCSuperHomePage";
 import FCStudentHomePage from "./Pages/FCStudentHomePage";
 import FCAdminHomePage from "./Pages/FCAdminHomePage";
@@ -11,13 +10,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import FCStudentRequestPage from './Pages/FCStudentRequestPage';
 import FCSuperStudentRequestPage from './Pages/FCSuperStudentRequestPage.jsx';
 import FCSuperStudentRequestPage2 from './Pages/FCSuperStudentRequestPage2.jsx';
+import FCCreateNewClass from "./FuncionlComps/FCCreateNewClass";
 
 
 export default function App() {
   return (
     <div>
       <Routes>
-        {/* <Route path="/RequestPage" element={<FCRequestPage />} /> */}
         <Route path="/studentHomePage" element={<FCStudentHomePage />} />
         <Route path="/superHomePage" element={<FCSuperHomePage />} />
         <Route path="/adminHomePage" element={<FCAdminHomePage />} />
@@ -31,6 +30,7 @@ export default function App() {
         <Route path='/superHomePage' element={<FCSuperHomePage />} />
         <Route path='/adminHomePage' element={<FCAdminHomePage />} />
         <Route path='/typeOfUser' element={<FCTypeOfUser />} />
+        <Route path='/CreateNewClass' element={<FCCreateNewClass />} />
       </Routes>
     </div>
   );
