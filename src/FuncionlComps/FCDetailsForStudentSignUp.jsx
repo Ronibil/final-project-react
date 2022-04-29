@@ -2,6 +2,7 @@ import React from "react";
 import { Button, Container, Form, Card } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import Multiselect from 'multiselect-react-dropdown';
 
 export default function FCDetailsForStudentSignUp(props) {
   const navigate = useNavigate();
@@ -16,7 +17,7 @@ export default function FCDetailsForStudentSignUp(props) {
   const [sCity, setSCity] = useState("");
 
   // get request - fetch all cities
-  useEffect(() => {
+ {/*useEffect(() => {
     const apiUrlCities = "http://proj.ruppin.ac.il/bgroup92/prod/city/getall";
     fetch(apiUrlCities, {
       method: "GET",
@@ -34,13 +35,14 @@ export default function FCDetailsForStudentSignUp(props) {
       .then(
         (result) => {
           console.log("fetch btnFetchGetCities= ", result);
-          setCities(result);
+          //setCities(result);
         },
         (error) => {
           console.log("err post=", error);
         }
       );
-  }, []);
+  }, []);*/}
+  
   // post new student request to db - fetch post
   const btnPostStudentRequest = () => {
     const LocalUrl = "http://localhost:49812/requestToJoin/newRequest";
@@ -85,6 +87,39 @@ export default function FCDetailsForStudentSignUp(props) {
     console.log("end");
   };
 
+  const getCitiesByinput = (s) => {
+    const filteredCitiesUrl = "http://localhost:49812/city/getCitiesByInput/"
+    if (s !== null && s !== "") {
+    console.log("start")
+      fetch(filteredCitiesUrl + s, {
+        method: "GET",
+        headers: new Headers({
+          "Content-Type": "application/json; charset=UTF-8",
+          Accept: "application/json; charset=UTF-8",
+        }),
+      })
+        .then((res) => {
+          console.log("res=", res);
+          console.log("res.status", res.status);
+          console.log("res.ok", res.ok);
+          return res.json();
+        })
+        .then(
+          (result) => {
+            console.log("fetch btnFetchGetFilteredCities= ", result);
+            setCities(result);
+          },
+          (error) => {
+            console.log("err post=", error);
+          }
+        );
+      console.log("end")
+    }
+    else {
+      setCities(Array(0))
+    }
+  }
+
   //assign state according to client input
   const ID = (i) => {
     setSID(i.target.value);
@@ -114,7 +149,7 @@ export default function FCDetailsForStudentSignUp(props) {
     setSBirthdate(bd.target.value);
   };
   const City = (c) => {
-    setSCity(c.target.value);
+    setSCity(c[0])
   };
 
   const superDetails = {
@@ -154,20 +189,20 @@ export default function FCDetailsForStudentSignUp(props) {
   };
 
   const cityList = () => {
-    let options = cities.map((c) => (
-      <option value={c.CityName} key={c.CityName}>
-        {c.CityName}
-      </option>
-    ));
-    let list = (
-      <div>
-        {" "}
-        <input list="cities" onChange={City} required />
-        <datalist id="cities">{options}</datalist>
-      </div>
-    );
-    return list;
-  };
+    const cityArr = cities.map(c => c.CityName)
+    let selectBox = (
+      <Multiselect
+        options={cityArr}
+        isObject={false}
+        selectionLimit={1}
+        onSelect={City}
+        onSearch={getCitiesByinput}
+        placeholder="הקלד לבחירת ישוב"
+        emptyRecordMsg="לא נמצאה התאמה"
+      />
+    )
+    return selectBox
+  }
 
   return (
     <Container
