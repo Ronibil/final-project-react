@@ -89,7 +89,7 @@ export default function FCLoginPage() {
 
     <Container className="d-flex align-items-center justify-content-center"
       style={{ minHeight: "100vh" }}>
-      {<FCLoginForm UpdateEmail={UpdateEmail} UpdatePassword={UpdatePassword} VerifyUser={()=>{VerifyUser()}} navigateToRegister={navigateToRegister} />}
+      {<FCLoginForm UpdateEmail={UpdateEmail} UpdatePassword={UpdatePassword} VerifyUser={() => { VerifyUser() }} navigateToRegister={navigateToRegister} />}
     </Container>
 
   )

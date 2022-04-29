@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Navigate, useLocation } from "react-router-dom";
 import FCFormSuperDetails from "../FuncionlComps/FCFormSuperDetails";
 import { Container } from "react-bootstrap";
 import FCButtonsForSuperHomePage from "../FuncionlComps/FCButtonsForSuperHomePage";
@@ -58,27 +58,13 @@ export default function FCSuperHomePage() {
       );
     console.log("!!!!!!!!!!!!");
   }, []);
-
-
-  // const runPage = () => {
-  //   if (superDetails !== undefined) {
-  //     console.log("AAAAAAAAAAAAAAAAAAAA");
-  //     return <>{<FCFormSuperDetails superDetails={superDetails} />} {<FCButtonsForSuperHomePage/>}</>;
-  //   } else {
-  //     return (
-  //       <>
-  //         <h2>Loding...</h2>
-  //       </>
-  //     );
-  //   }
-  // };
-
+  
   return (
     <Container
       className="align-items-center justi fy-content-center"
       style={{ minHeight: "30vh" }}
     >
-      {superDetails !== undefined&& <FCFormSuperDetails superDetails={superDetails} />} {<FCButtonsForSuperHomePage />}
+      {superDetails !== undefined ? <><FCFormSuperDetails superDetails={superDetails} /><FCButtonsForSuperHomePage UserDetails={UserDetails} superName={superDetails.FullName} /></> : "Loding..."}
     </Container>
   );
 }
