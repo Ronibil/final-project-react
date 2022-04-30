@@ -97,16 +97,15 @@ export default function FCCreateNewClass() {
       .then(
         (result) => {
           console.log("FETCH PostRequest= ", result);
-
         },
         (error) => {
           console.log("err post=", error);
         });
     console.log("end")
   }
-  const showMessage = () => {
-    document.getElementById("msg").style.display = "block"
-  }
+  // const showMessage = () => {
+  //   document.getElementById("msg").style.display = "block"
+  // }
   // const msgBox = () => {
   //   const style = {
   //     display: "none"

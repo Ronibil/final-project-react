@@ -64,7 +64,7 @@ export default function FCSuperHomePage() {
       className="align-items-center justi fy-content-center"
       style={{ minHeight: "30vh" }}
     >
-      {superDetails !== undefined ? <><FCFormSuperDetails superDetails={superDetails} /><FCButtonsForSuperHomePage UserDetails={UserDetails} superName={superDetails.FullName} /></> : "Loding..."}
+      {superDetails !== undefined ? <><FCFormSuperDetails superDetails={superDetails} /><FCButtonsForSuperHomePage DepartmentName={superDetails.DepartmentName}   Description={superDetails.Description}  StudyYear={superDetails.StudyYear}   UserDetails={UserDetails} superName={superDetails.FullName} /></> : "Loding..."}
     </Container>
   );
 }

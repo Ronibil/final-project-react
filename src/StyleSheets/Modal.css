@@ -14,9 +14,9 @@
   justify-content: center;
 }
 
-#btnBackToHome{
+.btnBackToHome{
   border-radius: 18%;
-  height: 50px;
+  height: 60px;
   width: 120px;
 }
 

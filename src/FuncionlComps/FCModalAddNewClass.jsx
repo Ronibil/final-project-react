@@ -28,7 +28,7 @@ function FCModalAddNewClass({ BackToHomePage,modalOpen,ClassDetailsForModal}) {
       </Modal.Body>
 
       <Modal.Footer className='divBackToHomePage'>        
-        <Button id='btnBackToHome'  onClick={BackToHomePage} variant="success"><b>סגור</b></Button>
+        <Button className='btnBackToHome'  onClick={BackToHomePage} variant="success"><b>חזור לדף הבית</b></Button>
       </Modal.Footer>
     </Modal.Dialog>
     </Modal>
