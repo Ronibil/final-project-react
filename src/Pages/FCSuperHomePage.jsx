@@ -45,7 +45,7 @@ export default function FCSuperHomePage() {
             StudyYear: result.StudyYear,
             NumOfRanks: result.NumOfRanks,
             RankAverage: result.RankAverage,
-            NumOfClass: result.NumOfClass,
+            NumOfClass: result.ClassesHistory.length,
           });
           setClassHistory(result.ClassesHistory);
           setClassFutre(result.FutreClasses);

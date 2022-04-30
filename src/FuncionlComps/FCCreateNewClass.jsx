@@ -1,7 +1,10 @@
 import React from 'react'
-import { Container, Form, Card, Button } from "react-bootstrap";
+import { Container, Form, Card, Button} from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
+import FCModalAddNewClass from './FCModalAddNewClass';
+
+
 
 export default function FCCreateNewClass() {
   const navigate = useNavigate();
@@ -22,6 +25,16 @@ export default function FCCreateNewClass() {
   const [classEndTime, setClassEndTime] = useState("");
   const [classParticipants, setClassParticipants] = useState(0);
   const [classTags, setClassTags] = useState([]);
+  const [modalOpen, setModalOpen] = useState(false)
+
+  //Class Details for Modal!
+  const ClassDetailsForModal = {
+    className:className,
+    classDate:classDate,
+    classStartTime:classStartTime,
+    classEndTime:classEndTime,
+    classParticipants:classParticipants
+  }
 
   useEffect(() => {
     let apiUrlTags = "http://localhost:49812/Tags/getAll"
@@ -76,7 +89,8 @@ export default function FCCreateNewClass() {
       .then(res => {
         console.log('res.ok', res.ok);
         if (res.ok) {
-          showMessage()
+          // showMessage()
+          setModalOpen(true)
         }
         return res.json();
       })
@@ -93,15 +107,19 @@ export default function FCCreateNewClass() {
   const showMessage = () => {
     document.getElementById("msg").style.display = "block"
   }
-  const msgBox = () => {
-    const style = {
-      display: "none"
-    }
-    let msgDiv = <div style={style} id="msg">
-      <div className='green'>השיעור נוצר בהצלחה!</div>
-      <div><button onClick={() => navigate("/SuperHomePage", { state: UserDetails })}>חזור לדף הבית</button></div>
-    </div>
-    return msgDiv
+  // const msgBox = () => {
+  //   const style = {
+  //     display: "none"
+  //   }
+  //   let msgDiv = <div style={style} id="msg">
+  //     <div className='green'>השיעור נוצר בהצלחה!</div>
+  //     <div><button onClick={() => navigate("/SuperHomePage", { state: UserDetails })}>חזור לדף הבית</button></div>
+  //   </div>
+  //   return msgDiv
+  // }
+
+  const BackToHomePage = () => {
+    navigate("/SuperHomePage", { state: UserDetails })
   }
 
 
@@ -183,8 +201,9 @@ export default function FCCreateNewClass() {
             >
               יצירת שיעור
             </Button>
-            {msgBox()}
+            {/* {msgBox()} */}           
           </Card.Body>
+          <FCModalAddNewClass BackToHomePage={BackToHomePage} modalOpen={modalOpen} ClassDetailsForModal={ClassDetailsForModal}    />
         </Card>{" "}
       </div>
     </Container >

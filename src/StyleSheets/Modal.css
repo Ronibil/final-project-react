@@ -1,0 +1,24 @@
+.ModalBody {
+  text-align: right;
+}
+
+.iconModal {
+  display: flex;
+  margin-left: 105px;
+  height: 100px;
+  width: 100px;
+}
+
+.divBackToHomePage {
+  display: flex;
+  justify-content: center;
+}
+
+#btnBackToHome{
+  border-radius: 18%;
+  height: 50px;
+  width: 120px;
+}
+
+
+
