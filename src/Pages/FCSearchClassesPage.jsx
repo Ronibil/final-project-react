@@ -1,17 +1,29 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Container, Button, Row, FormSelect, Col } from "react-bootstrap";
-import { ReactTags } from "react-tag-autocomplete";
+import { Container, Button, Row, Col } from "react-bootstrap";
+import Select from "react-select";
+import makeAnimate from "react-select/animated";
 import ClassCard from "../Functional Components/ClassCard";
 import "../StyleSheets/searchClassesStyle.css";
 import { useNavigate } from "react-router-dom";
 
 export default function SearchClassesPage() {
-  const [selctedOption, setSelctedOption] = useState("");
   const [tags, setTags] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const [classes, setClasses] = useState([]);
   const navigate = useNavigate();
+
+  const animatedComponents = makeAnimate();
+  const customTheme = (theme) => {
+    return {
+      ...theme,
+
+      color: {
+        ...theme.colors,
+        primary25: "green",
+      },
+    };
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,37 +36,6 @@ export default function SearchClassesPage() {
     };
     fetchData();
   }, []);
-
-  const onDelete = useCallback(
-    (tagIndex) => {
-      setTags(tags.filter((_, i) => i !== tagIndex));
-    },
-    [tags]
-  );
-
-  const onAdd = useCallback(
-    (newTag) => {
-      setTags([...tags, newTag]);
-    },
-    [tags]
-  );
-
-  const addTag = () => {
-    const tagList = suggestions.find((value) => value.value === selctedOption);
-
-    if (tagList) {
-      onAdd(tagList);
-      setSelctedOption("");
-    }
-  };
-
-  const selectTag = (e) => {
-    setSelctedOption(parseInt(e.target.value, 0));
-  };
-
-  const clearTag = () => {
-    setTags([]);
-  };
 
   const searchByTags = async () => {
     let tagList = tags.map((tag) => ({ TagName: tag.label }));
@@ -103,49 +84,26 @@ export default function SearchClassesPage() {
   };
 
   return (
-    <Container>
-      <h3>מצא את השיעור שמתאים לך!</h3>
-      <Row>
-        <Col xs={10}>
-          <ReactTags
-            // labelText="בחר תגיות"
-            selected={tags}
-            suggestions={suggestions}
-            onAdd={onAdd}
-            onDelete={onDelete}
-            // noOptionsText="לא נמצאו תגיות התואמות את החיפוש"
+    <Container style={{ alignItems: "center" }}>
+      <h2>מצא את השיעור שמתאים לך!</h2>
+      <Row style={{ alignItems: "center" }}>
+        <Col xs={8}>
+          <Select
+            theme={customTheme}
+            placeholder="בחר תגיות"
+            closeMenuOnSelect={false}
+            components={animatedComponents}
+            onChange={setTags}
+            isMulti
+            isSearchable
+            noOptionsMessage={() => "לא נמצאו תגיות"}
+            className="basic-multi-select m-3 lg-10"
+            options={suggestions}
           />
         </Col>
-        <Col xs={2}>
-          <Button variant="success" onClick={searchByTags}>
+        <Col>
+          <Button className="lg-2" variant="success" onClick={searchByTags}>
             חיפוש
-          </Button>
-        </Col>
-      </Row>
-      <br />
-      <Row className="controls">
-        <Col xs={8}>
-          <FormSelect
-            name="suggestions"
-            value={selctedOption}
-            onChange={selectTag}
-          >
-            <option value="" />
-            {suggestions?.map((suggestion) => {
-              return (
-                <option value={suggestion.value} key={suggestion.value}>
-                  {suggestion.label}
-                </option>
-              );
-            })}
-          </FormSelect>
-        </Col>
-        <Col xs={4}>
-          <Button variant="success" size="sm" onClick={addTag}>
-            הוסף תגית
-          </Button>{" "}
-          <Button variant="success" size="sm" onClick={clearTag}>
-            נקה תגיות
           </Button>
         </Col>
       </Row>

@@ -1,10 +1,12 @@
-import React from 'react'
-import { Container, Form, Card, Button} from "react-bootstrap";
+import React from "react";
+import { Container, Form, Card, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import FCModalAddNewClass from './FCModalAddNewClass';
+import FCModalAddNewClass from "./FCModalAddNewClass";
 
-
+import axios from "axios";
+import Select from "react-select";
+import makeAnimated from "react-select/animated";
 
 export default function FCCreateNewClass() {
   const navigate = useNavigate();
@@ -14,56 +16,54 @@ export default function FCCreateNewClass() {
   const superEmail = state.superEmail;
   const UserDetails = {
     Email: superEmail,
-    Password: superId
-  }
+    Password: superId,
+  };
 
-  const [allTags, setAllTags] = useState([])
+  const [tags, setTags] = useState([]);
+  const [suggestions, setSuggestions] = useState([]);
   const [className, setClassName] = useState("");
   const [classDescription, setClassDescription] = useState("");
   const [classDate, setClassDate] = useState("");
   const [classStartTime, seTclassStartTime] = useState("");
   const [classEndTime, setClassEndTime] = useState("");
   const [classParticipants, setClassParticipants] = useState(0);
-  const [classTags, setClassTags] = useState([]);
-  const [modalOpen, setModalOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const animatedComponents = makeAnimated();
+  const customTheme = (theme) => {
+    return {
+      ...theme,
+      colors: {
+        ...theme.colors,
+        primary25: "limegreen",
+        primaty: "green",
+      },
+    };
+  };
 
   //Class Details for Modal!
   const ClassDetailsForModal = {
-    className:className,
-    classDate:classDate,
-    classStartTime:classStartTime,
-    classEndTime:classEndTime,
-    classParticipants:classParticipants
-  }
+    className: className,
+    classDate: classDate,
+    classStartTime: classStartTime,
+    classEndTime: classEndTime,
+    classParticipants: classParticipants,
+  };
 
   useEffect(() => {
-    let apiUrlTags = "http://localhost:49812/Tags/getAll"
-    fetch(apiUrlTags, {
-      method: "GET",
-      headers: new Headers({
-        "Content-Type": "application/json; charset=UTF-8",
-        "Accept": "application/json; charset=UTF-8",
-      }),
-    })
-      .then((res) => {
-        console.log("res=", res);
-        console.log("res.status", res.status);
-        console.log("res.ok", res.ok);
-        return res.json();
-      })
-      .then(
-        (result) => {
-          console.log("fetch btnFetchGetCities= ", result);
-          setAllTags(result)
-        },
-        (error) => {
-          console.log("err post=", error);
-        }
-      );
-  }, [])
+    const fetchData = async () => {
+      const { data } = await axios.get("http://localhost:49812/Tags/getAll");
+      let suggestionList = data.map((suggestion, index) => {
+        return { value: index, label: suggestion };
+      });
+
+      setSuggestions(suggestionList);
+    };
+    fetchData();
+  }, []);
 
   const postNewClass = () => {
-    const Url = "http://localhost:49812/Class/PostNewClass"
+    const Url = "http://localhost:49812/Class/PostNewClass";
     const newClassObj = {
       ClassDate: classDate,
       StartTime: classStartTime,
@@ -73,24 +73,23 @@ export default function FCCreateNewClass() {
       NumOfParticipants: classParticipants,
       ClassDescription: classDescription,
       SuperName: superName,
-      Tags: classTags
+      Tags: tags,
     };
-    console.log(newClassObj)
-    console.log("start")
-    fetch(Url,
-      {
-        method: 'POST',
-        body: JSON.stringify(newClassObj),
-        headers: new Headers({
-          'Content-Type': 'application/json; charset=UTF-8',
-          'Accept': 'application/json; charset=UTF-8',
-        })
-      })
-      .then(res => {
-        console.log('res.ok', res.ok);
+    console.log(newClassObj);
+    console.log("start");
+    fetch(Url, {
+      method: "POST",
+      body: JSON.stringify(newClassObj),
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json; charset=UTF-8",
+      }),
+    })
+      .then((res) => {
+        console.log("res.ok", res.ok);
         if (res.ok) {
           // showMessage()
-          setModalOpen(true)
+          setModalOpen(true);
         }
         return res.json();
       })
@@ -100,9 +99,10 @@ export default function FCCreateNewClass() {
         },
         (error) => {
           console.log("err post=", error);
-        });
-    console.log("end")
-  }
+        }
+      );
+    console.log("end");
+  };
   // const showMessage = () => {
   //   document.getElementById("msg").style.display = "block"
   // }
@@ -118,9 +118,8 @@ export default function FCCreateNewClass() {
   // }
 
   const BackToHomePage = () => {
-    navigate("/SuperHomePage", { state: UserDetails })
-  }
-
+    navigate("/SuperHomePage", { state: UserDetails });
+  };
 
   return (
     <Container
@@ -135,7 +134,7 @@ export default function FCCreateNewClass() {
           <Card.Body align="center">
             <h2 className="text-center mb-4">יצירת שיעור חדש</h2>
             <Form>
-              <Form.Group className="mb-1">
+              <Form.Group className="mb-3">
                 <Form.Label>שם השיעור</Form.Label>
                 <Form.Control
                   type="text"
@@ -144,16 +143,17 @@ export default function FCCreateNewClass() {
                   onChange={(e) => setClassName(e.target.value)}
                 />
               </Form.Group>
-              <Form.Group className="mb-1">
+              <Form.Group className="mb-3">
                 <Form.Label>תיאור השיעור</Form.Label>
                 <Form.Control
-                  type="email"
+                  as="textarea"
+                  rows={3}
                   placeholder="הכנס את תיאור השיעור / מערך השיעור"
                   required
                   onChange={(e) => setClassDescription(e.target.value)}
                 />
               </Form.Group>
-              <Form.Group className="mb-1">
+              <Form.Group className="mb-3">
                 <Form.Label>תאריך השיעור</Form.Label>
                 <Form.Control
                   type="date"
@@ -161,8 +161,9 @@ export default function FCCreateNewClass() {
                   required
                   onChange={(e) => setClassDate(e.target.value)}
                 />
-              </Form.Group><br />
-              <Form.Group className="mb-1">
+              </Form.Group>
+
+              <Form.Group className="mb-3">
                 <Form.Label>שעת התחלה</Form.Label>
                 <Form.Control
                   type="time"
@@ -170,8 +171,9 @@ export default function FCCreateNewClass() {
                   required
                   onChange={(e) => seTclassStartTime(e.target.value)}
                 />
-              </Form.Group><br />
-              <Form.Group className="mb-1">
+              </Form.Group>
+
+              <Form.Group className="mb-3">
                 <Form.Label>שעת סיום</Form.Label>
                 <Form.Control
                   type="time"
@@ -179,19 +181,39 @@ export default function FCCreateNewClass() {
                   required
                   onChange={(e) => setClassEndTime(e.target.value)}
                 />
-              </Form.Group><br />
-              <Form.Group className="mb-1">
+              </Form.Group>
+
+              <Form.Group className="mb-3">
                 <Form.Label>מספר משתתפים</Form.Label>
-                <Form.Select size="sm" required onChange={(e) => setClassParticipants(e.target.value)}>
-                  <option value="" defaultValue hidden>בחר</option>
+                <Form.Select
+                  size="sm"
+                  required
+                  onChange={(e) => setClassParticipants(e.target.value)}
+                >
+                  <option value="" defaultValue hidden>
+                    בחר
+                  </option>
                   <option value="1"> 1 </option>
                   <option value="2"> 2 </option>
                   <option value="3"> 3 </option>
                   <option value="4"> 4 </option>
                 </Form.Select>
               </Form.Group>
-              <Form.Label>בחר תגיות</Form.Label>
-              {/* תגיות */}
+              <Form.Group className="mb-3">
+                <Form.Label>בחר תגיות</Form.Label>
+                <Select
+                  theme={customTheme}
+                  placeholder="בחר תגיות"
+                  closeMenuOnSelect={false}
+                  components={animatedComponents}
+                  onChange={setTags}
+                  isMulti
+                  isSearchable
+                  noOptionsMessage={() => "לא נמצאו תגיות"}
+                  className="basic-multi-select mb-3"
+                  options={suggestions}
+                />
+              </Form.Group>
             </Form>
             <Button
               id="subBtn"
@@ -200,11 +222,15 @@ export default function FCCreateNewClass() {
             >
               יצירת שיעור
             </Button>
-            {/* {msgBox()} */}           
+            {/* {msgBox()} */}
           </Card.Body>
-          <FCModalAddNewClass BackToHomePage={BackToHomePage} modalOpen={modalOpen} ClassDetailsForModal={ClassDetailsForModal}    />
+          <FCModalAddNewClass
+            BackToHomePage={BackToHomePage}
+            modalOpen={modalOpen}
+            ClassDetailsForModal={ClassDetailsForModal}
+          />
         </Card>{" "}
       </div>
-    </Container >
-  )
+    </Container>
+  );
 }
