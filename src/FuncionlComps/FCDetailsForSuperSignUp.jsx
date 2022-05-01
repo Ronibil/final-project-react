@@ -140,7 +140,7 @@ export default function FCDetailsForSuperSignUp(props) {
       }}
     >
       <div className="w-100" style={{ maxWidth: "400px" }}>
-        <Card id="fldBlock">
+        <Card>
           <Card.Body align="center">
             <h2 className="text-center mb-4">יצירת פרופיל אישי</h2>
             <Form>

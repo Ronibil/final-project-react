@@ -1,13 +1,14 @@
 import React from "react";
 import { Button, Container, Form, Card } from "react-bootstrap";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Multiselect from 'multiselect-react-dropdown';
+
+import AsyncSelect from "react-select/async";
+import axios from "axios";
 
 export default function FCDetailsForStudentSignUp(props) {
   const navigate = useNavigate();
 
-  const [cities, setCities] = useState([]);
   const [sID, setSID] = useState("");
   const [sEmail, setSEmail] = useState("");
   const [sFullName, setSFullName] = useState("");
@@ -16,33 +17,6 @@ export default function FCDetailsForStudentSignUp(props) {
   const [sBirthdate, setSBirthdate] = useState("");
   const [sCity, setSCity] = useState("");
 
-  // get request - fetch all cities
- {/*useEffect(() => {
-    const apiUrlCities = "http://proj.ruppin.ac.il/bgroup92/prod/city/getall";
-    fetch(apiUrlCities, {
-      method: "GET",
-      headers: new Headers({
-        "Content-Type": "application/json; charset=UTF-8",
-        Accept: "application/json; charset=UTF-8",
-      }),
-    })
-      .then((res) => {
-        console.log("res=", res);
-        console.log("res.status", res.status);
-        console.log("res.ok", res.ok);
-        return res.json();
-      })
-      .then(
-        (result) => {
-          console.log("fetch btnFetchGetCities= ", result);
-          //setCities(result);
-        },
-        (error) => {
-          console.log("err post=", error);
-        }
-      );
-  }, []);*/}
-  
   // post new student request to db - fetch post
   const btnPostStudentRequest = () => {
     const LocalUrl = "http://localhost:49812/requestToJoin/newRequest";
@@ -87,69 +61,24 @@ export default function FCDetailsForStudentSignUp(props) {
     console.log("end");
   };
 
-  const getCitiesByinput = (s) => {
-    const filteredCitiesUrl = "http://localhost:49812/city/getCitiesByInput/"
-    if (s !== null && s !== "") {
-    console.log("start")
-      fetch(filteredCitiesUrl + s, {
-        method: "GET",
-        headers: new Headers({
-          "Content-Type": "application/json; charset=UTF-8",
-          Accept: "application/json; charset=UTF-8",
-        }),
-      })
-        .then((res) => {
-          console.log("res=", res);
-          console.log("res.status", res.status);
-          console.log("res.ok", res.ok);
-          return res.json();
-        })
-        .then(
-          (result) => {
-            console.log("fetch btnFetchGetFilteredCities= ", result);
-            setCities(result);
-          },
-          (error) => {
-            console.log("err post=", error);
-          }
-        );
-      console.log("end")
-    }
-    else {
-      setCities(Array(0))
-    }
-  }
-
-  //assign state according to client input
-  const ID = (i) => {
-    setSID(i.target.value);
-  };
-  const Email = (e) => {
-    setSEmail(e.target.value);
-  };
-  const Name = (n) => {
-    setSFullName(n.target.value);
-  };
-  const PhoneNumber = (pn) => {
-    setSPhone(pn.target.value);
-  };
-  // transform gender chocie to one char
-  const Gender = (g) => {
-    let oneChar = "";
-    if (g.target.value === "male") {
-      oneChar = "m";
-    } else if (g.target.value === "female") {
-      oneChar = "f";
+  const fetchCities = (inputValue, callback) => {
+    if (!inputValue) {
+      callback([]);
     } else {
-      oneChar = "o";
+      setTimeout(async () => {
+        const { data } = await axios.get(
+          "http://localhost:49812/city/getCitiesByInput/" + inputValue
+        );
+        const tempArray = [];
+        data.forEach((element) => {
+          tempArray.push({
+            label: `${element.CityName}`,
+            value: element.CityName,
+          });
+        });
+        callback(tempArray);
+      });
     }
-    setSGender(oneChar);
-  };
-  const BirthDate = (bd) => {
-    setSBirthdate(bd.target.value);
-  };
-  const City = (c) => {
-    setSCity(c[0])
   };
 
   const superDetails = {
@@ -188,22 +117,6 @@ export default function FCDetailsForStudentSignUp(props) {
     }
   };
 
-  const cityList = () => {
-    const cityArr = cities.map(c => c.CityName)
-    let selectBox = (
-      <Multiselect
-        options={cityArr}
-        isObject={false}
-        selectionLimit={1}
-        onSelect={City}
-        onSearch={getCitiesByinput}
-        placeholder="הקלד לבחירת ישוב"
-        emptyRecordMsg="לא נמצאה התאמה"
-      />
-    )
-    return selectBox
-  }
-
   return (
     <Container
       className="d-flex align-items-center justify-content-center"
@@ -213,78 +126,94 @@ export default function FCDetailsForStudentSignUp(props) {
       }}
     >
       <div className="w-100" style={{ maxWidth: "400px" }}>
-        <Card id="fldBlock">
+        <Card>
           <Card.Body align="center">
             <h2 className="text-center mb-4">HelpMeStudent הרשמה</h2>
             <Form>
-              <Form.Group className="mb-1">
+              <Form.Group className="mb-2">
                 <Form.Label>תעודת זהות</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="תעודת זהות"
                   required
-                  onChange={ID}
+                  onChange={(e) => setSID(e.target.value)}
                 />
               </Form.Group>
-              <Form.Group className="mb-1">
+              <Form.Group className="mb-2">
                 <Form.Label>כתובת מייל</Form.Label>
                 <Form.Control
                   type="email"
                   placeholder="הכנס מייל"
                   required
-                  onChange={Email}
+                  onChange={(e) => {
+                    setSEmail(e.target.value);
+                  }}
                 />
                 <Form.Text className="text-muted">
                   המייל שלך ישמש כאמצאי ההתחברות שלך וקבלת התראות על שיעורים
                 </Form.Text>
               </Form.Group>
-              <Form.Group className="mb-1">
+              <Form.Group className="mb-2">
                 <Form.Label>שם מלא</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="שם מלא"
                   required
-                  onChange={Name}
+                  onChange={(e) => {
+                    setSFullName(e.target.value);
+                  }}
                 />
               </Form.Group>
-              <Form.Group className="mb-1">
+              <Form.Group className="mb-2">
                 <Form.Label>מספר טלפון</Form.Label>
                 <Form.Control
                   type="text"
                   placeholder="מספר טלפון"
                   required
-                  onChange={PhoneNumber}
+                  onChange={(e) => {
+                    setSPhone(e.target.value);
+                  }}
                 />
               </Form.Group>
-              <Form.Group className="mb-1">
-                <br />
+              <Form.Group className="mb-2">
                 <Form.Label>מין</Form.Label>
-                <Form.Select size="sm" onChange={Gender} required>
+                <Form.Select
+                  size="sm"
+                  onChange={(e) => setSGender(e.target.value)}
+                  required
+                >
                   <option value="" defaultValue hidden>
                     בחר
                   </option>
-                  <option value="male"> זכר </option>
-                  <option value="female"> נקבה </option>
-                  <option value="else"> אחר </option>
+                  <option value="m"> זכר </option>
+                  <option value="f"> נקבה </option>
+                  <option value="o"> אחר </option>
                 </Form.Select>
               </Form.Group>
-              <Form.Group className="mb-1">
+              <Form.Group className="mb-2">
                 <Form.Label>תאריך לידה</Form.Label>
                 <Form.Control
                   type="date"
                   placeholder="תאריך לידה"
                   required
-                  onChange={BirthDate}
+                  onChange={(e) => {
+                    setSBirthdate(e.target.value);
+                  }}
                 />
               </Form.Group>
-              <Form.Group className="mb-1">
+              <Form.Group className="mb-3">
                 <Form.Label>מקום מגורים</Form.Label>
-                {cityList()}
+                <AsyncSelect
+                  isRtl
+                  loadOptions={fetchCities}
+                  required
+                  onChange={(e) => setSCity(e.value)}
+                />
               </Form.Group>{" "}
+              {buttonToReturn()}
             </Form>
           </Card.Body>
-          {buttonToReturn()}
-        </Card>{" "}
+        </Card>
       </div>
     </Container>
   );

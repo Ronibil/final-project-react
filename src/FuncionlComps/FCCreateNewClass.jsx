@@ -73,7 +73,7 @@ export default function FCCreateNewClass() {
       NumOfParticipants: classParticipants,
       ClassDescription: classDescription,
       SuperName: superName,
-      Tags: tags,
+      Tags: tags.map((t) => t.suggestion),
     };
     console.log(newClassObj);
     console.log("start");
