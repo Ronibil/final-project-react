@@ -12,6 +12,7 @@ import FCSuperStudentRequestPage from './Pages/FCSuperStudentRequestPage.jsx';
 import FCSuperStudentRequestPage2 from './Pages/FCSuperStudentRequestPage2.jsx';
 import FCCreateNewClass from "./FuncionlComps/FCCreateNewClass";
 import FCUpdateProfileSuper from "./Pages/FCUpdateProfileSuper";
+import FCHistoryClassSuper from "./Pages/FCHistoryClassSuper";
 
 
 export default function App() {
@@ -32,7 +33,8 @@ export default function App() {
         <Route path='/adminHomePage' element={<FCAdminHomePage />} />
         <Route path='/typeOfUser' element={<FCTypeOfUser />} />
         <Route path='/CreateNewClass' element={<FCCreateNewClass />} />
-        <Route path='/UpdateProfileSuper' element={<FCUpdateProfileSuper/>} />
+        <Route path='/UpdateProfileSuper' element={<FCUpdateProfileSuper />} />
+        <Route path='/HistoryClassSuper' element={<FCHistoryClassSuper />} />
       </Routes>
     </div>
   );

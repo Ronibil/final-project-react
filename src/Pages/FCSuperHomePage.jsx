@@ -54,6 +54,7 @@ export default function FCSuperHomePage() {
             StudyYear={superDetails.StudyYear}
             UserDetails={UserDetails}
             superName={superDetails.FullName}
+            HistoryClass= {classHistory}
           />
         </>
       ) : (

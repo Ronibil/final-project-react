@@ -3,7 +3,7 @@ import { Row, Col, Card } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom';
 import "../StyleSheets/btnSuperStyle.css";
 
-export default function FCButtonsForSuperHomePage({ UserDetails, superName, DepartmentName, Description, StudyYear }) {
+export default function FCButtonsForSuperHomePage({ UserDetails, superName, DepartmentName, Description, StudyYear, HistoryClass }) {
   const navigate = useNavigate();
   const superDetails = {
     superEmail: UserDetails.Email,
@@ -19,6 +19,12 @@ export default function FCButtonsForSuperHomePage({ UserDetails, superName, Depa
     StudyYear: StudyYear
   }
 
+  const superDetailsForHistoryClass = {
+    superEmail: UserDetails.Email,
+    superPassword: UserDetails.Password,
+    HistoryClass: HistoryClass
+  }
+
 
   return (
     <div >
@@ -31,7 +37,7 @@ export default function FCButtonsForSuperHomePage({ UserDetails, superName, Depa
           <br />
           <Row>
             <Col xs={6}><button className='btnSuper' onClick={() => navigate('/UpdateProfileSuper', { state: superDetailsForUpdateProfile })} >עריכת הפרופיל שלי</button></Col>
-            <Col xs={6}><button className='btnSuper'>היסטורית שיעורים</button></Col>
+            <Col xs={6}><button className='btnSuper' onClick={() => navigate('/HistoryClassSuper', { state: superDetailsForHistoryClass })}>היסטורית שיעורים</button></Col>
           </Row>
         </Card.Body>
       </Card>
