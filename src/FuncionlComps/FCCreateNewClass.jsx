@@ -64,6 +64,7 @@ export default function FCCreateNewClass() {
 
   const postNewClass = () => {
     const Url = "http://localhost:49812/Class/PostNewClass";
+    const tagList = tags.map((tag) => ({ TagName: tag.label }));
     const newClassObj = {
       ClassDate: classDate,
       StartTime: classStartTime,
@@ -73,7 +74,7 @@ export default function FCCreateNewClass() {
       NumOfParticipants: classParticipants,
       ClassDescription: classDescription,
       SuperName: superName,
-      Tags: tags.map((tag) => ({ TagName: tag.label })),
+      Tags: tagList,
     };
     console.log(newClassObj);
     console.log("start");
