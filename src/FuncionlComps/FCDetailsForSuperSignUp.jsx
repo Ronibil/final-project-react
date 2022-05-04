@@ -10,7 +10,6 @@ export default function FCDetailsForSuperSignUp(props) {
   const navigate = useNavigate();
 
   const [departments, setDepartments] = useState([]);
-  // const [superImg, setSuperImg] = useState();// לטפל בהכנסת תמונה
   const [superDepartmet, setSuperDepartmet] = useState("");
   const [superStudyYear, setSuperStudyYear] = useState("");
   const [superDescription, setSuperDescription] = useState("");
@@ -155,9 +154,10 @@ export default function FCDetailsForSuperSignUp(props) {
                 <Form.Control
                   type="file"
                   id="formFile"
-                  onChange={(e) =>
-                    setSuperImage(URL.createObjectURL(e.target.files[0]))
-                  }
+                  onChange={(e) => {
+                    setSuperImage(URL.createObjectURL(e.target.files[0]));
+                    console.log(e.target.files[0]);
+                  }}
                   required
                 />
               </Form.Group>

@@ -1,33 +1,41 @@
 import React from "react";
 import { Card, Form, Button } from "react-bootstrap";
 
-export default function FCLoginForm(props) {
+export default function FCLoginForm({
+  UpdateEmail,
+  UpdatePassword,
+  VerifyUser,
+  navigateToRegister,
+}) {
   return (
-    <div className="w-100" style={{
-      maxWidth: "400px",
-      textAlign: "center",
-      paddingTop: 120
-    }}>
+    <div
+      className="w-100"
+      style={{
+        maxWidth: "400px",
+        textAlign: "center",
+        paddingTop: 120,
+      }}
+    >
       <Card>
         <Card.Body>
           <h2 className="text-center mb-4">התחברות</h2>
           <Form>
             <Form.Group id="text" controlId="contolEmail">
               <Form.Label>Email</Form.Label>
-              <Form.Control type="text" onChange={props.UpdateEmail} required />
+              <Form.Control type="text" onChange={UpdateEmail} required />
             </Form.Group>
             <Form.Group id="password" controlId="contolPassword">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"
-                onChange={props.UpdatePassword}
+                onChange={UpdatePassword}
                 required
               />
             </Form.Group>
             <Button
               className="w-100 text-center mt-2"
               variant="success"
-              onClick={props.VerifyUser}
+              onClick={VerifyUser}
             >
               התחבר
             </Button>
@@ -37,11 +45,11 @@ export default function FCLoginForm(props) {
       <div id="errMsgLogin" style={{ display: "none" }}>
         שם משתמש או סיסמה שגויים
       </div>
-      <div className="w-100 text-center mt-2">לא רשומים למערכת</div>
+      <div className="w-100 text-center mt-2">?לא רשומים למערכת</div>
       <Button
         className="w-100 text-center mt-2"
         variant="success"
-        onClick={props.navigateToRegister}
+        onClick={navigateToRegister}
       >
         לחצו כאן להירשם
       </Button>

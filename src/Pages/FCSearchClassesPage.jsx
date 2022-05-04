@@ -38,12 +38,17 @@ export default function SearchClassesPage() {
   }, []);
 
   const searchByTags = async () => {
-    let tagList = tags.map((tag) => ({ TagName: tag.label }));
-    const { data } = await axios.post(
-      "http://localhost:49812/Class/GetClassesByTags",
-      tagList
-    );
-    setClasses(data);
+    try {
+      if (tags.length !== 0) {
+        let tagList = tags.map((tag) => ({ TagName: tag.label }));
+        console.log(tagList);
+        const { data } = await axios.post(
+          "http://localhost:49812/Class/GetClassesByTags",
+          tagList
+        );
+        setClasses(data);
+      }
+    } catch (error) {}
   };
 
   const register = (classCode) => {
@@ -84,10 +89,13 @@ export default function SearchClassesPage() {
   };
 
   return (
-    <Container style={{ alignItems: "center" }}>
+    <Container
+      className="w-100"
+      style={{ maxWidth: "400px", textAlign: "center" }}
+    >
       <h2>מצא את השיעור שמתאים לך!</h2>
       <Row style={{ alignItems: "center" }}>
-        <Col xs={8}>
+        <Col xs={11}>
           <Select
             theme={customTheme}
             placeholder="בחר תגיות"
@@ -97,12 +105,12 @@ export default function SearchClassesPage() {
             isMulti
             isSearchable
             noOptionsMessage={() => "לא נמצאו תגיות"}
-            className="basic-multi-select m-3 lg-10"
+            className="basic-multi-select m-3"
             options={suggestions}
           />
         </Col>
-        <Col>
-          <Button className="lg-2" variant="success" onClick={searchByTags}>
+        <Col xs={1}>
+          <Button variant="success" onClick={searchByTags}>
             חיפוש
           </Button>
         </Col>

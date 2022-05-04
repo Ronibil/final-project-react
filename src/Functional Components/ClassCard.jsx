@@ -12,7 +12,6 @@ export default function ClassCard({ classes, register }) {
         <Card.Text>שעת סיום: {classItem.EndTime}</Card.Text>
         <Card.Text>מספר משתתפים: {classItem.NumOfParticipants}</Card.Text>
         <Card.Text> {classItem.SuperName}</Card.Text>
-
         <Button onClick={() => register(classItem.ClassCode)} variant="success">
           הרשמה
         </Button>
@@ -20,5 +19,5 @@ export default function ClassCard({ classes, register }) {
     </Card>
   ));
 
-  return <div>{classList}</div>;
+  return <>{classList}</>;
 }

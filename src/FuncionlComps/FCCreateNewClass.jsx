@@ -229,7 +229,7 @@ export default function FCCreateNewClass() {
             modalOpen={modalOpen}
             ClassDetailsForModal={ClassDetailsForModal}
           />
-        </Card>{" "}
+        </Card>
       </div>
     </Container>
   );
