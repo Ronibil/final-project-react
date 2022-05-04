@@ -63,8 +63,8 @@ export default function FCCreateNewClass() {
   }, []);
 
   const postNewClass = () => {
-    const Url = "http://localhost:49812/Class/PostNewClass";
-    const tagList = tags.map((tag) => ({ TagName: tag.label }));
+    const url = "http://localhost:49812/Class/PostNewClass";
+    let tagList = tags.map((tag) => tag.label);
     const newClassObj = {
       ClassDate: classDate,
       StartTime: classStartTime,
@@ -79,7 +79,7 @@ export default function FCCreateNewClass() {
 
     console.log(newClassObj);
     console.log("start");
-    fetch(Url, {
+    fetch(url, {
       method: "POST",
       body: JSON.stringify(newClassObj),
       headers: new Headers({

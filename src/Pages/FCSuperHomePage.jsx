@@ -14,11 +14,11 @@ export default function FCSuperHomePage() {
   const [classFutre, setClassFutre] = useState([]);
 
   useEffect(() => {
-    const user = {
-      Email: UserDetails.Email,
-      Password: UserDetails.Password,
-    };
     const fetchData = async () => {
+      const user = {
+        Email: UserDetails.Email,
+        Password: UserDetails.Password,
+      };
       const urlGetSuperDetails =
         "http://localhost:49812/SuperStudent/GetSuperLandingPageDetails";
       const { data } = await axios.post(urlGetSuperDetails, user);
@@ -42,7 +42,7 @@ export default function FCSuperHomePage() {
 
   return (
     <Container
-      className="align-items-center justi fy-content-center"
+      className="align-items-center justify-content-center"
       style={{ minHeight: "30vh" }}
     >
       {superDetails !== undefined ? (
@@ -54,7 +54,7 @@ export default function FCSuperHomePage() {
             StudyYear={superDetails.StudyYear}
             UserDetails={UserDetails}
             superName={superDetails.FullName}
-            HistoryClass= {classHistory}
+            HistoryClass={classHistory}
           />
         </>
       ) : (
