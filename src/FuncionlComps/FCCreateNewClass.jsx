@@ -90,7 +90,6 @@ export default function FCCreateNewClass() {
       .then((res) => {
         console.log("res.ok", res.ok);
         if (res.ok) {
-          // showMessage()
           setModalOpen(true);
         }
         return res.json();
@@ -105,19 +104,6 @@ export default function FCCreateNewClass() {
       );
     console.log("end");
   };
-  // const showMessage = () => {
-  //   document.getElementById("msg").style.display = "block"
-  // }
-  // const msgBox = () => {
-  //   const style = {
-  //     display: "none"
-  //   }
-  //   let msgDiv = <div style={style} id="msg">
-  //     <div className='green'>השיעור נוצר בהצלחה!</div>
-  //     <div><button onClick={() => navigate("/SuperHomePage", { state: UserDetails })}>חזור לדף הבית</button></div>
-  //   </div>
-  //   return msgDiv
-  // }
 
   const BackToHomePage = () => {
     navigate("/SuperHomePage", { state: UserDetails });
@@ -224,7 +210,6 @@ export default function FCCreateNewClass() {
             >
               יצירת שיעור
             </Button>
-            {/* {msgBox()} */}
           </Card.Body>
           <FCModalAddNewClass
             BackToHomePage={BackToHomePage}

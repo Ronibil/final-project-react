@@ -23,7 +23,7 @@ export default function FCHistoryClassSuper() {
         <Card.Body align="center">
           <Card.Title>:היסטורית שיעורים</Card.Title>
           {HistoryClass.length !== 0 ? <>
-            {HistoryClass.map(c => <FCClassCard key={c.ClassCode} classToCard={c} type="history" />)}
+            {HistoryClass.map(c => <FCClassCard key={c.ClassCode} classToCard={c} type="istory" />)}
           </> : "No found classes"} <br />
           <Button className="btnBackToHome" onClick={() => navigate('/superHomePage', { state: superDetails })} variant="success" >חזרה לפרופיל האישי</Button>
         </Card.Body>
