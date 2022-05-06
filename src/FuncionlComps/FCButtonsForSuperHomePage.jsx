@@ -10,6 +10,7 @@ export default function FCButtonsForSuperHomePage({
   Description,
   StudyYear,
   HistoryClass,
+  FutreClass
 }) {
   const navigate = useNavigate();
   const superDetails = {
@@ -32,13 +33,23 @@ export default function FCButtonsForSuperHomePage({
     HistoryClass: HistoryClass,
   };
 
+  const superDetailsForFutreClass = {
+    superEmail: UserDetails.Email,
+    superPassword: UserDetails.Password,
+    FutreClass: FutreClass,
+  };
+
   return (
     <div>
       <Card xs={12} style={{ width: "30rem" }}>
         <Card.Body align="center">
           <Row>
             <Col xs={6}>
-              <Button className="btnSuper">שיעורים עתידיים שלי</Button>
+              <Button className="btnSuper" onClick={() =>
+                navigate('/FutreClasses', { state: superDetailsForFutreClass })}
+              >
+                שיעורים עתידיים שלי
+              </Button>
             </Col>
             <Col xs={6}>
               <Button

@@ -5,9 +5,15 @@ import Select from "react-select";
 import makeAnimate from "react-select/animated";
 import ClassCard from "../Functional Components/ClassCard";
 import "../StyleSheets/searchClassesStyle.css";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function SearchClassesPage() {
+  const { state } = useLocation();
+  const userDetails = {
+    Email: state.Email,
+    Password: state.Password
+  }
+
   const [tags, setTags] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const [classes, setClasses] = useState([]);
@@ -48,7 +54,7 @@ export default function SearchClassesPage() {
         );
         setClasses(data);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const register = (classCode) => {
@@ -79,7 +85,7 @@ export default function SearchClassesPage() {
       .then(
         (result) => {
           console.log(result);
-          navigate("/home");
+          navigate('/studentHomePage', {state: userDetails});
         },
         (error) => {
           console.log("err post=", error);

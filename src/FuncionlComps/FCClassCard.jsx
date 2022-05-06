@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Row, Col } from "react-bootstrap";
+import { Card, Row, Col, Button } from "react-bootstrap";
 
 export default function FCClassCard({ classToCard, type }) {
   {
@@ -22,9 +22,37 @@ export default function FCClassCard({ classToCard, type }) {
       );
     } else {
       return (
-        <div>
-          <h1>aaaaaaaa</h1>
-        </div>
+        <>
+          <Card>
+            <Card.Body>
+              <Row>
+                <Col xs={2}>
+                  <Button
+                    // onClick={() => navigate("/superHomePage", { state: superDetails })}
+                    variant="secondary"
+                  >
+                    עדכון
+                  </Button>
+                </Col>
+                <Col xs={2}>
+                  <Button
+
+                    // onClick={() => navigate("/superHomePage", { state: superDetails })}
+                    variant="outline-danger"
+                  >
+                    מחיקה
+                  </Button>
+                </Col>
+                <Col xs={8}>
+                  <b>שם השיעור:</b> {classToCard.ClassName}
+                  <br />
+                  <b>תאריך:</b> {classToCard.ClassDate} <br />
+                  <b>שעת התחלה:</b> {classToCard.StartTime}
+                </Col>
+              </Row>
+            </Card.Body>
+          </Card>
+        </>
       );
     }
   }

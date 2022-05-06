@@ -55,6 +55,7 @@ export default function FCSuperHomePage() {
             UserDetails={UserDetails}
             superName={superDetails.FullName}
             HistoryClass={classHistory}
+            FutreClass={classFutre}
           />
         </>
       ) : (

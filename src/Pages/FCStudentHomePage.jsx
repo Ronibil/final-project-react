@@ -1,48 +1,83 @@
 import React, { useState, useEffect } from "react";
 import { Container, Button, Card } from "react-bootstrap";
-import { Link } from "react-router-dom";
-import axios from "axios";
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function StudentHomePage() {
-  // const [user, setUser] = useState(JSON.parse(localStorage.getItem("user")));
-  const [userDetails, setUserDetails] = useState({});
+  const navigate = useNavigate()
+  const [studentDetails, setStudentDetails] = useState({});
   const [classesHistory, setClassesHistory] = useState([]);
   const [futreClasses, setFutreClasses] = useState([]);
 
+  const { state } = useLocation();
+  const userDetails = {
+    Email: state.Email,
+    Password: state.Password
+  }
+  const fullName = "";
+
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("user"));
-    const fetchData = async () => {
-      const { data } = await axios.post(
-        "http://localhost:49812/Student/GetStudentLandingPageDetails",
-        user
+    const url = "http://localhost:49812/Student/GetStudentLandingPageDetails"
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify(userDetails),
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json; charset=UTF-8",
+      }),
+    })
+      .then((res) => {
+        console.log("res.ok", res.ok);
+        return res.json();
+      })
+      .then(
+        (result) => {
+          console.log("FETCH PostRequest= ", result);
+          setStudentDetails({
+            StudentId: result.StudentId,
+            FullName: result.FullName
+          });
+          setClassesHistory(result.ClassesHistory);
+          setFutreClasses(result.FutreClasses)
+        },
+        (error) => {
+          console.log("err post=", error);
+        }
       );
-      setTimeout(() => {
-        setUserDetails(data);
-        setClassesHistory(data.ClassesHistory);
-        setFutreClasses(data.FutreClasses);
-      }, 1000);
-    };
-    fetchData();
   }, []);
 
-  const DeleteStudentFromClass = async (classCode) => {
-    console.log(userDetails.StudentId);
-    const studentToDelete = {
-      StudentId: userDetails.StudentId,
-      ClassCode: classCode,
+  const DeleteStudentFromClass = (classCode) => {
+    const Url = "http://localhost:49812/Student/DeleteStudentFromClass";
+    const classToDelete = {
+      StudentId: studentDetails.StudentId,
+      ClassCode: classCode
     };
-
-    await axios.delete(
-      "http://localhost:49812/Student/DeleteStudentFromClass",
-      JSON.stringify(studentToDelete)
-    );
-    let newArray = futreClasses.filter((c) => c.classCode === classCode);
-    setFutreClasses(newArray);
+    fetch(Url, {
+      method: "DELETE",
+      body: JSON.stringify(classToDelete),
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json; charset=UTF-8",
+      }),
+    })
+      .then((res) => {
+        console.log("res.ok", res.ok);
+        return res.json();
+      })
+      .then(
+        (result) => {
+          console.log(result);
+          let newFutreClasses = futreClasses.filter(c => c.ClassCode != classCode)
+          setFutreClasses(newFutreClasses);
+        },
+        (error) => {
+          console.log("err post=", error);
+        }
+      );
   };
 
-  const futureClasses = () => {
+  const FutureClasses = () => {
     if (futreClasses.length !== 0) {
-      const classList = futreClasses.map((classInList) => (
+      let classList = futreClasses.map((classInList) => (
         <Card
           style={{ maxWidth: 1000, margin: 20 }}
           key={classInList.ClassCode}
@@ -87,15 +122,13 @@ export default function StudentHomePage() {
       className="d-flex align-items-center flex-column"
       style={{ minHeight: "100vh" }}
     >
-      <h2>ברוכים הבאים - {userDetails.FullName}</h2>
+      <h2>ברוכים הבאים - {studentDetails.FullName}</h2>
       <h3>שיעוריים עתידיים</h3>
-      {futureClasses()}
+      {FutureClasses()}
 
-      <Link to="/searchClassesPage">
-        <Button variant="success" className="align-content-end">
-          חיפוש שיעור חדש
-        </Button>
-      </Link>
+      <Button variant="success" onClick={() => navigate("/searchClassesPage", { state: userDetails })} className="align-content-end">
+        חיפוש שיעור חדש
+      </Button>
     </Container>
   );
 }
