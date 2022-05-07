@@ -18,6 +18,7 @@ export default function FCLoginForm({
     >
       <Card>
         <Card.Body>
+          <h1 className="text-center mb-4">HelpMeStudent</h1>
           <h2 className="text-center mb-4">התחברות</h2>
           <Form>
             <Form.Group id="text" controlId="contolEmail">
@@ -45,13 +46,13 @@ export default function FCLoginForm({
       <div id="errMsgLogin" style={{ display: "none" }}>
         שם משתמש או סיסמה שגויים
       </div>
-      <div className="w-100 text-center mt-2">?לא רשומים למערכת</div>
+      <div className="w-100 text-center mt-2"><b>?לא רשומים למערכת</b></div>
       <Button
         className="w-100 text-center mt-2"
-        variant="success"
+        variant="link"
         onClick={navigateToRegister}
       >
-        לחצו כאן להירשם
+        <b>!לחצו כאן להירשם</b>
       </Button>
     </div>
   );

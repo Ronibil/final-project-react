@@ -3,15 +3,44 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Card, Container, Button } from "react-bootstrap";
 import FCClassCard from "../FuncionlComps/FCClassCard";
 import "../StyleSheets/Modal.css";
+import { useState } from "react";
 
 export default function FCFutreClasses() {
   const navigate = useNavigate();
   const { state } = useLocation();
-  const FutreClass = state.FutreClass;
+  const [futreClass, setFutreClass] = useState(state.FutreClass)
   const superDetails = {
     Email: state.superEmail,
     Password: state.superPassword,
   };
+
+  const deleteClassByClassCode = (ClassCode) => {
+    console.log(ClassCode);
+    const url = `http://localhost:49812/Class/DeleteClassByClassCode/${ClassCode}`;
+    fetch(url, {
+      method: "DELETE",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json; charset=UTF-8",
+      }),
+    })
+      .then((res) => {
+        console.log("res.ok", res.ok);
+        return res.json();
+      })
+      .then(
+        (result) => {
+          console.log("FETCH PostRequest= ", result);
+          let newFutreClass = futreClass.filter(c => c.ClassCode != ClassCode);
+          setFutreClass(newFutreClass);
+        },
+        (error) => {
+          console.log("err post=", error);
+        }
+      );
+  };
+
+
   return (
     <Container
       className="d-flex align-items-center justify-content-center"
@@ -23,10 +52,10 @@ export default function FCFutreClasses() {
       <Card xs={12} style={{ width: "30rem" }}>
         <Card.Body align="center">
           <Card.Title>:שיעורים עתידיים שלי</Card.Title>
-          {FutreClass.length !== 0 ? (
+          {futreClass.length !== 0 ? (
             <>
-              {FutreClass.map((c) => (
-                <FCClassCard key={c.ClassCode} classToCard={c} type="futre" />
+              {futreClass.map((c) => (
+                <FCClassCard key={c.ClassCode} classToCard={c} type="futre" deleteClassByClassCode={deleteClassByClassCode} />
               ))}
             </>
           ) : (

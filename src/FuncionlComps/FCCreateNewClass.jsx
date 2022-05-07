@@ -126,6 +126,7 @@ export default function FCCreateNewClass() {
                 <Form.Label>שם השיעור</Form.Label>
                 <Form.Control
                   type="text"
+                  style={{textAlign: "right"}}
                   placeholder="שם השיעור"
                   required
                   onChange={(e) => setClassName(e.target.value)}

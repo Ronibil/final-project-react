@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Row, Col, Button } from "react-bootstrap";
 
-export default function FCClassCard({ classToCard, type }) {
+export default function FCClassCard({ classToCard, type, deleteClassByClassCode }) {
   {
     if (type === "history") {
       return (
@@ -28,7 +28,6 @@ export default function FCClassCard({ classToCard, type }) {
               <Row>
                 <Col xs={2}>
                   <Button
-                    // onClick={() => navigate("/superHomePage", { state: superDetails })}
                     variant="secondary"
                   >
                     עדכון
@@ -36,8 +35,7 @@ export default function FCClassCard({ classToCard, type }) {
                 </Col>
                 <Col xs={2}>
                   <Button
-
-                    // onClick={() => navigate("/superHomePage", { state: superDetails })}
+                    onClick={() => deleteClassByClassCode(classToCard.ClassCode)}
                     variant="outline-danger"
                   >
                     מחיקה
