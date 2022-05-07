@@ -43,7 +43,9 @@ export default function FCSuperHomePage() {
   return (
     <Container
       className="align-items-center justify-content-center"
-      style={{ minHeight: "30vh" }}
+      style={{
+        marginTop: 50,
+      }}
     >
       {superDetails !== undefined ? (
         <>

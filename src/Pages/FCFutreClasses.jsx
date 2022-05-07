@@ -4,6 +4,8 @@ import { Card, Container, Button } from "react-bootstrap";
 import FCClassCard from "../FuncionlComps/FCClassCard";
 import "../StyleSheets/Modal.css";
 import { useState } from "react";
+import FCModalAreYouSure from '../FuncionlComps/FCModalAreYouSure';
+import FCModalAddNewClass from '../FuncionlComps/FCModalAddNewClass';
 
 export default function FCFutreClasses() {
   const navigate = useNavigate();
@@ -13,6 +15,10 @@ export default function FCFutreClasses() {
     Email: state.superEmail,
     Password: state.superPassword,
   };
+  const [areYouSureModal, setAreYouSureModal] = useState(false);
+  const [classCode, setClassCode] = useState()
+  // const [confirmModal, setConfirmModal] = useState(false)
+
 
   const deleteClassByClassCode = (ClassCode) => {
     console.log(ClassCode);
@@ -26,6 +32,9 @@ export default function FCFutreClasses() {
     })
       .then((res) => {
         console.log("res.ok", res.ok);
+        if (res.ok) {
+          setAreYouSureModal(false)
+        }
         return res.json();
       })
       .then(
@@ -40,6 +49,19 @@ export default function FCFutreClasses() {
       );
   };
 
+  const HideModalAreYouSure = () => {
+    setAreYouSureModal(false)
+  }
+
+  const ShowModaAreYouSure = (ClassCode) => {
+    setAreYouSureModal(true)
+    setClassCode(ClassCode)
+  }
+
+  const BackToHomePage = () => {
+    navigate("/SuperHomePage", { state: superDetails });
+  };
+
 
   return (
     <Container
@@ -51,11 +73,13 @@ export default function FCFutreClasses() {
     >
       <Card xs={12} style={{ width: "30rem" }}>
         <Card.Body align="center">
+          <FCModalAreYouSure isOpen={areYouSureModal} modalHide={HideModalAreYouSure} btnFunc={deleteClassByClassCode} parameter={classCode} text="?האם אתה בטוח שברצונך למחוק שיעור זה" />
+          {/* <FCModalAddNewClass modalOpen={confirmModal} BackToHomePage={BackToHomePage}  text="!השיעור נמחק בהצלחה" /> */}
           <Card.Title>:שיעורים עתידיים שלי</Card.Title>
           {futreClass.length !== 0 ? (
             <>
               {futreClass.map((c) => (
-                <FCClassCard key={c.ClassCode} classToCard={c} type="futre" deleteClassByClassCode={deleteClassByClassCode} />
+                <FCClassCard key={c.ClassCode} classToCard={c} type="futre" ShowModaAreYouSure={ShowModaAreYouSure} />
               ))}
             </>
           ) : (

@@ -122,7 +122,7 @@ export default function FCCreateNewClass() {
           <Card.Body align="center">
             <h2 className="text-center mb-4">יצירת שיעור חדש</h2>
             <Form>
-              <Form.Group className="mb-3">
+              <Form.Group className="mb-3" >
                 <Form.Label>שם השיעור</Form.Label>
                 <Form.Control
                   type="text"
@@ -136,6 +136,7 @@ export default function FCCreateNewClass() {
                 <Form.Label>תיאור השיעור</Form.Label>
                 <Form.Control
                   as="textarea"
+                  style={{textAlign: "right"}}
                   rows={3}
                   placeholder="הכנס את תיאור השיעור / מערך השיעור"
                   required
@@ -176,6 +177,7 @@ export default function FCCreateNewClass() {
                 <Form.Label>מספר משתתפים</Form.Label>
                 <Form.Select
                   size="sm"
+                  style={{textAlign: "right"}}
                   required
                   onChange={(e) => setClassParticipants(e.target.value)}
                 >
@@ -216,6 +218,7 @@ export default function FCCreateNewClass() {
             BackToHomePage={BackToHomePage}
             modalOpen={modalOpen}
             ClassDetailsForModal={ClassDetailsForModal}
+            text="!השיעור התווסף/ עודכן בהצלחה"
           />
         </Card>
       </div>

@@ -40,7 +40,6 @@ export default function FCButtonsForSuperHomePage({
   };
 
   return (
-    <div>
       <Card xs={12} style={{ width: "30rem" }}>
         <Card.Body align="center">
           <Row>
@@ -92,6 +91,5 @@ export default function FCButtonsForSuperHomePage({
           </Row>
         </Card.Body>
       </Card>
-    </div>
   );
 }

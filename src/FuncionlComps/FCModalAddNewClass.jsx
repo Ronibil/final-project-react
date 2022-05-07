@@ -3,13 +3,13 @@ import {Modal,Button } from 'react-bootstrap';
 import { FcOk } from "react-icons/fc";
 import "../StyleSheets/Modal.css";
 
-function FCModalAddNewClass({ BackToHomePage,modalOpen,ClassDetailsForModal}) { 
+function FCModalAddNewClass({ BackToHomePage,modalOpen,ClassDetailsForModal, text}) { 
   return (
    
     <Modal show={modalOpen}>
     <Modal.Dialog >
       <Modal.Header>
-        <Modal.Title>!השיעור התווסף/עודכן בהצלחה  </Modal.Title>
+        <Modal.Title>{text}</Modal.Title>
       </Modal.Header>
 
       <Modal.Body className='ModalBody' >

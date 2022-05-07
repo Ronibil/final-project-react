@@ -1,7 +1,7 @@
 import React from "react";
 import { Card, Row, Col, Button } from "react-bootstrap";
 
-export default function FCClassCard({ classToCard, type, deleteClassByClassCode }) {
+export default function FCClassCard({ classToCard, type, ShowModaAreYouSure }) {
   {
     if (type === "history") {
       return (
@@ -35,7 +35,7 @@ export default function FCClassCard({ classToCard, type, deleteClassByClassCode 
                 </Col>
                 <Col xs={2}>
                   <Button
-                    onClick={() => deleteClassByClassCode(classToCard.ClassCode)}
+                    onClick={() => ShowModaAreYouSure(classToCard.ClassCode)}
                     variant="outline-danger"
                   >
                     מחיקה
