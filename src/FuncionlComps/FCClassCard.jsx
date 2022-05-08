@@ -35,7 +35,7 @@ export default function FCClassCard({ classToCard, type, ShowModaAreYouSure }) {
                 </Col>
                 <Col xs={2}>
                   <Button
-                    onClick={() => ShowModaAreYouSure(classToCard.ClassCode)}
+                    onClick={() => ShowModaAreYouSure(classToCard)}
                     variant="outline-danger"
                   >
                     מחיקה

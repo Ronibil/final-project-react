@@ -42,23 +42,25 @@ export default function FCSuperHomePage() {
 
   return (
     <Container
-      className="align-items-center justify-content-center"
+      className="d-flex align-items-center justify-content-center"
       style={{
         marginTop: 50,
       }}
     >
       {superDetails !== undefined ? (
         <>
-          <FCFormSuperDetails superDetails={superDetails} />
-          <FCButtonsForSuperHomePage
-            DepartmentName={superDetails.DepartmentName}
-            Description={superDetails.Description}
-            StudyYear={superDetails.StudyYear}
-            UserDetails={UserDetails}
-            superName={superDetails.FullName}
-            HistoryClass={classHistory}
-            FutreClass={classFutre}
-          />
+          <div>
+            <FCFormSuperDetails superDetails={superDetails} />
+            <FCButtonsForSuperHomePage
+              DepartmentName={superDetails.DepartmentName}
+              Description={superDetails.Description}
+              StudyYear={superDetails.StudyYear}
+              UserDetails={UserDetails}
+              superName={superDetails.FullName}
+              HistoryClass={classHistory}
+              FutreClass={classFutre}
+            />
+          </div>
         </>
       ) : (
         "Loding..."

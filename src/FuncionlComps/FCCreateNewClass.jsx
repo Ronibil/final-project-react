@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Form, Card, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import FCModalAddNewClass from "./FCModalAddNewClass";
+import FCModalConfirm from "./FCModalConfirm";
 
 import axios from "axios";
 import Select from "react-select";
@@ -214,7 +214,7 @@ export default function FCCreateNewClass() {
               יצירת שיעור
             </Button>
           </Card.Body>
-          <FCModalAddNewClass
+          <FCModalConfirm
             BackToHomePage={BackToHomePage}
             modalOpen={modalOpen}
             ClassDetailsForModal={ClassDetailsForModal}

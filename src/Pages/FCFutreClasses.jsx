@@ -5,7 +5,7 @@ import FCClassCard from "../FuncionlComps/FCClassCard";
 import "../StyleSheets/Modal.css";
 import { useState } from "react";
 import FCModalAreYouSure from '../FuncionlComps/FCModalAreYouSure';
-import FCModalAddNewClass from '../FuncionlComps/FCModalAddNewClass';
+import FCModalConfirm from '../FuncionlComps/FCModalConfirm';
 
 export default function FCFutreClasses() {
   const navigate = useNavigate();
@@ -16,8 +16,8 @@ export default function FCFutreClasses() {
     Password: state.superPassword,
   };
   const [areYouSureModal, setAreYouSureModal] = useState(false);
-  const [classCode, setClassCode] = useState()
-  // const [confirmModal, setConfirmModal] = useState(false)
+  const [classDetails, setClassDetails] = useState()
+  const [confirmModal, setConfirmModal] = useState(false)
 
 
   const deleteClassByClassCode = (ClassCode) => {
@@ -34,6 +34,7 @@ export default function FCFutreClasses() {
         console.log("res.ok", res.ok);
         if (res.ok) {
           setAreYouSureModal(false)
+          setConfirmModal(true)
         }
         return res.json();
       })
@@ -50,18 +51,31 @@ export default function FCFutreClasses() {
   };
 
   const HideModalAreYouSure = () => {
-    setAreYouSureModal(false)
-  }
+    setAreYouSureModal(false);
+  };
 
-  const ShowModaAreYouSure = (ClassCode) => {
-    setAreYouSureModal(true)
-    setClassCode(ClassCode)
-  }
+  const ShowModaAreYouSure = (ClassDetails2Remove) => {
+    setAreYouSureModal(true);
+    let classToRemove = {
+      classCode: ClassDetails2Remove.ClassCode,
+      classDate: ClassDetails2Remove.ClassDate,
+      classEndTime: ClassDetails2Remove.EndTime,
+      className: ClassDetails2Remove.ClassName,
+      classParticipants: ClassDetails2Remove.NumOfParticipants,
+      classStartTime: ClassDetails2Remove.StartTime
+      // superId: ClassDetails2Remove.SuperStudentId,
+      // classDescription: ClassDetails2Remove.ClassDescription,
+      // superName: ClassDetails2Remove.SuperName,
+      // tagList: ClassDetails2Remove.Tags
+    }
+    console.log(classToRemove);
+    setClassDetails(classToRemove);
+    
+  };
 
   const BackToHomePage = () => {
     navigate("/SuperHomePage", { state: superDetails });
   };
-
 
   return (
     <Container
@@ -73,8 +87,22 @@ export default function FCFutreClasses() {
     >
       <Card xs={12} style={{ width: "30rem" }}>
         <Card.Body align="center">
-          <FCModalAreYouSure isOpen={areYouSureModal} modalHide={HideModalAreYouSure} btnFunc={deleteClassByClassCode} parameter={classCode} text="?האם אתה בטוח שברצונך למחוק שיעור זה" />
-          {/* <FCModalAddNewClass modalOpen={confirmModal} BackToHomePage={BackToHomePage}  text="!השיעור נמחק בהצלחה" /> */}
+          {classDetails != undefined ?
+            <>
+              <FCModalAreYouSure
+                isOpen={areYouSureModal}
+                modalHide={HideModalAreYouSure}
+                btnFunc={deleteClassByClassCode}
+                parameter={classDetails.classCode}
+                text="?האם אתה בטוח שברצונך למחוק שיעור זה" />
+              <FCModalConfirm
+                modalOpen={confirmModal}
+                BackToHomePage={BackToHomePage}
+                ClassDetailsForModal={classDetails}
+                text="!השיעור נמחק בהצלחה" />
+            </>
+            : "loding..."
+          }
           <Card.Title>:שיעורים עתידיים שלי</Card.Title>
           {futreClass.length !== 0 ? (
             <>
