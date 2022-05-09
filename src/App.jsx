@@ -13,6 +13,8 @@ import FCCreateNewClass from "./FuncionlComps/FCCreateNewClass";
 import FCUpdateProfileSuper from "./Pages/FCUpdateProfileSuper";
 import FCHistoryClassSuper from "./Pages/FCHistoryClassSuper";
 import FCFutreClasses from "./Pages/FCFutreClasses";
+import CCAdminHomePage from "./Pages/CCAdminHomePage";
+import CCHandleRequest from "./Pages/CCHandleRequest";
 
 
 export default function App() {
@@ -21,7 +23,8 @@ export default function App() {
       <Routes>
         <Route path="/studentHomePage" element={<FCStudentHomePage />} />
         <Route path="/superHomePage" element={<FCSuperHomePage />} />
-        <Route path="/adminHomePage" element={<FCAdminHomePage />} />
+        <Route path="/adminHomePage" element={<CCAdminHomePage />} />
+        <Route path="/reqDetails" element={<CCHandleRequest />} />
         <Route path="/searchClassesPage" element={<FCSearchClassesPage />} />
         <Route path='/' element={<FCLoginPage />} />
         <Route path='/StudentRequestPage' element={<FCStudentRequestPage />} />

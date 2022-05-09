@@ -1,0 +1,23 @@
+.det > div {
+  margin-bottom: 20px;
+}
+.bold {
+  font-size: x-large;
+  text-decoration: underline;
+}
+.semi {
+  font-size: large;
+}
+.green {
+  color: green;
+}
+.red {
+  color: red;
+}
+#succesMsg {
+  display: none;
+  color: green;
+}
+#fldBlock {
+  text-align: center;
+}
