@@ -2,7 +2,6 @@ import { Routes, Route } from "react-router-dom";
 import FCLoginPage from "./Pages/FCLoginPage";
 import FCSuperHomePage from "./Pages/FCSuperHomePage";
 import FCStudentHomePage from "./Pages/FCStudentHomePage";
-import FCAdminHomePage from "./Pages/FCAdminHomePage";
 import FCTypeOfUser from "./Pages/FCTypeOfUser";
 import FCSearchClassesPage from "./Pages/FCSearchClassesPage";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -32,7 +31,6 @@ export default function App() {
         <Route path='/SuperStudentRequestPage2' element={<FCSuperStudentRequestPage2 />} />
         <Route path='/studentHomePage' element={<FCStudentHomePage />} />
         <Route path='/superHomePage' element={<FCSuperHomePage />} />
-        <Route path='/adminHomePage' element={<FCAdminHomePage />} />
         <Route path='/typeOfUser' element={<FCTypeOfUser />} />
         <Route path='/CreateNewClass' element={<FCCreateNewClass />} />
         <Route path='/UpdateProfileSuper' element={<FCUpdateProfileSuper />} />
