@@ -20,6 +20,39 @@ export default function FCClassCard({ classToCard, type, ShowModaAreYouSure }) {
           </Card>
         </>
       );
+    } else if (type === "studentFutre") {
+      return (
+        <>
+          <Card >
+            <Card.Body >
+              <Row>
+                <Col xs={2}>
+                  <Button
+                    onClick={() => ShowModaAreYouSure(classToCard)}
+                    variant="outline-danger"
+                  >
+                    מחיקה
+                  </Button>
+                </Col>
+                <Col xs={2}>
+                  <Button
+                    onClick={() => ShowModaAreYouSure(classToCard)}
+                    variant="outline-primary"
+                  >
+                    לצ'אט
+                  </Button>
+                </Col>
+                <Col xs={8}>
+                  <b>שם השיעור:</b> {classToCard.ClassName}
+                  <br />
+                  <b>תאריך:</b> {classToCard.ClassDate} <br />
+                  <b>שעת התחלה:</b> {classToCard.StartTime}
+                </Col>
+              </Row>
+            </Card.Body>
+          </Card>
+        </>
+      );
     } else {
       return (
         <>

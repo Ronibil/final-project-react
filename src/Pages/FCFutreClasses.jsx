@@ -63,14 +63,9 @@ export default function FCFutreClasses() {
       className: ClassDetails2Remove.ClassName,
       classParticipants: ClassDetails2Remove.NumOfParticipants,
       classStartTime: ClassDetails2Remove.StartTime
-      // superId: ClassDetails2Remove.SuperStudentId,
-      // classDescription: ClassDetails2Remove.ClassDescription,
-      // superName: ClassDetails2Remove.SuperName,
-      // tagList: ClassDetails2Remove.Tags
     }
     console.log(classToRemove);
     setClassDetails(classToRemove);
-    
   };
 
   const BackToHomePage = () => {
