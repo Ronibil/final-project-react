@@ -1,24 +1,23 @@
-import React from 'react'
+import React from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Card, Container, Button } from "react-bootstrap";
 import FCClassCard from "../FuncionlComps/FCClassCard";
 import "../StyleSheets/Modal.css";
 import { useState } from "react";
-import FCModalAreYouSure from '../FuncionlComps/FCModalAreYouSure';
-import FCModalConfirm from '../FuncionlComps/FCModalConfirm';
+import FCModalAreYouSure from "../FuncionlComps/FCModalAreYouSure";
+import FCModalConfirm from "../FuncionlComps/FCModalConfirm";
 
 export default function FCFutreClasses() {
   const navigate = useNavigate();
   const { state } = useLocation();
-  const [futreClass, setFutreClass] = useState(state.FutreClass)
+  const [futreClass, setFutreClass] = useState(state.FutreClass);
   const superDetails = {
     Email: state.superEmail,
     Password: state.superPassword,
   };
   const [areYouSureModal, setAreYouSureModal] = useState(false);
-  const [classDetails, setClassDetails] = useState()
-  const [confirmModal, setConfirmModal] = useState(false)
-
+  const [classDetails, setClassDetails] = useState();
+  const [confirmModal, setConfirmModal] = useState(false);
 
   const deleteClassByClassCode = (ClassCode) => {
     console.log(ClassCode);
@@ -33,15 +32,17 @@ export default function FCFutreClasses() {
       .then((res) => {
         console.log("res.ok", res.ok);
         if (res.ok) {
-          setAreYouSureModal(false)
-          setConfirmModal(true)
+          setAreYouSureModal(false);
+          setConfirmModal(true);
         }
         return res.json();
       })
       .then(
         (result) => {
           console.log("FETCH PostRequest= ", result);
-          let newFutreClass = futreClass.filter(c => c.ClassCode != ClassCode);
+          let newFutreClass = futreClass.filter(
+            (c) => c.ClassCode !== ClassCode
+          );
           setFutreClass(newFutreClass);
         },
         (error) => {
@@ -62,8 +63,8 @@ export default function FCFutreClasses() {
       classEndTime: ClassDetails2Remove.EndTime,
       className: ClassDetails2Remove.ClassName,
       classParticipants: ClassDetails2Remove.NumOfParticipants,
-      classStartTime: ClassDetails2Remove.StartTime
-    }
+      classStartTime: ClassDetails2Remove.StartTime,
+    };
     console.log(classToRemove);
     setClassDetails(classToRemove);
   };
@@ -82,27 +83,35 @@ export default function FCFutreClasses() {
     >
       <Card xs={12} style={{ width: "30rem" }}>
         <Card.Body align="center">
-          {classDetails != undefined ?
+          {classDetails !== undefined ? (
             <>
               <FCModalAreYouSure
                 isOpen={areYouSureModal}
                 modalHide={HideModalAreYouSure}
                 btnFunc={deleteClassByClassCode}
                 parameter={classDetails.classCode}
-                text="?האם אתה בטוח שברצונך למחוק שיעור זה" />
+                text="?האם אתה בטוח שברצונך למחוק שיעור זה"
+              />
               <FCModalConfirm
                 modalOpen={confirmModal}
                 BackToHomePage={BackToHomePage}
                 ClassDetailsForModal={classDetails}
-                text="!השיעור נמחק בהצלחה" />
+                text="!השיעור נמחק בהצלחה"
+              />
             </>
-            : "loding..."
-          }
+          ) : (
+            "loding..."
+          )}
           <Card.Title>:שיעורים עתידיים שלי</Card.Title>
           {futreClass.length !== 0 ? (
             <>
               {futreClass.map((c) => (
-                <FCClassCard key={c.ClassCode} classToCard={c} type="futre" ShowModaAreYouSure={ShowModaAreYouSure} />
+                <FCClassCard
+                  key={c.ClassCode}
+                  classToCard={c}
+                  type="futre"
+                  ShowModaAreYouSure={ShowModaAreYouSure}
+                />
               ))}
             </>
           ) : (

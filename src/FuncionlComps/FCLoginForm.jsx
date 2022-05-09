@@ -12,7 +12,6 @@ export default function FCLoginForm({
       className="w-100"
       style={{
         maxWidth: "400px",
-        textAlign: "center",
         paddingTop: 120,
       }}
     >
@@ -22,12 +21,22 @@ export default function FCLoginForm({
           <h2 className="text-center mb-4">התחברות</h2>
           <Form>
             <Form.Group id="text" controlId="contolEmail">
-              <Form.Label>Email</Form.Label>
-              <Form.Control type="text" onChange={UpdateEmail} required />
+              <Form.Label style={{ display: "block", textAlign: "right" }}>
+                :אימייל
+              </Form.Label>
+              <Form.Control
+                className="mb-2"
+                type="text"
+                onChange={UpdateEmail}
+                required
+              />
             </Form.Group>
             <Form.Group id="password" controlId="contolPassword">
-              <Form.Label>Password</Form.Label>
+              <Form.Label style={{ display: "block", textAlign: "right" }}>
+                :סיסמא{" "}
+              </Form.Label>
               <Form.Control
+                className="mb-2"
                 type="password"
                 onChange={UpdatePassword}
                 required
@@ -46,7 +55,9 @@ export default function FCLoginForm({
       <div id="errMsgLogin" style={{ display: "none" }}>
         שם משתמש או סיסמה שגויים
       </div>
-      <div className="w-100 text-center mt-2"><b>?לא רשומים למערכת</b></div>
+      <div className="w-100 text-center mt-2">
+        <b>?לא רשומים למערכת</b>
+      </div>
       <Button
         className="w-100 text-center mt-2"
         variant="link"
