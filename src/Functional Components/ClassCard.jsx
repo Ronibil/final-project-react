@@ -7,7 +7,9 @@ export default function ClassCard({ classes, register }) {
       <Card.Body>
         <Card.Title>{classItem.ClassName}</Card.Title>
         <Card.Text>תיאור: {classItem.ClassDescription}</Card.Text>
-        <Card.Text>תאריך: {classItem.ClassDate}</Card.Text>
+        <Card.Text>
+          תאריך: {new Date(classItem.ClassDate).toLocaleDateString('en-GB')}
+        </Card.Text>
         <Card.Text>שעת התחלה: {classItem.StartTime}</Card.Text>
         <Card.Text>שעת סיום: {classItem.EndTime}</Card.Text>
         <Card.Text>מספר משתתפים: {classItem.NumOfParticipants}</Card.Text>

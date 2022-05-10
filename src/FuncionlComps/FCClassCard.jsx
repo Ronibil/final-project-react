@@ -11,7 +11,9 @@ export default function FCClassCard({ classToCard, type, ShowModaAreYouSure }) {
               <Col xs={12}>
                 <b>שם השיעור:</b> {classToCard.ClassName}
                 <br />
-                <b>תאריך:</b> {classToCard.ClassDate} <br />
+                <b>תאריך:</b>{" "}
+                {new Date(classToCard.ClassDate).toLocaleDateString("en-GB")}{" "}
+                <br />
                 <b>שעת התחלה:</b> {classToCard.StartTime}
               </Col>
             </Row>
@@ -44,7 +46,9 @@ export default function FCClassCard({ classToCard, type, ShowModaAreYouSure }) {
               <Col xs={8}>
                 <b>שם השיעור:</b> {classToCard.ClassName}
                 <br />
-                <b>תאריך:</b> {classToCard.ClassDate} <br />
+                <b>תאריך:</b>{" "}
+                {new Date(classToCard.ClassDate).toLocaleDateString("en-GB")}{" "}
+                <br />
                 <b>שעת התחלה:</b> {classToCard.StartTime}
               </Col>
             </Row>
@@ -72,7 +76,9 @@ export default function FCClassCard({ classToCard, type, ShowModaAreYouSure }) {
               <Col xs={8}>
                 <b>שם השיעור:</b> {classToCard.ClassName}
                 <br />
-                <b>תאריך:</b> {classToCard.ClassDate} <br />
+                <b>תאריך:</b>{" "}
+                {new Date(classToCard.ClassDate).toLocaleDateString("en-GB")}{" "}
+                <br />
                 <b>שעת התחלה:</b> {classToCard.StartTime}
               </Col>
             </Row>
