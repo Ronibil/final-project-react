@@ -44,8 +44,6 @@ export default function FCDetailsForStudentSignUp(props) {
       }),
     })
       .then((res) => {
-        console.log("res=", res);
-        console.log("res.status", res.status);
         console.log("res.ok", res.ok);
         return res.json();
       })
@@ -53,6 +51,7 @@ export default function FCDetailsForStudentSignUp(props) {
         (result) => {
           console.log("FETCH PostRequest= ", result);
           console.log(result.RequsetNum);
+          navigate("/");
         },
         (error) => {
           console.log("err post=", error);

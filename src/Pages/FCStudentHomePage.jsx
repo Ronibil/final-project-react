@@ -144,7 +144,7 @@ export default function StudentHomePage() {
               />
             </>
           ) : (
-            "loding..."
+            ""
           )}
           <h1>HelpMeStudent</h1>
           <Card.Title>ברוכים הבאים - {studentDetails.FullName}</Card.Title>
