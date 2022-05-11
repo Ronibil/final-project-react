@@ -5,12 +5,14 @@ import { useNavigate } from "react-router-dom";
 
 import AsyncSelect from "react-select/async";
 import axios from "axios";
+import validator from 'validator'
 
 export default function FCDetailsForStudentSignUp(props) {
   const navigate = useNavigate();
 
   const [sID, setSID] = useState("");
   const [sEmail, setSEmail] = useState("");
+  const [emailError, setEmailError] = useState("")
   const [sFullName, setSFullName] = useState("");
   const [sPhone, setSPhone] = useState("");
   const [sGender, setSGender] = useState("");
@@ -116,6 +118,34 @@ export default function FCDetailsForStudentSignUp(props) {
     }
   };
 
+  const handleID = (e) => {
+    if (!(Number(e.target.value)) && e.target.value !== "0") {
+      let str = e.target.value.substring(0, e.target.value.length - 1)
+      e.target.value = str
+    }
+    else if (e.target.value === "" || e.target.value === 0 || e.target.value.length < 9) {
+      e.target.style.border = "2px solid red"
+    }
+    else {
+      e.target.style.border = ""
+      console.log(e.target.value)
+      setSID(e.target.value)
+    }
+  }
+
+  const handleEmail = (e) => {
+    var email = e.target.value
+    if (validator.isEmail(email)) {
+      e.target.style.color = "green"
+      setEmailError('Valid Email :)')
+      setSEmail(e.target.value)
+    }
+     else {
+      e.target.style.color = "red"
+      setEmailError('Enter valid Email!')
+    }
+  }
+
   return (
     <Container
       className="d-flex align-items-center justify-content-center"
@@ -135,7 +165,9 @@ export default function FCDetailsForStudentSignUp(props) {
                   type="text"
                   placeholder="תעודת זהות"
                   required
-                  onChange={(e) => setSID(e.target.value)}
+                  onChange={(e) => handleID(e)}
+                  //onChange={(e) => setSID(e.target.value)}
+                  maxLength={9}
                 />
               </Form.Group>
               <Form.Group className="mb-2">
@@ -144,12 +176,15 @@ export default function FCDetailsForStudentSignUp(props) {
                   type="email"
                   placeholder="הכנס מייל"
                   required
-                  onChange={(e) => {
-                    setSEmail(e.target.value);
-                  }}
+                  //onChange={(e) => {setSEmail(e.target.value);}}
+                  onChange={(e) => handleEmail(e)}
                 />
                 <Form.Text className="text-muted">
                   המייל שלך ישמש כאמצאי ההתחברות שלך וקבלת התראות על שיעורים
+                </Form.Text>
+                <br/>
+                <Form.Text className="text-muted">
+                  {emailError}
                 </Form.Text>
               </Form.Group>
               <Form.Group className="mb-2">
