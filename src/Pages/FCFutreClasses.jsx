@@ -100,7 +100,7 @@ export default function FCFutreClasses() {
               />
             </>
           ) : (
-            "loding..."
+            ""
           )}
           <Card.Title>:שיעורים עתידיים שלי</Card.Title>
           {futreClass.length !== 0 ? (

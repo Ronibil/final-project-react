@@ -1,48 +1,8 @@
 import React, { useEffect, useState } from "react";
 import { Card, Row, Col } from "react-bootstrap";
-import { useLocation } from "react-router-dom";
+// import { useLocation } from "react-router-dom";
 
-export default function FCFormSuperDetails() {
-  const location = useLocation();
-  const [superDetails, setSuperDetails] = useState({});
-
-  useEffect(() => {
-    const SuperStudentId = location.state.id;
-    const fetchSuperStudentDetails = async () => {
-      // const response = await fetch(
-      //   "http://localhost:49812/SuperStudent/GetSuperDetailsRef/" +
-      //     SuperStudentId
-      // );
-      // console.log(response);
-
-      fetch(
-        "http://localhost:49812/SuperStudent/GetSuperDetailsRef/" +
-          SuperStudentId,
-        {
-          method: "GET",
-          headers: new Headers({
-            "Content-Type": "application/json; charset=UTF-8",
-            Accept: "application/json; charset=UTF-8",
-          }),
-        }
-      )
-        .then((res) => {
-          console.log("res.ok", res.ok);
-          return res.json();
-        })
-        .then(
-          (result) => {
-            console.log("FETCH PostRequest= ", result);
-            setSuperDetails(result);
-          },
-          (error) => {
-            console.log("err post=", error);
-          }
-        );
-    };
-    fetchSuperStudentDetails();
-  }, []);
-
+export default function FCFormSuperDetails({ superDetails }) {
   return (
     <Card xs={12} style={{ width: "30rem" }}>
       <Card.Img
@@ -83,4 +43,49 @@ export default function FCFormSuperDetails() {
       </Card.Body>
     </Card>
   );
-}
+};
+
+
+
+
+
+// נעשה פונקציה שתחזיר את הפרטים של הסופר סטודנט
+ // const location = useLocation();
+  // const [superDetails, setSuperDetails] = useState({});
+
+  // useEffect(() => {
+  //   const SuperStudentId = location.state.id;
+  //   const fetchSuperStudentDetails = async () => {
+  //     // const response = await fetch(
+  //     //   "http://localhost:49812/SuperStudent/GetSuperDetailsRef/" +
+  //     //     SuperStudentId
+  //     // );
+  //     // console.log(response);
+
+  //     fetch(
+  //       "http://localhost:49812/SuperStudent/GetSuperDetailsRef/" +
+  //         SuperStudentId,
+  //       {
+  //         method: "GET",
+  //         headers: new Headers({
+  //           "Content-Type": "application/json; charset=UTF-8",
+  //           Accept: "application/json; charset=UTF-8",
+  //         }),
+  //       }
+  //     )
+  //       .then((res) => {
+  //         console.log("res.ok", res.ok);
+  //         return res.json();
+  //       })
+  //       .then(
+  //         (result) => {
+  //           console.log("FETCH PostRequest= ", result);
+  //           setSuperDetails(result);
+  //         },
+  //         (error) => {
+  //           console.log("err post=", error);
+  //         }
+  //       );
+  //   };
+  //   fetchSuperStudentDetails();
+  // }, []);

@@ -3,7 +3,7 @@ import axios from "axios";
 import { Container, Button, Row, Col } from "react-bootstrap";
 import Select from "react-select";
 import makeAnimate from "react-select/animated";
-import ClassCard from "../Functional Components/ClassCard";
+import ClassCard from "../FuncionlComps/ClassCard";
 import "../StyleSheets/searchClassesStyle.css";
 import { useLocation, useNavigate } from "react-router-dom";
 
