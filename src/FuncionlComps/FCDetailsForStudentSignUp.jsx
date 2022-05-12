@@ -14,6 +14,7 @@ export default function FCDetailsForStudentSignUp(props) {
   const [sEmail, setSEmail] = useState("");
   const [emailError, setEmailError] = useState("")
   const [sFullName, setSFullName] = useState("");
+  const [nameError, setNameError] = useState("")
   const [sPhone, setSPhone] = useState("");
   const [sGender, setSGender] = useState("");
   const [sBirthdate, setSBirthdate] = useState("");
@@ -136,13 +137,67 @@ export default function FCDetailsForStudentSignUp(props) {
   const handleEmail = (e) => {
     var email = e.target.value
     if (validator.isEmail(email)) {
-      e.target.style.color = "green"
-      setEmailError('Valid Email :)')
+      e.target.style.border = ""
+      setEmailError('מייל תקין :)')
       setSEmail(e.target.value)
     }
      else {
-      e.target.style.color = "red"
-      setEmailError('Enter valid Email!')
+      e.target.style.border = "2px solid red"
+      setEmailError('מייל לא תקין!')
+    }
+  }
+
+  const emailMessage = () => {
+    let block = <Form.Text className="text-danger">
+                  {emailError}
+                </Form.Text>
+    if (emailError === 'מייל לא תקין!') {
+      return block
+    }
+    else {
+      let block = <Form.Text className="text-success">
+                  {emailError}
+                  </Form.Text>
+      return block
+    }
+  }
+  const handleFullName = () => {
+    let name = sFullName
+    let res = name.match(" ")
+    console.log(res)
+    console.log(name.length)
+    if (res === null || res.index < 2 || res.input[res.input.length - 1] === " " || res.input.includes("  "))  {
+      console.log("red")
+      setNameError("שם לא תקין!")
+    }
+    else {
+      setNameError("")
+    }
+    
+  }
+  
+  const nameMessage = () => {
+    let block = <Form.Text className="text-danger">
+                  {nameError}
+                </Form.Text>
+    if (nameError === "שם לא תקין!") {
+      return block
+    }
+    else {
+      return null
+    }
+  }
+
+  const handlePhone = (e) => {
+    let ph = sPhone
+    let res = ph.match("05")
+    if (ph.length === 3) {
+      let phone = ph + "-"
+      e.target.value = phone
+    }
+    else if (ph.length === 6) {
+      let phone = ph + "-"
+      e.target.value = phone
     }
   }
 
@@ -183,9 +238,7 @@ export default function FCDetailsForStudentSignUp(props) {
                   המייל שלך ישמש כאמצאי ההתחברות שלך וקבלת התראות על שיעורים
                 </Form.Text>
                 <br/>
-                <Form.Text className="text-muted">
-                  {emailError}
-                </Form.Text>
+                {emailMessage()}
               </Form.Group>
               <Form.Group className="mb-2">
                 <Form.Label>שם מלא</Form.Label>
@@ -196,7 +249,9 @@ export default function FCDetailsForStudentSignUp(props) {
                   onChange={(e) => {
                     setSFullName(e.target.value);
                   }}
+                  onBlur={handleFullName}
                 />
+                {nameMessage()}
               </Form.Group>
               <Form.Group className="mb-2">
                 <Form.Label>מספר טלפון</Form.Label>
@@ -207,6 +262,8 @@ export default function FCDetailsForStudentSignUp(props) {
                   onChange={(e) => {
                     setSPhone(e.target.value);
                   }}
+                  onBlur={handlePhone}
+                  onInput={(e) => handlePhone(e)}
                 />
               </Form.Group>
               <Form.Group className="mb-2">
