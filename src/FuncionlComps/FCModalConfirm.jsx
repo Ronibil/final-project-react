@@ -20,7 +20,7 @@ function FCModalConfirm({ BackToHomePage, modalOpen, ClassDetailsForModal, text 
           <hr />
           <h3>פרטי השיעור</h3>
           <b><p>נושא: {ClassDetailsForModal.className}</p></b>
-          <b><p>תאריך:{ClassDetailsForModal.classDate} </p></b>
+          <b><p>תאריך:{new Date(ClassDetailsForModal.classDate).toLocaleDateString('en-GB')} </p></b>
           <b><p>שעת התחלה:{ClassDetailsForModal.classStartTime} </p></b>
           <b><p>שעת סיום:{ClassDetailsForModal.classEndTime} </p></b>
           <b><p>פרטני/קבוצתי:{ClassDetailsForModal.classParticipants > 1 ? <>קבוצתי</> : <>פרטני</>} </p></b>

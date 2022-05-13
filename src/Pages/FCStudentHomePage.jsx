@@ -11,6 +11,7 @@ export default function StudentHomePage() {
   const [classesHistory, setClassesHistory] = useState([]);
   const [futreClasses, setFutreClasses] = useState([]);
 
+  //modal 
   const [areYouSureModal, setAreYouSureModal] = useState(false);
   const [classDetails, setClassDetails] = useState();
   const [confirmModal, setConfirmModal] = useState(false);
@@ -88,12 +89,12 @@ export default function StudentHomePage() {
       );
   };
 
-  const FutureClasses = () => {
-    let classList = futreClasses.map((classInList) => (
-      <FCClassCard classToCard={classInList} type="studentFutre" />
-    ));
-    return classList;
-  };
+  // const FutureClasses = () => {
+  //   let classList = futreClasses.map((classInList) => (
+  //     <FCClassCard classToCard={classInList} type="studentFutre" />
+  //   ));
+  //   return classList;
+  // };
 
   const HideModalAreYouSure = () => {
     setAreYouSureModal(false);

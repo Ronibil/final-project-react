@@ -34,11 +34,11 @@ export default function FCHistoryClassSuper() {
           )}{" "}
           <br />
           <Button
-            className="btnBackToHome"
+            //className="btnBackToHome"
             onClick={() => navigate("/superHomePage", { state: superDetails })}
-            variant="success"
+            variant="outline-primary"
           >
-            חזרה לפרופיל האישי
+            חזרה לדף הבית
           </Button>
         </Card.Body>
       </Card>

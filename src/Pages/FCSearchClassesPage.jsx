@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Container, Button, Row, Col } from "react-bootstrap";
+import { Container, Button, Row, Col, Card } from "react-bootstrap";
 import Select from "react-select";
 import makeAnimate from "react-select/animated";
-import ClassCard from "../FuncionlComps/ClassCard";
+import FCClassCard from "../FuncionlComps/FCClassCard";
 import "../StyleSheets/searchClassesStyle.css";
 import { useLocation, useNavigate } from "react-router-dom";
+import FCModalConfirm from "../FuncionlComps/FCModalConfirm";
+
 
 export default function SearchClassesPage() {
   const { state } = useLocation();
@@ -18,6 +20,10 @@ export default function SearchClassesPage() {
   const [suggestions, setSuggestions] = useState([]);
   const [classes, setClasses] = useState([]);
   const navigate = useNavigate();
+
+  //Modal
+  const [confirmModal, setConfirmModal] = useState(false);
+  const [classDetails, setClassDetails] = useState()
 
   const animatedComponents = makeAnimate();
   const customTheme = (theme) => {
@@ -66,6 +72,18 @@ export default function SearchClassesPage() {
       ClassCode: classCode,
     };
 
+    let classToModal = classes.find(c => c.ClassCode === classCode);
+    console.log(classToModal);
+    let classToConfirmModal = {
+      classCode: classToModal.ClassCode,
+      classDate: classToModal.ClassDate,
+      classEndTime: classToModal.EndTime,
+      className: classToModal.ClassName,
+      classParticipants: classToModal.NumOfParticipants,
+      classStartTime: classToModal.StartTime
+    };
+    setClassDetails(classToConfirmModal);
+
     const url = "http://localhost:49812/Student/PostStudentToClass";
 
     fetch(url, {
@@ -77,57 +95,103 @@ export default function SearchClassesPage() {
       }),
     })
       .then((res) => {
-        console.log("res=", res);
-        console.log("res.status", res.status);
         console.log("res.ok", res.ok);
+        if (res.ok) {
+          setConfirmModal(true)
+        }
         return res.json();
       })
       .then(
         (result) => {
           console.log(result);
-          navigate('/studentHomePage', {state: userDetails});
         },
         (error) => {
           console.log("err post=", error);
         }
       );
-    console.log("end1");
   };
+
+  const BackToHomePage = () => {
+    navigate('/studentHomePage', { state: userDetails })
+  }
+
+
 
   return (
     <Container
-      className="w-100"
-      style={{ maxWidth: "400px", textAlign: "center" }}
+      className="d-flex align-items-center flex-column"
+      style={{
+        marginTop: 50,
+        marginBottom: 10,
+      }}
     >
-      <h2>מצא את השיעור שמתאים לך!</h2>
-      <Row style={{ alignItems: "center" }}>
-        <Col xs={11}>
-          <Select
-            theme={customTheme}
-            placeholder="בחר תגיות"
-            closeMenuOnSelect={false}
-            components={animatedComponents}
-            onChange={setTags}
-            isMulti
-            isSearchable
-            noOptionsMessage={() => "לא נמצאו תגיות"}
-            className="basic-multi-select m-3"
-            options={suggestions}
-          />
-        </Col>
-        <Col xs={1}>
-          <Button variant="success" onClick={searchByTags}>
-            חיפוש
-          </Button>
-        </Col>
-      </Row>
-      <Row>
-        {classes.length !== 0 ? (
-          <ClassCard classes={classes} register={register} />
-        ) : (
-          <h3>No classes yet</h3>
-        )}
-      </Row>
+      <Card xs={12} style={{ width: "40rem" }}>
+        <Card.Body align="center">
+          {classDetails !== undefined ?
+            <>
+              <FCModalConfirm
+                modalOpen={confirmModal}
+                BackToHomePage={BackToHomePage}
+                ClassDetailsForModal={classDetails}
+                text="!הרשמה בוצעה בהצלחה"
+              />
+            </>
+            :
+            ""
+          }
+
+          <h2>!מצא את השיעור שמתאים לך</h2>
+          <Row style={{ alignItems: "center" }}>
+            <Col xs={10}>
+              <Select
+                theme={customTheme}
+                placeholder="בחר תגיות"
+                closeMenuOnSelect={false}
+                components={animatedComponents}
+                onChange={setTags}
+                isMulti
+                isSearchable
+                noOptionsMessage={() => "לא נמצאו תגיות"}
+                className="basic-multi-select m-3"
+                options={suggestions}
+              />
+            </Col>
+            <Col xs={2}>
+              <Button variant="success" onClick={searchByTags}>
+                חיפוש
+              </Button>
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              {classes.length !== 0 ? (
+                <>
+                  {classes.map((c) => (
+                    <FCClassCard
+                      key={c.ClassCode}
+                      classToCard={c}
+                      type="SearchClass"
+                      btnFunction={register}
+                    />
+                  ))
+                  }</>
+              ) : (
+                ""
+              )}
+            </Col>
+          </Row>
+          <Row>
+            <Col xs={12}>
+              <Button
+                onClick={BackToHomePage}
+                variant="outline-primary"
+              >
+                חזרה לדף הבית
+              </Button>
+            </Col>
+          </Row>
+        </Card.Body>
+      </Card>
     </Container>
   );
 }

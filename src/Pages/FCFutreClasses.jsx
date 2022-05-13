@@ -115,15 +115,18 @@ export default function FCFutreClasses() {
               ))}
             </>
           ) : (
-            "No found classes"
+            <>
+              <h5>לא קיימים שיעורים עתידיים</h5>
+              <p>להוספת שיעור עתידי חזור לדף הבית ליצירת שיעור חדש</p><br />
+            </>
           )}{" "}
           <br />
           <Button
-            className="btnBackToHome"
+            //className="btnBackToHome"
             onClick={() => navigate("/superHomePage", { state: superDetails })}
-            variant="success"
+            variant="outline-primary"
           >
-            חזרה לפרופיל האישי
+            חזרה לדף הבית
           </Button>
         </Card.Body>
       </Card>

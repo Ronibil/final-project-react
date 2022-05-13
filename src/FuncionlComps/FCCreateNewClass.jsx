@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Form, Card, Button } from "react-bootstrap";
+import { Container, Form, Card, Button, Row, Col } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FCModalConfirm from "./FCModalConfirm";
@@ -126,7 +126,7 @@ export default function FCCreateNewClass() {
                 <Form.Label>שם השיעור</Form.Label>
                 <Form.Control
                   type="text"
-                  style={{textAlign: "right"}}
+                  style={{ textAlign: "right" }}
                   placeholder="שם השיעור"
                   required
                   onChange={(e) => setClassName(e.target.value)}
@@ -136,7 +136,7 @@ export default function FCCreateNewClass() {
                 <Form.Label>תיאור השיעור</Form.Label>
                 <Form.Control
                   as="textarea"
-                  style={{textAlign: "right"}}
+                  style={{ textAlign: "right" }}
                   rows={3}
                   placeholder="הכנס את תיאור השיעור / מערך השיעור"
                   required
@@ -177,7 +177,7 @@ export default function FCCreateNewClass() {
                 <Form.Label>מספר משתתפים</Form.Label>
                 <Form.Select
                   size="sm"
-                  style={{textAlign: "right"}}
+                  style={{ textAlign: "right" }}
                   required
                   onChange={(e) => setClassParticipants(e.target.value)}
                 >
@@ -206,13 +206,28 @@ export default function FCCreateNewClass() {
                 />
               </Form.Group>
             </Form>
-            <Button
-              id="subBtn"
-              variant="success"
-              onClick={() => postNewClass()}
-            >
-              יצירת שיעור
-            </Button>
+            <Row>
+              <Col xs={6}>
+                <Button
+                  id="subBtn"
+                  variant="success"
+                  onClick={() => postNewClass()}
+                >
+                  יצירת שיעור
+                </Button>
+              </Col>
+              <Col xs={6}>
+                <Button
+                  id="subBtn"
+                  variant="outline-primary"
+                  onClick={BackToHomePage}
+                >
+                  חזרה לדף הבית
+                </Button>
+              </Col>
+            </Row>
+
+
           </Card.Body>
           <FCModalConfirm
             BackToHomePage={BackToHomePage}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
-import { Button, Form, Card, Container } from 'react-bootstrap';
+import { Button, Form, Card, Container, Row, Col } from 'react-bootstrap';
 import "../StyleSheets/Modal.css";
 import FCModalUpdateSuperProfile from '../FuncionlComps/FCModalUpdateSuperProfile';
 
@@ -10,7 +10,7 @@ function FCUpdateProfileSuper() {
   const StudyYear = state.StudyYear;
   const DepartmentName = state.DepartmentName;
   const superEmail = state.superEmail;
-  const superPassword=state.superPassword;
+  const superPassword = state.superPassword;
   const [description, setDescription] = useState();
   const [modalOpen, setModalOpen] = useState(false)
 
@@ -49,7 +49,7 @@ function FCUpdateProfileSuper() {
 
   }
   const BackToHomePage = () => {
-    const UserDetails={
+    const UserDetails = {
       Email: superEmail,
       Password: superPassword
     }
@@ -97,7 +97,24 @@ function FCUpdateProfileSuper() {
                 />
               </Form.Group>
             </Form>
-            <Button onClick={UpdateSuperDescription} className='btnBackToHome' variant="success">סיום עריכה</Button>
+            <Row>
+              <Col xs={6}>
+                <Button
+                  onClick={UpdateSuperDescription}
+                  // className='btnBackToHome'
+                  variant="success">
+                  סיום עריכה
+                </Button>
+              </Col>
+              <Col xs={6}>
+                <Button
+                  id="subBtn"
+                  variant="outline-primary"
+                  onClick={BackToHomePage}>
+                  חזרה לדף הבית
+                </Button>
+              </Col>
+            </Row>
           </Card.Body>
         </Card>{" "}
       </div>
