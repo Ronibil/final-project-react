@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Container, Form, Card } from "react-bootstrap";
+import { Button, Container, Form, Card, Row, Col} from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -16,9 +16,37 @@ export default function FCDetailsForStudentSignUp(props) {
   const [sFullName, setSFullName] = useState("");
   const [nameError, setNameError] = useState("")
   const [sPhone, setSPhone] = useState("");
+  const [phoneError, setPhoneError] = useState("")
   const [sGender, setSGender] = useState("");
   const [sBirthdate, setSBirthdate] = useState("");
+  const [birthDateError, setBirthDateError] = useState("")
   const [sCity, setSCity] = useState("");
+
+  const checkFields = () => {
+    const newStudentRequest = {
+      StudentId: sID,
+      FullName: sFullName,
+      Email: sEmail,
+      Phone: sPhone,
+      Gender: sGender,
+      BirthDate: sBirthdate,
+      City: sCity,
+    };
+    console.log(newStudentRequest);
+
+    if (sID, sEmail, sFullName, sPhone, sGender, sBirthdate, sCity === "") {
+      alert("כל השדות חובה! נא למלות את כולן.")
+    }
+    else {
+      if (props.type === "type1") {
+        btnPostStudentRequest()
+      }
+      else {
+        alert("go")
+        navigate("/SuperStudentRequestPage2", { state: newStudentRequest })
+      }
+    }
+  }
 
   // post new student request to db - fetch post
   const btnPostStudentRequest = () => {
@@ -99,7 +127,7 @@ export default function FCDetailsForStudentSignUp(props) {
         <Button
           id="subBtn"
           variant="success"
-          onClick={() => btnPostStudentRequest()}
+          onClick={() => checkFields()}
         >
           שליחה לאימות נתונים
         </Button>
@@ -109,9 +137,7 @@ export default function FCDetailsForStudentSignUp(props) {
         <Button
           id="subBtn"
           variant="success"
-          onClick={() =>
-            navigate("/SuperStudentRequestPage2", { state: superDetails })
-          }
+          onClick={() => checkFields()}
         >
           המשך למילוי פרופיל אישי
         </Button>
@@ -126,10 +152,10 @@ export default function FCDetailsForStudentSignUp(props) {
     }
     else if (e.target.value === "" || e.target.value === 0 || e.target.value.length < 9) {
       e.target.style.border = "2px solid red"
+      setSID("")
     }
     else {
       e.target.style.border = ""
-      console.log(e.target.value)
       setSID(e.target.value)
     }
   }
@@ -138,12 +164,13 @@ export default function FCDetailsForStudentSignUp(props) {
     var email = e.target.value
     if (validator.isEmail(email)) {
       e.target.style.border = ""
-      setEmailError('מייל תקין :)')
+      setEmailError('(: מייל תקין')
       setSEmail(e.target.value)
     }
      else {
       e.target.style.border = "2px solid red"
-      setEmailError('מייל לא תקין!')
+      setEmailError('!מייל לא תקין')
+      setSEmail("")
     }
   }
 
@@ -151,7 +178,7 @@ export default function FCDetailsForStudentSignUp(props) {
     let block = <Form.Text className="text-danger">
                   {emailError}
                 </Form.Text>
-    if (emailError === 'מייל לא תקין!') {
+    if (emailError === '!מייל לא תקין') {
       return block
     }
     else {
@@ -161,26 +188,24 @@ export default function FCDetailsForStudentSignUp(props) {
       return block
     }
   }
-  const handleFullName = () => {
-    let name = sFullName
+  const handleFullName = (e) => {
+    let name = e.target.value
     let res = name.match(" ")
-    console.log(res)
-    console.log(name.length)
     if (res === null || res.index < 2 || res.input[res.input.length - 1] === " " || res.input.includes("  "))  {
-      console.log("red")
-      setNameError("שם לא תקין!")
+      setNameError("!שם לא תקין")
+      setSFullName("")
     }
     else {
+      setSFullName(name)
       setNameError("")
     }
-    
   }
   
   const nameMessage = () => {
     let block = <Form.Text className="text-danger">
                   {nameError}
                 </Form.Text>
-    if (nameError === "שם לא תקין!") {
+    if (nameError === "!שם לא תקין") {
       return block
     }
     else {
@@ -189,15 +214,66 @@ export default function FCDetailsForStudentSignUp(props) {
   }
 
   const handlePhone = (e) => {
-    let ph = sPhone
-    let res = ph.match("05")
-    if (ph.length === 3) {
-      let phone = ph + "-"
-      e.target.value = phone
+    let res = e.target.value.match("05")
+    if (e.target.value === "" || e.target.value === 0 || e.target.value.length < 10 || res === null || res.index !== 0 ) {
+      setPhoneError("!מספר הטלפון אינו תקין")
+      setSPhone("")
     }
-    else if (ph.length === 6) {
-      let phone = ph + "-"
-      e.target.value = phone
+    else {
+      setSPhone(e.target.value)
+      setPhoneError("")
+    }
+  }
+  const preventLetters = (e) => {
+    if (!(Number(e.target.value)) && e.target.value !== "0") {
+      let str = e.target.value.substring(0, e.target.value.length - 1)
+      e.target.value = str
+    }
+  }
+
+  const phoneMessage = () => {
+    let block = <Form.Text className="text-danger">
+                  {phoneError}
+                </Form.Text>
+    if (phoneError === "!מספר הטלפון אינו תקין") {
+      return block
+    }
+    else {
+      return null
+    }
+  }
+
+  const handleAge = (e) => {
+    let age = 0
+    const today = new Date();
+    const birthDate = new Date(e.target.value);
+    const yearsDifference = today.getFullYear() - birthDate.getFullYear();
+    if (today.getMonth() < birthDate.getMonth() || (today.getMonth() === birthDate.getMonth() && today.getDate() < birthDate.getDate())) {
+      age = yearsDifference - 1
+    }
+    else {
+      age = yearsDifference
+    }
+    
+    if (e.target.value === "" || age < 18) {
+      setBirthDateError("!תאריך לידה אינו תקין")
+      setSBirthdate("")
+    }
+    else {
+      setSBirthdate(birthDate)
+      setBirthDateError("")
+    }
+  }
+
+  const birthDateMessage = () => {
+    let block = <Form.Text className="text-danger">
+                  {birthDateError}
+                </Form.Text>
+    if (birthDateError === "!תאריך לידה אינו תקין") {
+      return block
+    }
+    else {
+      return null
     }
   }
 
@@ -221,7 +297,6 @@ export default function FCDetailsForStudentSignUp(props) {
                   placeholder="תעודת זהות"
                   required
                   onChange={(e) => handleID(e)}
-                  //onChange={(e) => setSID(e.target.value)}
                   maxLength={9}
                 />
               </Form.Group>
@@ -231,7 +306,6 @@ export default function FCDetailsForStudentSignUp(props) {
                   type="email"
                   placeholder="הכנס מייל"
                   required
-                  //onChange={(e) => {setSEmail(e.target.value);}}
                   onChange={(e) => handleEmail(e)}
                 />
                 <Form.Text className="text-muted">
@@ -246,9 +320,6 @@ export default function FCDetailsForStudentSignUp(props) {
                   type="text"
                   placeholder="שם מלא"
                   required
-                  onChange={(e) => {
-                    setSFullName(e.target.value);
-                  }}
                   onBlur={handleFullName}
                 />
                 {nameMessage()}
@@ -259,12 +330,11 @@ export default function FCDetailsForStudentSignUp(props) {
                   type="text"
                   placeholder="מספר טלפון"
                   required
-                  onChange={(e) => {
-                    setSPhone(e.target.value);
-                  }}
-                  onBlur={handlePhone}
-                  onInput={(e) => handlePhone(e)}
+                  onChange={(e) => preventLetters(e)}
+                  onBlur={(e) => handlePhone(e)}
+                  maxLength={10}
                 />
+                {phoneMessage()}
               </Form.Group>
               <Form.Group className="mb-2">
                 <Form.Label>מין</Form.Label>
@@ -287,11 +357,10 @@ export default function FCDetailsForStudentSignUp(props) {
                   type="date"
                   placeholder="תאריך לידה"
                   required
-                  onChange={(e) => {
-                    setSBirthdate(e.target.value);
-                  }}
+                  onBlur={(e) => handleAge(e)}
                 />
               </Form.Group>
+              {birthDateMessage()}
               <Form.Group className="mb-3">
                 <Form.Label>מקום מגורים</Form.Label>
                 <AsyncSelect
@@ -302,6 +371,7 @@ export default function FCDetailsForStudentSignUp(props) {
                 />
               </Form.Group>{" "}
               {buttonToReturn()}
+              <Button onClick={checkFields}>demo</Button>
             </Form>
           </Card.Body>
         </Card>
