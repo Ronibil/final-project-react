@@ -3,15 +3,7 @@ import { Row, Col, Card, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import "../StyleSheets/btnSuperStyle.css";
 
-export default function FCButtonsForSuperHomePage({
-  UserDetails,
-  superName,
-  DepartmentName,
-  Description,
-  StudyYear,
-  HistoryClass,
-  FutreClass
-}) {
+export default function FCButtonsForSuperHomePage({ UserDetails, superName, DepartmentName, Description, StudyYear, HistoryClass, FutreClass }) {
   const navigate = useNavigate();
   const superDetails = {
     superEmail: UserDetails.Email,
@@ -40,56 +32,56 @@ export default function FCButtonsForSuperHomePage({
   };
 
   return (
-      <Card xs={12} style={{ width: "30rem" }}>
-        <Card.Body align="center">
-          <Row>
-            <Col xs={6}>
-              <Button className="btnSuper" onClick={() =>
-                navigate('/FutreClasses', { state: superDetailsForFutreClass })}
-              >
-                שיעורים עתידיים שלי
-              </Button>
-            </Col>
-            <Col xs={6}>
-              <Button
-                className="btnSuper"
-                onClick={() =>
-                  navigate("/CreateNewClass", { state: superDetails })
-                }
-                style={{ backgroundColor: "#90EE90" }}
-              >
-                + יצירת שיעור חדש
-              </Button>
-            </Col>
-          </Row>
-          <br />
-          <Row>
-            <Col xs={6}>
-              <Button
-                className="btnSuper"
-                onClick={() =>
-                  navigate("/UpdateProfileSuper", {
-                    state: superDetailsForUpdateProfile,
-                  })
-                }
-              >
-                עריכת הפרופיל שלי
-              </Button>
-            </Col>
-            <Col xs={6}>
-              <Button
-                className="btnSuper"
-                onClick={() =>
-                  navigate("/HistoryClassSuper", {
-                    state: superDetailsForHistoryClass,
-                  })
-                }
-              >
-                היסטורית שיעורים
-              </Button>
-            </Col>
-          </Row>
-        </Card.Body>
-      </Card>
+    <Card xs={12} style={{ width: "30rem" }}>
+      <Card.Body align="center">
+        <Row>
+          <Col xs={6}>
+            <Button className="btnSuper" onClick={() =>
+              navigate('/FutreClasses', { state: superDetailsForFutreClass })}
+            >
+              שיעורים עתידיים שלי
+            </Button>
+          </Col>
+          <Col xs={6}>
+            <Button
+              className="btnSuper"
+              onClick={() =>
+                navigate("/CreateNewClass", { state: superDetails })
+              }
+              style={{ backgroundColor: "#90EE90" }}
+            >
+              + יצירת שיעור חדש
+            </Button>
+          </Col>
+        </Row>
+        <br />
+        <Row>
+          <Col xs={6}>
+            <Button
+              className="btnSuper"
+              onClick={() =>
+                navigate("/UpdateProfileSuper", {
+                  state: superDetailsForUpdateProfile,
+                })
+              }
+            >
+              עריכת הפרופיל שלי
+            </Button>
+          </Col>
+          <Col xs={6}>
+            <Button
+              className="btnSuper"
+              onClick={() =>
+                navigate("/HistoryClassSuper", {
+                  state: superDetailsForHistoryClass,
+                })
+              }
+            >
+              היסטורית שיעורים
+            </Button>
+          </Col>
+        </Row>
+      </Card.Body>
+    </Card>
   );
 }

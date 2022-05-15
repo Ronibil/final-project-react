@@ -53,7 +53,6 @@ export default function SearchClassesPage() {
     try {
       if (tags.length !== 0) {
         let tagList = tags.map((tag) => ({ TagName: tag.label }));
-        console.log(tagList);
         const { data } = await axios.post(
           "http://localhost:49812/Class/GetClassesByTags",
           tagList
@@ -64,16 +63,13 @@ export default function SearchClassesPage() {
   };
 
   const register = (classCode) => {
-    console.log(classCode);
     let user = JSON.parse(localStorage.getItem("user"));
-    console.log(user.Password);
     const requestToRegister = {
       StudentId: user.Password,
       ClassCode: classCode,
     };
 
     let classToModal = classes.find(c => c.ClassCode === classCode);
-    console.log(classToModal);
     let classToConfirmModal = {
       classCode: classToModal.ClassCode,
       classDate: classToModal.ClassDate,
@@ -172,6 +168,7 @@ export default function SearchClassesPage() {
                       classToCard={c}
                       type="SearchClass"
                       btnFunction={register}
+                      studentDetails={userDetails}
                     />
                   ))
                   }</>

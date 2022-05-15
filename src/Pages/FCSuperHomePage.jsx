@@ -26,7 +26,7 @@ export default function FCSuperHomePage() {
       setSuperDetails({
         StudentId: data.StudentId,
         FullName: data.FullName,
-        Image: data.Image,
+        Image: null,
         Description: data.Description,
         DepartmentName: data.DepartmentName,
         StudyYear: data.StudyYear,

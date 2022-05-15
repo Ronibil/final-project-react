@@ -1,10 +1,18 @@
 import React from "react";
 import { Card, Row, Col, Button } from "react-bootstrap";
-import { Navigate, NavigationType, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
-export default function FCClassCard({ classToCard, type, ShowModaAreYouSure, btnFunction }) {
-  const Navigate = useNavigate();
 
+export default function FCClassCard({ classToCard, type, ShowModaAreYouSure, btnFunction, studentDetails }) {
+  const navigate = useNavigate();
+  // const DetailsForShowProfileSuperStudent = null;
+  // if (studentDetails != undefined) {
+  //   let DetailsForShow = {
+  //     superStudentId: classToCard.SuperStudentId,
+  //     Email: studentDetails.Email,
+  //     Password: studentDetails.Password
+  //   }
+  // }
   switch (type) {
     case "history":
       return (
@@ -44,7 +52,6 @@ export default function FCClassCard({ classToCard, type, ShowModaAreYouSure, btn
                 <Col xs={2}>
                   <Button
                     size="md"
-                    // onClick={() => ShowModaAreYouSure(classToCard)}
                     variant="outline-primary"
                   >
                     לצ'אט
@@ -60,17 +67,40 @@ export default function FCClassCard({ classToCard, type, ShowModaAreYouSure, btn
                   <br />
                   <Button
                     size="sm"
-                  // onClick={() => {
-                  //   Navigate("/FCFormSuperDetails", {
-                  //     state: {
-                  //       id: classToCard.SuperStudentId
-                  //     }
-                  //   });
-                  //   console.log(classToCard.SuperStudentId);
-                  // }}
+                    onClick={() => navigate("/ShowProfileSuperStudent", { state: classToCard.SuperStudentId })}
                   >
                     {classToCard.SuperName}
                   </Button>
+                </Col>
+              </Row>
+            </Card.Body>
+          </Card>
+        </>
+      );
+    case "Futre":
+      return (
+        <>
+          <Card>
+            <Card.Body>
+              <Row>
+                <Col xs={2}>
+                  <Button variant="secondary">עדכון</Button>
+                </Col>
+                <Col xs={2}>
+                  <Button
+                    onClick={() => ShowModaAreYouSure(classToCard)}
+                    variant="outline-danger"
+                  >
+                    מחיקה
+                  </Button>
+                </Col>
+                <Col xs={8}>
+                  <b>שם השיעור:</b> {classToCard.ClassName}
+                  <br />
+                  <b>תאריך:</b>{" "}
+                  {new Date(classToCard.ClassDate).toLocaleDateString("en-GB")}{" "}
+                  <br />
+                  <b>שעת התחלה:</b> {classToCard.StartTime}
                 </Col>
               </Row>
             </Card.Body>
@@ -84,7 +114,7 @@ export default function FCClassCard({ classToCard, type, ShowModaAreYouSure, btn
             style=
             {
               {
-                width: "50%", 
+                width: "50%",
                 backgroundColor: "#FFF5EE"
               }
             }>
@@ -97,14 +127,26 @@ export default function FCClassCard({ classToCard, type, ShowModaAreYouSure, btn
               <Card.Text>שעת התחלה: {classToCard.StartTime}</Card.Text>
               <Card.Text>שעת סיום: {classToCard.EndTime}</Card.Text>
               <Card.Text>מספר משתתפים: {classToCard.NumOfParticipants}</Card.Text>
-              <Card.Text> {classToCard.SuperName}</Card.Text>
-              <Button onClick={() => btnFunction(classToCard.ClassCode)} variant="success">
-                הרשמה
-              </Button>
+              <Row>
+                <Col>
+                  <Button variant="outline-primary" 
+                  onClick={() => navigate("/ShowProfileSuperStudent", { state: classToCard.SuperStudentId })}
+                  >
+                    {classToCard.SuperName}
+                  </Button>
+                </Col>
+              </Row><br />
+              <Row>
+                <Col>
+                  <Button onClick={() => btnFunction(classToCard.ClassCode)} variant="success">
+                    הרשמה
+                  </Button>
+                </Col>
+              </Row>
             </Card.Body>
           </Card><br />
         </>
-      )
+      );
     default:
       return (
         <>

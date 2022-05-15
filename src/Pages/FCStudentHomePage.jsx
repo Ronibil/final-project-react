@@ -89,13 +89,6 @@ export default function StudentHomePage() {
       );
   };
 
-  // const FutureClasses = () => {
-  //   let classList = futreClasses.map((classInList) => (
-  //     <FCClassCard classToCard={classInList} type="studentFutre" />
-  //   ));
-  //   return classList;
-  // };
-
   const HideModalAreYouSure = () => {
     setAreYouSureModal(false);
   };
@@ -163,6 +156,7 @@ export default function StudentHomePage() {
                   classToCard={c}
                   type="studentFutre"
                   ShowModaAreYouSure={ShowModaAreYouSure}
+                  studentDetails={userDetails}
                 />
               ))}
               <br />

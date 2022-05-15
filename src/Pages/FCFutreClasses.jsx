@@ -109,7 +109,7 @@ export default function FCFutreClasses() {
                 <FCClassCard
                   key={c.ClassCode}
                   classToCard={c}
-                  type="futre"
+                  type="Futre"
                   ShowModaAreYouSure={ShowModaAreYouSure}
                 />
               ))}

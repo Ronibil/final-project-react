@@ -14,7 +14,7 @@ import FCHistoryClassSuper from "./Pages/FCHistoryClassSuper";
 import FCFutreClasses from "./Pages/FCFutreClasses";
 import CCAdminHomePage from "./Pages/CCAdminHomePage";
 import CCHandleRequest from "./Pages/CCHandleRequest";
-import FCFormSuperDetails from "./FuncionlComps/FCFormSuperDetails";
+import FCShowProfileSuperStudent from "./Pages/FCShowProfileSuperStudent";
 
 export default function App() {
   return (
@@ -27,14 +27,8 @@ export default function App() {
         <Route path="/searchClassesPage" element={<FCSearchClassesPage />} />
         <Route path="/" element={<FCLoginPage />} />
         <Route path="/StudentRequestPage" element={<FCStudentRequestPage />} />
-        <Route
-          path="/SuperStudentRequestPage"
-          element={<FCSuperStudentRequestPage />}
-        />
-        <Route
-          path="/SuperStudentRequestPage2"
-          element={<FCSuperStudentRequestPage2 />}
-        />
+        <Route path="/SuperStudentRequestPage" element={<FCSuperStudentRequestPage />} />
+        <Route path="/SuperStudentRequestPage2" element={<FCSuperStudentRequestPage2 />} />
         <Route path="/studentHomePage" element={<FCStudentHomePage />} />
         <Route path="/superHomePage" element={<FCSuperHomePage />} />
         <Route path="/typeOfUser" element={<FCTypeOfUser />} />
@@ -42,10 +36,7 @@ export default function App() {
         <Route path="/UpdateProfileSuper" element={<FCUpdateProfileSuper />} />
         <Route path="/HistoryClassSuper" element={<FCHistoryClassSuper />} />
         <Route path="/FutreClasses" element={<FCFutreClasses />} />
-        <Route
-          path="/FCFormSuperDetails"
-          element={<FCFormSuperDetails />}
-        ></Route>
+        <Route path="/ShowProfileSuperStudent" element={<FCShowProfileSuperStudent />} />
       </Routes>
     </div>
   );
