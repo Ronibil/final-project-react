@@ -11,12 +11,13 @@ export default function StudentHomePage() {
   const [classesHistory, setClassesHistory] = useState([]);
   const [futreClasses, setFutreClasses] = useState([]);
 
-  //modal 
+  //modal
   const [areYouSureModal, setAreYouSureModal] = useState(false);
   const [classDetails, setClassDetails] = useState();
   const [confirmModal, setConfirmModal] = useState(false);
 
-  const { state } = useLocation();
+  const location = useLocation();
+  const { state } = location;
   const userDetails = {
     Email: state.Email,
     Password: state.Password,
@@ -51,7 +52,7 @@ export default function StudentHomePage() {
           console.log("err post=", error);
         }
       );
-  }, []);
+  }, [location]);
 
   const DeleteStudentFromClass = (classCode) => {
     const Url = "http://localhost:49812/Student/DeleteStudentFromClass";

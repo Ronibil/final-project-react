@@ -29,8 +29,8 @@ export default function App() {
         <Route path="/StudentRequestPage" element={<FCStudentRequestPage />} />
         <Route path="/SuperStudentRequestPage" element={<FCSuperStudentRequestPage />} />
         <Route path="/SuperStudentRequestPage2" element={<FCSuperStudentRequestPage2 />} />
-        <Route path="/studentHomePage" element={<FCStudentHomePage />} />
-        <Route path="/superHomePage" element={<FCSuperHomePage />} />
+        {/* <Route path="/studentHomePage" element={<FCStudentHomePage />} /> */}
+        {/* <Route path="/superHomePage" element={<FCSuperHomePage />} /> */}
         <Route path="/typeOfUser" element={<FCTypeOfUser />} />
         <Route path="/CreateNewClass" element={<FCCreateNewClass />} />
         <Route path="/UpdateProfileSuper" element={<FCUpdateProfileSuper />} />
