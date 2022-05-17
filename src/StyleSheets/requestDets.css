@@ -15,9 +15,11 @@
   color: red;
 }
 #succesMsg {
-  display: none;
   color: green;
 }
 #fldBlock {
   text-align: center;
+}
+#msgBlock {
+  display: none;
 }

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, Container, Form, Card, Row, Col} from "react-bootstrap";
+import { Button, Container, Form, Card} from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
@@ -33,16 +33,15 @@ export default function FCDetailsForStudentSignUp(props) {
       City: sCity,
     };
     console.log(newStudentRequest);
-
-    if (sID, sEmail, sFullName, sPhone, sGender, sBirthdate, sCity === "") {
-      alert("כל השדות חובה! נא למלות את כולן.")
+    
+    if (sID === "" || sFullName === "" || sEmail === "" || sPhone === "" || sGender === "" || sBirthdate === "" || sCity === "") {
+          alert("כל השדות חובה! נא למלות את כולן בתקינות.")
     }
     else {
       if (props.type === "type1") {
         btnPostStudentRequest()
       }
       else {
-        alert("go")
         navigate("/SuperStudentRequestPage2", { state: newStudentRequest })
       }
     }
@@ -111,23 +110,13 @@ export default function FCDetailsForStudentSignUp(props) {
     }
   };
 
-  const superDetails = {
-    StudentId: sID,
-    FullName: sFullName,
-    Email: sEmail,
-    Phone: sPhone,
-    Gender: sGender,
-    BirthDate: sBirthdate,
-    City: sCity,
-  };
-
   const buttonToReturn = () => {
     if (props.type === "type1") {
       return (
         <Button
           id="subBtn"
           variant="success"
-          onClick={() => checkFields()}
+          onClick={checkFields}
         >
           שליחה לאימות נתונים
         </Button>
@@ -137,7 +126,7 @@ export default function FCDetailsForStudentSignUp(props) {
         <Button
           id="subBtn"
           variant="success"
-          onClick={() => checkFields()}
+          onClick={checkFields}
         >
           המשך למילוי פרופיל אישי
         </Button>
@@ -198,6 +187,15 @@ export default function FCDetailsForStudentSignUp(props) {
     else {
       setSFullName(name)
       setNameError("")
+    }
+  }
+
+  const preventNumbers = (e) => {
+    for (let i = 0; i < e.target.value.length; i++) {
+      if (Number(e.target.value[i])) {
+        let str = e.target.value.substring(0, e.target.value.length - 1)
+        e.target.value = str
+      }
     }
   }
   
@@ -321,6 +319,7 @@ export default function FCDetailsForStudentSignUp(props) {
                   placeholder="שם מלא"
                   required
                   onBlur={handleFullName}
+                  onChange={(e) => preventNumbers(e)}
                 />
                 {nameMessage()}
               </Form.Group>
@@ -371,7 +370,6 @@ export default function FCDetailsForStudentSignUp(props) {
                 />
               </Form.Group>{" "}
               {buttonToReturn()}
-              <Button onClick={checkFields}>demo</Button>
             </Form>
           </Card.Body>
         </Card>

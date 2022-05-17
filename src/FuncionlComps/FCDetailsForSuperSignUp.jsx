@@ -45,6 +45,15 @@ export default function FCDetailsForSuperSignUp(props) {
       );
   }, []);
 
+  const checkFields = () => {
+    if (superDepartmet === "" || superStudyYear === "" || superDescription === "") {
+      alert("כל השדות חובה! נא למלות את כולן בתקינות.")
+    }
+    else {
+      btnPostSuperStudentRequest()
+    }
+  }
+  
   const btnPostSuperStudentRequest = () => {
     const LocalUrl = "http://localhost:49812/requestToJoin/newRequest";
     let currentDate = new Date();
@@ -206,7 +215,7 @@ export default function FCDetailsForSuperSignUp(props) {
                 className="mb-3"
                 id="subBtn"
                 variant="success"
-                onClick={() => btnPostSuperStudentRequest()}
+                onClick={checkFields}
               >
                 שלח לאימות נתונים
               </Button>

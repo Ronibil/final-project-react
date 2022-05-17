@@ -28,6 +28,12 @@ class CCHandleRequest extends Component {
     return gender;
   };
 
+  shortDate = (d) => {
+    let date = new Date(d)
+    let short = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() 
+    return short
+  }
+
   //go back button
   back = () => {
     let prev = (
@@ -145,7 +151,6 @@ class CCHandleRequest extends Component {
           console.log("res.status", res.status);
           console.log("res.ok", res.ok);
           if (res.ok) {
-            this.setState({ post: true });
             setTimeout(this.movePage(status), 2000);
           }
           return res.json()
@@ -163,17 +168,22 @@ class CCHandleRequest extends Component {
 
   //hide page and show message depending on request status
   movePage = (s) => {
-    if (this.state.post && s === "approved") {
+    if (s === "approved") {
       console.log("aywa aleeeek");
-      document.getElementById("succesMsg").style.display = "block";
+      document.getElementById("msgBlock").style.display = "block";
       document.getElementById("fldBlock").style.display = "none";
     }
-    else if (this.state.post && s === "rejected") {
+    else if (s === "rejected") {
       console.log("you are out dude");
       document.getElementById("succesMsg").innerHTML = "הבקשה נדחתה! הסטודנט לא הוכנס למערכת";
       document.getElementById("succesMsg").style.color = "red";
-      document.getElementById("succesMsg").style.display = "block";
+      document.getElementById("msgBlock").style.display = "block";
       document.getElementById("fldBlock").style.display = "none";
+    }
+    else {
+      console.log("did not got in")
+      console.log(this.state.post)
+      console.log(s)
     }
   };
 
@@ -221,7 +231,10 @@ class CCHandleRequest extends Component {
 
   // show message after approve or deny
   msgBox = () => {
-    let box = <div id="succesMsg">! הבקשה אושרה בהצלחה</div>;
+    let box = <div style={{textAlign: "center"}} id="msgBlock">
+                <div id="succesMsg">! הבקשה אושרה בהצלחה</div>
+                <div>{this.back()}</div>
+              </div>
     return box;
   };
 
@@ -283,7 +296,7 @@ class CCHandleRequest extends Component {
                       <h6 className="mb-0">שנת לידה:</h6>
                     </div>
                     <div className="col-sm-9 text-secondary">
-                      {request.BirthDate}
+                      {this.shortDate(request.BirthDate)}
                     </div>
                   </div>
                   <hr />
@@ -301,7 +314,7 @@ class CCHandleRequest extends Component {
                       <h6 className="mb-0">תאריך הגשת בקשה:</h6>
                     </div>
                     <div className="col-sm-9 text-secondary">
-                      {request.RequestDate}
+                      {this.shortDate(request.RequestDate)}
                     </div>
                   </div>
                   <hr />
