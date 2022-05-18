@@ -86,20 +86,21 @@ export default function FCLoginPage() {
   };
 
   return (
-    <Container
-      className="d-flex align-items-center justify-content-center"
-      style={{ minHeight: "100vh" }}
-    >
-      {
-        <FCLoginForm
-          UpdateEmail={UpdateEmail}
-          UpdatePassword={UpdatePassword}
-          VerifyUser={() => {
-            VerifyUser();
-          }}
-          navigateToRegister={navigateToRegister}
-        />
-      }
+    <Container className="d-flex justify-content-start align-items-center flex-column ">
+      <img
+        src="App logos\HelpMeStudent!-logos_black.png"
+        alt="logo"
+        id="logo"
+        style={{ width: "200px" }}
+      />
+      <FCLoginForm
+        UpdateEmail={UpdateEmail}
+        UpdatePassword={UpdatePassword}
+        VerifyUser={() => {
+          VerifyUser();
+        }}
+        navigateToRegister={navigateToRegister}
+      />
     </Container>
   );
 }

@@ -7,3 +7,13 @@
   background-color: #ffffff;
   border-radius: 50px;
 }
+
+@media (max-width: 768px) {
+  .btnSuper {
+    width: 100%;
+    height: 120%;
+  }
+  .card {
+    width: 100%;
+  }
+}

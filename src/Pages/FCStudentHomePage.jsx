@@ -114,7 +114,7 @@ export default function StudentHomePage() {
 
   return (
     <Container
-      className="d-flex align-items-center flex-column"
+      className="d-flex align-items-center flex-direction-column"
       style={{
         marginTop: 50,
         marginBottom: 10,

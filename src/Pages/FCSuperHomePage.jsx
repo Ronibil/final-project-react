@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Navigate, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import FCFormSuperDetails from "../FuncionlComps/FCFormSuperDetails";
 import { Container } from "react-bootstrap";
 import FCButtonsForSuperHomePage from "../FuncionlComps/FCButtonsForSuperHomePage";
@@ -15,13 +15,16 @@ export default function FCSuperHomePage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const user = {
-        Email: UserDetails.Email,
-        Password: UserDetails.Password,
-      };
+      // const user = {
+      //   Email: UserDetails.Email,
+      //   Password: UserDetails.Password,
+      // };
       const urlGetSuperDetails =
         "http://localhost:49812/SuperStudent/GetSuperLandingPageDetails";
-      const { data } = await axios.post(urlGetSuperDetails, user);
+      const { data } = await axios.post(urlGetSuperDetails, {
+        Email: UserDetails.Email,
+        Password: UserDetails.Password,
+      });
       console.log(data);
       setSuperDetails({
         StudentId: data.StudentId,
