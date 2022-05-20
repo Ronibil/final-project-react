@@ -54,10 +54,11 @@ export default function SearchClassesPage() {
       if (tags.length !== 0) {
         let tagList = tags.map((tag) => ({ TagName: tag.label }));
         const { data } = await axios.post(
-          "http://localhost:49812/Class/GetClassesByTags",
+          `http://localhost:49812/Class/GetClassesByTags/${userDetails.Password}`,
           tagList
         );
         setClasses(data);
+        console.log(data);
       }
     } catch (error) { }
   };

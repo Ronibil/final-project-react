@@ -83,17 +83,35 @@ export default function FCClassCard({ classToCard, type, ShowModaAreYouSure, btn
           <Card>
             <Card.Body>
               <Row>
-                <Col xs={2}>
-                  <Button variant="secondary">עדכון</Button>
-                </Col>
-                <Col xs={2}>
-                  <Button
-                    onClick={() => ShowModaAreYouSure(classToCard)}
-                    variant="outline-danger"
-                  >
-                    מחיקה
-                  </Button>
-                </Col>
+                {classToCard.NumOfRegistered > 0 ?
+                  <Col xs={4}>
+                    <Button
+                      onClick={() => ShowModaAreYouSure(classToCard)}
+                      variant="outline-danger"
+                    >
+                      מחיקה
+                    </Button>
+                  </Col>
+                  :
+                  <>
+                    <Col xs={2}>
+                      <Button
+                        variant="secondary"
+                        onClick={() => navigate("/UpdateSuperClassPage", { state: classToCard })}
+                      >
+                        עדכון
+                      </Button>
+                    </Col>
+                    <Col xs={2}>
+                      <Button
+                        onClick={() => ShowModaAreYouSure(classToCard)}
+                        variant="outline-danger"
+                      >
+                        מחיקה
+                      </Button>
+                    </Col>
+                  </>
+                }
                 <Col xs={8}>
                   <b>שם השיעור:</b> {classToCard.ClassName}
                   <br />
@@ -127,10 +145,11 @@ export default function FCClassCard({ classToCard, type, ShowModaAreYouSure, btn
               <Card.Text>שעת התחלה: {classToCard.StartTime}</Card.Text>
               <Card.Text>שעת סיום: {classToCard.EndTime}</Card.Text>
               <Card.Text>מספר משתתפים: {classToCard.NumOfParticipants}</Card.Text>
+              <Card.Text>מקומות פנויים: {classToCard.NumOfParticipants - classToCard.NumOfRegistered}</Card.Text>
               <Row>
                 <Col>
-                  <Button variant="outline-primary" 
-                  onClick={() => navigate("/ShowProfileSuperStudent", { state: classToCard.SuperStudentId })}
+                  <Button variant="outline-primary"
+                    onClick={() => navigate("/ShowProfileSuperStudent", { state: classToCard.SuperStudentId })}
                   >
                     {classToCard.SuperName}
                   </Button>
@@ -138,9 +157,16 @@ export default function FCClassCard({ classToCard, type, ShowModaAreYouSure, btn
               </Row><br />
               <Row>
                 <Col>
-                  <Button onClick={() => btnFunction(classToCard.ClassCode)} variant="success">
+                  {classToCard.NumOfParticipants - classToCard.NumOfRegistered > 0 ?
+                    <Button onClick={() => btnFunction(classToCard.ClassCode)} variant="success">
+                      הרשמה
+                    </Button>
+                    :
+                    <b>לא נותרו מקומות</b>
+                  }
+                  {/* <Button onClick={() => btnFunction(classToCard.ClassCode)} variant="success">
                     הרשמה
-                  </Button>
+                  </Button> */}
                 </Col>
               </Row>
             </Card.Body>
