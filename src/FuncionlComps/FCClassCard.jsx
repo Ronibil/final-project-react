@@ -144,12 +144,20 @@ export default function FCClassCard({
               <br />
               <Row>
                 <Col>
-                  <Button
-                    onClick={() => btnFunction(classToCard.ClassCode)}
-                    variant="success"
-                  >
+                  {classToCard.NumOfParticipants - classToCard.NumOfRegistered >
+                  0 ? (
+                    <Button
+                      onClick={() => btnFunction(classToCard.ClassCode)}
+                      variant="success"
+                    >
+                      הרשמה
+                    </Button>
+                  ) : (
+                    <b>לא נותרו מקומות</b>
+                  )}
+                  {/* <Button onClick={() => btnFunction(classToCard.ClassCode)} variant="success">
                     הרשמה
-                  </Button>
+                  </Button> */}
                 </Col>
               </Row>
             </Card.Body>
