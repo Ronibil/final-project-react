@@ -44,12 +44,13 @@ export default function FCSuperHomePage() {
   }, []);
 
   return (
-    <Container
-      className="d-flex align-items-center justify-content-center"
-      style={{
-        marginTop: 50,
-      }}
-    >
+    <Container className="d-flex align-items-center justify-content-center flex-column">
+      <img
+        src="App logos\HelpMeStudent!-logos_black.png"
+        alt="logo"
+        id="logo"
+        style={{ width: "120px" }}
+      />
       {superDetails !== undefined ? (
         <>
           <div>

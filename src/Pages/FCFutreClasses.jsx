@@ -74,62 +74,60 @@ export default function FCFutreClasses() {
   };
 
   return (
-    <Container
-      className="d-flex align-items-center justify-content-center"
-      style={{
-        marginTop: 50,
-        marginBottom: 10,
-      }}
-    >
-      <Card xs={12} style={{ width: "30rem" }}>
-        <Card.Body align="center">
-          {classDetails !== undefined ? (
-            <>
-              <FCModalAreYouSure
-                isOpen={areYouSureModal}
-                modalHide={HideModalAreYouSure}
-                btnFunc={deleteClassByClassCode}
-                parameter={classDetails.classCode}
-                text="?האם אתה בטוח שברצונך למחוק שיעור זה"
-              />
-              <FCModalConfirm
-                modalOpen={confirmModal}
-                BackToHomePage={BackToHomePage}
-                ClassDetailsForModal={classDetails}
-                text="!השיעור נמחק בהצלחה"
-              />
-            </>
-          ) : (
-            ""
-          )}
-          <Card.Title>:שיעורים עתידיים שלי</Card.Title>
-          {futreClass.length !== 0 ? (
-            <>
-              {futreClass.map((c) => (
-                <FCClassCard
-                  key={c.ClassCode}
-                  classToCard={c}
-                  type="Futre"
-                  ShowModaAreYouSure={ShowModaAreYouSure}
-                />
-              ))}
-            </>
-          ) : (
-            <>
-              <h5>לא קיימים שיעורים עתידיים</h5>
-              <p>להוספת שיעור עתידי חזור לדף הבית ליצירת שיעור חדש</p><br />
-            </>
-          )}{" "}
+    <Container className="d-flex flex-column align-items-center justify-content-center">
+      <img
+        src="App logos\HelpMeStudent!-logos_black.png"
+        alt="logo"
+        id="logo"
+        style={{ width: "120px" }}
+      />
+      {classDetails !== undefined ? (
+        <>
+          <FCModalAreYouSure
+            isOpen={areYouSureModal}
+            modalHide={HideModalAreYouSure}
+            btnFunc={deleteClassByClassCode}
+            parameter={classDetails.classCode}
+            text="?האם אתה בטוח שברצונך למחוק שיעור זה"
+          />
+          <FCModalConfirm
+            modalOpen={confirmModal}
+            BackToHomePage={BackToHomePage}
+            ClassDetailsForModal={classDetails}
+            text="!השיעור נמחק בהצלחה"
+          />
+        </>
+      ) : (
+        ""
+      )}
+      <h2>:שיעורים עתידיים שלי</h2>
+      {futreClass.length !== 0 ? (
+        <>
+          {futreClass.map((c) => (
+            <FCClassCard
+              key={c.ClassCode}
+              classToCard={c}
+              type="Futre"
+              ShowModaAreYouSure={ShowModaAreYouSure}
+            />
+          ))}
+        </>
+      ) : (
+        <>
+          <h5>לא קיימים שיעורים עתידיים</h5>
+          <p>להוספת שיעור עתידי חזור לדף הבית ליצירת שיעור חדש</p>
           <br />
-          <Button
-            //className="btnBackToHome"
-            onClick={() => navigate("/superHomePage", { state: superDetails })}
-            variant="outline-primary"
-          >
-            חזרה לדף הבית
-          </Button>
-        </Card.Body>
-      </Card>
+        </>
+      )}{" "}
+      <br />
+      <Button
+        className="mt-auto"
+        //className="btnBackToHome"
+        onClick={() => navigate("/superHomePage", { state: superDetails })}
+        variant="outline-primary"
+      >
+        חזרה לדף הבית
+      </Button>
     </Container>
   );
 }
