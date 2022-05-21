@@ -61,7 +61,7 @@ export default function FCClassCard({
                     size="sm"
                     onClick={() =>
                       navigate("/ShowProfileSuperStudent", {
-                        state: {classToCard ,studentDetails}
+                        state: { classToCard, studentDetails }
                       })
                     }
                   >
@@ -144,9 +144,9 @@ export default function FCClassCard({
               </Card.Text>
               <Row>
                 <Col>
-<<<<<<< HEAD
                   {studentDetails !== undefined ?
                     <Button
+                      className="badge rounded-pill bg-primary"
                       variant="outline-primary"
                       onClick={() =>
                         navigate("/ShowProfileSuperStudent", {
@@ -159,19 +159,6 @@ export default function FCClassCard({
                     :
                     ""}
 
-=======
-                  <Button
-                    className="badge rounded-pill bg-primary"
-                    // variant="outline-primary"
-                    onClick={() =>
-                      navigate("/ShowProfileSuperStudent", {
-                        state: classToCard.SuperStudentId,
-                      })
-                    }
-                  >
-                    {classToCard.SuperName}
-                  </Button>
->>>>>>> parent of c3732a7 (Revert "css changes")
                 </Col>
               </Row>
               <br />
