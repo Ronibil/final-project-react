@@ -18,7 +18,8 @@ export default function FCUpdateSuperClassPage() {
   //   Email: superEmail,
   //   Password: superId,
   // };
-  const classDetails = state;
+  const classDetails = state.classToCard;
+  const superDetails = state.studentDetails;
 
   const [tags, setTags] = useState([classDetails.Tags]);
   const [suggestions, setSuggestions] = useState([]);
@@ -65,7 +66,7 @@ export default function FCUpdateSuperClassPage() {
     fetchData();
   }, []);
 
-  const btnShow =() =>{
+  const btnShow = () => {
     console.log(className);
     console.log(classDescription);
     console.log(classDate);
@@ -73,12 +74,14 @@ export default function FCUpdateSuperClassPage() {
     console.log(classEndTime);
     console.log(classParticipants);
     console.log(tags);
-  } 
+    console.log("Super DETAILS !!!!!!!!!!!!!!!!");
+    console.log(superDetails);
+  }
   // PUT
 
-  // const BackToHomePage = () => {
-  //   navigate("/SuperHomePage", { state: UserDetails });
-  // };
+  const BackToHomePage = () => {
+    navigate("/SuperHomePage", { state: superDetails });
+  };
 
   return (
     <Container
@@ -191,7 +194,7 @@ export default function FCUpdateSuperClassPage() {
                 <Button
                   id="subBtn"
                   variant="outline-primary"
-                  // onClick={BackToHomePage}
+                onClick={BackToHomePage}
                 >
                   חזרה לדף הבית
                 </Button>

@@ -134,6 +134,8 @@ export default function FCDetailsForStudentSignUp(props) {
     }
   };
 
+
+  //Notification
   const handleID = (e) => {
     if (!(Number(e.target.value)) && e.target.value !== "0") {
       let str = e.target.value.substring(0, e.target.value.length - 1)
@@ -148,7 +150,6 @@ export default function FCDetailsForStudentSignUp(props) {
       setSID(e.target.value)
     }
   }
-
   const handleEmail = (e) => {
     var email = e.target.value
     if (validator.isEmail(email)) {
@@ -162,7 +163,6 @@ export default function FCDetailsForStudentSignUp(props) {
       setSEmail("")
     }
   }
-
   const emailMessage = () => {
     let block = <Form.Text className="text-danger">
                   {emailError}
@@ -189,7 +189,6 @@ export default function FCDetailsForStudentSignUp(props) {
       setNameError("")
     }
   }
-
   const preventNumbers = (e) => {
     for (let i = 0; i < e.target.value.length; i++) {
       if (Number(e.target.value[i])) {
@@ -198,7 +197,6 @@ export default function FCDetailsForStudentSignUp(props) {
       }
     }
   }
-  
   const nameMessage = () => {
     let block = <Form.Text className="text-danger">
                   {nameError}
@@ -210,7 +208,6 @@ export default function FCDetailsForStudentSignUp(props) {
       return null
     }
   }
-
   const handlePhone = (e) => {
     let res = e.target.value.match("05")
     if (e.target.value === "" || e.target.value === 0 || e.target.value.length < 10 || res === null || res.index !== 0 ) {
@@ -228,7 +225,6 @@ export default function FCDetailsForStudentSignUp(props) {
       e.target.value = str
     }
   }
-
   const phoneMessage = () => {
     let block = <Form.Text className="text-danger">
                   {phoneError}
@@ -240,7 +236,6 @@ export default function FCDetailsForStudentSignUp(props) {
       return null
     }
   }
-
   const handleAge = (e) => {
     let age = 0
     const today = new Date();
@@ -262,7 +257,6 @@ export default function FCDetailsForStudentSignUp(props) {
       setBirthDateError("")
     }
   }
-
   const birthDateMessage = () => {
     let block = <Form.Text className="text-danger">
                   {birthDateError}

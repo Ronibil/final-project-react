@@ -9,7 +9,8 @@ export default function FCFormSuperDetails({ superDetails }) {
     <Card xs={12} style={{ maxWidth: "768px" }}>
       <Card.Img
         variant="top"
-        style={{ paddingLeft: 150, paddingRight: 150 }}
+        style={{ paddingLeft: 110, paddingRight: 110}}
+        
         src={mockupImage}
       />
       <Card.Body align="center">

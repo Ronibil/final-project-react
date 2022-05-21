@@ -11,11 +11,12 @@ export default function FCShowProfileSuperStudent() {
   const [superDetails, setSuperDetails] = useState();
   const [futureClassesSuper, setfutureClassesSuper] = useState();
 
-  const superId = state;
-  // const studentDetails = {
-  //   Email: state.Email,
-  //   Password: state.Password
-  // }
+  const superId = state.classToCard.SuperStudentId;
+  const studentDetails = state.studentDetails;
+  const StudentDetails = {
+    Email: state.studentDetails.Email,
+    Password: state.studentDetails.Password
+  }
 
   useEffect(() => {
     const url = `http://localhost:49812/SuperStudent/ShowSuperDetailsById/${superId}`
@@ -52,9 +53,9 @@ export default function FCShowProfileSuperStudent() {
       );
   }, []);
 
-  // const BackToStudentHomePage = () => {
-  //   navigate("/studentHomePage", { state: studentDetails });
-  // }
+  const BackToStudentHomePage = () => {
+    navigate("/studentHomePage", { state: StudentDetails });
+  }
   return (
     <Container
       className="d-flex align-items-center justify-content-center"
@@ -67,7 +68,7 @@ export default function FCShowProfileSuperStudent() {
           <div>
             <FCFormSuperDetails superDetails={superDetails} />
             <FCShowProfileSuperBtns />
-            {/* <Row>
+            <Row>
               <Col xs={12}>
                 <Button
                   variant="outline-primary"
@@ -76,7 +77,7 @@ export default function FCShowProfileSuperStudent() {
                   חזרה לדף הבית
                 </Button>
               </Col>
-            </Row> */}
+            </Row>
           </div>
         </>
       ) :

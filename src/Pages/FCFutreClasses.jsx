@@ -107,6 +107,7 @@ export default function FCFutreClasses() {
             <FCClassCard
               key={c.ClassCode}
               classToCard={c}
+              studentDetails={superDetails}
               type="Futre"
               ShowModaAreYouSure={ShowModaAreYouSure}
             />
