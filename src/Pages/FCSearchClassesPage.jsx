@@ -8,13 +8,12 @@ import "../StyleSheets/searchClassesStyle.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import FCModalConfirm from "../FuncionlComps/FCModalConfirm";
 
-
 export default function SearchClassesPage() {
   const { state } = useLocation();
   const userDetails = {
     Email: state.Email,
-    Password: state.Password
-  }
+    Password: state.Password,
+  };
 
   const [tags, setTags] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
@@ -23,7 +22,7 @@ export default function SearchClassesPage() {
 
   //Modal
   const [confirmModal, setConfirmModal] = useState(false);
-  const [classDetails, setClassDetails] = useState()
+  const [classDetails, setClassDetails] = useState();
 
   const animatedComponents = makeAnimate();
   const customTheme = (theme) => {
@@ -60,7 +59,7 @@ export default function SearchClassesPage() {
         setClasses(data);
         console.log(data);
       }
-    } catch (error) { }
+    } catch (error) {}
   };
 
   const register = (classCode) => {
@@ -70,14 +69,14 @@ export default function SearchClassesPage() {
       ClassCode: classCode,
     };
 
-    let classToModal = classes.find(c => c.ClassCode === classCode);
+    let classToModal = classes.find((c) => c.ClassCode === classCode);
     let classToConfirmModal = {
       classCode: classToModal.ClassCode,
       classDate: classToModal.ClassDate,
       classEndTime: classToModal.EndTime,
       className: classToModal.ClassName,
       classParticipants: classToModal.NumOfParticipants,
-      classStartTime: classToModal.StartTime
+      classStartTime: classToModal.StartTime,
     };
     setClassDetails(classToConfirmModal);
 
@@ -94,7 +93,7 @@ export default function SearchClassesPage() {
       .then((res) => {
         console.log("res.ok", res.ok);
         if (res.ok) {
-          setConfirmModal(true)
+          setConfirmModal(true);
         }
         return res.json();
       })
@@ -109,87 +108,77 @@ export default function SearchClassesPage() {
   };
 
   const BackToHomePage = () => {
-    navigate('/studentHomePage', { state: userDetails })
-  }
-
-
+    navigate("/studentHomePage", { state: userDetails });
+  };
 
   return (
-    <Container
-      className="d-flex align-items-center flex-column"
-      style={{
-        marginTop: 50,
-        marginBottom: 10,
-      }}
-    >
-      <Card xs={12} style={{ width: "40rem" }}>
-        <Card.Body align="center">
-          {classDetails !== undefined ?
-            <>
-              <FCModalConfirm
-                modalOpen={confirmModal}
-                BackToHomePage={BackToHomePage}
-                ClassDetailsForModal={classDetails}
-                text="!הרשמה בוצעה בהצלחה"
-              />
-            </>
-            :
-            ""
-          }
+    <Container className="min-vh-100 d-flex justify-content-center align-items-center flex-column text-center ">
+      <img
+        src="App logos\HelpMeStudent!-logos_black.png"
+        alt="logo"
+        id="logo"
+        style={{ width: "120px" }}
+      />
+      {/* <Card xs={12} style={{ width: "40rem" }}>
+        <Card.Body align="center"> */}
+      {classDetails !== undefined ? (
+        <FCModalConfirm
+          modalOpen={confirmModal}
+          BackToHomePage={BackToHomePage}
+          ClassDetailsForModal={classDetails}
+          text="!הרשמה בוצעה בהצלחה"
+        />
+      ) : (
+        ""
+      )}
+      <h4>!מצא את השיעור שמתאים לך</h4>
+      <div className="d-flex w-100 m-3">
+        <Select
+          theme={customTheme}
+          placeholder="בחר תגיות"
+          closeMenuOnSelect={false}
+          components={animatedComponents}
+          onChange={setTags}
+          isMulti
+          isSearchable
+          noOptionsMessage={() => "לא נמצאו תגיות"}
+          className="basic-multi-select w-100"
+          options={suggestions}
+        />
+        <Button
+          className="flex-shrink-1"
+          variant="outline-success"
+          onClick={searchByTags}
+        >
+          🔍
+        </Button>
+      </div>
+      {classes.length !== 0 ? (
+        <>
+          {classes.map((c) => (
+            <FCClassCard
+              key={c.ClassCode}
+              classToCard={c}
+              type="SearchClass"
+              btnFunction={register}
+              studentDetails={userDetails}
+            />
+          ))}
+        </>
+      ) : (
+        ""
+      )}
 
-          <h2>!מצא את השיעור שמתאים לך</h2>
-          <Row style={{ alignItems: "center" }}>
-            <Col xs={10}>
-              <Select
-                theme={customTheme}
-                placeholder="בחר תגיות"
-                closeMenuOnSelect={false}
-                components={animatedComponents}
-                onChange={setTags}
-                isMulti
-                isSearchable
-                noOptionsMessage={() => "לא נמצאו תגיות"}
-                className="basic-multi-select m-3"
-                options={suggestions}
-              />
-            </Col>
-            <Col xs={2}>
-              <Button variant="success" onClick={searchByTags}>
-                חיפוש
-              </Button>
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              {classes.length !== 0 ? (
-                <>
-                  {classes.map((c) => (
-                    <FCClassCard
-                      key={c.ClassCode}
-                      classToCard={c}
-                      type="SearchClass"
-                      btnFunction={register}
-                      studentDetails={userDetails}
-                    />
-                  ))
-                  }</>
-              ) : (
-                ""
-              )}
-            </Col>
-          </Row>
-          <Row>
-            <Col xs={12}>
-              <Button
-                onClick={BackToHomePage}
-                variant="outline-primary"
-              >
-                חזרה לדף הבית
-              </Button>
-            </Col>
-          </Row>
-        </Card.Body>
-      </Card>
+      <Button
+        className="mb-3 mt-auto"
+        onClick={BackToHomePage}
+        variant="outline-primary"
+      >
+        חזרה לדף הבית
+      </Button>
+
+      {/* </Card.Body>
+      </Card> */}
     </Container>
   );
 }
