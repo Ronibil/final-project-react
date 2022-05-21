@@ -37,8 +37,6 @@
   }
 }
 
-@media (max-width: 768px) {
-  .App {
-    min-height: 100vh;
-  }
+@media (max-width: 768px){
+  
 }

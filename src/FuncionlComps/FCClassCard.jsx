@@ -110,12 +110,12 @@ export default function FCClassCard({
       return (
         <>
           <Card
-            className="m-2"
             style={{
+              width: "50%",
               backgroundColor: "#FFF5EE",
             }}
           >
-            <Card.Body className="d-flex align-items-center flex-column justify-content-between">
+            <Card.Body>
               <Card.Title>{classToCard.ClassName}</Card.Title>
               <Card.Text>תיאור: {classToCard.ClassDescription}</Card.Text>
               <Card.Text>
@@ -130,8 +130,7 @@ export default function FCClassCard({
               <Row>
                 <Col>
                   <Button
-                    className="badge rounded-pill bg-primary"
-                    // variant="outline-primary"
+                    variant="outline-primary"
                     onClick={() =>
                       navigate("/ShowProfileSuperStudent", {
                         state: classToCard.SuperStudentId,
@@ -163,6 +162,7 @@ export default function FCClassCard({
               </Row>
             </Card.Body>
           </Card>
+          <br />
         </>
       );
     default:

@@ -113,65 +113,67 @@ export default function StudentHomePage() {
   };
 
   return (
-    <Container className="min-vh-100 d-flex align-items-center flex-column text-center">
-      <img
-        src="App logos\HelpMeStudent!-logos_black.png"
-        alt="logo"
-        id="logo"
-        style={{ width: "120px" }}
-      />
-      {/* <Card xs={12} style={{ width: "30rem" }}> */}
-      {/* <Card.Body align="center"> */}
-      {classDetails !== undefined ? (
-        <>
-          <FCModalAreYouSure
-            isOpen={areYouSureModal}
-            modalHide={HideModalAreYouSure}
-            btnFunc={DeleteStudentFromClass}
-            parameter={classDetails.classCode}
-            text="?האם אתה בטוח שברצונך למחוק שיעור זה"
-          />
-          <FCModalConfirm
-            modalOpen={confirmModal}
-            BackToHomePage={BackToHomePage}
-            ClassDetailsForModal={classDetails}
-            text="!השיעור נמחק בהצלחה"
-          />
-        </>
-      ) : (
-        ""
-      )}
-      {/* <h1>HelpMeStudent</h1> */}
-      <h2>ברוכים הבאים - {studentDetails.FullName}</h2>
-      {futreClasses.length === 0 ? (
-        <div className="m-5">
-          <h5>לא קיימים שיעורים</h5>
-          <h6>שיעורים אליהם אתם רשומים יופיעו כאן</h6>
-        </div>
-      ) : (
-        <>
-          <h3>שיעוריים עתידיים שלי</h3>
-          {futreClasses.map((c, index) => (
-            <FCClassCard
-              key={index}
-              classToCard={c}
-              type="studentFutre"
-              ShowModaAreYouSure={ShowModaAreYouSure}
-              studentDetails={userDetails}
-            />
-          ))}
-          <br />
-        </>
-      )}
-      <Button
-        className="mb-3 mt-auto"
-        variant="success"
-        onClick={() => navigate("/searchClassesPage", { state: userDetails })}
-      >
-        חיפוש שיעור חדש
-      </Button>
-      {/* </Card.Body> */}
-      {/* </Card> */}
+    <Container
+      className="d-flex align-items-center flex-direction-column"
+      style={{
+        marginTop: 50,
+        marginBottom: 10,
+      }}
+    >
+      <Card xs={12} style={{ width: "30rem" }}>
+        <Card.Body align="center">
+          {classDetails !== undefined ? (
+            <>
+              <FCModalAreYouSure
+                isOpen={areYouSureModal}
+                modalHide={HideModalAreYouSure}
+                btnFunc={DeleteStudentFromClass}
+                parameter={classDetails.classCode}
+                text="?האם אתה בטוח שברצונך למחוק שיעור זה"
+              />
+              <FCModalConfirm
+                modalOpen={confirmModal}
+                BackToHomePage={BackToHomePage}
+                ClassDetailsForModal={classDetails}
+                text="!השיעור נמחק בהצלחה"
+              />
+            </>
+          ) : (
+            ""
+          )}
+          <h1>HelpMeStudent</h1>
+          <Card.Title>ברוכים הבאים - {studentDetails.FullName}</Card.Title>
+          {futreClasses.length === 0 ? (
+            <Row>
+              <h5>לא קיימים שיעורים</h5>
+              <h6>שיעורים אליהם אתם רשומים יופיעו כאן</h6>
+            </Row>
+          ) : (
+            <>
+              <Card.Text>שיעוריים עתידיים שלי</Card.Text>
+              {futreClasses.map((c, index) => (
+                <FCClassCard
+                  key={index}
+                  classToCard={c}
+                  type="studentFutre"
+                  ShowModaAreYouSure={ShowModaAreYouSure}
+                  studentDetails={userDetails}
+                />
+              ))}
+              <br />
+            </>
+          )}
+          <Button
+            variant="success"
+            onClick={() =>
+              navigate("/searchClassesPage", { state: userDetails })
+            }
+            className="align-content-end"
+          >
+            חיפוש שיעור חדש
+          </Button>
+        </Card.Body>
+      </Card>
     </Container>
   );
 }
