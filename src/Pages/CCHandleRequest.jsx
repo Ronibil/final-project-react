@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import "../StyleSheets/requestDets.css";
 import { Link } from "react-router-dom";
-
 class CCHandleRequest extends Component {
   constructor(props) {
     super(props);
@@ -66,22 +65,31 @@ class CCHandleRequest extends Component {
     return btnsBox;
   };
 
+  generatePassword = (n) => { // n = request number which is uniqe
+    let randomPasswordstring = Math.random().toString(36).slice(-5);
+    let userPassword = n + randomPasswordstring
+    console.log(userPassword)
+    return userPassword
+  }
+
   // fetch - post new student to db - if ok = true - update request status 
   postStudent = (s) => {
     let request = this.state.requestObject;
+    let generatedPassword = this.generatePassword(request.RequsetNum)
+    let birthTypeDate = new Date(request.BirthDate)
     let StudentUrl =
-      "http://proj.ruppin.ac.il/bgroup92/prod/Student/PostNewStudent";
+      "http://localhost:49812/Student/PostNewStudent";
     let currentDate = new Date();
     const student = {
       StudentId: request.StudentId,
       FullName: request.FullName,
       Email: request.Email,
-      Password: request.StudentId,
+      Password: generatedPassword,
       Phone: request.Phone,
       Gender: request.Gender,
-      BirthDate: request.BirthDate,
+      BirthDate: birthTypeDate,
       City: request.City,
-      RegistrationDate: currentDate,
+      RegistrationDate: currentDate
     };
     console.log(student);
 
@@ -191,7 +199,7 @@ class CCHandleRequest extends Component {
   postSuper = (s) => {
     let request = this.state.requestObject;
     const SuperUrl =
-      "http://proj.ruppin.ac.il/bgroup92/prod/SuperStudent/PostNewSuperStudent";
+      "http://localhost:49812/SuperStudent/PostNewSuperStudent";
     let superStudent = {
       StudentId: request.StudentId,
       StudyYear: request.StudyYear,
