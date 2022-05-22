@@ -396,7 +396,7 @@ export default function FCDetailsForStudentSignUp(props) {
       </Card>
       <Button
         className="mb-3 mt-auto"
-        onClick={navigate("/")}
+        onClick={() => navigate("/")}
         variant="outline-primary"
       >
         חזרה לדף ההתחברות{" "}

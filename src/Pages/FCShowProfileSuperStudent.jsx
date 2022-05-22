@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Container, Button } from "react-bootstrap";
 import FCShowProfileSuperBtns from "../FuncionlComps/FCShowProfileSuperBtns";
+import { AiOutlineHome } from "react-icons/ai";
 
 export default function FCShowProfileSuperStudent() {
   const { state } = useLocation();
@@ -56,6 +57,9 @@ export default function FCShowProfileSuperStudent() {
   const BackToStudentHomePage = () => {
     navigate("/studentHomePage", { state: StudentDetails });
   };
+  const BackToSearchClassesPage = () => {
+    navigate("/searchClassesPage", { state: StudentDetails });
+  };
   return (
     <Container className="d-flex flex-column align-items-center text-center justify-content-center">
       <img
@@ -68,13 +72,25 @@ export default function FCShowProfileSuperStudent() {
         <div>
           <FCFormSuperDetails superDetails={superDetails} />
           <FCShowProfileSuperBtns />
-          <Button
-            className="mb-3 mt-auto"
-            variant="outline-primary"
-            onClick={BackToStudentHomePage}
-          >
-            חזרה לדף הבית
-          </Button>
+          {state.type == 1 ?
+            <Button
+              className="mb-3 mt-auto"
+              variant="outline-primary"
+              onClick={BackToSearchClassesPage}
+            >
+              חזרה לחיפוש שיעור
+            </Button>
+            :
+            <Button
+              className="mb-3 mt-auto"
+              variant="outline-primary"
+              onClick={BackToStudentHomePage}
+            >
+              <AiOutlineHome />
+
+            </Button>
+          }
+
         </div>
       ) : (
         ""

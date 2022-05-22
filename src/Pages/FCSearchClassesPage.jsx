@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Container, Button, Row, Col, Card } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 import Select from "react-select";
 import makeAnimate from "react-select/animated";
 import FCClassCard from "../FuncionlComps/FCClassCard";
 import "../StyleSheets/searchClassesStyle.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import FCModalConfirm from "../FuncionlComps/FCModalConfirm";
+import { AiOutlineHome } from "react-icons/ai";
 
 export default function SearchClassesPage() {
   const { state } = useLocation();
@@ -59,7 +60,7 @@ export default function SearchClassesPage() {
         setClasses(data);
         console.log(data);
       }
-    } catch (error) {}
+    } catch (error) { }
   };
 
   const register = (classCode) => {
@@ -119,8 +120,6 @@ export default function SearchClassesPage() {
         id="logo"
         style={{ width: "120px" }}
       />
-      {/* <Card xs={12} style={{ width: "40rem" }}>
-        <Card.Body align="center"> */}
       {classDetails !== undefined ? (
         <FCModalConfirm
           modalOpen={confirmModal}
@@ -174,11 +173,8 @@ export default function SearchClassesPage() {
         onClick={BackToHomePage}
         variant="outline-primary"
       >
-        חזרה לדף הבית
+        <AiOutlineHome />
       </Button>
-
-      {/* </Card.Body>
-      </Card> */}
     </Container>
   );
 }

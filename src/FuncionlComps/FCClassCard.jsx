@@ -148,7 +148,7 @@ export default function FCClassCard({
                       variant="outline-primary"
                       onClick={() =>
                         navigate("/ShowProfileSuperStudent", {
-                          state: { classToCard, studentDetails },
+                          state: { classToCard, studentDetails, type: 1 },
                         })
                       }
                     >
@@ -163,7 +163,7 @@ export default function FCClassCard({
               <Row>
                 <Col>
                   {classToCard.NumOfParticipants - classToCard.NumOfRegistered >
-                  0 ? (
+                    0 ? (
                     <Button
                       onClick={() => btnFunction(classToCard.ClassCode)}
                       variant="success"
