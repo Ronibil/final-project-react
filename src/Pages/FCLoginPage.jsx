@@ -84,6 +84,9 @@ export default function FCLoginPage() {
   const navigateToRegister = () => {
     Navigate("/typeOfUser");
   };
+  const navigateToChangePassword = () => {
+    Navigate("/changePasswordPage");
+  };
 
   return (
     <Container className="d-flex justify-content-start align-items-center flex-column ">
@@ -100,6 +103,7 @@ export default function FCLoginPage() {
           VerifyUser();
         }}
         navigateToRegister={navigateToRegister}
+        navigateToChangePassword={navigateToChangePassword}
       />
     </Container>
   );

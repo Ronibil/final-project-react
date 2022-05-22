@@ -6,6 +6,7 @@ export default function FCLoginForm({
   UpdatePassword,
   VerifyUser,
   navigateToRegister,
+  navigateToChangePassword,
 }) {
   return (
     <Card>
@@ -34,6 +35,13 @@ export default function FCLoginForm({
               onChange={UpdatePassword}
               required
             />
+            <Button
+             style={{display: "block", textAlign: "right", fontSize:"14px"}}
+             className="w-100 text-right"
+             variant="link"
+             onClick={navigateToChangePassword}
+            > 
+            ?שכחתם את הסיסמא</Button>
           </Form.Group>
           <Button
             className="w-100 text-center mt-2"
@@ -44,7 +52,7 @@ export default function FCLoginForm({
           </Button>
         </Form>
       </Card.Body>
-      <div id="errMsgLogin" style={{ display: "none" }}>
+      <div id="errMsgLogin" style={{ display: "none", margin: "0 auto", color: "red" }}>
         שם משתמש או סיסמה שגויים
       </div>
       <div className="w-100 text-center mt-2">
