@@ -120,8 +120,6 @@ export default function StudentHomePage() {
         id="logo"
         style={{ width: "120px" }}
       />
-      {/* <Card xs={12} style={{ width: "30rem" }}> */}
-      {/* <Card.Body align="center"> */}
       {classDetails !== undefined ? (
         <>
           <FCModalAreYouSure
@@ -141,7 +139,6 @@ export default function StudentHomePage() {
       ) : (
         ""
       )}
-      {/* <h1>HelpMeStudent</h1> */}
       <h2>ברוכים הבאים - {studentDetails.FullName}</h2>
       {futreClasses.length === 0 ? (
         <div className="m-5">
@@ -170,8 +167,6 @@ export default function StudentHomePage() {
       >
         חיפוש שיעור חדש
       </Button>
-      {/* </Card.Body> */}
-      {/* </Card> */}
     </Container>
   );
 }

@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Button, Form, Card, Container, Row, Col } from 'react-bootstrap';
+import React, { useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import { Button, Form, Card, Container, Row, Col } from "react-bootstrap";
 import "../StyleSheets/Modal.css";
-import FCModalUpdateSuperProfile from '../FuncionlComps/FCModalUpdateSuperProfile';
+import FCModalUpdateSuperProfile from "../FuncionlComps/FCModalUpdateSuperProfile";
 
 function FCUpdateProfileSuper() {
   const { state } = useLocation();
@@ -12,14 +12,15 @@ function FCUpdateProfileSuper() {
   const superEmail = state.superEmail;
   const superPassword = state.superPassword;
   const [description, setDescription] = useState();
-  const [modalOpen, setModalOpen] = useState(false)
+  const [modalOpen, setModalOpen] = useState(false);
 
   const UpdateSuperDescription = () => {
     const SuperDetails = {
       Email: superEmail,
-      Descreption: description
-    }
-    const Url = "http://localhost:49812/SuperStudent/UpdateSuperStudentProfileDescription";
+      Descreption: description,
+    };
+    const Url =
+      "http://localhost:49812/SuperStudent/UpdateSuperStudentProfileDescription";
 
     fetch(Url, {
       method: "PUT",
@@ -34,37 +35,35 @@ function FCUpdateProfileSuper() {
         console.log("res.status", res.status);
         console.log("res.ok", res.ok);
         if (res.ok) {
-          setModalOpen(true)
+          setModalOpen(true);
         }
         return res.json();
       })
       .then(
         (result) => {
-          console.log(result)
+          console.log(result);
         },
         (error) => {
           console.log("err post=", error);
         }
       );
-
-  }
+  };
   const BackToHomePage = () => {
     const UserDetails = {
       Email: superEmail,
-      Password: superPassword
-    }
-    navigate("/SuperHomePage", { state: UserDetails })
-  }
-
+      Password: superPassword,
+    };
+    navigate("/SuperHomePage", { state: UserDetails });
+  };
 
   return (
-    <Container
-      className="d-flex align-items-center justify-content-center"
-      style={{
-        marginTop: 50,
-        marginBottom: 10,
-      }}
-    >
+    <Container className="d-flex align-items-center justify-content-center flex-column">
+      <img
+        src="App logos\HelpMeStudent!-logos_black.png"
+        alt="logo"
+        id="logo"
+        style={{ width: "120px" }}
+      />
       <div className="w-100" style={{ maxWidth: "400px" }}>
         <Card id="fldBlock">
           <Card.Body align="center">
@@ -72,11 +71,7 @@ function FCUpdateProfileSuper() {
             <Form>
               <Form.Group className="mb-1">
                 <Form.Label>:שנת לימוד</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder={StudyYear}
-                  readOnly
-                />
+                <Form.Control type="text" placeholder={StudyYear} readOnly />
               </Form.Group>
               <Form.Group className="mb-1">
                 <Form.Label>:מסלול לימודים</Form.Label>
@@ -102,7 +97,8 @@ function FCUpdateProfileSuper() {
                 <Button
                   onClick={UpdateSuperDescription}
                   // className='btnBackToHome'
-                  variant="success">
+                  variant="success"
+                >
                   סיום עריכה
                 </Button>
               </Col>
@@ -110,7 +106,8 @@ function FCUpdateProfileSuper() {
                 <Button
                   id="subBtn"
                   variant="outline-primary"
-                  onClick={BackToHomePage}>
+                  onClick={BackToHomePage}
+                >
                   חזרה לדף הבית
                 </Button>
               </Col>
@@ -118,9 +115,13 @@ function FCUpdateProfileSuper() {
           </Card.Body>
         </Card>{" "}
       </div>
-      <FCModalUpdateSuperProfile BackToHomePage={BackToHomePage} Description={description} modalOpen={modalOpen} />
+      <FCModalUpdateSuperProfile
+        BackToHomePage={BackToHomePage}
+        Description={description}
+        modalOpen={modalOpen}
+      />
     </Container>
-  )
+  );
 }
 
-export default FCUpdateProfileSuper
+export default FCUpdateProfileSuper;

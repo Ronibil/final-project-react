@@ -13,65 +13,57 @@ export default function FCClassCard({
   switch (type) {
     case "history":
       return (
-        <Card>
-          <Card.Body>
-            <Row>
-              <Col xs={12} style={{ display: "block", textAlign: "right" }}>
-                <b>שם השיעור:</b> {classToCard.ClassName}
-                <br />
-                <b>תאריך:</b>{" "}
-                {new Date(classToCard.ClassDate).toLocaleDateString("en-GB")}{" "}
-                <br />
-                <b>שעת התחלה:</b> {classToCard.StartTime}
-                <br />
-              </Col>
-            </Row>
+        <Card className="m-1">
+          <Card.Body className="text-end">
+            <b>שם השיעור:</b> {classToCard.ClassName}
+            <br />
+            <b>תאריך:</b>{" "}
+            {new Date(classToCard.ClassDate).toLocaleDateString("en-GB")} <br />
+            <b>שעת התחלה:</b> {classToCard.StartTime}
+            <br />
           </Card.Body>
         </Card>
       );
     case "studentFutre":
       return (
-        <Card>
-          <Card.Body>
-            <Row className="d-flex align-items-center">
-              <Col xs={2}>
+        <Card className="m-1">
+          <Card.Body className="w-100 d-flex align-items-center justify-content-between">
+            <div>
+              <Button
+                className="m-1"
+                size="sm"
+                onClick={() => ShowModaAreYouSure(classToCard)}
+                variant="outline-danger"
+              >
+                מחיקה
+              </Button>
+              <Button className="m-1" size="sm" variant="outline-primary">
+                לצ'אט
+              </Button>
+            </div>
+            <div className="text-end">
+              <b>שם השיעור:</b> {classToCard.ClassName}
+              <br />
+              <b>תאריך:</b>{" "}
+              {new Date(classToCard.ClassDate).toLocaleDateString("en-GB")}{" "}
+              <br />
+              <b>שעת התחלה:</b> {classToCard.StartTime}
+              {studentDetails !== undefined ? (
                 <Button
+                  className="badge rounded-pill bg-primary"
                   size="sm"
-                  onClick={() => ShowModaAreYouSure(classToCard)}
-                  variant="outline-danger"
+                  onClick={() =>
+                    navigate("/ShowProfileSuperStudent", {
+                      state: { classToCard, studentDetails },
+                    })
+                  }
                 >
-                  מחיקה
+                  {classToCard.SuperName}
                 </Button>
-              </Col>
-              <Col xs={2}>
-                <Button size="sm" variant="outline-primary">
-                  לצ'אט
-                </Button>
-              </Col>
-              <Col xs={8} style={{ display: "block", textAlign: "right" }}>
-                <b>שם השיעור:</b> {classToCard.ClassName}
-                <br />
-                <b>תאריך:</b>{" "}
-                {new Date(classToCard.ClassDate).toLocaleDateString("en-GB")}{" "}
-                <br />
-                <b>שעת התחלה:</b> {classToCard.StartTime}
-                <br />
-                {studentDetails !== undefined ?
-                  <Button
-                    size="sm"
-                    onClick={() =>
-                      navigate("/ShowProfileSuperStudent", {
-                        state: { classToCard, studentDetails }
-                      })
-                    }
-                  >
-                    {classToCard.SuperName}
-                  </Button>
-                  :
-                  ""}
-
-              </Col>
-            </Row>
+              ) : (
+                ""
+              )}
+            </div>
           </Card.Body>
         </Card>
       );
@@ -80,7 +72,7 @@ export default function FCClassCard({
         <Card className="m-1">
           <Card.Body className="d-flex align-items-center justify-content-between">
             <div className="d-flex flex-column">
-              {classToCard.NumOfRegistered > 0 ?
+              {classToCard.NumOfRegistered > 0 ? (
                 <Button
                   size="sm"
                   onClick={() => ShowModaAreYouSure(classToCard)}
@@ -88,16 +80,23 @@ export default function FCClassCard({
                 >
                   מחיקה
                 </Button>
-                :
+              ) : (
                 <>
-                  {studentDetails !== undefined ?
-                    <Button variant="secondary" size="sm"
-                      onClick={() => navigate("/UpdateSuperClassPage", { state: { classToCard, studentDetails } })}
+                  {studentDetails !== undefined ? (
+                    <Button
+                      variant="secondary"
+                      size="sm"
+                      onClick={() =>
+                        navigate("/UpdateSuperClassPage", {
+                          state: { classToCard, studentDetails },
+                        })
+                      }
                     >
                       עדכון
                     </Button>
-                    :
-                    ""}
+                  ) : (
+                    ""
+                  )}
 
                   <Button
                     size="sm"
@@ -107,8 +106,7 @@ export default function FCClassCard({
                     מחיקה
                   </Button>
                 </>
-              }
-
+              )}
             </div>
             <div className="text-end">
               <b>שם השיעור:</b> {classToCard.ClassName}
@@ -144,27 +142,28 @@ export default function FCClassCard({
               </Card.Text>
               <Row>
                 <Col>
-                  {studentDetails !== undefined ?
+                  {studentDetails !== undefined ? (
                     <Button
                       className="badge rounded-pill bg-primary"
                       variant="outline-primary"
                       onClick={() =>
                         navigate("/ShowProfileSuperStudent", {
-                          state: { classToCard, studentDetails }
+                          state: { classToCard, studentDetails },
                         })
                       }
                     >
                       {classToCard.SuperName}
                     </Button>
-                    :
-                    ""}
-
+                  ) : (
+                    ""
+                  )}
                 </Col>
               </Row>
               <br />
               <Row>
                 <Col>
-                  {classToCard.NumOfParticipants - classToCard.NumOfRegistered > 0 ? (
+                  {classToCard.NumOfParticipants - classToCard.NumOfRegistered >
+                  0 ? (
                     <Button
                       onClick={() => btnFunction(classToCard.ClassCode)}
                       variant="success"

@@ -1,13 +1,11 @@
-import React from 'react'
-import FCDetailsForStudentSignUp from '../FuncionlComps/FCDetailsForStudentSignUp';
+import React from "react";
+import { Container } from "react-bootstrap";
+import FCDetailsForStudentSignUp from "../FuncionlComps/FCDetailsForStudentSignUp";
 
 export default function FCStudentRequestPage() {
   return (
-    <div style={{
-      textAlign: "center"
-    }}>
-      <FCDetailsForStudentSignUp type={"type1"}/>
-    </div >
-
-  )
+    <>
+      <FCDetailsForStudentSignUp type={"type1"} />
+    </>
+  );
 }

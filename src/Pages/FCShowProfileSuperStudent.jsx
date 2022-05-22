@@ -1,9 +1,9 @@
-import React from 'react'
-import FCFormSuperDetails from '../FuncionlComps/FCFormSuperDetails'
+import React from "react";
+import FCFormSuperDetails from "../FuncionlComps/FCFormSuperDetails";
 import { useState, useEffect } from "react";
-import { useLocation, useNavigate } from 'react-router-dom';
-import { Container, Button, Row, Col } from "react-bootstrap";
-import FCShowProfileSuperBtns from '../FuncionlComps/FCShowProfileSuperBtns';
+import { useLocation, useNavigate } from "react-router-dom";
+import { Container, Button } from "react-bootstrap";
+import FCShowProfileSuperBtns from "../FuncionlComps/FCShowProfileSuperBtns";
 
 export default function FCShowProfileSuperStudent() {
   const { state } = useLocation();
@@ -15,11 +15,11 @@ export default function FCShowProfileSuperStudent() {
   const studentDetails = state.studentDetails;
   const StudentDetails = {
     Email: state.studentDetails.Email,
-    Password: state.studentDetails.Password
-  }
+    Password: state.studentDetails.Password,
+  };
 
   useEffect(() => {
-    const url = `http://localhost:49812/SuperStudent/ShowSuperDetailsById/${superId}`
+    const url = `http://localhost:49812/SuperStudent/ShowSuperDetailsById/${superId}`;
     console.log(superId);
     fetch(url, {
       method: "POST",
@@ -51,38 +51,34 @@ export default function FCShowProfileSuperStudent() {
           console.log("err post=", error);
         }
       );
-  }, []);
+  }, [superId]);
 
   const BackToStudentHomePage = () => {
     navigate("/studentHomePage", { state: StudentDetails });
-  }
+  };
   return (
-    <Container
-      className="d-flex align-items-center justify-content-center"
-      style={{
-        marginTop: 50,
-      }}
-    >
-      {superDetails != undefined ? (
-        <>
-          <div>
-            <FCFormSuperDetails superDetails={superDetails} />
-            <FCShowProfileSuperBtns />
-            <Row>
-              <Col xs={12}>
-                <Button
-                  variant="outline-primary"
-                  onClick={BackToStudentHomePage}
-                >
-                  חזרה לדף הבית
-                </Button>
-              </Col>
-            </Row>
-          </div>
-        </>
-      ) :
-        ("")
-      }
+    <Container className="d-flex flex-column align-items-center text-center justify-content-center">
+      <img
+        src="App logos\HelpMeStudent!-logos_black.png"
+        alt="logo"
+        id="logo"
+        style={{ width: "120px" }}
+      />
+      {superDetails !== undefined ? (
+        <div>
+          <FCFormSuperDetails superDetails={superDetails} />
+          <FCShowProfileSuperBtns />
+          <Button
+            className="mb-3 mt-auto"
+            variant="outline-primary"
+            onClick={BackToStudentHomePage}
+          >
+            חזרה לדף הבית
+          </Button>
+        </div>
+      ) : (
+        ""
+      )}
     </Container>
-  )
+  );
 }
