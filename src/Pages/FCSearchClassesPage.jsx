@@ -14,6 +14,7 @@ export default function SearchClassesPage() {
   const userDetails = {
     Email: state.Email,
     Password: state.Password,
+    StudentId: state.StudentId
   };
 
   const [tags, setTags] = useState([]);
@@ -54,7 +55,7 @@ export default function SearchClassesPage() {
       if (tags.length !== 0) {
         let tagList = tags.map((tag) => ({ TagName: tag.label }));
         const { data } = await axios.post(
-          `http://localhost:49812/Class/GetClassesByTags/${userDetails.Password}`,
+          `http://localhost:49812/Class/GetClassesByTags/${userDetails.StudentId}`, //state.StudentId
           tagList
         );
         setClasses(data);
@@ -66,7 +67,7 @@ export default function SearchClassesPage() {
   const register = (classCode) => {
     let user = JSON.parse(localStorage.getItem("user"));
     const requestToRegister = {
-      StudentId: user.Password,
+      StudentId: userDetails.StudentId, //state.StudentId
       ClassCode: classCode,
     };
 

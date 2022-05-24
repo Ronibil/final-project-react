@@ -18,10 +18,7 @@ export default function StudentHomePage() {
 
   const location = useLocation();
   const { state } = location;
-  const userDetails = {
-    Email: state.Email,
-    Password: state.Password,
-  };
+  
   const fullName = "";
 
   useEffect(() => {
@@ -53,6 +50,12 @@ export default function StudentHomePage() {
         }
       );
   }, [location]);
+
+  const userDetails = {
+    Email: state.Email,
+    Password: state.Password,
+    StudentId: studentDetails.StudentId
+  };
 
   const DeleteStudentFromClass = (classCode) => {
     const Url = "http://localhost:49812/Student/DeleteStudentFromClass";
