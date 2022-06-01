@@ -53,7 +53,7 @@ export default function FCDetailsForSuperSignUp(props) {
       btnPostSuperStudentRequest()
     }
   }
-  
+
   const btnPostSuperStudentRequest = () => {
     const LocalUrl = "http://localhost:49812/requestToJoin/newRequest";
     let currentDate = new Date();
@@ -167,6 +167,7 @@ export default function FCDetailsForSuperSignUp(props) {
                     setSuperImage(URL.createObjectURL(e.target.files[0]));
                     console.log(e.target.files[0]);
                   }}
+                  style={{ borderRadius: 25 }}
                   required
                 />
               </Form.Group>
@@ -174,6 +175,7 @@ export default function FCDetailsForSuperSignUp(props) {
                 <Form.Label>שם מחלקה</Form.Label>
                 <Form.Select
                   onChange={(e) => setSuperDepartmet(e.target.value)}
+                  style={{ borderRadius: 25 }}
                 >
                   <option value="" defaultValue hidden>
                     בחר
@@ -190,6 +192,7 @@ export default function FCDetailsForSuperSignUp(props) {
                 {
                   <Form.Select
                     onChange={(e) => setSuperStudyYear(e.target.value)}
+                    style={{ borderRadius: 25 }}
                   >
                     <option value="" defaultValue hidden>
                       בחר
@@ -209,6 +212,7 @@ export default function FCDetailsForSuperSignUp(props) {
                   onChange={(e) => setSuperDescription(e.target.value)}
                   placeholder="רקע קצר כדי שהסטודנטים יכירו אותך"
                   required
+                  style={{ borderRadius: 25 }}
                 />
               </Form.Group>
               <Button
@@ -216,6 +220,7 @@ export default function FCDetailsForSuperSignUp(props) {
                 id="subBtn"
                 variant="success"
                 onClick={checkFields}
+                style={{ borderRadius: 25 }}
               >
                 שלח לאימות נתונים
               </Button>

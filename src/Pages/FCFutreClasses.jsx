@@ -6,6 +6,7 @@ import "../StyleSheets/Modal.css";
 import { useState } from "react";
 import FCModalAreYouSure from "../FuncionlComps/FCModalAreYouSure";
 import FCModalConfirm from "../FuncionlComps/FCModalConfirm";
+import LogoComponent from "../Elements/LogoComponent";
 
 export default function FCFutreClasses() {
   const navigate = useNavigate();
@@ -75,12 +76,7 @@ export default function FCFutreClasses() {
 
   return (
     <Container className="d-flex flex-column align-items-center justify-content-center">
-      <img
-        src="App logos\HelpMeStudent!-logos_black.png"
-        alt="logo"
-        id="logo"
-        style={{ width: "120px" }}
-      />
+      <LogoComponent/>
       {classDetails !== undefined ? (
         <>
           <FCModalAreYouSure

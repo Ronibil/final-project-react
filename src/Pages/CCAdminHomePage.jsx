@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { Button, Container, Table } from "react-bootstrap";
+import LogoComponent from "../Elements/LogoComponent";
 
 class CCAdminHomePage extends Component {
   constructor(props) {
@@ -164,7 +165,7 @@ class CCAdminHomePage extends Component {
           <td>
             <Link to="/reqDetails">
               <Button size="sm" variant="success" onClick={() => this.goToRequestDetails(r)}>
-                                פרטי הבקשה
+                פרטי הבקשה
               </Button>
             </Link>
           </td>
@@ -194,7 +195,8 @@ class CCAdminHomePage extends Component {
   render() {
     return (
       <Container>
-        <h2 style={{textAlign: "center"}}> דף גורם מנהל </h2>
+        <LogoComponent />
+        <h2 style={{ textAlign: "center" }}> דף גורם מנהל </h2>
         {this.aplicationStatusMenu()}
         {this.showRequestsTable(this.state.arrToShow)}
       </Container>

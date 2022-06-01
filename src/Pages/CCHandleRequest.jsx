@@ -77,8 +77,7 @@ class CCHandleRequest extends Component {
     let request = this.state.requestObject;
     let generatedPassword = this.generatePassword(request.RequsetNum)
     let birthTypeDate = new Date(request.BirthDate)
-    let StudentUrl =
-      "http://localhost:49812/Student/PostNewStudent";
+    const StudentUrl ="http://localhost:49812/Student/PostNewStudent";
     let currentDate = new Date();
     const student = {
       StudentId: request.StudentId,
@@ -91,6 +90,7 @@ class CCHandleRequest extends Component {
       City: request.City,
       RegistrationDate: currentDate
     };
+    // debugger;
     console.log(student);
 
     console.log("start")

@@ -4,6 +4,7 @@ import FCFormSuperDetails from "../FuncionlComps/FCFormSuperDetails";
 import { Container } from "react-bootstrap";
 import FCButtonsForSuperHomePage from "../FuncionlComps/FCButtonsForSuperHomePage";
 import axios from "axios";
+import LogoComponent from "../Elements/LogoComponent";
 
 export default function FCSuperHomePage() {
   const { state } = useLocation();
@@ -45,12 +46,7 @@ export default function FCSuperHomePage() {
 
   return (
     <Container className="d-flex align-items-center justify-content-center flex-column">
-      <img
-        src="App logos\HelpMeStudent!-logos_black.png"
-        alt="logo"
-        id="logo"
-        style={{ width: "120px" }}
-      />
+      <LogoComponent/>
       {superDetails !== undefined ? (
         <>
           <div>

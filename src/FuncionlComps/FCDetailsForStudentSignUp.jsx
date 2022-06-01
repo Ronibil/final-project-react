@@ -2,10 +2,12 @@ import React from "react";
 import { Button, Container, Form, Card } from "react-bootstrap";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 import AsyncSelect from "react-select/async";
 import axios from "axios";
 import validator from "validator";
+import FCButton from "./FCButton";
+import LogoComponent from "../Elements/LogoComponent";
+
 
 export default function FCDetailsForStudentSignUp(props) {
   const navigate = useNavigate();
@@ -33,7 +35,6 @@ export default function FCDetailsForStudentSignUp(props) {
       City: sCity,
     };
     console.log(newStudentRequest);
-
     if (
       sID === "" ||
       sFullName === "" ||
@@ -276,12 +277,7 @@ export default function FCDetailsForStudentSignUp(props) {
 
   return (
     <Container className="min-vh-100 w-100 d-flex align-items-center flex-column">
-      <img
-        src="App logos\HelpMeStudent!-logos_black.png"
-        alt="logo"
-        id="logo"
-        style={{ width: "120px" }}
-      />
+      <LogoComponent />
       <Card className="mb-3">
         <h3 className="text-center mt-2">הרשמה</h3>
         <Card.Body>
@@ -295,6 +291,7 @@ export default function FCDetailsForStudentSignUp(props) {
                 required
                 onChange={(e) => handleID(e)}
                 maxLength={9}
+                style={{ borderRadius: 25 }}
               />
             </Form.Group>
             <Form.Group className="mb-2">
@@ -305,6 +302,7 @@ export default function FCDetailsForStudentSignUp(props) {
                 placeholder="הכנס מייל"
                 required
                 onChange={(e) => handleEmail(e)}
+                style={{ borderRadius: 25 }}
               />
               <Form.Text className="text-muted">
                 המייל שלך ישמש כאמצאי ההתחברות שלך וקבלת התראות על שיעורים
@@ -321,6 +319,7 @@ export default function FCDetailsForStudentSignUp(props) {
                 required
                 onBlur={handleFullName}
                 onChange={(e) => preventNumbers(e)}
+                style={{ borderRadius: 25 }}
               />
               {nameMessage()}
             </Form.Group>
@@ -334,6 +333,7 @@ export default function FCDetailsForStudentSignUp(props) {
                 onChange={(e) => preventLetters(e)}
                 onBlur={(e) => handlePhone(e)}
                 maxLength={10}
+                style={{ borderRadius: 25 }}
               />
               {phoneMessage()}
             </Form.Group>
@@ -344,6 +344,7 @@ export default function FCDetailsForStudentSignUp(props) {
                 size="sm"
                 onChange={(e) => setSGender(e.target.value)}
                 required
+                style={{ borderRadius: 25 }}
               >
                 <option value="" defaultValue hidden>
                   בחר
@@ -360,6 +361,7 @@ export default function FCDetailsForStudentSignUp(props) {
                 placeholder="תאריך לידה"
                 required
                 onBlur={(e) => handleAge(e)}
+                style={{ borderRadius: 25 }}
               />
             </Form.Group>
             {birthDateMessage()}
@@ -374,33 +376,13 @@ export default function FCDetailsForStudentSignUp(props) {
             </Form.Group>
           </Form>
           {props.type === "type1" ? (
-            <Button
-              className="text-center"
-              id="subBtn"
-              variant="success"
-              onClick={checkFields}
-            >
-              שליחה לאימות נתונים
-            </Button>
+            <FCButton onClick={checkFields} >שליחה לאימות נתונים</FCButton >
           ) : (
-            <Button
-              className="text-center"
-              id="subBtn"
-              variant="success"
-              onClick={checkFields}
-            >
-              המשך למילוי פרופיל אישי
-            </Button>
+            <FCButton style={{}} onClick={checkFields} >המשך למילוי פרופיל אישי</FCButton >
           )}
         </Card.Body>
       </Card>
-      <Button
-        className="mb-3 mt-auto"
-        onClick={() => navigate("/")}
-        variant="outline-primary"
-      >
-        חזרה לדף ההתחברות{" "}
-      </Button>
+      <FCButton onClick={() => navigate("/")} >חזרה לדף התחברות</FCButton >
     </Container>
   );
 }

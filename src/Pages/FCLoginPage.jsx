@@ -3,6 +3,7 @@ import { Container } from "react-bootstrap";
 import FCLoginForm from "../FuncionlComps/FCLoginForm";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import LogoComponent from "../Elements/LogoComponent";
 
 export default function FCLoginPage() {
   const [Email, setEmail] = useState("");
@@ -90,12 +91,7 @@ export default function FCLoginPage() {
 
   return (
     <Container className="d-flex justify-content-start align-items-center flex-column ">
-      <img
-        src="App logos\HelpMeStudent!-logos_black.png"
-        alt="logo"
-        id="logo"
-        style={{ width: "200px" }}
-      />
+      <LogoComponent />
       <FCLoginForm
         UpdateEmail={UpdateEmail}
         UpdatePassword={UpdatePassword}

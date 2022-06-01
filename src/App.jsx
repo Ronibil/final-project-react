@@ -17,6 +17,7 @@ import CCHandleRequest from "./Pages/CCHandleRequest";
 import FCShowProfileSuperStudent from "./Pages/FCShowProfileSuperStudent";
 import FCUpdateSuperClassPage from "./Pages/FCUpdateSuperClassPage";
 import FCChangePasswordPage from "./Pages/FCChangePasswordPage";
+import FCClassForStudent from "./FuncionlComps/FCClassForStudent";
 
 export default function App() {
   return (
@@ -39,6 +40,7 @@ export default function App() {
         <Route path="/ShowProfileSuperStudent" element={<FCShowProfileSuperStudent />} />
         <Route path="/UpdateSuperClassPage" element={<FCUpdateSuperClassPage />} />
         <Route path="changePasswordPage" element={<FCChangePasswordPage />} />
+        <Route path="classForStudent" element={<FCClassForStudent />} />
       </Routes>
     </div>
   );

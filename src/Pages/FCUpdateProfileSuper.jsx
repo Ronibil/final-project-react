@@ -3,6 +3,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Button, Form, Card, Container, Row, Col } from "react-bootstrap";
 import "../StyleSheets/Modal.css";
 import FCModalUpdateSuperProfile from "../FuncionlComps/FCModalUpdateSuperProfile";
+import LogoComponent from "../Elements/LogoComponent";
 
 function FCUpdateProfileSuper() {
   const { state } = useLocation();
@@ -58,12 +59,7 @@ function FCUpdateProfileSuper() {
 
   return (
     <Container className="d-flex align-items-center justify-content-center flex-column">
-      <img
-        src="App logos\HelpMeStudent!-logos_black.png"
-        alt="logo"
-        id="logo"
-        style={{ width: "120px" }}
-      />
+      <LogoComponent/>
       <div className="w-100" style={{ maxWidth: "400px" }}>
         <Card id="fldBlock">
           <Card.Body align="center">

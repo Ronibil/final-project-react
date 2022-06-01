@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Container, Button } from "react-bootstrap";
 import FCShowProfileSuperBtns from "../FuncionlComps/FCShowProfileSuperBtns";
 import { AiOutlineHome } from "react-icons/ai";
+import LogoComponent from "../Elements/LogoComponent";
 
 export default function FCShowProfileSuperStudent() {
   const { state } = useLocation();
@@ -62,12 +63,7 @@ export default function FCShowProfileSuperStudent() {
   };
   return (
     <Container className="d-flex flex-column align-items-center text-center justify-content-center">
-      <img
-        src="App logos\HelpMeStudent!-logos_black.png"
-        alt="logo"
-        id="logo"
-        style={{ width: "120px" }}
-      />
+      <LogoComponent />
       {superDetails !== undefined ? (
         <div>
           <FCFormSuperDetails superDetails={superDetails} />

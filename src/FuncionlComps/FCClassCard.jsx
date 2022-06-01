@@ -8,6 +8,7 @@ export default function FCClassCard({
   ShowModaAreYouSure,
   btnFunction,
   studentDetails,
+  ShowModalStarsBtn
 }) {
   const navigate = useNavigate();
   switch (type) {
@@ -178,6 +179,49 @@ export default function FCClassCard({
             </Card.Body>
           </Card>
         </>
+      );
+    case "studentHistory":
+      return (
+        <Card className="m-1">
+          <Card.Body className="w-100 d-flex align-items-center justify-content-between">
+            <div>
+              <Button
+                className="m-1"
+                size="sm"
+                onClick={() => ShowModalStarsBtn(classToCard.ClassCode)}
+                variant="outline-primary"
+              >
+                דירוג
+              </Button><br />
+              <Button className="m-1" size="sm" variant="outline-primary">
+                לצ'אט
+              </Button>
+            </div>
+            <div className="text-end">
+              <b>שם השיעור:</b> {classToCard.ClassName}
+              <br />
+              <b>תאריך:</b>{" "}
+              {new Date(classToCard.ClassDate).toLocaleDateString("en-GB")}{" "}
+              <br />
+              <b>שעת התחלה:</b> {classToCard.StartTime}
+              {studentDetails !== undefined ? (
+                <Button
+                  className="badge rounded-pill bg-primary"
+                  size="sm"
+                  onClick={() =>
+                    navigate("/ShowProfileSuperStudent", {
+                      state: { classToCard, studentDetails },
+                    })
+                  }
+                >
+                  {classToCard.SuperName}
+                </Button>
+              ) : (
+                ""
+              )}
+            </div>
+          </Card.Body>
+        </Card>
       );
     default:
       return (

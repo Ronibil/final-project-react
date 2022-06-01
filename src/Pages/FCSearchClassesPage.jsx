@@ -7,7 +7,8 @@ import FCClassCard from "../FuncionlComps/FCClassCard";
 import "../StyleSheets/searchClassesStyle.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import FCModalConfirm from "../FuncionlComps/FCModalConfirm";
-import { AiOutlineHome } from "react-icons/ai";
+import FCBottomNavigation from "../FuncionlComps/FCBottomNavigation";
+import LogoComponent from "../Elements/LogoComponent";
 
 export default function SearchClassesPage() {
   const { state } = useLocation();
@@ -65,11 +66,13 @@ export default function SearchClassesPage() {
   };
 
   const register = (classCode) => {
-    let user = JSON.parse(localStorage.getItem("user"));
+    console.log(classCode);
+    // let user = JSON.parse(localStorage.getItem("user"));
     const requestToRegister = {
       StudentId: userDetails.StudentId, //state.StudentId
-      ClassCode: classCode,
+      ClassCode: classCode
     };
+    console.log(requestToRegister);
 
     let classToModal = classes.find((c) => c.ClassCode === classCode);
     let classToConfirmModal = {
@@ -114,13 +117,8 @@ export default function SearchClassesPage() {
   };
 
   return (
-    <Container className="min-vh-100 d-flex justify-content-center align-items-center flex-column text-center ">
-      <img
-        src="App logos\HelpMeStudent!-logos_black.png"
-        alt="logo"
-        id="logo"
-        style={{ width: "120px" }}
-      />
+    <Container className="min-vh-100 d-flex align-items-center flex-column text-center" style={{ backgroundColor: "#FFFFFF" }}>
+      <LogoComponent />
       {classDetails !== undefined ? (
         <FCModalConfirm
           modalOpen={confirmModal}
@@ -168,14 +166,13 @@ export default function SearchClassesPage() {
       ) : (
         ""
       )}
-
-      <Button
-        className="mb-3 mt-auto"
-        onClick={BackToHomePage}
-        variant="outline-primary"
-      >
-        <AiOutlineHome />
-      </Button>
+      {userDetails === undefined ? (
+        ""
+      ) : (
+        <FCBottomNavigation
+          UserDetails={userDetails}
+        />
+      )}
     </Container>
   );
 }
