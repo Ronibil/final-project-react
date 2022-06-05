@@ -10,6 +10,7 @@ padding:5px 15px 5px 15px;
 width: 100%;
 border-radius: 25px;
 transition: all ease-in-out 0.1s;
+margin-top: 10px;
 
 &:hover{
   background: #08D9D6 ;

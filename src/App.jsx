@@ -23,12 +23,12 @@ export default function App() {
   return (
     <div>
       <Routes>
+        <Route path="/" element={<FCLoginPage />} />
         <Route path="/studentHomePage" element={<FCStudentHomePage />} />
         <Route path="/superHomePage" element={<FCSuperHomePage />} />
         <Route path="/adminHomePage" element={<CCAdminHomePage />} />
         <Route path="/reqDetails" element={<CCHandleRequest />} />
         <Route path="/searchClassesPage" element={<FCSearchClassesPage />} />
-        <Route path="/" element={<FCLoginPage />} />
         <Route path="/StudentRequestPage" element={<FCStudentRequestPage />} />
         <Route path="/SuperStudentRequestPage" element={<FCSuperStudentRequestPage />} />
         <Route path="/SuperStudentRequestPage2" element={<FCSuperStudentRequestPage2 />} />

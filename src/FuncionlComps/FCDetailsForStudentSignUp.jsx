@@ -7,6 +7,7 @@ import axios from "axios";
 import validator from "validator";
 import FCButton from "./FCButton";
 import LogoComponent from "../Elements/LogoComponent";
+import ReturnPageButton from "../Elements/ReturnPageButton";
 
 
 export default function FCDetailsForStudentSignUp(props) {
@@ -276,9 +277,12 @@ export default function FCDetailsForStudentSignUp(props) {
   };
 
   return (
-    <Container className="min-vh-100 w-100 d-flex align-items-center flex-column">
-      <LogoComponent />
-      <Card className="mb-3">
+    <Container style={{ flexDirection: "column", maxWidth: "700px" }}>
+      <Card style={{ borderRadius: 25, marginTop: 25 }} >
+        <div style={{ alignSelf: "center" }} >
+          <LogoComponent />
+          <ReturnPageButton GoTo={() => navigate("/typeOfUser")} />
+        </ div>
         <h3 className="text-center mt-2">הרשמה</h3>
         <Card.Body>
           <Form className="text-end">
@@ -382,7 +386,6 @@ export default function FCDetailsForStudentSignUp(props) {
           )}
         </Card.Body>
       </Card>
-      <FCButton onClick={() => navigate("/")} >חזרה לדף התחברות</FCButton >
     </Container>
   );
 }

@@ -10,8 +10,8 @@ export default function StudentHomePage() {
 
   const location = useLocation();
   const { state } = location;
+  const recommendation = "במקום לקרוא עמודים על גבי עמודים ברצף, התרגלו להפסיק את הקריאה בסוף כל תת נושא או סעיף ולספר בקול את עיקרי הדברים שלמדתם כאילו שאתם מסבירים את החומר למישהו אחר. חזרה על החומר במילים שלכם מהווה מדד מצוין למידה שבה הפנמתם את המידע בשעת הקריאה. אם הצלחתם להסביר עברו הלאה ואם לא - חיזרו אחורה וקראו שנית"
 
-  const fullName = "";
 
   const userDetails = {
     Email: state.Email,
@@ -48,25 +48,27 @@ export default function StudentHomePage() {
   }, []);
 
   return (
-    <Container className="min-vh-100 d-flex align-items-center flex-column text-center" style={{backgroundColor: "#FFFFFF"}}>
+    <Container className="min-vh-100 d-flex align-items-center flex-column text-center">
       <LogoComponent />
-      <h1>ברוכים הבאים - {studentDetails.FullName}</h1>
-      <h5 style={{ marginTop: 200 }}>נוסיף המלצות לסטודנטים הלומדים</h5>
-      <h5>הסופר סטודנט המצטיין</h5>
-      <h5>פרסומות - הדף יהיה מעוצב יפה למשתמש</h5>
+      <h1>ברוכים הבאים - {studentDetails.FullName}</h1><br />
+      <h3>:ההמלצה השבועית</h3>
+      <div style={{ borderRadius: 25, backgroundColor: "#FFD2A5", padding: "25PX" }}>
+        <h6>{recommendation}</h6>
+      </div><br />
       <Button
         style={
           {
-            marginTop: 210,
+            marginTop: "auto",
+            marginBottom: 80,
             padding: "28px 40px 28px 40px",
             fontSize: 20,
             borderRadius: 20,
-            background: "#A2D5AB"
+            background: "#A2D5AB",
+            border: "solid #4B8673 2px"
           }}
         onClick={() => navigate("/searchClassesPage", { state: userDetails })}>
         !מצא את השיעור שמתאים לך
       </Button>
-
       {userDetails === undefined ? (
         ""
       ) : (

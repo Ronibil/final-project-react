@@ -14,7 +14,7 @@ export default function FCShowProfileSuperStudent() {
   const [futureClassesSuper, setfutureClassesSuper] = useState();
 
   const superId = state.classToCard.SuperStudentId;
-  const studentDetails = state.studentDetails;
+  // const studentDetails = state.studentDetails;
   const StudentDetails = {
     Email: state.studentDetails.Email,
     Password: state.studentDetails.Password,
@@ -62,8 +62,8 @@ export default function FCShowProfileSuperStudent() {
     navigate("/searchClassesPage", { state: StudentDetails });
   };
   return (
-    <Container className="d-flex flex-column align-items-center text-center justify-content-center">
-      <LogoComponent />
+    <Container style={{ flexDirection: "column", maxWidth: "700px" }}>
+      {/* <LogoComponent style={{ alignSelf: "center" }} /> */}
       {superDetails !== undefined ? (
         <div>
           <FCFormSuperDetails superDetails={superDetails} />

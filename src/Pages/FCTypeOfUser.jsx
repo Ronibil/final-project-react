@@ -1,26 +1,33 @@
 import React from "react";
-import { Container } from "react-bootstrap";
+import { Container, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import LogoComponent from "../Elements/LogoComponent";
+import ReturnPageButton from "../Elements/ReturnPageButton";
 import FCButton from "../FuncionlComps/FCButton";
 
 export default function FCTypeOfUser() {
   const navigate = useNavigate();
 
   return (
-    <Container className="min-vh-100 d-flex flex-column align-items-center text-center">
-      <LogoComponent />
-      <h1>?מי תרצו להיות</h1>
-      <h4 className="mb-4"> :בחרו את מטרת השימוש שלכם באפליקציה</h4>
-      <div style={{ marginTop: 15 }}>
-        <FCButton onClick={() => navigate("/StudentRequestPage")}>סטודנט</FCButton>
-        <div style={{ marginTop: 15 }}>
-          <FCButton onClick={() => navigate("/SuperStudentRequestPage")}>סופר-סטודנט (מורה פרטי)</FCButton>
+    <Container style={{ flexDirection: "column", maxWidth: "700px" }} >
+      <Card style={{ height: "400px" ,borderRadius: 25, marginTop: 50, alignItems: "center", textAlign: "center" }} >
+
+        <div>
+          <LogoComponent />
+          <ReturnPageButton GoTo={() => navigate("/")} />
+        </ div>
+        <div style={{ borderRadius: 25, backgroundColor: "#A2D5AB", padding: "25PX" }}>
+          <h1>?מי תרצו להיות</h1>
+          <h5> :בחרו את מטרת השימוש שלכם באפליקציה</h5>
         </div>
-      </div>
-      <div style={{ marginTop: 450 }}>
-        <FCButton onClick={() => navigate("/")}>חזרה לדף ההתחברות</FCButton>
-      </div>
-    </Container>
+        <div style={{ marginTop: 15 }}>
+          <FCButton onClick={() => navigate("/StudentRequestPage")}>סטודנט</FCButton>
+          <div style={{ marginTop: 15 }}>
+            <FCButton onClick={() => navigate("/SuperStudentRequestPage")}>סופר-סטודנט (מורה פרטי)</FCButton>
+          </div>
+        </div>
+
+      </Card >
+    </ Container>
   );
 }

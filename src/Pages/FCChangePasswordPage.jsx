@@ -34,27 +34,32 @@ export default function FCChangePasswordPage() {
   }
   return (
     <Container className="d-flex justify-content-start align-items-center flex-column ">
-      <LogoComponent />
-      <Card>
+      <Card style={{ borderRadius: 25, marginTop: 140 }}>
+        <div style={{ marginLeft: 122 }} >
+          <LogoComponent />
+        </ div>
         <Card.Body>
           <h3 className="text-center mb-4"> דף שינוי סיסמא</h3>
-          <h6 style={{ direction: "rtl" }}>נא להזין ת.ז שלפיה נרשמתם למערכת. תקבלו מייל עם הסיסמא החדשה להתחברות.</h6>
+          <hr />
+          <h6 style={{ direction: "rtl", textAlign: "center" }}>נא להזין את מספר תעודת הזהות איתו נרשמת למערכת. לאחר מכן תקבל/י מייל עם הסיסמא החדשה להתחברות.</h6>
           <Form>
             <Form.Group >
-              <Form.Label style={{ display: "block", textAlign: "right" }}>
-                :ת.ז
+              <Form.Label style={{ display: "block", textAlign: "right", marginRight: 10 }}>
+                :תעודת זהות
               </Form.Label>
               <Form.Control
                 className="mb-2"
                 type="text"
                 required
                 onChange={(e) => setId(e.target.value)}
+                style={{ borderRadius: 25 }}
               />
             </Form.Group>
             <Button
               className="w-100 text-center mt-2"
               variant="success"
               onClick={() => fetchNewPass()}
+              style={{ borderRadius: 25 }}
             >
               שלחו אליי סיסמה חדשה
             </Button>

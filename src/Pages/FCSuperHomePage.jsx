@@ -45,22 +45,20 @@ export default function FCSuperHomePage() {
   }, []);
 
   return (
-    <Container className="d-flex align-items-center justify-content-center flex-column">
-      <LogoComponent/>
+    <Container>
+      <LogoComponent />
       {superDetails !== undefined ? (
         <>
-          <div>
-            <FCFormSuperDetails superDetails={superDetails} />
-            <FCButtonsForSuperHomePage
-              DepartmentName={superDetails.DepartmentName}
-              Description={superDetails.Description}
-              StudyYear={superDetails.StudyYear}
-              UserDetails={UserDetails}
-              superName={superDetails.FullName}
-              HistoryClass={classHistory}
-              FutreClass={classFutre}
-            />
-          </div>
+          <FCFormSuperDetails superDetails={superDetails} />
+          <FCButtonsForSuperHomePage
+            DepartmentName={superDetails.DepartmentName}
+            Description={superDetails.Description}
+            StudyYear={superDetails.StudyYear}
+            UserDetails={UserDetails}
+            superName={superDetails.FullName}
+            HistoryClass={classHistory}
+            FutreClass={classFutre}
+          />
         </>
       ) : (
         ""

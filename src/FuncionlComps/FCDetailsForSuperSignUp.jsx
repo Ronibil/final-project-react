@@ -140,95 +140,86 @@ export default function FCDetailsForSuperSignUp(props) {
   };
 
   return (
-    <Container
-      className="d-flex align-items-center justify-content-center"
-      style={{
-        marginTop: 50,
-        marginBottom: 10,
-      }}
-    >
-      <div className="w-100" style={{ maxWidth: "400px" }}>
-        <Card>
-          <Card.Body align="center">
-            <h2 className="text-center mb-4">יצירת פרופיל אישי</h2>
-            <Form>
-              <Form.Group className="mb-3">
-                <Form.Label>תמונת פרופיל</Form.Label> <br />
-                <Image
-                  className="mb-3"
-                  style={{ width: 150 }}
-                  src={superImage ? superImage : altImage}
-                  alt={altImage}
-                />
-                <Form.Control
-                  type="file"
-                  id="formFile"
-                  onChange={(e) => {
-                    setSuperImage(URL.createObjectURL(e.target.files[0]));
-                    console.log(e.target.files[0]);
-                  }}
-                  style={{ borderRadius: 25 }}
-                  required
-                />
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>שם מחלקה</Form.Label>
+    <Container style={{ flexDirection: "column", maxWidth: "700px" }}>
+      <Card style={{ borderRadius: 25, marginTop: 25 }} >
+        <Card.Body align="center">
+          <h2 className="text-center mb-4">יצירת פרופיל אישי</h2>
+          <Form>
+            <Form.Group className="mb-3">
+              <Form.Label>תמונת פרופיל</Form.Label> <br />
+              <Image
+                className="mb-3"
+                style={{ width: 150 }}
+                src={superImage ? superImage : altImage}
+                alt={altImage}
+              />
+              <Form.Control
+                type="file"
+                id="formFile"
+                onChange={(e) => {
+                  setSuperImage(URL.createObjectURL(e.target.files[0]));
+                  console.log(e.target.files[0]);
+                }}
+                style={{ borderRadius: 25 }}
+                required
+              />
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>שם מחלקה</Form.Label>
+              <Form.Select
+                onChange={(e) => setSuperDepartmet(e.target.value)}
+                style={{ borderRadius: 25 }}
+              >
+                <option value="" defaultValue hidden>
+                  בחר
+                </option>
+                {departments.map((d) => (
+                  <option value={d.DepartmentName} key={d.DepartmentName}>
+                    {d.DepartmentName}
+                  </option>
+                ))}
+              </Form.Select>
+            </Form.Group>{" "}
+            <Form.Group className="mb-3">
+              <Form.Label>שנת לימודים</Form.Label>
+              {
                 <Form.Select
-                  onChange={(e) => setSuperDepartmet(e.target.value)}
+                  onChange={(e) => setSuperStudyYear(e.target.value)}
                   style={{ borderRadius: 25 }}
                 >
                   <option value="" defaultValue hidden>
                     בחר
                   </option>
-                  {departments.map((d) => (
-                    <option value={d.DepartmentName} key={d.DepartmentName}>
-                      {d.DepartmentName}
-                    </option>
-                  ))}
+                  <option value="1"> 'שנה א</option>
+                  <option value="2"> 'שנה ב</option>
+                  <option value="3"> 'שנה ג</option>
+                  <option value="4"> 'שנה ד</option>
                 </Form.Select>
-              </Form.Group>{" "}
-              <Form.Group className="mb-3">
-                <Form.Label>שנת לימודים</Form.Label>
-                {
-                  <Form.Select
-                    onChange={(e) => setSuperStudyYear(e.target.value)}
-                    style={{ borderRadius: 25 }}
-                  >
-                    <option value="" defaultValue hidden>
-                      בחר
-                    </option>
-                    <option value="1"> 'שנה א</option>
-                    <option value="2"> 'שנה ב</option>
-                    <option value="3"> 'שנה ג</option>
-                    <option value="4"> 'שנה ד</option>
-                  </Form.Select>
-                }
-              </Form.Group>
-              <Form.Group className="mb-3">
-                <Form.Label>תיאור קצר עלי</Form.Label>
-                <Form.Control
-                  as="textarea"
-                  rows={3}
-                  onChange={(e) => setSuperDescription(e.target.value)}
-                  placeholder="רקע קצר כדי שהסטודנטים יכירו אותך"
-                  required
-                  style={{ borderRadius: 25 }}
-                />
-              </Form.Group>
-              <Button
-                className="mb-3"
-                id="subBtn"
-                variant="success"
-                onClick={checkFields}
+              }
+            </Form.Group>
+            <Form.Group className="mb-3">
+              <Form.Label>תיאור קצר עלי</Form.Label>
+              <Form.Control
+                as="textarea"
+                rows={3}
+                onChange={(e) => setSuperDescription(e.target.value)}
+                placeholder="רקע קצר כדי שהסטודנטים יכירו אותך"
+                required
                 style={{ borderRadius: 25 }}
-              >
-                שלח לאימות נתונים
-              </Button>
-            </Form>
-          </Card.Body>
-        </Card>{" "}
-        <br />
-      </div>
+              />
+            </Form.Group>
+            <Button
+              className="mb-3"
+              id="subBtn"
+              variant="success"
+              onClick={checkFields}
+              style={{ borderRadius: 25 }}
+            >
+              שלח לאימות נתונים
+            </Button>
+          </Form>
+        </Card.Body>
+      </Card>
     </Container>
   );
 }

@@ -21,6 +21,7 @@ export default function SearchClassesPage() {
   const [tags, setTags] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const [classes, setClasses] = useState([]);
+  const [suggestionsClasses, setSuggestionsClasses] = useState([])
   const navigate = useNavigate();
 
   //Modal
@@ -64,6 +65,30 @@ export default function SearchClassesPage() {
       }
     } catch (error) { }
   };
+
+  useEffect(()=>{
+    const url = `http://localhost:49812/Class/GetSuggestionsClasses/${state.StudentId}`
+    fetch(url, {
+      method: "GET",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json; charset=UTF-8",
+      }),
+    })
+      .then((res) => {
+        console.log("res.ok", res.ok);
+        return res.json();
+      })
+      .then(
+        (result) => {
+          console.log("FETCH PostRequest= ", result);
+          setSuggestionsClasses(result)
+        },
+        (error) => {
+          console.log("err post=", error);
+        }
+      );
+  },[])
 
   const register = (classCode) => {
     console.log(classCode);
@@ -145,7 +170,7 @@ export default function SearchClassesPage() {
         />
         <Button
           className="flex-shrink-1"
-          variant="outline-success"
+          style={{ background: "#A2D5AB", border: "solid #4B8673 1px", margin: 0 }}
           onClick={searchByTags}
         >
           🔍
@@ -153,26 +178,50 @@ export default function SearchClassesPage() {
       </div>
       {classes.length !== 0 ? (
         <>
-          {classes.map((c) => (
-            <FCClassCard
-              key={c.ClassCode}
-              classToCard={c}
-              type="SearchClass"
-              btnFunction={register}
-              studentDetails={userDetails}
-            />
-          ))}
+          <div style={{ width: "100%", height: 400, background: "#F7FBFC", overflow: "auto", boxShadow: "0px 0px 8px 0px black", borderRadius: 15 }}>
+            {classes.map((c) => (
+              <FCClassCard
+                key={c.ClassCode}
+                classToCard={c}
+                type="SearchClass"
+                btnFunction={register}
+                studentDetails={userDetails}
+              />
+            ))}
+          </div>
         </>
       ) : (
-        ""
-      )}
-      {userDetails === undefined ? (
-        ""
-      ) : (
-        <FCBottomNavigation
-          UserDetails={userDetails}
-        />
-      )}
-    </Container>
+        <>
+        {suggestionsClasses == undefined ? (
+          ""
+        ) : (
+          <>
+            <h5>הצעות לשיעורים שאולי מתאימים לך</h5>
+            <div style={{ width: "100%", height: 400, background: "#F7FBFC", overflow: "auto", boxShadow: "0px 0px 8px 0px black", borderRadius: 15 }}>
+              {suggestionsClasses.map((c) => (
+                <FCClassCard
+                  key={c.ClassCode}
+                  classToCard={c}
+                  type="SearchClass"
+                  // btnFunction={register}
+                  studentDetails={userDetails}
+                />
+              ))}
+            </div>
+          </>
+        )}
+        </>
+      )
+      }
+      {
+        userDetails === undefined ? (
+          ""
+        ) : (
+          <FCBottomNavigation
+            UserDetails={userDetails}
+          />
+        )
+      }
+    </Container >
   );
 }

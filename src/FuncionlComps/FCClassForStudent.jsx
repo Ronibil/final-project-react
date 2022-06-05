@@ -133,7 +133,7 @@ export default function FCClassForStudent() {
 
 
   return (
-    <Container className="min-vh-100 d-flex align-items-center flex-column text-center" style={{backgroundColor: "#FFFFFF"}}>
+    <Container className="min-vh-100 d-flex align-items-center flex-column text-center" style={{ backgroundColor: "#FFFFFF" }}>
       <LogoComponent />
       {classDetails !== undefined ? (
         <>
@@ -154,10 +154,10 @@ export default function FCClassForStudent() {
       ) : (
         ""
       )}
-      <h2 style={{marginBottom: 25}}>ברוכים הבאים - {studentDetails.FullName}</h2>
-      <div className="d-flex flex-row" style={{marginBottom: 10}}>
-        <Button onClick={() => setClassType("future")} style={{ borderRadius: 25, margin: 5, background: "#A2D5AB" }} >שיעורים עתידיים</Button>
-        <Button onClick={() => setClassType("history")} style={{ borderRadius: 25, margin: 5, background: "#A2D5AB" }}>היסטוריית שיעורים</Button>
+      <h2 style={{ marginBottom: 25 }}>ברוכים הבאים - {studentDetails.FullName}</h2>
+      <div className="d-flex flex-row" style={{ marginBottom: 10 }}>
+        <Button onClick={() => setClassType("future")} style={{ borderRadius: 15, width: "120%", margin: 5, background: "#A2D5AB", border: "solid #4B8673 2px" }} >שיעורים עתידיים</Button>
+        <Button onClick={() => setClassType("history")} style={{ borderRadius: 15, width: "120%", margin: 5, background: "#A2D5AB", border: "solid #4B8673 2px" }}>היסטוריית שיעורים</Button>
       </div >
       {classType === 'future' ? (
         <>
@@ -168,16 +168,18 @@ export default function FCClassForStudent() {
             </div>
           ) : (
             <>
-              <h3>השיעורים העתידיים שלי</h3>
-              {futreClasses.map((c, index) => (
-                <FCClassCard
-                  key={index}
-                  classToCard={c}
-                  type="studentFutre"
-                  ShowModaAreYouSure={ShowModaAreYouSure}
-                  studentDetails={userDetails}
-                />
-              ))}
+              <h3>שיעורים עתידיים</h3>
+              <div style={{ width: "100%", height: 400, background: "#F7FBFC", overflow: "auto", boxShadow: "0px 0px 8px 0px black", borderRadius: 15 }}>
+                {futreClasses.map((c, index) => (
+                  <FCClassCard
+                    key={index}
+                    classToCard={c}
+                    type="studentFutre"
+                    ShowModaAreYouSure={ShowModaAreYouSure}
+                    studentDetails={userDetails}
+                  />
+                ))}
+              </div>
             </>
           )}
         </>
@@ -186,41 +188,48 @@ export default function FCClassForStudent() {
           {classesHistory.length > 0 ? (
             <>
               <h3>היסטוריית שיעוריים</h3>
-              {classesHistory.map((c, index) => (
-                <FCClassCard
-                  key={index}
-                  classToCard={c}
-                  type="studentHistory"
-                  ShowModalStarsBtn={ShowModalStars}
-                />
-              ))}
+              <div style={{ width: "100%", height: 400, background: "#F7FBFC", overflow: "auto", boxShadow: "0px 0px 8px 0px black", borderRadius: 15 }}>
+                  {classesHistory.map((c, index) => (
+                    <FCClassCard
+                      key={index}
+                      classToCard={c}
+                      type="studentHistory"
+                      ShowModalStarsBtn={ShowModalStars}
+                    />
+                  ))}
+              </div>
             </>
           ) : (
             <div className="m-5" >
-            <h5>אין היסטוריית שיעורים</h5>
-            <h6>שיעורים שעברתם באפליקצייה יופיעו כאן</h6>
-          </div>
+              <h5>אין היסטוריית שיעורים</h5>
+              <h6>שיעורים שעברתם באפליקצייה יופיעו כאן</h6>
+            </div>
           )}
         </>
-      )}
+      )
+      }
 
-      {starsModal === false ? (
-        ""
-      ) : (
-        <>
-          <FCModalStars
-            isOpen={starsModal}
-            starsModalHide={HideModalStars}
+      {
+        starsModal === false ? (
+          ""
+        ) : (
+          <>
+            <FCModalStars
+              isOpen={starsModal}
+              starsModalHide={HideModalStars}
+            />
+          </>
+        )
+      }
+      {
+        userDetails === undefined ? (
+          ""
+        ) : (
+          <FCBottomNavigation
+            UserDetails={userDetails}
           />
-        </>
-      )}
-      {userDetails === undefined ? (
-        ""
-      ) : (
-        <FCBottomNavigation
-          UserDetails={userDetails}
-        />
-      )}
-    </Container>
+        )
+      }
+    </Container >
   )
 }

@@ -1,6 +1,7 @@
 import React from "react";
 import { Card, Button } from "react-bootstrap";
 import FCInput from "./FCInput";
+import LogoComponent from "../Elements/LogoComponent";
 
 export default function FCLoginForm({
   UpdateEmail,
@@ -10,9 +11,11 @@ export default function FCLoginForm({
   navigateToChangePassword,
 }) {
   return (
-    <Card>
+    <Card style={{ borderRadius: 25, marginTop: 50 }} >
+      <div style={{ alignSelf: "center" }} >
+        <LogoComponent />
+      </ div>
       <Card.Body>
-        {/* <h1 className="text-center mb-4">HelpMeStudent</h1> */}
         <h2 className="text-center mb-4">התחברות</h2>
         <FCInput type="text" label='שם משתמש' onChange={UpdateEmail} />
         <FCInput type="password" label='סיסמא' onChange={UpdatePassword} />
