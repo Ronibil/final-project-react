@@ -4,7 +4,7 @@ import FCFormSuperDetails from "../FuncionlComps/FCFormSuperDetails";
 import { Container } from "react-bootstrap";
 import FCButtonsForSuperHomePage from "../FuncionlComps/FCButtonsForSuperHomePage";
 import axios from "axios";
-import LogoComponent from "../Elements/LogoComponent";
+
 
 export default function FCSuperHomePage() {
   const { state } = useLocation();
@@ -46,7 +46,6 @@ export default function FCSuperHomePage() {
 
   return (
     <Container>
-      <LogoComponent />
       {superDetails !== undefined ? (
         <>
           <FCFormSuperDetails superDetails={superDetails} />

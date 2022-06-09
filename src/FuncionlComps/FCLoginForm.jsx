@@ -1,7 +1,10 @@
 import React from "react";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Container } from "react-bootstrap";
 import FCInput from "./FCInput";
 import LogoComponent from "../Elements/LogoComponent";
+// import Loader from "../Elements/Loader";
+
+
 
 export default function FCLoginForm({
   UpdateEmail,
@@ -10,45 +13,49 @@ export default function FCLoginForm({
   navigateToRegister,
   navigateToChangePassword,
 }) {
+
   return (
-    <Card style={{ borderRadius: 25, marginTop: 50 }} >
-      <div style={{ alignSelf: "center" }} >
-        <LogoComponent />
-      </ div>
-      <Card.Body>
-        <h2 className="text-center mb-4">התחברות</h2>
-        <FCInput type="text" label='שם משתמש' onChange={UpdateEmail} />
-        <FCInput type="password" label='סיסמא' onChange={UpdatePassword} />
-        <Button
-          style={{ display: "block", textAlign: "right", fontSize: "14px" }}
-          className="w-100 text-right"
-          variant="link"
-          onClick={navigateToChangePassword}
-        >
-          ?שכחתם את הסיסמא
-        </Button>
+    <Container style={{ flexDirection: "row", maxWidth: "700px", paddingTop: 150 }}>
+      <Card style={{ backgroundColor: "rgba(255, 255, 255, 0.7)", borderRadius: 25 }}>
+        <div style={{ alignSelf: "center" }} >
+          <LogoComponent />
+        </ div>
+        <Card.Body>
+          <h2 className="text-center mb-4">התחברות</h2>
+          <FCInput type="text" label='שם משתמש' onChange={UpdateEmail} />
+          <FCInput type="password" label='סיסמא' onChange={UpdatePassword} />
+          <Button
+            style={{ display: "block", textAlign: "right", fontSize: "14px" }}
+            className="w-100 text-right"
+            variant="link"
+            onClick={navigateToChangePassword}
+          >
+            ?שכחתם את הסיסמא
+          </Button>
+          <Button
+            className="w-100 text-center mt-2"
+            variant="success"
+            onClick={VerifyUser}
+            style={{ borderRadius: 25 }}
+          >
+            התחבר
+          </Button>
+        </Card.Body>
+        <div id="errMsgLogin" style={{ display: "none", margin: "0 auto", color: "red" }}>
+          שם משתמש או סיסמה שגויים
+        </div>
+        <div className="w-100 text-center mt-2">
+          <b>?לא רשומים למערכת</b>
+        </div>
         <Button
           className="w-100 text-center mt-2"
-          variant="success"
-          onClick={VerifyUser}
-          style={{ borderRadius: 25 }}
+          variant="link"
+          onClick={navigateToRegister}
         >
-          התחבר
+          <b>!לחצו כאן להירשם</b>
         </Button>
-      </Card.Body>
-      <div id="errMsgLogin" style={{ display: "none", margin: "0 auto", color: "red" }}>
-        שם משתמש או סיסמה שגויים
-      </div>
-      <div className="w-100 text-center mt-2">
-        <b>?לא רשומים למערכת</b>
-      </div>
-      <Button
-        className="w-100 text-center mt-2"
-        variant="link"
-        onClick={navigateToRegister}
-      >
-        <b>!לחצו כאן להירשם</b>
-      </Button>
-    </Card>
+        {/* <Loader /> */}
+      </Card>
+    </Container>
   );
 }

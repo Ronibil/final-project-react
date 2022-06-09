@@ -9,17 +9,15 @@ export default function FCTypeOfUser() {
   const navigate = useNavigate();
 
   return (
-    <Container style={{ flexDirection: "column", maxWidth: "700px" }} >
-      <Card style={{ height: "400px" ,borderRadius: 25, marginTop: 50, alignItems: "center", textAlign: "center" }} >
+    <Container style={{ flexDirection: "column", maxWidth: "700px", paddingTop: 150 }} >
+      <Card style={{ height: "400px", borderRadius: 25, marginTop: 50, alignItems: "center", textAlign: "center", backgroundColor: "rgba(255, 255, 255, 0.7)" }} >
 
         <div>
           <LogoComponent />
           <ReturnPageButton GoTo={() => navigate("/")} />
         </ div>
-        <div style={{ borderRadius: 25, backgroundColor: "#A2D5AB", padding: "25PX" }}>
-          <h1>?מי תרצו להיות</h1>
-          <h5> :בחרו את מטרת השימוש שלכם באפליקציה</h5>
-        </div>
+        <h1>?מי תרצו להיות</h1>
+        <h5> :בחרו את מטרת השימוש שלכם באפליקציה</h5>
         <div style={{ marginTop: 15 }}>
           <FCButton onClick={() => navigate("/StudentRequestPage")}>סטודנט</FCButton>
           <div style={{ marginTop: 15 }}>

@@ -13,10 +13,10 @@ export default function FCModalAreYouSure({ text, isOpen, btnFunc, modalHide, pa
         <Modal.Body className="d-flex align-items-center justify-content-center" >
           <Row>
             <Col xs={6}>
-              <Button className='btnBackToHome' onClick={modalHide} variant="danger"><b>לא</b></Button>
+              <Button style={{ borderRadius: 20 }} onClick={modalHide} variant="danger"><b>לא</b></Button>
             </Col>
             <Col xs={6}>
-              <Button className='btnBackToHome' onClick={() => btnFunc(parameter)} variant="success"><b>כן</b></Button>
+              <Button style={{ borderRadius: 20 }} onClick={() => btnFunc(parameter)} variant="success"><b>כן</b></Button>
             </Col>
           </Row>
         </Modal.Body>

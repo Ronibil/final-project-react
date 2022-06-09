@@ -140,8 +140,8 @@ export default function FCDetailsForSuperSignUp(props) {
   };
 
   return (
-    <Container style={{ flexDirection: "column", maxWidth: "700px" }}>
-      <Card style={{ borderRadius: 25, marginTop: 25 }} >
+    <Container style={{ flexDirection: "column", maxWidth: "700px", paddingTop:70 }}>
+      <Card style={{ borderRadius: 25, backgroundColor: "rgba(255, 255, 255, 0.7)" }} >
         <Card.Body align="center">
           <h2 className="text-center mb-4">יצירת פרופיל אישי</h2>
           <Form>

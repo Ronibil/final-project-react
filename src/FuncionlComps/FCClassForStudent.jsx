@@ -133,7 +133,7 @@ export default function FCClassForStudent() {
 
 
   return (
-    <Container className="min-vh-100 d-flex align-items-center flex-column text-center" style={{ backgroundColor: "#FFFFFF" }}>
+    <Container className="min-vh-100 d-flex align-items-center flex-column text-center">
       <LogoComponent />
       {classDetails !== undefined ? (
         <>
@@ -169,7 +169,7 @@ export default function FCClassForStudent() {
           ) : (
             <>
               <h3>שיעורים עתידיים</h3>
-              <div style={{ width: "100%", height: 400, background: "#F7FBFC", overflow: "auto", boxShadow: "0px 0px 8px 0px black", borderRadius: 15 }}>
+              <div style={{ width: "100%", height: 400, overflow: "auto" }}>
                 {futreClasses.map((c, index) => (
                   <FCClassCard
                     key={index}
@@ -188,15 +188,15 @@ export default function FCClassForStudent() {
           {classesHistory.length > 0 ? (
             <>
               <h3>היסטוריית שיעוריים</h3>
-              <div style={{ width: "100%", height: 400, background: "#F7FBFC", overflow: "auto", boxShadow: "0px 0px 8px 0px black", borderRadius: 15 }}>
-                  {classesHistory.map((c, index) => (
-                    <FCClassCard
-                      key={index}
-                      classToCard={c}
-                      type="studentHistory"
-                      ShowModalStarsBtn={ShowModalStars}
-                    />
-                  ))}
+              <div style={{ width: "100%", height: 400, overflow: "auto" }}>
+                {classesHistory.map((c, index) => (
+                  <FCClassCard
+                    key={index}
+                    classToCard={c}
+                    type="studentHistory"
+                    ShowModalStarsBtn={ShowModalStars}
+                  />
+                ))}
               </div>
             </>
           ) : (

@@ -21,27 +21,25 @@ import FCClassForStudent from "./FuncionlComps/FCClassForStudent";
 
 export default function App() {
   return (
-    <div>
-      <Routes>
-        <Route path="/" element={<FCLoginPage />} />
-        <Route path="/studentHomePage" element={<FCStudentHomePage />} />
-        <Route path="/superHomePage" element={<FCSuperHomePage />} />
-        <Route path="/adminHomePage" element={<CCAdminHomePage />} />
-        <Route path="/reqDetails" element={<CCHandleRequest />} />
-        <Route path="/searchClassesPage" element={<FCSearchClassesPage />} />
-        <Route path="/StudentRequestPage" element={<FCStudentRequestPage />} />
-        <Route path="/SuperStudentRequestPage" element={<FCSuperStudentRequestPage />} />
-        <Route path="/SuperStudentRequestPage2" element={<FCSuperStudentRequestPage2 />} />
-        <Route path="/typeOfUser" element={<FCTypeOfUser />} />
-        <Route path="/CreateNewClass" element={<FCCreateNewClass />} />
-        <Route path="/UpdateProfileSuper" element={<FCUpdateProfileSuper />} />
-        <Route path="/HistoryClassSuper" element={<FCHistoryClassSuper />} />
-        <Route path="/FutreClasses" element={<FCFutreClasses />} />
-        <Route path="/ShowProfileSuperStudent" element={<FCShowProfileSuperStudent />} />
-        <Route path="/UpdateSuperClassPage" element={<FCUpdateSuperClassPage />} />
-        <Route path="changePasswordPage" element={<FCChangePasswordPage />} />
-        <Route path="classForStudent" element={<FCClassForStudent />} />
-      </Routes>
-    </div>
+    <Routes>
+      <Route path="/" element={<FCLoginPage />} />
+      <Route path="/studentHomePage" element={<FCStudentHomePage />} />
+      <Route path="/superHomePage" element={<FCSuperHomePage />} />
+      <Route path="/adminHomePage" element={<CCAdminHomePage />} />
+      <Route path="/reqDetails" element={<CCHandleRequest />} />
+      <Route path="/searchClassesPage" element={<FCSearchClassesPage />} />
+      <Route path="/StudentRequestPage" element={<FCStudentRequestPage />} />
+      <Route path="/SuperStudentRequestPage" element={<FCSuperStudentRequestPage />} />
+      <Route path="/SuperStudentRequestPage2" element={<FCSuperStudentRequestPage2 />} />
+      <Route path="/typeOfUser" element={<FCTypeOfUser />} />
+      <Route path="/CreateNewClass" element={<FCCreateNewClass />} />
+      <Route path="/UpdateProfileSuper" element={<FCUpdateProfileSuper />} />
+      <Route path="/HistoryClassSuper" element={<FCHistoryClassSuper />} />
+      <Route path="/FutreClasses" element={<FCFutreClasses />} />
+      <Route path="/ShowProfileSuperStudent" element={<FCShowProfileSuperStudent />} />
+      <Route path="/UpdateSuperClassPage" element={<FCUpdateSuperClassPage />} />
+      <Route path="changePasswordPage" element={<FCChangePasswordPage />} />
+      <Route path="classForStudent" element={<FCClassForStudent />} />
+    </Routes>
   );
 }

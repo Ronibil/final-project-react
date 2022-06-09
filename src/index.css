@@ -5,6 +5,7 @@ body {
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
 }
 
 code {
@@ -12,8 +13,9 @@ code {
     monospace;
 }
 
-@media (max-width: 768px) {
-  body #root {
-    min-height: 100vh;
-  }
+
+body #root {
+  height: 100vh;
+  width: 100vw;
+  background-image: url("https://ae01.alicdn.com/kf/HTB1fiGMgrsTMeJjSszdq6AEupXaL/Laeacco.jpg");
 }

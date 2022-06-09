@@ -21,7 +21,7 @@ export default function SearchClassesPage() {
   const [tags, setTags] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const [classes, setClasses] = useState([]);
-  const [suggestionsClasses, setSuggestionsClasses] = useState([])
+  const [suggestionsClasses, setSuggestionsClasses] = useState()
   const navigate = useNavigate();
 
   //Modal
@@ -66,7 +66,8 @@ export default function SearchClassesPage() {
     } catch (error) { }
   };
 
-  useEffect(()=>{
+  useEffect(() => {
+    console.log(state.StudentId);
     const url = `http://localhost:49812/Class/GetSuggestionsClasses/${state.StudentId}`
     fetch(url, {
       method: "GET",
@@ -82,13 +83,17 @@ export default function SearchClassesPage() {
       .then(
         (result) => {
           console.log("FETCH PostRequest= ", result);
-          setSuggestionsClasses(result)
+          if (result == "Sorry there are still no classes with tags that you sended. please try another tags.") {
+            return;
+          }
+          else(setSuggestionsClasses(result));
+          
         },
         (error) => {
           console.log("err post=", error);
         }
       );
-  },[])
+  }, [])
 
   const register = (classCode) => {
     console.log(classCode);
@@ -142,7 +147,7 @@ export default function SearchClassesPage() {
   };
 
   return (
-    <Container className="min-vh-100 d-flex align-items-center flex-column text-center" style={{ backgroundColor: "#FFFFFF" }}>
+    <Container className="min-vh-100 d-flex align-items-center flex-column text-center">
       <LogoComponent />
       {classDetails !== undefined ? (
         <FCModalConfirm
@@ -178,7 +183,7 @@ export default function SearchClassesPage() {
       </div>
       {classes.length !== 0 ? (
         <>
-          <div style={{ width: "100%", height: 400, background: "#F7FBFC", overflow: "auto", boxShadow: "0px 0px 8px 0px black", borderRadius: 15 }}>
+          <div style={{ width: "100%", height: 400, overflow: "auto" }}>
             {classes.map((c) => (
               <FCClassCard
                 key={c.ClassCode}
@@ -192,24 +197,23 @@ export default function SearchClassesPage() {
         </>
       ) : (
         <>
-        {suggestionsClasses == undefined ? (
-          ""
-        ) : (
-          <>
-            <h5>הצעות לשיעורים שאולי מתאימים לך</h5>
-            <div style={{ width: "100%", height: 400, background: "#F7FBFC", overflow: "auto", boxShadow: "0px 0px 8px 0px black", borderRadius: 15 }}>
-              {suggestionsClasses.map((c) => (
-                <FCClassCard
-                  key={c.ClassCode}
-                  classToCard={c}
-                  type="SearchClass"
-                  // btnFunction={register}
-                  studentDetails={userDetails}
-                />
-              ))}
-            </div>
-          </>
-        )}
+          {suggestionsClasses == undefined ? (
+            ""
+          ) : (
+            <>
+              <h5>הצעות לשיעורים שאולי מתאימים לך</h5>
+              <div style={{ width: "100%", height: 400, overflow: "auto" }}>
+                {suggestionsClasses.map((c) => (
+                  <FCClassCard
+                    key={c.ClassCode}
+                    classToCard={c}
+                    type="SearchClass"
+                    studentDetails={userDetails}
+                  />
+                ))}
+              </div>
+            </>
+          )}
         </>
       )
       }

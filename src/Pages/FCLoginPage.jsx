@@ -1,5 +1,4 @@
 import { React, useState } from "react";
-import { Container } from "react-bootstrap";
 import FCLoginForm from "../FuncionlComps/FCLoginForm";
 import { useNavigate } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
@@ -89,16 +88,12 @@ export default function FCLoginPage() {
   };
 
   return (
-    <Container style={{ flexDirection: "column", maxWidth: "700px" }}>
-      <FCLoginForm
-        UpdateEmail={UpdateEmail}
-        UpdatePassword={UpdatePassword}
-        VerifyUser={() => {
-          VerifyUser();
-        }}
-        navigateToRegister={navigateToRegister}
-        navigateToChangePassword={navigateToChangePassword}
-      />
-    </Container>
+    <FCLoginForm
+      UpdateEmail={UpdateEmail}
+      UpdatePassword={UpdatePassword}
+      VerifyUser={() => { VerifyUser() }}
+      navigateToRegister={navigateToRegister}
+      navigateToChangePassword={navigateToChangePassword}
+    />
   );
 }

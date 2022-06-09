@@ -27,7 +27,7 @@ export default function FCClassCard({
       );
     case "studentFutre":
       return (
-        <Card style={{ width: "98%", marginTop: 4, background: "#DAEAF1", marginLeft: 4, borderRadius: 20, border: "solid #1C658C 1px" }}>
+        <Card style={{ width: "98%", marginTop: 4, backgroundColor: "rgba(218, 234, 241, 0.8)", marginLeft: 4, borderRadius: 20, border: "solid #1C658C 1px" }}>
           <Card.Body className="w-100 d-flex align-items-center justify-content-between">
             <div>
               <Button
@@ -52,7 +52,7 @@ export default function FCClassCard({
               {studentDetails !== undefined ? (
                 <Button
                   className="badge rounded-pill"
-                  style={{ background: "#4B8673", border: "solid #4B8673 2px" }}
+                  style={{ background: "#A2D5AB", border: "solid #4B8673 1px" }}
                   size="sm"
                   onClick={() =>
                     navigate("/ShowProfileSuperStudent", {
@@ -124,7 +124,7 @@ export default function FCClassCard({
     case "SearchClass":
       return (
         <>
-          <Card style={{ width: "98%", marginTop: 4, background: "#DAEAF1", marginLeft: 4, borderRadius: 20, border: "solid #1C658C 1px" }}>
+          <Card style={{ width: "98%", marginTop: 4, backgroundColor: "rgba(218, 234, 241, 0.8)", marginLeft: 4, borderRadius: 20, border: "solid #1C658C 1px" }}>
             <Card.Body className="w-100 d-flex align-items-center justify-content-between">
               <div>
                 {classToCard.NumOfParticipants - classToCard.NumOfRegistered >
@@ -169,7 +169,7 @@ export default function FCClassCard({
       );
     case "studentHistory":
       return (
-        <Card style={{ width: "98%", marginTop: 4, background: "#D0C9C0", marginLeft: 4, borderRadius: 20, border: "solid #7F8487 1px" }}>
+        <Card style={{ width: "98%", marginTop: 4, backgroundColor: "rgba(208, 201, 192, 0.8)", marginLeft: 4, borderRadius: 20, border: "solid #7F8487 1px" }}>
           <Card.Body className="w-100 d-flex align-items-center justify-content-between">
             <div>
               <Button

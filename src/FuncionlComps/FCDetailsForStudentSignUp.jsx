@@ -277,8 +277,8 @@ export default function FCDetailsForStudentSignUp(props) {
   };
 
   return (
-    <Container style={{ flexDirection: "column", maxWidth: "700px" }}>
-      <Card style={{ borderRadius: 25, marginTop: 25 }} >
+    <Container style={{ flexDirection: "column", maxWidth: "700px", justifyContent: "center", paddingTop: 2 }}>
+      <Card style={{ borderRadius: 25, backgroundColor: "rgba(255, 255, 255, 0.7)" }} >
         <div style={{ alignSelf: "center" }} >
           <LogoComponent />
           <ReturnPageButton GoTo={() => navigate("/typeOfUser")} />

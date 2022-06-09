@@ -17,7 +17,7 @@ export default function FCBottomNavigation({ UserDetails }) {
       value={value}
       onChange={(event, newValue) => setValue(newValue)}
       showLabels
-      style={{ borderTop: "0.2px solid black", background: "#FFFFFF" }}
+      style={{ borderTop: "0.2px solid black", backgroundColor: "rgba(255, 255, 255, 0.9)" }}
     >
       <BottomNavigationAction label="מסך הבית" icon={<HomeIcon />} onClick={() => navigate("/studentHomePage", { state: studentDetails })} />
       <BottomNavigationAction label="שיעורים שלי" icon={<MenuBookIcon />} onClick={() => navigate("/classForStudent", { state: studentDetails })} />

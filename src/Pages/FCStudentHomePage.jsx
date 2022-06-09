@@ -52,7 +52,7 @@ export default function StudentHomePage() {
       <LogoComponent />
       <h1>ברוכים הבאים - {studentDetails.FullName}</h1><br />
       <h3>:ההמלצה השבועית</h3>
-      <div style={{ borderRadius: 25, backgroundColor: "#FFD2A5", padding: "25PX" }}>
+      <div style={{ borderRadius: 25, backgroundColor: "#17815A", padding: "20PX", backgroundColor: "rgba(255, 255, 255, 0.7)" }}>
         <h6>{recommendation}</h6>
       </div><br />
       <Button
@@ -63,8 +63,8 @@ export default function StudentHomePage() {
             padding: "28px 40px 28px 40px",
             fontSize: 20,
             borderRadius: 20,
-            background: "#A2D5AB",
-            border: "solid #4B8673 2px"
+            background: "#00417E",
+            border: "solid #01417E 2px"
           }}
         onClick={() => navigate("/searchClassesPage", { state: userDetails })}>
         !מצא את השיעור שמתאים לך
