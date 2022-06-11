@@ -52,7 +52,7 @@ export default function SearchClassesPage() {
     fetchData();
   }, []);
 
-  //Get suggestions for lessons if the student has previously registered for other lessons in the system.  
+  // Get suggestions for lessons if the student has previously registered for other lessons in the system.  
   useEffect(() => {
     console.log(state.StudentId);
     const url = `http://localhost:49812/Class/GetSuggestionsClasses/${state.StudentId}`
