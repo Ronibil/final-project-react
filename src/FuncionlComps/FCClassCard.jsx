@@ -8,7 +8,8 @@ export default function FCClassCard({
   ShowModaAreYouSure,
   btnFunction,
   studentDetails,
-  ShowModalStarsBtn
+  ShowModalStarsBtn,
+  RegistrationPoint
 }) {
   const navigate = useNavigate();
   switch (type) {
@@ -16,12 +17,19 @@ export default function FCClassCard({
       return (
         <Card className="m-1">
           <Card.Body className="text-end">
-            <b>שם השיעור:</b> {classToCard.ClassName}
-            <br />
-            <b>תאריך:</b>{" "}
-            {new Date(classToCard.ClassDate).toLocaleDateString("en-GB")} <br />
-            <b>שעת התחלה:</b> {classToCard.StartTime}
-            <br />
+            <Row>
+              <Col xs={4} style={{ alignSelf: "center" }}>
+                5/{classToCard.RankResults[0].RankValue} <b>:דירוג</b>
+              </Col>
+              <Col xs={8}>
+                <b>שם השיעור:</b> {classToCard.ClassName}
+                <br />
+                <b>תאריך:</b>{" "}
+                {new Date(classToCard.ClassDate).toLocaleDateString("en-GB")} <br />
+                <b>שעת התחלה:</b> {classToCard.StartTime}
+                <br />
+              </Col>
+            </Row>
           </Card.Body>
         </Card>
       );
@@ -124,13 +132,13 @@ export default function FCClassCard({
     case "SearchClass":
       return (
         <>
-          <Card style={{ width: "98%", marginTop: 4, backgroundColor: "rgba(218, 234, 241, 0.8)", marginLeft: 4, borderRadius: 20, border: "solid #1C658C 1px" }}>
+          <Card style={{ width: "98%", marginTop: 4, backgroundColor: "rgba(218, 234, 241, 0.9)", marginLeft: 4, borderRadius: 20, border: "solid #1C658C 1px" }}>
             <Card.Body className="w-100 d-flex align-items-center justify-content-between">
               <div>
                 {classToCard.NumOfParticipants - classToCard.NumOfRegistered >
                   0 ? (
                   <Button
-                    onClick={() => btnFunction(classToCard.ClassCode)}
+                    onClick={() => btnFunction(classToCard.ClassCode, RegistrationPoint)}
                     style={{ borderRadius: 15, background: "#A2D5AB", border: "solid #4B8673 2px" }}
                   >
                     הרשמה
@@ -147,18 +155,30 @@ export default function FCClassCard({
                 <br />
                 <b>שעת התחלה:</b> {classToCard.StartTime}
                 {studentDetails !== undefined ? (
-                  <Button
-                    className="badge rounded-pill"
-                    style={{ background: "#A2D5AB", border: "solid #4B8673 2px" }}
-                    size="sm"
-                    onClick={() =>
-                      navigate("/ShowProfileSuperStudent", {
-                        state: { classToCard, studentDetails, type: 1 },
-                      })
-                    }
-                  >
-                    {classToCard.SuperName}
-                  </Button>
+                  <>
+                    <Row>
+                      <Col xs={6} style={{ alignSelf: "center" }}>
+                        5/{classToCard.SuperStudentRank} <b>:דירוג</b>
+                      </Col>
+                      <Col xs={6}>
+                        <Button
+                          className="badge rounded-pill"
+                          style={{ background: "#A2D5AB", border: "solid #4B8673 2px" }}
+                          size="sm"
+                          onClick={() =>
+                            navigate("/ShowProfileSuperStudent", {
+                              state: { classToCard, studentDetails, type: 1 },
+                            })
+                          }
+                        >
+                          {classToCard.SuperName}
+                        </Button>
+                      </Col>
+                    </Row>
+                  </>
+
+
+
                 ) : (
                   ""
                 )}

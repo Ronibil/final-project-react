@@ -29,7 +29,6 @@ export default function FCHistoryClassSuper() {
       <br />
       <Button
         className="mb-3 mt-auto"
-        //className="btnBackToHome"
         onClick={() => navigate("/superHomePage", { state: superDetails })}
         variant="outline-primary"
       >

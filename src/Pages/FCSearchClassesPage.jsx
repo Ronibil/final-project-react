@@ -21,7 +21,7 @@ export default function SearchClassesPage() {
   const [tags, setTags] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const [classes, setClasses] = useState([]);
-  const [suggestionsClasses, setSuggestionsClasses] = useState()
+  const [suggestionsClasses, setSuggestionsClasses] = useState([])
   const navigate = useNavigate();
 
   //Modal
@@ -52,6 +52,36 @@ export default function SearchClassesPage() {
     fetchData();
   }, []);
 
+  //Get suggestions for lessons if the student has previously registered for other lessons in the system.  
+  useEffect(() => {
+    console.log(state.StudentId);
+    const url = `http://localhost:49812/Class/GetSuggestionsClasses/${state.StudentId}`
+    fetch(url, {
+      method: "GET",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json; charset=UTF-8",
+      }),
+    })
+      .then((res) => {
+        console.log("res.ok", res.ok);
+        if (res.ok == false) {
+          setSuggestionsClasses([]);
+          throw new Error(res.statusText);
+        }
+        return res.json();
+      })
+      .then(
+        (result) => {
+          console.log("FETCH PostRequest= ", result);
+          setSuggestionsClasses(result);
+        },
+        (error) => {
+          console.log("err post=", error);
+        }
+      );
+  }, [])
+
   const searchByTags = async () => {
     try {
       if (tags.length !== 0) {
@@ -66,55 +96,38 @@ export default function SearchClassesPage() {
     } catch (error) { }
   };
 
-  useEffect(() => {
-    console.log(state.StudentId);
-    const url = `http://localhost:49812/Class/GetSuggestionsClasses/${state.StudentId}`
-    fetch(url, {
-      method: "GET",
-      headers: new Headers({
-        "Content-Type": "application/json; charset=UTF-8",
-        Accept: "application/json; charset=UTF-8",
-      }),
-    })
-      .then((res) => {
-        console.log("res.ok", res.ok);
-        return res.json();
-      })
-      .then(
-        (result) => {
-          console.log("FETCH PostRequest= ", result);
-          if (result == "Sorry there are still no classes with tags that you sended. please try another tags.") {
-            return;
-          }
-          else(setSuggestionsClasses(result));
-          
-        },
-        (error) => {
-          console.log("err post=", error);
-        }
-      );
-  }, [])
 
-  const register = (classCode) => {
+  const register = (classCode, RegistrationPoint) => {
+
     console.log(classCode);
-    // let user = JSON.parse(localStorage.getItem("user"));
     const requestToRegister = {
       StudentId: userDetails.StudentId, //state.StudentId
       ClassCode: classCode
     };
     console.log(requestToRegister);
-
-    let classToModal = classes.find((c) => c.ClassCode === classCode);
-    let classToConfirmModal = {
-      classCode: classToModal.ClassCode,
-      classDate: classToModal.ClassDate,
-      classEndTime: classToModal.EndTime,
-      className: classToModal.ClassName,
-      classParticipants: classToModal.NumOfParticipants,
-      classStartTime: classToModal.StartTime,
-    };
-    setClassDetails(classToConfirmModal);
-
+    if (RegistrationPoint == "suggestionsClasses") {
+      const classToModal = suggestionsClasses.find((c) => c.ClassCode === classCode)
+      let classToConfirmModal = {
+        classCode: classToModal.ClassCode,
+        classDate: classToModal.ClassDate,
+        classEndTime: classToModal.EndTime,
+        className: classToModal.ClassName,
+        classParticipants: classToModal.NumOfParticipants,
+        classStartTime: classToModal.StartTime,
+      };
+      setClassDetails(classToConfirmModal);
+    } else {
+      const classToModal = classes.find((c) => c.ClassCode === classCode)
+      let classToConfirmModal = {
+        classCode: classToModal.ClassCode,
+        classDate: classToModal.ClassDate,
+        classEndTime: classToModal.EndTime,
+        className: classToModal.ClassName,
+        classParticipants: classToModal.NumOfParticipants,
+        classStartTime: classToModal.StartTime,
+      };
+      setClassDetails(classToConfirmModal);
+    }
     const url = "http://localhost:49812/Student/PostStudentToClass";
 
     fetch(url, {
@@ -190,6 +203,7 @@ export default function SearchClassesPage() {
                 classToCard={c}
                 type="SearchClass"
                 btnFunction={register}
+                RegistrationPoint="classes"
                 studentDetails={userDetails}
               />
             ))}
@@ -197,9 +211,7 @@ export default function SearchClassesPage() {
         </>
       ) : (
         <>
-          {suggestionsClasses == undefined ? (
-            ""
-          ) : (
+          {suggestionsClasses.length !== 0 ? (
             <>
               <h5>הצעות לשיעורים שאולי מתאימים לך</h5>
               <div style={{ width: "100%", height: 400, overflow: "auto" }}>
@@ -208,11 +220,15 @@ export default function SearchClassesPage() {
                     key={c.ClassCode}
                     classToCard={c}
                     type="SearchClass"
+                    btnFunction={register}
+                    RegistrationPoint="suggestionsClasses"
                     studentDetails={userDetails}
                   />
                 ))}
               </div>
             </>
+          ) : (
+            ""
           )}
         </>
       )

@@ -287,7 +287,6 @@ export default function FCDetailsForStudentSignUp(props) {
         <Card.Body>
           <Form className="text-end">
             <Form.Group className="mb-2">
-              <Form.Label>תעודת זהות</Form.Label>
               <Form.Control
                 className="text-end"
                 type="text"
@@ -299,23 +298,21 @@ export default function FCDetailsForStudentSignUp(props) {
               />
             </Form.Group>
             <Form.Group className="mb-2">
-              <Form.Label>כתובת מייל</Form.Label>
               <Form.Control
                 className="text-end"
                 type="email"
-                placeholder="הכנס מייל"
+                placeholder="כתובת מייל"
                 required
                 onChange={(e) => handleEmail(e)}
                 style={{ borderRadius: 25 }}
               />
-              <Form.Text className="text-muted">
-                המייל שלך ישמש כאמצאי ההתחברות שלך וקבלת התראות על שיעורים
+              <Form.Text>
+                המייל ישמש כאמצאי התחברות וקבלת התראות על שיעורים
               </Form.Text>
               <br />
               {emailMessage()}
             </Form.Group>
             <Form.Group className="mb-2">
-              <Form.Label>שם מלא</Form.Label>
               <Form.Control
                 className="text-end"
                 type="text"
@@ -328,7 +325,6 @@ export default function FCDetailsForStudentSignUp(props) {
               {nameMessage()}
             </Form.Group>
             <Form.Group className="mb-2">
-              <Form.Label>מספר טלפון</Form.Label>
               <Form.Control
                 className="text-end"
                 type="text"

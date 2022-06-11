@@ -1,10 +1,7 @@
 import React from "react";
-import { Card, Button, Container } from "react-bootstrap";
+import { Card, Button, Container} from "react-bootstrap";
 import FCInput from "./FCInput";
 import LogoComponent from "../Elements/LogoComponent";
-// import Loader from "../Elements/Loader";
-
-
 
 export default function FCLoginForm({
   UpdateEmail,
@@ -54,7 +51,6 @@ export default function FCLoginForm({
         >
           <b>!לחצו כאן להירשם</b>
         </Button>
-        {/* <Loader /> */}
       </Card>
     </Container>
   );

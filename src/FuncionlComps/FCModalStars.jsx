@@ -3,29 +3,13 @@ import { Modal, Button, Form, Col, Row } from 'react-bootstrap';
 import { useState } from 'react';
 import { Rating } from 'react-simple-star-rating';
 
-export default function FCModalStars({ isOpen, starsModalHide}) {
+export default function FCModalStars({ isOpen, starsModalHide, classCode, studentId, btnFunc }) {
   const [rating, setRating] = useState(0) // initial rating value
   const [ratingDescription, setRatingDescription] = useState("")
 
   // Catch Rating value
   const handleRating = (rate) => {
-    switch (rate) {
-      case 20:
-        return (setRating(1));
-      case 40:
-        return (setRating(2));
-      case 60:
-        return (setRating(3));
-      case 80:
-        return (setRating(4));
-      case 100:
-        return (setRating(5));
-    };
-  }
-
-  const btn = () => {
-    console.log(ratingDescription);
-    console.log(rating);
+    setRating(rate)
   }
   return (
     <Modal show={isOpen} style={{ textAlign: "center" }}>
@@ -52,7 +36,7 @@ export default function FCModalStars({ isOpen, starsModalHide}) {
               <Button onClick={starsModalHide} variant="danger"><b>אולי בפעם אחרת</b></Button>
             </Col>
             <Col xs={6}>
-              <Button variant="success" onClick={btn}><b>שלח דירוג</b></Button>
+              <Button variant="success" onClick={() => btnFunc({ studentId, classCode, rating, ratingDescription })}><b>שלח דירוג</b></Button>
             </Col>
           </Row>
         </Modal.Body>

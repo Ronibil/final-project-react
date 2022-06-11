@@ -20,6 +20,7 @@ export default function FCClassForStudent() {
   const [classDetails, setClassDetails] = useState();
   const [confirmModal, setConfirmModal] = useState(false);
   const [starsModal, setStarsModal] = useState(false)
+  const [classCodeRank, setClassCodeRank] = useState()
   const [classType, setClassType] = useState("future")
 
   const location = useLocation();
@@ -61,6 +62,38 @@ export default function FCClassForStudent() {
       );
   }, []);
 
+  const studentRank = ({ studentId, classCode, rating, ratingDescription }) => {
+    const url = "http://localhost:49812/RegisteredTo/StudentRank";
+    console.log();
+    const detailsForRank = {
+      StudentId: studentId,
+      ClassCode: classCode,
+      RankValue: rating,
+      RankDescription: ratingDescription
+    }
+    console.log(detailsForRank);
+    setStarsModal(false);
+    fetch(url, {
+      method: "PUT",
+      body: JSON.stringify(detailsForRank),
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json; charset=UTF-8",
+      }),
+    })
+      .then((res) => {
+        console.log("res.ok", res.ok);
+        return res.json();
+      })
+      .then(
+        (result) => {
+          console.log("FETCH PostRequest= ", result);
+        },
+        (error) => {
+          console.log("err post=", error);
+        }
+      );
+  }
 
 
   const DeleteStudentFromClass = (classCode) => {
@@ -122,6 +155,7 @@ export default function FCClassForStudent() {
   };
 
   const ShowModalStars = (classCode) => {
+    setClassCodeRank(classCode)
     setStarsModal(true);
     console.log(classCode);
     console.log(studentDetails);
@@ -215,8 +249,11 @@ export default function FCClassForStudent() {
         ) : (
           <>
             <FCModalStars
+              classCode={classCodeRank}
+              studentId={userDetails.StudentId}
               isOpen={starsModal}
               starsModalHide={HideModalStars}
+              btnFunc={studentRank}
             />
           </>
         )
