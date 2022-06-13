@@ -7,6 +7,7 @@ import { useState } from "react";
 import FCModalAreYouSure from "../FuncionlComps/FCModalAreYouSure";
 import FCModalConfirm from "../FuncionlComps/FCModalConfirm";
 import LogoComponent from "../Elements/LogoComponent";
+import ReturnPageButton from "../Elements/ReturnPageButton";
 
 export default function FCFutreClasses() {
   const navigate = useNavigate();
@@ -76,7 +77,8 @@ export default function FCFutreClasses() {
 
   return (
     <Container className="d-flex flex-column align-items-center justify-content-center">
-      <LogoComponent/>
+      <LogoComponent />
+      <ReturnPageButton GoTo={() => navigate("/superHomePage", { state: superDetails })} />
       {classDetails !== undefined ? (
         <>
           <FCModalAreYouSure
@@ -116,15 +118,6 @@ export default function FCFutreClasses() {
           <br />
         </>
       )}{" "}
-      <br />
-      <Button
-        className="mt-auto"
-        //className="btnBackToHome"
-        onClick={() => navigate("/superHomePage", { state: superDetails })}
-        variant="outline-primary"
-      >
-        חזרה לדף הבית
-      </Button>
     </Container>
   );
 }

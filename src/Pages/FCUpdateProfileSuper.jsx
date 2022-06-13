@@ -4,6 +4,7 @@ import { Button, Form, Card, Container, Row, Col } from "react-bootstrap";
 import "../StyleSheets/Modal.css";
 import FCModalUpdateSuperProfile from "../FuncionlComps/FCModalUpdateSuperProfile";
 import LogoComponent from "../Elements/LogoComponent";
+import ReturnPageButton from "../Elements/ReturnPageButton";
 
 function FCUpdateProfileSuper() {
   const { state } = useLocation();
@@ -59,10 +60,11 @@ function FCUpdateProfileSuper() {
 
   return (
     <Container className="d-flex align-items-center justify-content-center flex-column">
-      <LogoComponent/>
-      <div className="w-100" style={{ maxWidth: "400px" }}>
-        <Card id="fldBlock">
+      <LogoComponent />
+      <div className="w-100" style={{ maxWidth: "700px" }}>
+        <Card style={{ borderRadius: 25, backgroundColor: "rgba(255, 255, 255, 0.7)" }}>
           <Card.Body align="center">
+            <ReturnPageButton GoTo={BackToHomePage} />
             <h2 className="text-center mb-4"> עריכת פרופיל</h2>
             <Form>
               <Form.Group className="mb-1">
@@ -88,26 +90,13 @@ function FCUpdateProfileSuper() {
                 />
               </Form.Group>
             </Form>
-            <Row>
-              <Col xs={6}>
-                <Button
-                  onClick={UpdateSuperDescription}
-                  // className='btnBackToHome'
-                  variant="success"
-                >
-                  סיום עריכה
-                </Button>
-              </Col>
-              <Col xs={6}>
-                <Button
-                  id="subBtn"
-                  variant="outline-primary"
-                  onClick={BackToHomePage}
-                >
-                  חזרה לדף הבית
-                </Button>
-              </Col>
-            </Row>
+            <Button
+              onClick={UpdateSuperDescription}
+              // className='btnBackToHome'
+              variant="success"
+            >
+              סיום עריכה
+            </Button>
           </Card.Body>
         </Card>{" "}
       </div>

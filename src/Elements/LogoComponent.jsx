@@ -5,7 +5,7 @@ function LogoComponent() {
       src="App logos\HelpMeStudent!-logos_black.png"
       alt="logo"
       id="logo"
-      style={{ width: "120px" }}
+      style={{ width: "120px"}}
     />
   );
 }

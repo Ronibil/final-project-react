@@ -40,7 +40,7 @@ export default function FCButtonsForSuperHomePage({
   };
 
   return (
-    <Container style={{ flexDirection: "column", maxWidth: "700px" }} >
+    <Container style={{ flexDirection: "row", maxWidth: "700px" }} >
       <Card style={{backgroundColor: "rgba(0, 0, 0, 0)"}}>
         <Card.Body align="center">
           <Row>

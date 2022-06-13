@@ -3,8 +3,7 @@ import { useLocation } from "react-router-dom";
 import FCFormSuperDetails from "../FuncionlComps/FCFormSuperDetails";
 import { Container } from "react-bootstrap";
 import FCButtonsForSuperHomePage from "../FuncionlComps/FCButtonsForSuperHomePage";
-// import axios from "axios";
-
+import LogoComponent from "../Elements/LogoComponent";
 
 export default function FCSuperHomePage() {
   const { state } = useLocation();
@@ -52,43 +51,11 @@ export default function FCSuperHomePage() {
       );
   }, [])
 
-
-
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     // const user = {
-  //     //   Email: UserDetails.Email,
-  //     //   Password: UserDetails.Password,
-  //     // };
-
-  //     const urlGetSuperDetails =
-  //       "http://localhost:49812/SuperStudent/GetSuperLandingPageDetails";
-  //     const { data } = await axios.post(urlGetSuperDetails, {
-  //       Email: UserDetails.Email,
-  //       Password: UserDetails.Password,
-  //     });
-  //     console.log(data);
-  //     setSuperDetails({
-  //       StudentId: data.StudentId,
-  //       FullName: data.FullName,
-  //       Image: null,
-  //       Description: data.Description,
-  //       DepartmentName: data.DepartmentName,
-  //       StudyYear: data.StudyYear,
-  //       NumOfRanks: data.NumOfRanks,
-  //       RankAverage: data.RankAverage,
-  //       NumOfClass: data.ClassesHistory.length,
-  //     });
-  //     setClassHistory(data.ClassesHistory);
-  //     setClassFutre(data.FutreClasses);
-  //   };
-  //   fetchData();
-  // }, []);
-
   return (
-    <Container>
+    <Container className="d-flex align-items-center justify-content-center flex-column">
       {superDetails !== undefined ? (
         <>
+          <LogoComponent />
           <FCFormSuperDetails superDetails={superDetails} />
           <FCButtonsForSuperHomePage
             DepartmentName={superDetails.DepartmentName}

@@ -19,12 +19,12 @@ export default function FCLoginPage() {
   };
 
   const VerifyUser = () => {
-    const Url = "http://proj.ruppin.ac.il/bgroup92/prod/login/PostFindUser";
+    const Url = "http://localhost:49812/login/PostFindUser";
     const user = {
       Email: Email,
       Password: Password,
     };
-    console.log("start");
+    console.log(user);
     fetch(Url, {
       method: "POST",
       body: JSON.stringify(user),

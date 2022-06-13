@@ -4,6 +4,7 @@ import { Container, Button } from "react-bootstrap";
 import FCClassCard from "../FuncionlComps/FCClassCard";
 import "../StyleSheets/Modal.css";
 import LogoComponent from "../Elements/LogoComponent";
+import ReturnPageButton from "../Elements/ReturnPageButton";
 
 export default function FCHistoryClassSuper() {
   const navigate = useNavigate();
@@ -14,8 +15,9 @@ export default function FCHistoryClassSuper() {
     Password: state.superPassword,
   };
   return (
-    <Container className="min-vh-100 d-flex align-items-center justify-content-center flex-column">
-      <LogoComponent/>
+    <Container className="d-flex align-items-center justify-content-center flex-column">
+      <ReturnPageButton GoTo={() => navigate("/superHomePage", { state: superDetails })} />
+      <LogoComponent />
       <h3>:היסטורית שיעורים</h3>
       {HistoryClass.length !== 0 ? (
         <>
@@ -24,16 +26,9 @@ export default function FCHistoryClassSuper() {
           ))}
         </>
       ) : (
-        "No found classes"
+        "לא נמצאו שיעורים מתאימים"
       )}{" "}
       <br />
-      <Button
-        className="mb-3 mt-auto"
-        onClick={() => navigate("/superHomePage", { state: superDetails })}
-        variant="outline-primary"
-      >
-        חזרה לדף הבית
-      </Button>
     </Container>
   );
 }
