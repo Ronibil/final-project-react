@@ -3,6 +3,7 @@ import { Container, Button } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import LogoComponent from "../Elements/LogoComponent";
 import FCBottomNavigation from "../FuncionlComps/FCBottomNavigation";
+import FCBurgerComp from "../FuncionlComps/FCBurgerComp";
 
 export default function StudentHomePage() {
   const navigate = useNavigate();
@@ -51,6 +52,7 @@ export default function StudentHomePage() {
     <Container className="min-vh-100 d-flex align-items-center flex-column text-center">
       <LogoComponent />
       <h1>ברוכים הבאים - {studentDetails.FullName}</h1><br />
+      <FCBurgerComp userDetails={userDetails}/>
       <h3>:ההמלצה השבועית</h3>
       <div style={{ borderRadius: 25, backgroundColor: "#17815A", padding: "20PX", backgroundColor: "rgba(255, 255, 255, 0.7)" }}>
         <h6>{recommendation}</h6>

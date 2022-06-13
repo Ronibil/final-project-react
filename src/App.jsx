@@ -38,7 +38,7 @@ export default function App() {
       <Route path="/FutreClasses" element={<FCFutreClasses />} />
       <Route path="/ShowProfileSuperStudent" element={<FCShowProfileSuperStudent />} />
       <Route path="/UpdateSuperClassPage" element={<FCUpdateSuperClassPage />} />
-      <Route path="changePasswordPage" element={<FCChangePasswordPage />} />
+      <Route path="/changePasswordPage" element={<FCChangePasswordPage />} />
       <Route path="classForStudent" element={<FCClassForStudent />} />
     </Routes>
   );
