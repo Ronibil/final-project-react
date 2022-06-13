@@ -19,7 +19,11 @@ export default function FCClassCard({
           <Card.Body className="text-end">
             <Row>
               <Col xs={4} style={{ alignSelf: "center" }}>
-                5/{classToCard.RankResults[0].RankValue} <b>:דירוג</b>
+                {classToCard.RankResults != null ? (
+                  <>
+                    5 / {classToCard.RankResults[0].RankValue} < b >:דירוג</b>
+                  </>
+                ) : ("")}
               </Col>
               <Col xs={8}>
                 <b>שם השיעור:</b> {classToCard.ClassName}
@@ -31,7 +35,7 @@ export default function FCClassCard({
               </Col>
             </Row>
           </Card.Body>
-        </Card>
+        </Card >
       );
     case "studentFutre":
       return (

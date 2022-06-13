@@ -277,7 +277,7 @@ export default function FCDetailsForStudentSignUp(props) {
   };
 
   return (
-    <Container style={{ flexDirection: "column", maxWidth: "700px", justifyContent: "center", paddingTop: 2 }}>
+    <Container style={{ flexDirection: "column", maxWidth: "700px", justifyContent: "center", paddingTop: 70 }}>
       <Card style={{ borderRadius: 25, backgroundColor: "rgba(255, 255, 255, 0.7)" }} >
         <div style={{ alignSelf: "center" }} >
           <LogoComponent />
