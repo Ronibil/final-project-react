@@ -18,6 +18,7 @@ import FCShowProfileSuperStudent from "./Pages/FCShowProfileSuperStudent";
 import FCUpdateSuperClassPage from "./Pages/FCUpdateSuperClassPage";
 import FCChangePasswordPage from "./Pages/FCChangePasswordPage";
 import FCClassForStudent from "./FuncionlComps/FCClassForStudent";
+import FCNewPasswordPage from "./Pages/FCNewPasswordPage";
 
 export default function App() {
   return (
@@ -40,6 +41,7 @@ export default function App() {
       <Route path="/UpdateSuperClassPage" element={<FCUpdateSuperClassPage />} />
       <Route path="/changePasswordPage" element={<FCChangePasswordPage />} />
       <Route path="classForStudent" element={<FCClassForStudent />} />
+      <Route path="/newPasswordPage" element={<FCNewPasswordPage />} />
     </Routes>
   );
 }

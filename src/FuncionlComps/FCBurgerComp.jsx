@@ -55,7 +55,7 @@ export default function FCBurgerComp({userDetails}) {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={() => navigate("/newPasswordPage")}>
               <ListItemIcon>
                 <PasswordIcon />
               </ListItemIcon>
@@ -76,7 +76,7 @@ export default function FCBurgerComp({userDetails}) {
   );
 
   return (
-    <div style={{direction: "rtl"}}>
+    <div style={{direction: "rtl", position:"fixed", top:"1%", right:"1%"}}>
       <Button onClick={toggleDrawer('right', true)} variant="contained" style={{backgroundColor:"#00417E"}}><MenuIcon /></Button>
       <Drawer
         anchor='right'
