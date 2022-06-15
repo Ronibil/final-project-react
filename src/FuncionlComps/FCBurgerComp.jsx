@@ -55,7 +55,7 @@ export default function FCBurgerComp({userDetails}) {
             </ListItemButton>
           </ListItem>
           <ListItem disablePadding>
-            <ListItemButton onClick={() => navigate("/newPasswordPage")}>
+            <ListItemButton onClick={() => navigate("/newPasswordPage", {state: userDetails})}>
               <ListItemIcon>
                 <PasswordIcon />
               </ListItemIcon>
