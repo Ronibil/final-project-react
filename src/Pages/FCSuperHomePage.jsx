@@ -4,6 +4,8 @@ import FCFormSuperDetails from "../FuncionlComps/FCFormSuperDetails";
 import { Container } from "react-bootstrap";
 import FCButtonsForSuperHomePage from "../FuncionlComps/FCButtonsForSuperHomePage";
 import LogoComponent from "../Elements/LogoComponent";
+import FCBurgerComp from "../FuncionlComps/FCBurgerComp";
+
 
 export default function FCSuperHomePage() {
   const { state } = useLocation();
@@ -51,11 +53,18 @@ export default function FCSuperHomePage() {
       );
   }, [])
 
+  const userDetailsWithId = {
+    Email: UserDetails.Email,
+    Password: UserDetails.Password,
+    StudentId: superDetails.StudentId
+  }
+
   return (
     <Container className="d-flex align-items-center justify-content-center flex-column">
       {superDetails !== undefined ? (
         <>
           <LogoComponent />
+          <FCBurgerComp userDetails={userDetailsWithId}/>
           <FCFormSuperDetails superDetails={superDetails} />
           <FCButtonsForSuperHomePage
             DepartmentName={superDetails.DepartmentName}

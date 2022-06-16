@@ -13,7 +13,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import PasswordIcon from '@mui/icons-material/Password';
 import SchoolIcon from '@mui/icons-material/School';
 import LogoutIcon from '@mui/icons-material/Logout';
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 
 export default function FCBurgerComp({userDetails}) {
@@ -29,6 +29,13 @@ export default function FCBurgerComp({userDetails}) {
 
     setState({ ...state, [anchor]: open });
   };
+  const logOut = () => {
+      window.history.pushState(null, document.title, window.location.href);
+      window.addEventListener('popstate', function(event) {
+      window.history.pushState(null, document.title, window.location.href);
+    });
+    navigate("/")
+  }
 
   const list = (anchor) => (
     <Box
@@ -64,7 +71,7 @@ export default function FCBurgerComp({userDetails}) {
           </ListItem>
           <Divider />
           <ListItem disablePadding>
-            <ListItemButton>
+            <ListItemButton onClick={() => logOut()}>
               <ListItemIcon>
                 <LogoutIcon />
               </ListItemIcon>

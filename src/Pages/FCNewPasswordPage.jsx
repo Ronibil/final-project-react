@@ -10,6 +10,7 @@ export default function FCNewPasswordPage() {
   const [currentPassword, setCurrentPassword] = useState("")
   const [newPassword, setNewPassword] = useState("")
   const [confirmPassword, setConfirmPassword] = useState("")
+  const [type, setType] = useState("")
   const [message, setMessage] = useState("")
   const [icon, setIcon] = useState(<VisibilityIcon />)
   const location = useLocation();
@@ -41,7 +42,7 @@ export default function FCNewPasswordPage() {
           console.log("res.status", res.status);
           console.log("res.ok", res.ok);
           if (res.ok) {
-            setMessage("הסיסמא עודכנה בהצלחה")
+            setMessage("..הסיסמא עודכנה בהצלחה! עליך לבצע התחברות מחדש")
           }
           else {
             setMessage("עדכון הסיסמא נכשל!")
@@ -51,6 +52,7 @@ export default function FCNewPasswordPage() {
         .then(
           (result) => {
             console.log("fetch updated Password= ", result);
+            setType(result)
           },
           (error) => {
             console.log("err put=", error);
@@ -98,29 +100,57 @@ export default function FCNewPasswordPage() {
       txtBoxes[1].style.border = "1px solid green"
       txtBoxes[2].style.border = "1px solid green"
       fetchUpdatePassword()
+      document.getElementById("form").style.display = "none"
     }
+  }
+  const reLogin = () => {
+      window.history.pushState(null, document.title, window.location.href);
+      window.addEventListener('popstate', function(event) {
+      window.history.pushState(null, document.title, window.location.href);
+    });
+    navigate("/")
   }
   const messageBox = () => {
     let style = {}
-    if (message === "הסיסמא עודכנה בהצלחה") {
+    let display = {
+      display: "none"
+    }
+    let redirectBTN;
+    if (message === "..הסיסמא עודכנה בהצלחה! עליך לבצע התחברות מחדש") {
       style = {
         color: "green"
       }
+      display = {
+        display: "block"
+      }
+      redirectBTN = <Button onClick={() => reLogin()} variant="success">התחבר מחדש</Button>
     }
     else if (message === "עדכון הסיסמא נכשל!") {
       style = {
         color: "red"
       }
+      display = {
+        display: "block"
+      }
+      if (type === "superStudent") {
+        redirectBTN = <Button onClick={() => navigate("/superHomePage", {state: userDetails})} variant="danger">חזור לדף הבית</Button>
+      }
+      else if (type === "student") {
+        redirectBTN = <Button onClick={() => navigate("/studentHomePage", {state: userDetails})} variant="danger">חזור לדף הבית</Button>
+      }
     }
     const box = (
-      <Form.Group>
-        <Form.Label style={style}>
-          {message}
-        </Form.Label>
-        <Button onClick={() => navigate("/studentHomePage", {state: userDetails})}>חזור לדף הבית</Button>
-      </Form.Group>
+      <Form style={display}>
+        <Form.Group>
+          <Form.Label style={style}>
+            {message}
+          </Form.Label>
+          <br />
+          {redirectBTN}
+        </Form.Group>
+      </Form>
     )
-    
+    return box
   }
 
   return (
@@ -182,6 +212,7 @@ export default function FCNewPasswordPage() {
               עדכן סיסמא
             </Button>
           </Form>
+          {messageBox()}
         </Card.Body>
       </Card>
     </Container>
