@@ -70,7 +70,7 @@ export default function FCSuperHomePage() {
             DepartmentName={superDetails.DepartmentName}
             Description={superDetails.Description}
             StudyYear={superDetails.StudyYear}
-            UserDetails={UserDetails}
+            UserDetails={userDetailsWithId}
             superName={superDetails.FullName}
             HistoryClass={classHistory}
             FutreClass={classFutre}

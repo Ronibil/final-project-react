@@ -17,6 +17,7 @@ export default function FCButtonsForSuperHomePage({
     superEmail: UserDetails.Email,
     superPassword: UserDetails.Password,
     superName: superName,
+    superId: UserDetails.StudentId
   };
 
   const superDetailsForUpdateProfile = {

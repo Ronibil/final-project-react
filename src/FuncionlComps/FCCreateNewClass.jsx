@@ -12,12 +12,13 @@ import makeAnimated from "react-select/animated";
 export default function FCCreateNewClass() {
   const navigate = useNavigate();
   const { state } = useLocation();
-  const superId = state.superPassword;
+  const superId = state.superId;
   const superName = state.superName;
   const superEmail = state.superEmail;
+  const superPassword  = state.superPassword
   const UserDetails = {
     Email: superEmail,
-    Password: superId,
+    Password: superPassword,
   };
 
   const [tags, setTags] = useState([]);
