@@ -61,7 +61,7 @@ export default function StudentHomePage() {
         style={
           {
             marginTop: "auto",
-            marginBottom: 80,
+            marginBottom: 120,
             padding: "28px 40px 28px 40px",
             fontSize: 20,
             borderRadius: 20,
