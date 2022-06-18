@@ -13,6 +13,7 @@ export default function FCDetailsForSuperSignUp(props) {
   const [superDepartmet, setSuperDepartmet] = useState("");
   const [superStudyYear, setSuperStudyYear] = useState("");
   const [superDescription, setSuperDescription] = useState("");
+  const [superImageUrl,setSuperImageUrl]=useState(null);
   const [superImage, setSuperImage] = useState(null);
 
   const altImage =
@@ -55,7 +56,7 @@ export default function FCDetailsForSuperSignUp(props) {
   }
 
   const btnPostSuperStudentRequest = () => {
-    const LocalUrl = "http://localhost:49812/requestToJoin/newRequest";
+    const LocalUrl = "https://proj.ruppin.ac.il/bgroup92/prod/requestToJoin/newRequest";
     let currentDate = new Date();
     let newSuperRequest = {
       StudentId: superDetails.StudentId,
@@ -101,7 +102,7 @@ export default function FCDetailsForSuperSignUp(props) {
   // post new super student request to db - fetch post
   const PostSuper = (RequsetNum) => {
     const superUrl =
-      "http://localhost:49812/RequestToJoinSuper/newSuperRequest";
+      "https://proj.ruppin.ac.il/bgroup92/prod/RequestToJoinSuper/newSuperRequest";
 
     const superRequest = {
       RequsetNum: RequsetNum,
@@ -130,6 +131,7 @@ export default function FCDetailsForSuperSignUp(props) {
       .then(
         (result) => {
           console.log("FETCH PostSuperRequest= ", result);
+          UploadImage();
           navigate("/");
         },
         (error) => {
@@ -139,8 +141,42 @@ export default function FCDetailsForSuperSignUp(props) {
     console.log("end");
   };
 
+  const UploadImage = () => {
+    //UrlApi
+    const urlApi = 'https://proj.ruppin.ac.il/bgroup92/prod/Files/UploadImage';
+    //Name Of image.
+    const imageName = "ProfileImage-" + superDetails.StudentId + ".jpg";
+    //Image file
+    const file = superImage;
+    //Type of file.need to be-{image/jpeg}
+    const fileType = superImage.type;
+    if (fileType === 'image/jpeg') {
+      console.log("this is image/jpeg !! continue")
+      //Create FormData.
+      const formData = new FormData();
+      formData.append(imageName, file);
+      //Fetch
+      fetch(urlApi,
+        {
+          method: 'POST',
+          body: formData
+        }).then((response) => {
+          if (response.ok)
+            console.log("Success")
+        })
+        .then((result) => {
+          console.log("Result =>" + result);
+        }, (error) => {
+          console.log("Error!!! " + error)
+        })
+    }
+    else {
+      console.log("this is not image/jpeg")
+    }
+  }
+
   return (
-    <Container style={{ flexDirection: "column", maxWidth: "700px", paddingTop:70 }}>
+    <Container style={{ flexDirection: "column", maxWidth: "700px", paddingTop: 70 }}>
       <Card style={{ borderRadius: 25, backgroundColor: "rgba(255, 255, 255, 0.7)" }} >
         <Card.Body align="center">
           <h2 className="text-center mb-4">יצירת פרופיל אישי</h2>
@@ -150,19 +186,20 @@ export default function FCDetailsForSuperSignUp(props) {
               <Image
                 className="mb-3"
                 style={{ width: 150 }}
-                src={superImage ? superImage : altImage}
+                src={superImageUrl ? superImageUrl : altImage}
                 alt={altImage}
               />
               <Form.Control
                 type="file"
                 id="formFile"
                 onChange={(e) => {
-                  setSuperImage(URL.createObjectURL(e.target.files[0]));
-                  console.log(e.target.files[0]);
+                  setSuperImage(e.target.files[0]);
+                  setSuperImageUrl(URL.createObjectURL(e.target.files[0]))
                 }}
                 style={{ borderRadius: 25 }}
                 required
               />
+              <Button onClick={UploadImage}>העלה תמונה</Button>
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>שם מחלקה</Form.Label>

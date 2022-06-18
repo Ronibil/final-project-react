@@ -54,7 +54,7 @@ export default function FCCreateNewClass() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await axios.get("http://localhost:49812/Tags/getAll");
+      const { data } = await axios.get("https://proj.ruppin.ac.il/bgroup92/prod/Tags/getAll");
       let suggestionList = data.map((suggestion, index) => {
         return { value: index, label: suggestion };
       });
@@ -65,7 +65,7 @@ export default function FCCreateNewClass() {
   }, []);
 
   const postNewClass = () => {
-    const url = "http://localhost:49812/Class/PostNewClass";
+    const url = "https://proj.ruppin.ac.il/bgroup92/prod/Class/PostNewClass";
     let tagList = tags.map((tag) => tag.label);
     const newClassObj = {
       ClassDate: classDate,

@@ -23,7 +23,7 @@ export default function FCFutreClasses() {
 
   const deleteClassByClassCode = (ClassCode) => {
     console.log(ClassCode);
-    const url = `http://localhost:49812/Class/DeleteClassByClassCode/${ClassCode}`;
+    const url = `https://proj.ruppin.ac.il/bgroup92/prod/Class/DeleteClassByClassCode/${ClassCode}`;
     fetch(url, {
       method: "DELETE",
       headers: new Headers({

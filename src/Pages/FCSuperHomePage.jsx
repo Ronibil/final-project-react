@@ -17,7 +17,7 @@ export default function FCSuperHomePage() {
 
   useEffect(() => {
     console.log(UserDetails);
-    const urlGetSuperDetails = "http://localhost:49812/SuperStudent/GetSuperLandingPageDetails";
+    const urlGetSuperDetails = "https://proj.ruppin.ac.il/bgroup92/prod/SuperStudent/GetSuperLandingPageDetails";
     fetch(urlGetSuperDetails, {
       method: "POST",
       body: JSON.stringify(UserDetails),
@@ -36,7 +36,7 @@ export default function FCSuperHomePage() {
           setSuperDetails({
             StudentId: result.StudentId,
             FullName: result.FullName,
-            Image: null,
+            ImagePath: result.ImagePath,
             Description: result.Description,
             DepartmentName: result.DepartmentName,
             StudyYear: result.StudyYear,

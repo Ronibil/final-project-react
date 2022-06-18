@@ -77,7 +77,7 @@ class CCHandleRequest extends Component {
     let request = this.state.requestObject;
     let generatedPassword = this.generatePassword(request.RequsetNum)
     let birthTypeDate = new Date(request.BirthDate)
-    const StudentUrl ="http://localhost:49812/Student/PostNewStudent";
+    const StudentUrl ="https://proj.ruppin.ac.il/bgroup92/prod/Student/PostNewStudent";
     let currentDate = new Date();
     const student = {
       StudentId: request.StudentId,
@@ -137,7 +137,7 @@ class CCHandleRequest extends Component {
 
   // put request - update status in db
   updateStatus = (status) => {
-      const PutStatustUrl = "http://localhost:49812/requestToJoin/updateRequestStatus"
+      const PutStatustUrl = "https://proj.ruppin.ac.il/bgroup92/prod/requestToJoin/updateRequestStatus"
       let request = this.state.requestObject
       let updatedStatus =
       {
@@ -199,7 +199,7 @@ class CCHandleRequest extends Component {
   postSuper = (s) => {
     let request = this.state.requestObject;
     const SuperUrl =
-      "http://localhost:49812/SuperStudent/PostNewSuperStudent";
+      "https://proj.ruppin.ac.il/bgroup92/prod/SuperStudent/PostNewSuperStudent";
     let superStudent = {
       StudentId: request.StudentId,
       StudyYear: request.StudyYear,
