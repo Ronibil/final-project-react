@@ -21,7 +21,7 @@ export default function FCDetailsForSuperSignUp(props) {
 
   useEffect(() => {
     const apiUrlDepartments =
-      "http://proj.ruppin.ac.il/bgroup92/prod/department/getall";
+      "http://localhost:49812/department/getall";
     fetch(apiUrlDepartments, {
       method: "GET",
       headers: new Headers({

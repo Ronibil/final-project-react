@@ -64,21 +64,21 @@ export default function FCSuperHomePage() {
       {superDetails !== undefined ? (
         <>
           <LogoComponent />
-          <FCBurgerComp userDetails={userDetailsWithId}/>
-          <FCFormSuperDetails superDetails={superDetails} />
-          <FCButtonsForSuperHomePage
-            DepartmentName={superDetails.DepartmentName}
-            Description={superDetails.Description}
-            StudyYear={superDetails.StudyYear}
-            UserDetails={userDetailsWithId}
-            superName={superDetails.FullName}
-            HistoryClass={classHistory}
-            FutreClass={classFutre}
-          />
-        </>
-      ) : (
-        ""
+          <FCBurgerComp userDetails={userDetailsWithId} type="super" />
+            <FCFormSuperDetails superDetails={superDetails} />
+            <FCButtonsForSuperHomePage
+              DepartmentName={superDetails.DepartmentName}
+              Description={superDetails.Description}
+              StudyYear={superDetails.StudyYear}
+              UserDetails={userDetailsWithId}
+              superName={superDetails.FullName}
+              HistoryClass={classHistory}
+              FutreClass={classFutre}
+            />
+          </>
+          ) : (
+          ""
       )}
-    </Container>
-  );
+        </Container>
+      );
 }

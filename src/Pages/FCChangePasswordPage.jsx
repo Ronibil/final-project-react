@@ -1,10 +1,12 @@
 import React from "react";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { Container, Card, Form, Button } from "react-bootstrap";
 import LogoComponent from "../Elements/LogoComponent";
+import ReturnPageButton from "../Elements/ReturnPageButton";
 
 export default function FCChangePasswordPage() {
-
+  const navigate = useNavigate()
   const [id, setId] = useState("")
   const fetchNewPass = () => {
     const newPassUrl = "https://proj.ruppin.ac.il/bgroup92/prod/Student/NewPassword/"
@@ -37,6 +39,7 @@ export default function FCChangePasswordPage() {
       <Card style={{ borderRadius: 25, marginTop: 140 }}>
         <div style={{ marginLeft: 122 }} >
           <LogoComponent />
+          <ReturnPageButton GoTo={() => navigate("/")} />
         </ div>
         <Card.Body>
           <h3 className="text-center mb-4"> דף שינוי סיסמא</h3>
