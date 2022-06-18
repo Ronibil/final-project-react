@@ -42,7 +42,7 @@ export default function SearchClassesPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await axios.get("http://localhost:49812/Tags/getAll");
+      const { data } = await axios.get("https://proj.ruppin.ac.il/bgroup92/prod/Tags/getAll");
       let suggestionList = data.map((suggestion, index) => {
         return { value: index, label: suggestion };
       });
@@ -55,7 +55,7 @@ export default function SearchClassesPage() {
   // Get suggestions for lessons if the student has previously registered for other lessons in the system.  
   useEffect(() => {
     console.log(state.StudentId);
-    const url = `http://localhost:49812/Class/GetSuggestionsClasses/${state.StudentId}`
+    const url = `https://proj.ruppin.ac.il/bgroup92/prod/Class/GetSuggestionsClasses/${state.StudentId}`
     fetch(url, {
       method: "GET",
       headers: new Headers({
@@ -87,7 +87,7 @@ export default function SearchClassesPage() {
       if (tags.length !== 0) {
         let tagList = tags.map((tag) => ({ TagName: tag.label }));
         const { data } = await axios.post(
-          `http://localhost:49812/Class/GetClassesByTags/${userDetails.StudentId}`, //state.StudentId
+          `https://proj.ruppin.ac.il/bgroup92/prod/Class/GetClassesByTags/${userDetails.StudentId}`, //state.StudentId
           tagList
         );
         setClasses(data);
@@ -128,7 +128,7 @@ export default function SearchClassesPage() {
       };
       setClassDetails(classToConfirmModal);
     }
-    const url = "http://localhost:49812/Student/PostStudentToClass";
+    const url = "https://proj.ruppin.ac.il/bgroup92/prod/Student/PostStudentToClass";
 
     fetch(url, {
       method: "POST",
