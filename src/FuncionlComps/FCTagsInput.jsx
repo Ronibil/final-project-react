@@ -28,10 +28,15 @@ export default function FCTagsInput() {
       setTags([...tags, newTag])
       document.getElementById("tags-input").value = '#'
     }
+    const style = {
+      textAlign: "center"
+    }
 
 
     return (
-        <div className="tags-input-container">
+      <div className='center'>
+        <h3 className='middle'>דף שליחת בקשות לתגיות</h3>
+        <div className="tags-input-container" >
             { tags.map((tag, index) => (
                 <div className="tag-item" key={index}>
                     <span className="text">{tag}</span>
@@ -41,5 +46,6 @@ export default function FCTagsInput() {
             <input onKeyDown={handleKeyDown} type="text" className="tags-input" placeholder="הקלד תגית חדשה" defaultValue="#" id="tags-input"/>
             <Button variant='secondary' size='sm' onClick={() => addTagBtn()}>הוסף</Button>
         </div>
+      </div>
     )
 }

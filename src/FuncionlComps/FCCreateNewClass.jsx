@@ -202,7 +202,7 @@ export default function FCCreateNewClass() {
                 className="basic-multi-select mb-3"
                 options={suggestions}
               />
-              <Form.Text><Button variant="link">!שלח לנו הצעות לתגיות חדשות</Button>?רצית תגית ולא מצאת</Form.Text>
+              <Form.Text><Button variant="link" onClick={() => navigate("/insertTagsPage")}>!שלח לנו הצעות לתגיות חדשות</Button>?רצית תגית ולא מצאת</Form.Text>
             </Form.Group>
           </Form>
           <Button
