@@ -8,6 +8,7 @@ import ReturnPageButton from "../Elements/ReturnPageButton";
 import axios from "axios";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
+import FCTagsInput from "./FCTagsInput";
 
 export default function FCCreateNewClass() {
   const navigate = useNavigate();
@@ -110,6 +111,7 @@ export default function FCCreateNewClass() {
   const BackToHomePage = () => {
     navigate("/SuperHomePage", { state: UserDetails });
   };
+  const textGuideForNewTags = "תגיות חייבות להתחיל בסולמית (#) והן נשלחות לאישור מנהל המערכת"
 
   return (
     <Container style={{ flexDirection: "column", maxWidth: "700px", justifyContent: "center", paddingTop: 2 }}>
@@ -200,6 +202,7 @@ export default function FCCreateNewClass() {
                 className="basic-multi-select mb-3"
                 options={suggestions}
               />
+              <Form.Text><Button variant="link">!שלח לנו הצעות לתגיות חדשות</Button>?רצית תגית ולא מצאת</Form.Text>
             </Form.Group>
           </Form>
           <Button
