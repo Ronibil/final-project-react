@@ -16,7 +16,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import { useNavigate } from "react-router-dom";
 
 
-export default function FCBurgerComp({userDetails}) {
+export default function FCBurgerComp({ userDetails, type }) {
   const [state, setState] = React.useState({
     right: false
   });
@@ -30,8 +30,8 @@ export default function FCBurgerComp({userDetails}) {
     setState({ ...state, [anchor]: open });
   };
   const logOut = () => {
-      window.history.pushState(null, document.title, window.location.href);
-      window.addEventListener('popstate', function(event) {
+    window.history.pushState(null, document.title, window.location.href);
+    window.addEventListener('popstate', function (event) {
       window.history.pushState(null, document.title, window.location.href);
     });
     navigate("/")
@@ -45,14 +45,15 @@ export default function FCBurgerComp({userDetails}) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <NotificationAddIcon />
-              </ListItemIcon>
-              <ListItemText primary="התראות" />
-            </ListItemButton>
-          </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton>
+            <ListItemIcon>
+              <NotificationAddIcon />
+            </ListItemIcon>
+            <ListItemText primary="התראות" />
+          </ListItemButton>
+        </ListItem>
+        {type !== "super" ? (
           <ListItem disablePadding>
             <ListItemButton>
               <ListItemIcon>
@@ -61,30 +62,40 @@ export default function FCBurgerComp({userDetails}) {
               <ListItemText primary="הפוך לסופר-סטודנט" />
             </ListItemButton>
           </ListItem>
+        ) : (
           <ListItem disablePadding>
-            <ListItemButton onClick={() => navigate("/newPasswordPage", {state: userDetails})}>
+            <ListItemButton>
               <ListItemIcon>
-                <PasswordIcon />
+                <SchoolIcon />
               </ListItemIcon>
-              <ListItemText primary="שינוי סיסמה" />
+              <ListItemText primary="המלצות" />
             </ListItemButton>
           </ListItem>
-          <Divider />
-          <ListItem disablePadding>
-            <ListItemButton onClick={() => logOut()}>
-              <ListItemIcon>
-                <LogoutIcon />
-              </ListItemIcon>
-              <ListItemText primary="התנתק" />
-            </ListItemButton>
-          </ListItem>
+        )}
+        <ListItem disablePadding>
+          <ListItemButton onClick={() => navigate("/newPasswordPage", { state: userDetails })}>
+            <ListItemIcon>
+              <PasswordIcon />
+            </ListItemIcon>
+            <ListItemText primary="שינוי סיסמה" />
+          </ListItemButton>
+        </ListItem>
+        <Divider />
+        <ListItem disablePadding>
+          <ListItemButton onClick={() => logOut()}>
+            <ListItemIcon>
+              <LogoutIcon />
+            </ListItemIcon>
+            <ListItemText primary="התנתק" />
+          </ListItemButton>
+        </ListItem>
       </List>
     </Box>
   );
 
   return (
-    <div style={{direction: "rtl", position:"fixed", top:"1%", right:"1%"}}>
-      <Button onClick={toggleDrawer('right', true)} variant="contained" style={{backgroundColor:"#00417E"}}><MenuIcon /></Button>
+    <div style={{ direction: "rtl", position: "fixed", top: "1%", right: "1%" }}>
+      <Button onClick={toggleDrawer('right', true)} variant="contained" style={{ backgroundColor: "#00417E" }}><MenuIcon /></Button>
       <Drawer
         anchor='right'
         open={state['right']}
