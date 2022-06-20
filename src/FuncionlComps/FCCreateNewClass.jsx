@@ -111,7 +111,11 @@ export default function FCCreateNewClass() {
   const BackToHomePage = () => {
     navigate("/SuperHomePage", { state: UserDetails });
   };
-  const textGuideForNewTags = "תגיות חייבות להתחיל בסולמית (#) והן נשלחות לאישור מנהל המערכת"
+  const tagsRelatedDetails = {
+    StudentId: superId,
+    StudentName: superName,
+    ClassName: className
+  }
 
   return (
     <Container style={{ flexDirection: "column", maxWidth: "700px", justifyContent: "center", paddingTop: 2 }}>
@@ -202,7 +206,7 @@ export default function FCCreateNewClass() {
                 className="basic-multi-select mb-3"
                 options={suggestions}
               />
-              <Form.Text><Button variant="link" onClick={() => navigate("/insertTagsPage")}>!שלח לנו הצעות לתגיות חדשות</Button>?רצית תגית ולא מצאת</Form.Text>
+              <Form.Text><Button variant="link" onClick={() => navigate("/insertTagsPage", {state: tagsRelatedDetails})}>!שלח לנו הצעות לתגיות חדשות</Button>?רצית תגית ולא מצאת</Form.Text>
             </Form.Group>
           </Form>
           <Button

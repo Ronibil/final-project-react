@@ -1,9 +1,10 @@
 import { useState } from 'react'
 import "../StyleSheets/TagsInput.css";
 import { Button } from "react-bootstrap"
-
+import { useLocation, useNavigate } from "react-router-dom";
 
 export default function FCTagsInput() {
+    const { state } = useLocation();
     const [tags, setTags] = useState([])
 
     function handleKeyDown(e) {
@@ -31,6 +32,41 @@ export default function FCTagsInput() {
     const style = {
       textAlign: "center"
     }
+    const demo = () => {
+      const LocalUrl = "http://localhost:49812/tagRequest/NewRequest"
+      let requestDate = new Date()
+      const tagRequestObj = {
+        Tags: tags,
+        RequestStatus: "onHold",
+        StudentId: state.StudentId,
+        StudentName: state.StudentName,
+        ClassName: state.ClassName,
+        RequestDate: requestDate
+      }
+      console.log(tagRequestObj)
+      console.log("start");
+      fetch(LocalUrl, {
+        method: "POST",
+        body: JSON.stringify(tagRequestObj),
+        headers: new Headers({
+          "Content-Type": "application/json; charset=UTF-8",
+          Accept: "application/json; charset=UTF-8",
+        }),
+      })
+        .then((res) => {
+          console.log("res.ok", res.ok);
+          return res.json();
+        })
+        .then(
+          (result) => {
+            console.log("FETCH PostRequest= ", result);
+          },
+          (error) => {
+            console.log("err post=", error);
+          }
+        );
+        console.log("end");
+    }
 
 
     return (
@@ -46,6 +82,7 @@ export default function FCTagsInput() {
             <input onKeyDown={handleKeyDown} type="text" className="tags-input" placeholder="הקלד תגית חדשה" defaultValue="#" id="tags-input"/>
             <Button variant='secondary' size='sm' onClick={() => addTagBtn()}>הוסף</Button>
         </div>
+        <Button variant='success' onClick={() => demo()}>שלח</Button>
       </div>
     )
 }

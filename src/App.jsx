@@ -20,6 +20,7 @@ import FCChangePasswordPage from "./Pages/FCChangePasswordPage";
 import FCClassForStudent from "./FuncionlComps/FCClassForStudent";
 import FCNewPasswordPage from "./Pages/FCNewPasswordPage";
 import FCTagsInput from "./FuncionlComps/FCTagsInput";
+import FCTgasRequestPage from "./Pages/FCTgasRequestPage";
 
 export default function App() {
   return (
@@ -44,6 +45,7 @@ export default function App() {
       <Route path="classForStudent" element={<FCClassForStudent />} />
       <Route path="/newPasswordPage" element={<FCNewPasswordPage />} />
       <Route path="/insertTagsPage" element={<FCTagsInput />} />
+      <Route path="/adminTagsPage" element={<FCTgasRequestPage />} />
     </Routes>
   );
 }

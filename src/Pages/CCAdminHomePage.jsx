@@ -127,6 +127,7 @@ class CCAdminHomePage extends Component {
   aplicationStatusMenu = () => {
     let statusMenu = (
       <div style={{ margin: 20, textAlign: "center" }}>
+        
         <Button size="sm" onClick={() => this.devideRequests("rejected")}>בקשות שנדחו</Button>
         &nbsp;| <Button size="sm" onClick={() => this.devideRequests("approved")} >בקשות שאושרו</Button>
         &nbsp;|{" "}
@@ -134,6 +135,12 @@ class CCAdminHomePage extends Component {
           {" "}
           בקשות ממתינות
         </Button>
+        <br/> <br/>
+        <Link to="/adminTagsPage">
+          <Button size="sm" variant="secondary">
+            בקשות של תגיות
+          </Button>
+        </Link>
       </div>
     );
     return statusMenu;
