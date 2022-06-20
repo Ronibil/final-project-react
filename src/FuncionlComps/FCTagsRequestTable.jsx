@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useReducer, useEffect } from 'react';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -10,18 +10,11 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 export default function FCTagsRequestTable({tagsRequestArr}) {
-  
-  // State variable to keep track of all the expanded rows
-  // By default, nothing expanded. Hence initialized with empty array.
   const [expandedRows, setExpandedRows] = useState([]);
-
-  // State variable to keep track which row is currently expanded.
   const [expandState, setExpandState] = useState({});
-
-  const requestsArr = tagsRequestArr
-  /**
-   * This function gets called when show/hide link is clicked.
-   */
+  //const [requestsArr, setRequestArr] = useState([])
+  
+  let requestsArr = tagsRequestArr
   const handleEpandRow = (event, requestId) => {
     const currentExpandedRows = expandedRows;
     const isRowExpanded = currentExpandedRows.includes(requestId);
@@ -30,13 +23,88 @@ export default function FCTagsRequestTable({tagsRequestArr}) {
     isRowExpanded ? (obj[requestId] = false) :  (obj[requestId] = true);
     setExpandState(obj);
 
-    // If the row is expanded, we are here to hide it. Hence remove
-    // it from the state variable. Otherwise add to it.
     const newExpandedRows = isRowExpanded ?
           currentExpandedRows.filter(id => id !== requestId) :
           currentExpandedRows.concat(requestId);
 
     setExpandedRows(newExpandedRows);
+  }
+
+  const postTag = (t, s) => {
+    const newTagUrl = "http://localhost:49812/Tags/PostNewTag"
+    const newTag = t
+    console.log("start");
+    fetch(newTagUrl, {
+      method: "POST",
+      body: JSON.stringify(newTag),
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json; charset=UTF-8",
+      }),
+    })
+      .then((res) => {
+        console.log("res=", res);
+        console.log("res.status", res.status);
+        console.log("res.ok", res.ok);
+        if (res.ok) {
+          updateTagStatus(t, s)
+        }
+        return res.json();
+      })
+      .then(
+        (result) => {
+          console.log("FETCH Post Tag= ", result);
+        },
+        (error) => {
+          console.log("err post=", error);
+        }
+      );
+    console.log("end");
+  }
+
+  const updateTagStatus = (tag, status) => {
+    const putTagStatusUrl = "http://localhost:49812/tagRequest/updateTagStatus"
+    const updateTagObj = {
+      TagName: tag,
+      RequestStatus: status
+    }
+    console.log('start');
+      fetch(putTagStatusUrl, {
+        method: "PUT",
+        body: JSON.stringify(updateTagObj),
+        headers: new Headers({
+          "Content-Type": "application/json; charset=UTF-8",
+          Accept: "application/json; charset=UTF-8",
+        }),
+      })
+        .then((res) => {
+          console.log("res=", res);
+          console.log("res.status", res.status);
+          console.log("res.ok", res.ok);
+          if (res.ok) {
+            removeRow(tag)
+          }
+          return res.json()
+        })
+        .then(
+          (result) => {
+            console.log("fetch updated Status= ", result);
+          },
+          (error) => {
+            console.log("err put=", error);
+          }
+        );
+      console.log("end");
+  }
+
+  const removeRow = (t) => {
+    let newRequestArr = []
+    newRequestArr = requestsArr.map(r => {
+      r.Tags.filter(tag => tag.TagName !== t)
+      return r
+    })
+    requestsArr = newRequestArr
+    document.getElementById(t).style.display = "none"
   }
 
   return(
@@ -92,12 +160,12 @@ export default function FCTagsRequestTable({tagsRequestArr}) {
                         <h2> תגיות </h2>
                         {request.Tags.map((t) => 
                         <>
-                        <ul key={t}>
+                        <ul key={t} id={t}>
                             <li>
                               <span><b>שם תגית:</b></span> {' '}
                               <span> {t} </span> {' '}
-                              <span><Button variant='success'>אישור</Button></span>
-                              <span><Button variant='danger'>דחייה</Button></span>
+                              <span><Button variant='success' onClick={(e) => postTag(t, "approved")}>אישור</Button></span> {' '}
+                              <span><Button variant='danger' onClick={(e) => updateTagStatus(t, "rejected")}>דחייה</Button></span>
                             </li>
                         </ul>
                         </>
