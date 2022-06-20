@@ -21,7 +21,7 @@ export default function StudentHomePage() {
   };
 
   useEffect(() => {
-    const url = "https://proj.ruppin.ac.il/bgroup92/prod/Student/GetStudentLandingPageDetails";
+    const url = "http://localhost:49812/Student/GetStudentLandingPageDetails";
     fetch(url, {
       method: "POST",
       body: JSON.stringify(userDetails),

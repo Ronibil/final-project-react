@@ -57,7 +57,7 @@ export default function FCDetailsForStudentSignUp(props) {
 
   // post new student request to db - fetch post
   const btnPostStudentRequest = () => {
-    const LocalUrl = "https://proj.ruppin.ac.il/bgroup92/prod/requestToJoin/newRequest";
+    const LocalUrl = "http://localhost:49812/requestToJoin/newRequest";
     const currentDate = new Date();
     const newStudentRequest = {
       StudentId: sID,
@@ -104,7 +104,7 @@ export default function FCDetailsForStudentSignUp(props) {
     } else {
       setTimeout(async () => {
         const { data } = await axios.get(
-          "https://proj.ruppin.ac.il/bgroup92/prod/city/getCitiesByInput/" + inputValue
+          "http://localhost:49812/city/getCitiesByInput/" + inputValue
         );
         const tempArray = [];
         data.forEach((element) => {
