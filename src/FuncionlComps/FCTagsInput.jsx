@@ -5,7 +5,15 @@ import { useLocation, useNavigate } from "react-router-dom";
 
 export default function FCTagsInput() {
     const { state } = useLocation();
+    const navigate = useNavigate();
     const [tags, setTags] = useState([])
+    const [message, setMessage] = useState("")
+    const userDets = {
+      superId: state.StudentId,
+      superName: state.StudentName,
+      superEmail: state.superEmail,
+      superPassword: state.superPassword
+    }
 
     function handleKeyDown(e) {
       if (e.key === 'Enter' && e.target.value.charAt(0) ==='#') {
@@ -29,9 +37,7 @@ export default function FCTagsInput() {
       setTags([...tags, newTag])
       document.getElementById("tags-input").value = '#'
     }
-    const style = {
-      textAlign: "center"
-    }
+    
     const demo = () => {
       const LocalUrl = "http://localhost:49812/tagRequest/NewRequest"
       let requestDate = new Date()
@@ -55,6 +61,14 @@ export default function FCTagsInput() {
       })
         .then((res) => {
           console.log("res.ok", res.ok);
+          if (res.ok) {
+            setMessage("הבקשה נשלחה בהצלחה")
+            showMessage()
+          }
+          else {
+            setMessage("..שליחת הבקשה נכשלה - נסה שנית מאוחר יותר")
+            showMessage()
+          }
           return res.json();
         })
         .then(
@@ -68,11 +82,42 @@ export default function FCTagsInput() {
         console.log("end");
     }
 
+    const showMessage = () => {
+      if (message !== "") {
+        let btn;
+        if (message === "הבקשה נשלחה בהצלחה") {
+          btn = (
+            <Button variant='success' size='sm' onClick={() => navigate("/CreateNewClass", {state: userDets})}>חזור</Button>
+          )
+        }
+        else if (message === "..שליחת הבקשה נכשלה - נסה שנית מאוחר יותר") {
+          btn = (
+            <Button variant='danger' size='sm' onClick={() => navigate("/CreateNewClass", {state: userDets})}>חזור</Button>
+          )
+        }
+        let block = (
+          <div className='middle'>
+            <div>{message}</div>
+            <div>{btn}</div>
+          </div>
+        )
+        document.getElementById("sendbtn").style.display = "none"
+        document.getElementById("box").style.display = "none"
+        //document.getElementById("tit").style.display = "none"
+        document.getElementById("msg").style.display = "block"
+        return block
+      }
+      else {
+        return
+      }
+    }
+
 
     return (
       <div className='center'>
-        <h3 className='middle'>דף שליחת בקשות לתגיות</h3>
-        <div className="tags-input-container" >
+        <h3 className='middle' id='tit'>דף שליחת בקשות לתגיות</h3>
+        <div id="msg" style={{display: "none"}}>{showMessage()}</div>
+        <div className="tags-input-container" id="box">
             { tags.map((tag, index) => (
                 <div className="tag-item" key={index}>
                     <span className="text">{tag}</span>
@@ -82,7 +127,7 @@ export default function FCTagsInput() {
             <input onKeyDown={handleKeyDown} type="text" className="tags-input" placeholder="הקלד תגית חדשה" defaultValue="#" id="tags-input"/>
             <Button variant='secondary' size='sm' onClick={() => addTagBtn()}>הוסף</Button>
         </div>
-        <Button variant='success' onClick={() => demo()}>שלח</Button>
+        <Button variant='success' onClick={() => demo()} id='sendbtn'>שלח</Button>
       </div>
     )
 }

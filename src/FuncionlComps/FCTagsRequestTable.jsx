@@ -1,4 +1,4 @@
-import React, { useState, useReducer, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
@@ -111,7 +111,7 @@ export default function FCTagsRequestTable({tagsRequestArr}) {
     <Container dir='rtl'>
       <Row>
         <Col>
-          <h1> Users({ requestsArr.length })</h1>
+          <h1> בקשות({ requestsArr.length })</h1>
         </Col>
       </Row>
       <Row>

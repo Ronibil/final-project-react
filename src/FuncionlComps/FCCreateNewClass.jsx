@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Form, Card, Button, Row, Col } from "react-bootstrap";
+import { Container, Form, Card, Button} from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FCModalConfirm from "./FCModalConfirm";
@@ -8,7 +8,6 @@ import ReturnPageButton from "../Elements/ReturnPageButton";
 import axios from "axios";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
-import FCTagsInput from "./FCTagsInput";
 
 export default function FCCreateNewClass() {
   const navigate = useNavigate();
@@ -114,7 +113,9 @@ export default function FCCreateNewClass() {
   const tagsRelatedDetails = {
     StudentId: superId,
     StudentName: superName,
-    ClassName: className
+    ClassName: className,
+    superEmail: superEmail,
+    superPassword: superPassword,
   }
 
   return (
