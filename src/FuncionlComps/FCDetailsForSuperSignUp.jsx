@@ -56,7 +56,7 @@ export default function FCDetailsForSuperSignUp(props) {
   }
 
   const btnPostSuperStudentRequest = () => {
-    const LocalUrl = "https://proj.ruppin.ac.il/bgroup92/prod/requestToJoin/newRequest";
+    const LocalUrl = "http://localhost:49812/requestToJoin/newRequest";
     let currentDate = new Date();
     let newSuperRequest = {
       StudentId: superDetails.StudentId,
@@ -102,7 +102,7 @@ export default function FCDetailsForSuperSignUp(props) {
   // post new super student request to db - fetch post
   const PostSuper = (RequsetNum) => {
     const superUrl =
-      "https://proj.ruppin.ac.il/bgroup92/prod/RequestToJoinSuper/newSuperRequest";
+      "http://localhost:49812/RequestToJoinSuper/newSuperRequest";
 
     const superRequest = {
       RequsetNum: RequsetNum,
@@ -143,7 +143,7 @@ export default function FCDetailsForSuperSignUp(props) {
 
   const UploadImage = () => {
     //UrlApi
-    const urlApi = 'https://proj.ruppin.ac.il/bgroup92/prod/Files/UploadImage';
+    const urlApi = 'http://localhost:49812/Files/UploadImage';
     //Name Of image.
     const imageName = "ProfileImage-" + superDetails.StudentId + ".jpg";
     //Image file

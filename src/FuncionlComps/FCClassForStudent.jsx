@@ -7,10 +7,11 @@ import FCClassCard from "../FuncionlComps/FCClassCard";
 import FCModalAreYouSure from "../FuncionlComps/FCModalAreYouSure";
 import FCModalConfirm from "../FuncionlComps/FCModalConfirm";
 import FCModalStars from "../FuncionlComps/FCModalStars";
+import { useNavigate } from "react-router-dom";
 
 
 export default function FCClassForStudent() {
-  // const navigate = useNavigate();
+  const navigate = useNavigate();
   const [studentDetails, setStudentDetails] = useState({});
   const [classesHistory, setClassesHistory] = useState([]);
   const [futreClasses, setFutreClasses] = useState([]);
@@ -33,7 +34,7 @@ export default function FCClassForStudent() {
   };
 
   useEffect(() => {
-    const url = "https://proj.ruppin.ac.il/bgroup92/prod/Student/GetStudentLandingPageDetails";
+    const url = "http://localhost:49812/Student/GetStudentLandingPageDetails";
     fetch(url, {
       method: "POST",
       body: JSON.stringify(userDetails),
@@ -63,7 +64,7 @@ export default function FCClassForStudent() {
   }, []);
 
   const studentRank = ({ studentId, classCode, rating, ratingDescription }) => {
-    const url = "https://proj.ruppin.ac.il/bgroup92/prod/RegisteredTo/StudentRank";
+    const url = "http://localhost:49812/RegisteredTo/StudentRank";
     console.log();
     const detailsForRank = {
       StudentId: studentId,
@@ -88,6 +89,8 @@ export default function FCClassForStudent() {
       .then(
         (result) => {
           console.log("FETCH PostRequest= ", result);
+          navigate("/studentHomePage", { state: userDetails })
+
         },
         (error) => {
           console.log("err post=", error);
@@ -97,7 +100,7 @@ export default function FCClassForStudent() {
 
 
   const DeleteStudentFromClass = (classCode) => {
-    const Url = "https://proj.ruppin.ac.il/bgroup92/prod/Student/DeleteStudentFromClass";
+    const Url = "http://localhost:49812/Student/DeleteStudentFromClass";
     const classToDelete = {
       StudentId: studentDetails.StudentId,
       ClassCode: classCode,

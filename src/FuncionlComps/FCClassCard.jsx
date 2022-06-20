@@ -196,14 +196,17 @@ export default function FCClassCard({
         <Card style={{ width: "98%", marginTop: 4, backgroundColor: "rgba(208, 201, 192, 0.8)", marginLeft: 4, borderRadius: 20, border: "solid #7F8487 1px" }}>
           <Card.Body className="w-100 d-flex align-items-center justify-content-between">
             <div>
-              <Button
-                className="m-1"
-                size="sm"
-                onClick={() => ShowModalStarsBtn(classToCard.ClassCode)}
-                variant="outline-primary"
-              >
-                דירוג
-              </Button><br />
+              {classToCard.RankResults[0].RankValue == 0 ? (
+                <Button
+                  className="m-1"
+                  size="sm"
+                  onClick={() => ShowModalStarsBtn(classToCard.ClassCode)}
+                  variant="outline-primary"
+                >
+                  דירוג
+                </Button>
+              ): ("")}
+              <br />
               <Button className="m-1" size="sm" variant="outline-primary">
                 לצ'אט
               </Button>

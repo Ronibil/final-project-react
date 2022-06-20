@@ -22,7 +22,7 @@ function FCUpdateProfileSuper() {
       Descreption: description,
     };
     const Url =
-      "https://proj.ruppin.ac.il/bgroup92/prod/SuperStudent/UpdateSuperStudentProfileDescription";
+      "http://localhost:49812/SuperStudent/UpdateSuperStudentProfileDescription";
 
     fetch(Url, {
       method: "PUT",

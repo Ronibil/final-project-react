@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Form, Card, Button, Row, Col } from "react-bootstrap";
+import { Container, Form, Card, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import ReturnPageButton from "../Elements/ReturnPageButton";

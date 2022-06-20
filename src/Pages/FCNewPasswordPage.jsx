@@ -23,7 +23,7 @@ export default function FCNewPasswordPage() {
   };
 
   const fetchUpdatePassword = () => {
-    const putPassUrl = "https://proj.ruppin.ac.il/bgroup92/prod/Student/UpdatePassword"
+    const putPassUrl = "http://localhost:49812/Student/UpdatePassword"
     let updatedPass = {
       StudentId: userDetails.StudentId,
       Password: confirmPassword

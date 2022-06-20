@@ -9,7 +9,7 @@ export default function FCChangePasswordPage() {
   const navigate = useNavigate()
   const [id, setId] = useState("")
   const fetchNewPass = () => {
-    const newPassUrl = "https://proj.ruppin.ac.il/bgroup92/prod/Student/NewPassword/"
+    const newPassUrl = "http://localhost:49812/Student/NewPassword/"
     console.log("start")
     fetch(newPassUrl + id, {
       method: "POST",
