@@ -21,9 +21,11 @@ export default function FCHistoryClassSuper() {
       <h3>:היסטורית שיעורים</h3>
       {HistoryClass.length !== 0 ? (
         <>
-          {HistoryClass.map((c) => (
-            <FCClassCard key={c.ClassCode} classToCard={c} type="history" />
-          ))}
+          <div style={{ width: "100%", height: 660, overflow: "auto" }}>
+            {HistoryClass.map((c) => (
+              <FCClassCard key={c.ClassCode} classToCard={c} type="history" />
+            ))}
+          </div>
         </>
       ) : (
         "לא נמצאו שיעורים מתאימים"

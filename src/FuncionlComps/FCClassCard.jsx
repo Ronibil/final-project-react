@@ -15,7 +15,7 @@ export default function FCClassCard({
   switch (type) {
     case "history":
       return (
-        <Card className="m-1">
+        <Card style={{ width: "98%", marginTop: 4, backgroundColor: "rgba(208, 201, 192, 0.8)", marginLeft: 4, borderRadius: 20, border: "solid #7F8487 1px" }}>
           <Card.Body className="text-end">
             <Row>
               <Col xs={4} style={{ alignSelf: "center" }}>
@@ -83,7 +83,7 @@ export default function FCClassCard({
       );
     case "Futre":
       return (
-        <Card className="m-1">
+        <Card style={{ width: "98%", marginTop: 4, backgroundColor: "rgba(218, 234, 241, 0.9)", marginLeft: 4, borderRadius: 20, border: "solid #1C658C 1px" }}>
           <Card.Body className="d-flex align-items-center justify-content-between">
             <div className="d-flex flex-column">
               {classToCard.NumOfRegistered > 0 ? (
@@ -160,29 +160,21 @@ export default function FCClassCard({
                 <b>שעת התחלה:</b> {classToCard.StartTime}
                 {studentDetails !== undefined ? (
                   <>
-                    <Row>
-                      <Col xs={6} style={{ alignSelf: "center" }}>
-                        5/{classToCard.SuperStudentRank} <b>:דירוג</b>
-                      </Col>
-                      <Col xs={6}>
-                        <Button
-                          className="badge rounded-pill"
-                          style={{ background: "#A2D5AB", border: "solid #4B8673 2px" }}
-                          size="sm"
-                          onClick={() =>
-                            navigate("/ShowProfileSuperStudent", {
-                              state: { classToCard, studentDetails, type: 1 },
-                            })
-                          }
-                        >
-                          {classToCard.SuperName}
-                        </Button>
-                      </Col>
-                    </Row>
+                    <br />
+                      5/{classToCard.SuperStudentRank} <b>:דירוג</b>
+                    <Button
+                      className="badge rounded-pill"
+                      style={{ background: "#A2D5AB", border: "solid #4B8673 2px", marginLeft:8 }}
+                      size="sm"
+                      onClick={() =>
+                        navigate("/ShowProfileSuperStudent", {
+                          state: { classToCard, studentDetails, type: 1 },
+                        })
+                      }
+                    >
+                      {classToCard.SuperName}
+                    </Button>
                   </>
-
-
-
                 ) : (
                   ""
                 )}
@@ -205,7 +197,7 @@ export default function FCClassCard({
                 >
                   דירוג
                 </Button>
-              ): ("")}
+              ) : ("")}
               <br />
               <Button className="m-1" size="sm" variant="outline-primary">
                 לצ'אט

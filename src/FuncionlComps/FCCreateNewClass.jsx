@@ -1,5 +1,5 @@
 import React from "react";
-import { Container, Form, Card, Button} from "react-bootstrap";
+import { Container, Form, Card, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import FCModalConfirm from "./FCModalConfirm";
@@ -15,7 +15,7 @@ export default function FCCreateNewClass() {
   const superId = state.superId;
   const superName = state.superName;
   const superEmail = state.superEmail;
-  const superPassword  = state.superPassword
+  const superPassword = state.superPassword
   const UserDetails = {
     Email: superEmail,
     Password: superPassword,
@@ -119,27 +119,27 @@ export default function FCCreateNewClass() {
   }
 
   return (
-    <Container style={{ flexDirection: "column", maxWidth: "700px", justifyContent: "center", paddingTop: 2 }}>
+    <Container style={{ flexDirection: "column", maxWidth: "700px", justifyContent: "center" }}>
       <Card style={{ paddingTop: 62, borderRadius: 25, backgroundColor: "rgba(255, 255, 255, 0.7)" }} >
         <Card.Body align="center">
           <ReturnPageButton GoTo={BackToHomePage} />
           <h2 className="text-center mb-4">יצירת שיעור חדש</h2>
           <Form>
             <Form.Group className="mb-3" >
-              <Form.Label>שם השיעור</Form.Label>
+              {/* <Form.Label>שם השיעור</Form.Label> */}
               <Form.Control
                 type="text"
-                style={{ textAlign: "right" }}
+                style={{ textAlign: "right", borderRadius: 25 }}
                 placeholder="שם השיעור"
                 required
                 onChange={(e) => setClassName(e.target.value)}
               />
             </Form.Group>
             <Form.Group className="mb-3">
-              <Form.Label>תיאור השיעור</Form.Label>
+              {/* <Form.Label>תיאור השיעור</Form.Label> */}
               <Form.Control
                 as="textarea"
-                style={{ textAlign: "right" }}
+                style={{ textAlign: "right", borderRadius: 25 }}
                 rows={3}
                 placeholder="הכנס את תיאור השיעור / מערך השיעור"
                 required
@@ -153,6 +153,7 @@ export default function FCCreateNewClass() {
                 placeholder="תאריך השיעור"
                 required
                 onChange={(e) => setClassDate(e.target.value)}
+                style={{ borderRadius: 25 }}
               />
             </Form.Group>
 
@@ -163,6 +164,7 @@ export default function FCCreateNewClass() {
                 placeholder="שעת התחלה"
                 required
                 onChange={(e) => seTclassStartTime(e.target.value)}
+                style={{ borderRadius: 25 }}
               />
             </Form.Group>
 
@@ -173,6 +175,7 @@ export default function FCCreateNewClass() {
                 placeholder="שעת סיום"
                 required
                 onChange={(e) => setClassEndTime(e.target.value)}
+                style={{ borderRadius: 25 }}
               />
             </Form.Group>
 
@@ -180,7 +183,7 @@ export default function FCCreateNewClass() {
               <Form.Label>מספר משתתפים</Form.Label>
               <Form.Select
                 size="sm"
-                style={{ textAlign: "right" }}
+                style={{ textAlign: "right", borderRadius: 25 }}
                 required
                 onChange={(e) => setClassParticipants(e.target.value)}
               >
@@ -207,7 +210,12 @@ export default function FCCreateNewClass() {
                 className="basic-multi-select mb-3"
                 options={suggestions}
               />
-              <Form.Text><Button variant="link" onClick={() => navigate("/insertTagsPage", {state: tagsRelatedDetails})}>!שלח לנו הצעות לתגיות חדשות</Button>?רצית תגית ולא מצאת</Form.Text>
+              <Form.Text>
+                <div>?רצית תגית ולא מצאת</div>
+                <Button variant="link" onClick={() => navigate("/insertTagsPage", { state: tagsRelatedDetails })}>
+                  !שלח לנו הצעות לתגיות חדשות
+                </Button>
+              </Form.Text>
             </Form.Group>
           </Form>
           <Button
@@ -217,8 +225,6 @@ export default function FCCreateNewClass() {
           >
             יצירת שיעור
           </Button>
-
-
         </Card.Body>
         <FCModalConfirm
           BackToHomePage={BackToHomePage}

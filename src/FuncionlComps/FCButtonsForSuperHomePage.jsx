@@ -41,9 +41,8 @@ export default function FCButtonsForSuperHomePage({
   };
 
   return (
-    <Container style={{ flexDirection: "row", maxWidth: "700px" }} >
       <Card style={{backgroundColor: "rgba(0, 0, 0, 0)"}}>
-        <Card.Body align="center">
+        <Card.Body>
           <Row>
             <Col xs={6}>
               <Button
@@ -96,6 +95,5 @@ export default function FCButtonsForSuperHomePage({
           </Row>
         </Card.Body>
       </Card>
-    </Container>
   );
 }

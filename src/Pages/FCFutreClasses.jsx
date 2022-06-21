@@ -101,15 +101,18 @@ export default function FCFutreClasses() {
       <h2>:שיעורים עתידיים שלי</h2>
       {futreClass.length !== 0 ? (
         <>
-          {futreClass.map((c) => (
-            <FCClassCard
-              key={c.ClassCode}
-              classToCard={c}
-              studentDetails={superDetails}
-              type="Futre"
-              ShowModaAreYouSure={ShowModaAreYouSure}
-            />
-          ))}
+          <div style={{ width: "100%", height: 660, overflow: "auto" }}>
+            {futreClass.map((c) => (
+
+              <FCClassCard
+                key={c.ClassCode}
+                classToCard={c}
+                studentDetails={superDetails}
+                type="Futre"
+                ShowModaAreYouSure={ShowModaAreYouSure}
+              />
+            ))}
+          </div>
         </>
       ) : (
         <>
