@@ -107,7 +107,7 @@ class CCHandleRequest extends Component {
         console.log("res.status", res.status);
         console.log("res.ok", res.ok);
         if (res.ok && request.type === "סופר סטודנט") {
-          setTimeout(this.postSuper(s), 2000);
+          this.postSuper(s)
         }
         else if (res.ok && request.type === "סטודנט") {
           this.updateStatus(s);
@@ -159,7 +159,7 @@ class CCHandleRequest extends Component {
           console.log("res.status", res.status);
           console.log("res.ok", res.ok);
           if (res.ok) {
-            setTimeout(this.movePage(status), 2000);
+            this.movePage(status)
           }
           return res.json()
         })
@@ -239,10 +239,16 @@ class CCHandleRequest extends Component {
 
   // show message after approve or deny
   msgBox = () => {
-    let box = <div style={{textAlign: "center"}} id="msgBlock">
-                <div id="succesMsg">! הבקשה אושרה בהצלחה</div>
-                <div>{this.back()}</div>
-              </div>
+    let style = {
+      padding: "70px 0",
+      textAlign: "center"
+    }
+    let box = (
+          <div style={style} id="msgBlock">
+            <div id="succesMsg">! הבקשה אושרה בהצלחה</div>
+            <div>{this.back()}</div>
+          </div>
+        )
     return box;
   };
 

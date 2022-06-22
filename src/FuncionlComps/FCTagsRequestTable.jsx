@@ -31,7 +31,7 @@ export default function FCTagsRequestTable({tagsRequestArr}) {
   }
 
   const postTag = (t, s) => {
-    const newTagUrl = "http://localhost:49812/Tags/PostNewTag"
+    const newTagUrl = "https://proj.ruppin.ac.il/bgroup92/prod/Tags/PostNewTag"
     const newTag = t
     console.log("start");
     fetch(newTagUrl, {
@@ -63,7 +63,7 @@ export default function FCTagsRequestTable({tagsRequestArr}) {
   }
 
   const updateTagStatus = (tag, status) => {
-    const putTagStatusUrl = "http://localhost:49812/tagRequest/updateTagStatus"
+    const putTagStatusUrl = "https://proj.ruppin.ac.il/bgroup92/prod/tagRequest/updateTagStatus"
     const updateTagObj = {
       TagName: tag,
       RequestStatus: status

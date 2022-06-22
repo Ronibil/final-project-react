@@ -24,6 +24,7 @@ export default function FCDetailsForStudentSignUp(props) {
   const [sBirthdate, setSBirthdate] = useState("");
   const [birthDateError, setBirthDateError] = useState("");
   const [sCity, setSCity] = useState("");
+  const [message, setMessage] = useState(<div></div>)
 
   const checkFields = () => {
     const newStudentRequest = {
@@ -83,13 +84,13 @@ export default function FCDetailsForStudentSignUp(props) {
     })
       .then((res) => {
         console.log("res.ok", res.ok);
+        msgBox(res.ok)
         return res.json();
       })
       .then(
         (result) => {
           console.log("FETCH PostRequest= ", result);
           console.log(result.RequsetNum);
-          navigate("/");
         },
         (error) => {
           console.log("err post=", error);
@@ -276,9 +277,34 @@ export default function FCDetailsForStudentSignUp(props) {
     }
   };
 
+  const msgBox = (isOk) => {
+    let box;
+    if (isOk) {
+      box = (
+        <div className="App-header">
+          <div>!הבקשה נשלחה בהצלחה</div>
+          <div>אנו נצור איתך קשר לגבי מצב בקשתך דרך המייל איתו הזנת בהרשמה</div>
+          <Button variant="success" onClick={() => navigate("/")}>סגור</Button>
+        </div>
+      )
+    }
+    else {
+      box = (
+        <div className="App-header">
+          <div>!שליחת הבקשה נכשלה</div>
+          <div>..נא לנסות שוב מאוחר יותר</div>
+          <Button variant="danger" onClick={() => navigate("/")}>סגור</Button>
+        </div>
+      )
+    }
+    document.getElementById("card").style.display = "none"
+    setMessage(box)
+  }
+
   return (
     <Container style={{ flexDirection: "column", maxWidth: "700px", justifyContent: "center", paddingTop: 70 }}>
-      <Card style={{ borderRadius: 25, backgroundColor: "rgba(255, 255, 255, 0.7)" }} >
+      <div className="App">{message}</div>
+      <Card style={{ borderRadius: 25, backgroundColor: "rgba(255, 255, 255, 0.7)" }} id="card">
         <div style={{ alignSelf: "center" }} >
           <LogoComponent />
           <ReturnPageButton GoTo={() => navigate("/typeOfUser")} />
@@ -287,6 +313,7 @@ export default function FCDetailsForStudentSignUp(props) {
         <Card.Body>
           <Form className="text-end">
             <Form.Group className="mb-2">
+            <Form.Label>תעודת זהות</Form.Label>
               <Form.Control
                 className="text-end"
                 type="text"
@@ -298,6 +325,7 @@ export default function FCDetailsForStudentSignUp(props) {
               />
             </Form.Group>
             <Form.Group className="mb-2">
+            <Form.Label>מייל</Form.Label>
               <Form.Control
                 className="text-end"
                 type="email"
@@ -313,6 +341,7 @@ export default function FCDetailsForStudentSignUp(props) {
               {emailMessage()}
             </Form.Group>
             <Form.Group className="mb-2">
+            <Form.Label>שם מלא</Form.Label>
               <Form.Control
                 className="text-end"
                 type="text"
@@ -325,6 +354,7 @@ export default function FCDetailsForStudentSignUp(props) {
               {nameMessage()}
             </Form.Group>
             <Form.Group className="mb-2">
+            <Form.Label>מספר טלפון</Form.Label>
               <Form.Control
                 className="text-end"
                 type="text"

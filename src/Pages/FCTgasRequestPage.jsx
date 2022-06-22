@@ -7,7 +7,7 @@ export default function FCTgasRequestPage() {
 
   useEffect(() => {
     const TagsRequestsUrl =
-      "http://localhost:49812/tagRequest/getAll";
+      "https://proj.ruppin.ac.il/bgroup92/prod/tagRequest/getAll";
     fetch(TagsRequestsUrl, {
       method: "GET",
       headers: new Headers({

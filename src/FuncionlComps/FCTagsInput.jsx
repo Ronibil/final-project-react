@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react'
 import "../StyleSheets/TagsInput.css";
 import { Button } from "react-bootstrap"
 import { useLocation, useNavigate } from "react-router-dom";
+import ReturnPageButton from "../Elements/ReturnPageButton";
 
 export default function FCTagsInput() {
     const { state } = useLocation();
@@ -48,7 +49,7 @@ export default function FCTagsInput() {
     }
     
     const demo = () => {
-      const LocalUrl = "http://localhost:49812/tagRequest/NewRequest"
+      const LocalUrl = "https://proj.ruppin.ac.il/bgroup92/prod/tagRequest/NewRequest"
       let requestDate = new Date()
       const tagRequestObj = {
         Tags: tags,
@@ -124,7 +125,8 @@ export default function FCTagsInput() {
 
     return (
       <div className='center'>
-        <h3 className='middle' id='tit'>דף שליחת בקשות לתגיות</h3>
+        <ReturnPageButton GoTo={() => navigate("/CreateNewClass", {state: userDets})}/>
+        <h3 className='middle' id='tit' style={{marginTop: "40px"}}>דף שליחת בקשות לתגיות</h3>
         <div id="msg" style={{display: "none"}}>{showMessage()}</div>
         <div className="tags-input-container" id="box">
             { tags.map((tag, index) => (
