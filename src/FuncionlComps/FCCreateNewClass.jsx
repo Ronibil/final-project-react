@@ -62,6 +62,25 @@ export default function FCCreateNewClass() {
       setSuggestions(suggestionList);
     };
     fetchData();
+    if (JSON.parse(localStorage.getItem("classDets")) !== null) {
+      const dets = JSON.parse(localStorage.getItem("classDets"))
+      console.log(dets)
+      let elemnts = document.getElementsByName("hold")
+      console.log(elemnts)
+      elemnts[0].value = dets.ClassName
+      setClassName(dets.ClassName)
+      elemnts[1].value = dets.ClassDescription
+      setClassDescription(dets.ClassDescription)
+      elemnts[2].value = dets.ClassDate
+      setClassDate(dets.ClassDate)
+      elemnts[3].value = dets.StartTime
+      seTclassStartTime(dets.StartTime)
+      elemnts[4].value = dets.EndTime
+      setClassEndTime(dets.EndTime)
+      elemnts[5].value = dets.NumOfParticipants
+      setClassParticipants(dets.NumOfParticipants)
+      elemnts[6].value = dets.Tags
+    }
   }, []);
 
   const postNewClass = () => {
@@ -92,6 +111,7 @@ export default function FCCreateNewClass() {
       .then((res) => {
         console.log("res.ok", res.ok);
         if (res.ok) {
+          localStorage.removeItem("classDets")
           setModalOpen(true);
         }
         return res.json();
@@ -118,6 +138,23 @@ export default function FCCreateNewClass() {
     superPassword: superPassword,
   }
 
+  const holdInputAndNav = () => {
+    let tagList = tags.map((tag) => tag.label);
+    const newClassObj = {
+      ClassDate: classDate,
+      StartTime: classStartTime,
+      EndTime: classEndTime,
+      ClassName: className,
+      SuperStudentId: superId,
+      NumOfParticipants: classParticipants,
+      ClassDescription: classDescription,
+      SuperName: superName,
+      Tags: tagList,
+    };
+    localStorage.setItem("classDets", JSON.stringify(newClassObj))
+    navigate("/insertTagsPage", { state: tagsRelatedDetails })
+  }
+
   return (
     <Container style={{ flexDirection: "column", maxWidth: "700px", justifyContent: "center" }}>
       <Card style={{ paddingTop: 62, borderRadius: 25, backgroundColor: "rgba(255, 255, 255, 0.7)" }} >
@@ -133,6 +170,7 @@ export default function FCCreateNewClass() {
                 placeholder="שם השיעור"
                 required
                 onChange={(e) => setClassName(e.target.value)}
+                name="hold"
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -144,6 +182,7 @@ export default function FCCreateNewClass() {
                 placeholder="הכנס את תיאור השיעור / מערך השיעור"
                 required
                 onChange={(e) => setClassDescription(e.target.value)}
+                name="hold"
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -154,6 +193,7 @@ export default function FCCreateNewClass() {
                 required
                 onChange={(e) => setClassDate(e.target.value)}
                 style={{ borderRadius: 25 }}
+                name="hold"
               />
             </Form.Group>
 
@@ -165,6 +205,7 @@ export default function FCCreateNewClass() {
                 required
                 onChange={(e) => seTclassStartTime(e.target.value)}
                 style={{ borderRadius: 25 }}
+                name="hold"
               />
             </Form.Group>
 
@@ -176,6 +217,7 @@ export default function FCCreateNewClass() {
                 required
                 onChange={(e) => setClassEndTime(e.target.value)}
                 style={{ borderRadius: 25 }}
+                name="hold"
               />
             </Form.Group>
 
@@ -186,6 +228,7 @@ export default function FCCreateNewClass() {
                 style={{ textAlign: "right", borderRadius: 25 }}
                 required
                 onChange={(e) => setClassParticipants(e.target.value)}
+                name="hold"
               >
                 <option value="" defaultValue hidden>
                   בחר
@@ -209,10 +252,11 @@ export default function FCCreateNewClass() {
                 noOptionsMessage={() => "לא נמצאו תגיות"}
                 className="basic-multi-select mb-3"
                 options={suggestions}
+                name="hold"
               />
               <Form.Text>
                 <div>?רצית תגית ולא מצאת</div>
-                <Button variant="link" onClick={() => navigate("/insertTagsPage", { state: tagsRelatedDetails })}>
+                <Button variant="link" onClick={() => holdInputAndNav()}>
                   !שלח לנו הצעות לתגיות חדשות
                 </Button>
               </Form.Text>

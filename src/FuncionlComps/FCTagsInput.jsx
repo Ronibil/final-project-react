@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import "../StyleSheets/TagsInput.css";
 import { Button } from "react-bootstrap"
 import { useLocation, useNavigate } from "react-router-dom";
@@ -8,12 +8,21 @@ export default function FCTagsInput() {
     const navigate = useNavigate();
     const [tags, setTags] = useState([])
     const [message, setMessage] = useState("")
+    const [classDets, setClassDets] = useState({})
     const userDets = {
       superId: state.StudentId,
       superName: state.StudentName,
       superEmail: state.superEmail,
       superPassword: state.superPassword
     }
+
+    useEffect(() => {
+      if (JSON.parse(localStorage.getItem("classDets")) !== undefined) {
+        const dets = JSON.parse(localStorage.getItem("classDets"))
+        console.log(dets)
+        setClassDets(dets)
+      }
+    }, []);
 
     function handleKeyDown(e) {
       if (e.key === 'Enter' && e.target.value.charAt(0) ==='#') {
