@@ -119,30 +119,41 @@ export default function FCDetailsForStudentSignUp(props) {
     }
   };
 
-  const buttonToReturn = () => {
-    if (props.type === "type1") {
-      return (
-        <Button
-          className="text-center"
-          id="subBtn"
-          variant="success"
-          onClick={checkFields}
-        >
-          שליחה לאימות נתונים
-        </Button>
+  const isEmailExist = (email) => {
+    const Url = "http://localhost:49812/requestToJoin/isEmailExist";
+    const user = {
+      Email: email,
+    };
+    console.log(user);
+    fetch(Url, {
+      method: "POST",
+      body: JSON.stringify(user),
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json; charset=UTF-8",
+      }),
+    })
+      .then((res) => {
+        console.log("res.status", res.status);
+        console.log("res.ok", res.ok);
+        return res.json();
+      })
+      .then(
+        (result) => {
+          console.log(result);
+          if (result === "found") {
+            setEmailError("!מייל זה קיים במערכת");
+            setSEmail("");
+          }
+          else {
+            setEmailError("(: מייל תקין");
+            setSEmail(email);
+          }
+        },
+        (error) => {
+          console.log("err post=", error);
+        }
       );
-    } else {
-      return (
-        <Button
-          className="text-center"
-          id="subBtn"
-          variant="success"
-          onClick={checkFields}
-        >
-          המשך למילוי פרופיל אישי
-        </Button>
-      );
-    }
   };
 
   //Notification
@@ -165,21 +176,19 @@ export default function FCDetailsForStudentSignUp(props) {
   const handleEmail = (e) => {
     var email = e.target.value;
     if (validator.isEmail(email)) {
-      e.target.style.border = "";
-      setEmailError("(: מייל תקין");
-      setSEmail(e.target.value);
-    } else {
-      e.target.style.border = "2px solid red";
+      isEmailExist(email)
+    } 
+    else {
       setEmailError("!מייל לא תקין");
       setSEmail("");
     }
   };
   const emailMessage = () => {
-    let block = <Form.Text className="text-danger">{emailError}</Form.Text>;
-    if (emailError === "!מייל לא תקין") {
+    let block = <Form.Text className="text-success">{emailError}</Form.Text>;
+    if (emailError === "(: מייל תקין") {
       return block;
     } else {
-      let block = <Form.Text className="text-success">{emailError}</Form.Text>;
+      let block = <Form.Text className="text-danger">{emailError}</Form.Text>;
       return block;
     }
   };
