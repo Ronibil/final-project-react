@@ -1,9 +1,8 @@
 import React from "react";
 import { Card, Row, Col, Container } from "react-bootstrap";
-const emptyImage = 'https://proj.ruppin.ac.il/bgroup92/prod/ImageFiles/empty.jpg';
+const emptyImage = 'https://proj.ruppin.ac.il/bgroup92/prod/ImageFiles/ProfileImage-empty.jpg';
  
-  
-  
+    
 export default function FCFormSuperDetails({ superDetails }) {
 
   let profileSuperImage =`https://proj.ruppin.ac.il/bgroup92/prod/ImageFiles/ProfileImage-${superDetails.ImagePath}.jpg`;
