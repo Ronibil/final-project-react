@@ -1,9 +1,9 @@
 import React from "react";
-import { Card, Row, Col, Container } from "react-bootstrap";
+import { Card, Row, Col, Container,Button } from "react-bootstrap";
 const emptyImage = 'https://proj.ruppin.ac.il/bgroup92/prod/ImageFiles/ProfileImage-empty.jpg';
  
     
-export default function FCFormSuperDetails({ superDetails }) {
+export default function FCFormSuperDetails({ superDetails,ShowModal }) {
 
   let profileSuperImage =`https://proj.ruppin.ac.il/bgroup92/prod/ImageFiles/ProfileImage-${superDetails.ImagePath}.jpg`;
   return (
@@ -15,6 +15,7 @@ export default function FCFormSuperDetails({ superDetails }) {
           src={profileSuperImage? profileSuperImage:emptyImage}
           alt={emptyImage}
         />
+        <Button onClick={ShowModal}>עדכן תמונת פרופיל</Button>
         <Card.Body align="center">
           <Card.Title>{superDetails.FullName}</Card.Title>
           <Card.Text>

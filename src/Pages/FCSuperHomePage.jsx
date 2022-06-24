@@ -5,6 +5,7 @@ import { Container } from "react-bootstrap";
 import FCButtonsForSuperHomePage from "../FuncionlComps/FCButtonsForSuperHomePage";
 import LogoComponent from "../Elements/LogoComponent";
 import FCBurgerComp from "../FuncionlComps/FCBurgerComp";
+import FCModalUpdateSuperProfileImage from "../FuncionlComps/FCModalUpdateSuperProfileImage";
 
 
 export default function FCSuperHomePage() {
@@ -14,6 +15,8 @@ export default function FCSuperHomePage() {
   const [superDetails, setSuperDetails] = useState({});
   const [classHistory, setClassHistory] = useState([]);
   const [classFutre, setClassFutre] = useState([]);
+  const [isOpen,setIsOpen]=useState(false);
+  const [renderAgain,setRenderAgain]=useState(null);
 
   useEffect(() => {
     console.log(UserDetails);
@@ -51,21 +54,67 @@ export default function FCSuperHomePage() {
           console.log("err post=", error);
         }
       );
-  }, [])
+  }, [renderAgain])
 
   const userDetailsWithId = {
     Email: UserDetails.Email,
     Password: UserDetails.Password,
     StudentId: superDetails.StudentId
   }
+  const ShowModal =()=>{
+    setIsOpen(true);
+  }
+  const CloseModal=()=>{
+    setIsOpen(false);
+  }
+  const UpdateImage=(newFileToUpload)=>{
+
+    //UrlApi
+    const urlApi = 'http://localhost:49812/Files/UpdateImage';
+    //Name Of image.
+    const imageName = "ProfileImage-" + superDetails.StudentId + ".jpg";
+    //Image file
+    const file = newFileToUpload;
+    //Type of file.need to be-{image/jpeg}
+    const fileType = newFileToUpload.type;
+    if (fileType === 'image/jpeg') {
+      console.log("this is image/jpeg !! continue")
+      //Create FormData.
+      const formData = new FormData();
+      formData.append(imageName, file);
+      //Fetch
+      fetch(urlApi,
+        {
+          method: 'POST',
+          body: formData
+        }).then((response) => {
+          if (response.ok)
+            console.log("Success");
+            //setRenderAgain for activate useEffect.
+            setIsOpen(false);
+            setRenderAgain(file);
+        })
+        .then((result) => {
+          console.log("Result =>" + result);
+        }, (error) => {
+          console.log("Error!!! " + error)
+        })
+    }
+    else {
+      console.log("this is not image/jpeg")
+    }
+  }
 
   return (
     <Container className="d-flex align-items-center justify-content-center flex-column">
       {superDetails !== undefined ? (
-        <>
+        <>                
           <LogoComponent />
+          <FCModalUpdateSuperProfileImage isOpen={isOpen} CloseModal={CloseModal} ImagePath={superDetails.ImagePath} 
+          UpdateImage={UpdateImage}
+          />
           <FCBurgerComp userDetails={userDetailsWithId} type="super" />
-            <FCFormSuperDetails superDetails={superDetails} />
+            <FCFormSuperDetails  ShowModal={ShowModal}  superDetails={superDetails} />
             <FCButtonsForSuperHomePage
               DepartmentName={superDetails.DepartmentName}
               Description={superDetails.Description}
