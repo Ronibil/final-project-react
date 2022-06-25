@@ -49,7 +49,7 @@ export default function FCTagsInput() {
     }
     
     const demo = () => {
-      const LocalUrl = "https://proj.ruppin.ac.il/bgroup92/prod/tagRequest/NewRequest"
+      const LocalUrl = "http://localhost:49812/tagRequest/NewRequest"
       let requestDate = new Date()
       const tagRequestObj = {
         Tags: tags,
@@ -73,17 +73,22 @@ export default function FCTagsInput() {
           console.log("res.ok", res.ok);
           if (res.ok) {
             setMessage("הבקשה נשלחה בהצלחה")
-            showMessage()
+          }
+          else if (res.status === 403) {
+            setMessage("INVALID")
           }
           else {
             setMessage("..שליחת הבקשה נכשלה - נסה שנית מאוחר יותר")
-            showMessage()
           }
           return res.json();
         })
         .then(
           (result) => {
             console.log("FETCH PostRequest= ", result);
+            console.log(result.substring(0,6))
+            if (result.substring(0,6) === "תגיות ") {
+              setMessage(result)
+            }
           },
           (error) => {
             console.log("err post=", error);
@@ -101,20 +106,27 @@ export default function FCTagsInput() {
           )
         }
         else if (message === "..שליחת הבקשה נכשלה - נסה שנית מאוחר יותר") {
-          btn = (
-            <Button variant='danger' size='sm' onClick={() => navigate("/CreateNewClass", {state: userDets})}>חזור</Button>
-          )
+            btn = (
+              <Button variant='danger' size='sm' onClick={() => navigate("/CreateNewClass", {state: userDets})}>חזור</Button>
+            )
+        }
+        else {
+            btn = ""
         }
         let block = (
           <div className='middle'>
-            <div>{message}</div>
+            <div style={{direction: "rtl"}}>{message}</div>
             <div>{btn}</div>
           </div>
         )
-        document.getElementById("sendbtn").style.display = "none"
-        document.getElementById("box").style.display = "none"
-        //document.getElementById("tit").style.display = "none"
-        document.getElementById("msg").style.display = "block"
+        if (btn === ""){
+          document.getElementById("msg").style.display = "block"
+        }
+        else {
+          document.getElementById("box").style.display = "none"
+          document.getElementById("sendbtn").style.display = "none"
+          document.getElementById("msg").style.display = "block"
+        }
         return block
       }
       else {
@@ -127,7 +139,6 @@ export default function FCTagsInput() {
       <div className='center'>
         <ReturnPageButton GoTo={() => navigate("/CreateNewClass", {state: userDets})}/>
         <h3 className='middle' id='tit' style={{marginTop: "40px"}}>דף שליחת בקשות לתגיות</h3>
-        <div id="msg" style={{display: "none"}}>{showMessage()}</div>
         <div className="tags-input-container" id="box">
             { tags.map((tag, index) => (
                 <div className="tag-item" key={index}>
@@ -139,6 +150,7 @@ export default function FCTagsInput() {
             <Button variant='secondary' size='sm' onClick={() => addTagBtn()}>הוסף</Button>
         </div>
         <Button variant='success' onClick={() => demo()} id='sendbtn'>שלח</Button>
+        <div id="msg" style={{display: "none"}}>{showMessage()}</div>
       </div>
     )
 }
