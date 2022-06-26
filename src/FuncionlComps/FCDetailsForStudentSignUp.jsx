@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import AsyncSelect from "react-select/async";
 import axios from "axios";
 import validator from "validator";
-import FCButton from "./FCButton";
+import FCButton from "../Elements/FCButton";
 import LogoComponent from "../Elements/LogoComponent";
 import ReturnPageButton from "../Elements/ReturnPageButton";
 
@@ -311,7 +311,7 @@ export default function FCDetailsForStudentSignUp(props) {
   }
 
   return (
-    <Container style={{ flexDirection: "column", maxWidth: "700px", justifyContent: "center", paddingTop: 70 }}>
+    <Container style={{ flexDirection: "column", maxWidth: "700px", justifyContent: "center", paddingTop: 2 }}>
       <div className="App">{message}</div>
       <Card style={{ borderRadius: 25, backgroundColor: "rgba(255, 255, 255, 0.7)" }} id="card">
         <div style={{ alignSelf: "center" }} >

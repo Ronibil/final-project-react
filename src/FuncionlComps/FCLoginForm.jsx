@@ -1,6 +1,6 @@
 import React from "react";
 import { Card, Button, Container} from "react-bootstrap";
-import FCInput from "./FCInput";
+import FCInput from "../Elements/FCInput";
 import LogoComponent from "../Elements/LogoComponent";
 
 export default function FCLoginForm({

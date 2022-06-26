@@ -23,6 +23,7 @@ export default function SearchClassesPage() {
   const [classes, setClasses] = useState([]);
   const [suggestionsClasses, setSuggestionsClasses] = useState([])
   const navigate = useNavigate();
+  const [msNoClasses, setMsNoClasses] = useState(false)
 
   //Modal
   const [confirmModal, setConfirmModal] = useState(false);
@@ -82,18 +83,57 @@ export default function SearchClassesPage() {
       );
   }, [])
 
-  const searchByTags = async () => {
-    try {
-      if (tags.length !== 0) {
-        let tagList = tags.map((tag) => ({ TagName: tag.label }));
-        const { data } = await axios.post(
-          `http://localhost:49812/Class/GetClassesByTags/${userDetails.StudentId}`, //state.StudentId
-          tagList
+  // const searchByTags = async () => {
+  //   try {
+  //     if (tags.length !== 0) {
+  //       let tagList = tags.map((tag) => ({ TagName: tag.label }));
+  //       const { data } = await axios.post(
+  //         `http://localhost:49812/Class/GetClassesByTags/${userDetails.StudentId}`, //state.StudentId
+  //         tagList
+  //       );
+  //       setClasses(data);
+  //       console.log(data);
+  //     }
+  //   } catch (error) { }
+  // };
+
+  const searchByTags = () => {
+
+    const url = `http://localhost:49812/Class/GetClassesByTags/${userDetails.StudentId}`;
+    if (tags.length !== 0) {
+      let tagList = tags.map((tag) => ({ TagName: tag.label }));
+
+      fetch(url, {
+        method: "POST",
+        body: JSON.stringify(tagList),
+        headers: new Headers({
+          "Content-Type": "application/json; charset=UTF-8",
+          Accept: "application/json; charset=UTF-8",
+        }),
+      })
+        .then((res) => {
+          console.log("res.ok", res.ok);
+          return res.json();
+        })
+        .then(
+          (result) => {
+            if (result == "Sorry there are still no classes with tags that you sended. please try another tags.") {
+              console.log("not found");
+              setMsNoClasses(true)
+              setClasses([]);
+            }
+            else {
+              console.log(result);
+              setMsNoClasses(false)
+              setClasses(result);
+            }
+
+          },
+          (error) => {
+            console.log("err post=", error);
+          }
         );
-        setClasses(data);
-        console.log(data);
-      }
-    } catch (error) { }
+    }
   };
 
 
@@ -194,6 +234,16 @@ export default function SearchClassesPage() {
           🔍
         </Button>
       </div>
+      {msNoClasses == true ? (
+        <>
+          <div style={{ margin: "0 auto", color: "black" }}>
+            כרגע לא קיימים שיעורים עם תגית זו, אנו ממליצים להוסיף את התגית להתראות כדי להיות מעודכנים ברגע שהתוסף שיעור בנושא זה
+          </div>
+        </>
+      ) : (
+        ""
+      )}
+
       {classes.length !== 0 ? (
         <>
           <div style={{ width: "100%", height: 400, overflow: "auto" }}>

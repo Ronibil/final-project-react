@@ -3,7 +3,7 @@ import { Container, Card } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import LogoComponent from "../Elements/LogoComponent";
 import ReturnPageButton from "../Elements/ReturnPageButton";
-import FCButton from "../FuncionlComps/FCButton";
+import FCButton from "../Elements/FCButton";
 
 export default function FCTypeOfUser() {
   const navigate = useNavigate();
