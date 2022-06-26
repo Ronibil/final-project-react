@@ -3,12 +3,12 @@ import { Button } from "react-bootstrap";
 
 export default function FCShowProfileSuperBtns() {
   return (
-    <div className="d-flex flex-column mb-2 text-center">
-      <Button className="m-1" variant="outline-primary">
-        <b>בקשה ליצירת קשר</b>
+    <div className="d-flex flex-column mt-2 text-center">
+      <Button className="m-1" variant="primary">
+        בקשה ליצירת קשר
       </Button>
-      <Button className="m-1" variant="outline-primary">
-        <b>צפייה בשיעורים שלי </b>
+      <Button className="m-1" variant="primary">
+        צפייה בשיעורים שלי
       </Button>
     </div>
   );

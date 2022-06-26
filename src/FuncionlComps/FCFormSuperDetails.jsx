@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Row, Col, Container, Button } from "react-bootstrap";
+import { Card, Container } from "react-bootstrap";
 import { FaUserEdit } from "react-icons/fa";
 const emptyImage =
   "https://proj.ruppin.ac.il/bgroup92/prod/ImageFiles/ProfileImage-empty.jpg";
@@ -7,7 +7,10 @@ const emptyImage =
 export default function FCFormSuperDetails({ superDetails, ShowModal }) {
   let profileSuperImage = `https://proj.ruppin.ac.il/bgroup92/prod/ImageFiles/ProfileImage-${superDetails.ImagePath}.jpg`;
   return (
-    <Container className="d-flex" style={{ maxWidth: "700px" }}>
+    <Container
+      className="d-flex justify-content-center"
+      style={{ maxWidth: "700px" }}
+    >
       <Card
         style={{
           borderRadius: 25,
@@ -19,9 +22,9 @@ export default function FCFormSuperDetails({ superDetails, ShowModal }) {
           style={{
             alignSelf: "center",
             height: "140px",
-            width: "120px",
+            width: "140px",
             marginTop: 10,
-            borderRadius: 70,
+            borderRadius: "50%",
             border: "solid 6px white",
           }}
           src={profileSuperImage ? profileSuperImage : emptyImage}

@@ -62,13 +62,13 @@ export default function FCShowProfileSuperStudent() {
     navigate("/searchClassesPage", { state: StudentDetails });
   };
   return (
-    <Container style={{ flexDirection: "column", maxWidth: "700px" }}>
-      {/* <LogoComponent style={{ alignSelf: "center" }} /> */}
+    <Container className="d-flex flex-column mw-700 align-items-center">
+      <LogoComponent style={{ alignSelf: "center" }} />
       {superDetails !== undefined ? (
-        <div>
+        <>
           <FCFormSuperDetails superDetails={superDetails} />
           <FCShowProfileSuperBtns />
-          {state.type == 1 ?
+          {state.type === 1 ? (
             <Button
               className="mb-3 mt-auto"
               variant="outline-primary"
@@ -76,18 +76,16 @@ export default function FCShowProfileSuperStudent() {
             >
               חזרה לחיפוש שיעור
             </Button>
-            :
+          ) : (
             <Button
-              className="mb-3 mt-auto"
-              variant="outline-primary"
+              className="mb-1 mt-auto"
+              variant="primary"
               onClick={BackToStudentHomePage}
             >
               <AiOutlineHome />
-
             </Button>
-          }
-
-        </div>
+          )}
+        </>
       ) : (
         ""
       )}

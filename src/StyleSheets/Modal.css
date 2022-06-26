@@ -2,6 +2,13 @@
   text-align: right;
 }
 
+.modalHeader{
+  width: 100%;
+  text-align: center;
+
+}
+
+
 .iconModal {
   display: flex;
   margin-left: 105px;
@@ -15,9 +22,9 @@
 }
 
 .btnBackToHome{
-  border-radius: 18%;
-  height: 60px;
-  width: 120px;
+  /* border-radius: 18%; */
+  /* height: 60px;
+  width: 120px; */
 }
 
 
