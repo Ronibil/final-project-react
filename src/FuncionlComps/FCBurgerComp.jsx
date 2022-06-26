@@ -1,29 +1,31 @@
-import * as React from 'react';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
-import List from '@mui/material/List';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
-import ListItemText from '@mui/material/ListItemText';
-import NotificationAddIcon from '@mui/icons-material/NotificationAdd';
-import MenuIcon from '@mui/icons-material/Menu';
-import PasswordIcon from '@mui/icons-material/Password';
-import SchoolIcon from '@mui/icons-material/School';
-import LogoutIcon from '@mui/icons-material/Logout';
+import * as React from "react";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import Button from "@mui/material/Button";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import NotificationAddIcon from "@mui/icons-material/NotificationAdd";
+import MenuIcon from "@mui/icons-material/Menu";
+import PasswordIcon from "@mui/icons-material/Password";
+import SchoolIcon from "@mui/icons-material/School";
+import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
-
 
 export default function FCBurgerComp({ userDetails, type }) {
   const [state, setState] = React.useState({
-    right: false
+    right: false,
   });
   const navigate = useNavigate();
 
   const toggleDrawer = (anchor, open) => (event) => {
-    if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
+    if (
+      event.type === "keydown" &&
+      (event.key === "Tab" || event.key === "Shift")
+    ) {
       return;
     }
 
@@ -31,11 +33,11 @@ export default function FCBurgerComp({ userDetails, type }) {
   };
   const logOut = () => {
     window.history.pushState(null, document.title, window.location.href);
-    window.addEventListener('popstate', function (event) {
+    window.addEventListener("popstate", function (event) {
       window.history.pushState(null, document.title, window.location.href);
     });
-    navigate("/")
-  }
+    navigate("/");
+  };
 
   const list = (anchor) => (
     <Box
@@ -73,7 +75,9 @@ export default function FCBurgerComp({ userDetails, type }) {
           </ListItem>
         )}
         <ListItem disablePadding>
-          <ListItemButton onClick={() => navigate("/newPasswordPage", { state: userDetails })}>
+          <ListItemButton
+            onClick={() => navigate("/newPasswordPage", { state: userDetails })}
+          >
             <ListItemIcon>
               <PasswordIcon />
             </ListItemIcon>
@@ -94,14 +98,22 @@ export default function FCBurgerComp({ userDetails, type }) {
   );
 
   return (
-    <div style={{ direction: "rtl", position: "fixed", top: "1%", right: "1%" }}>
-      <Button onClick={toggleDrawer('right', true)} variant="contained" style={{ backgroundColor: "#00417E" }}><MenuIcon /></Button>
-      <Drawer
-        anchor='right'
-        open={state['right']}
-        onClose={toggleDrawer('right', false)}
+    <div
+      style={{ direction: "rtl", position: "fixed", top: "1%", right: "1%" }}
+    >
+      <Button
+        onClick={toggleDrawer("right", true)}
+        variant="contained"
+        style={{ backgroundColor: "#00417E" }}
       >
-        {list('right')}
+        <MenuIcon />
+      </Button>
+      <Drawer
+        anchor="right"
+        open={state["right"]}
+        onClose={toggleDrawer("right", false)}
+      >
+        {list("right")}
       </Drawer>
     </div>
   );

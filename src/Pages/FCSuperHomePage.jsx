@@ -7,7 +7,6 @@ import LogoComponent from "../Elements/LogoComponent";
 import FCBurgerComp from "../FuncionlComps/FCBurgerComp";
 import FCModalUpdateSuperProfileImage from "../FuncionlComps/FCModalUpdateSuperProfileImage";
 
-
 export default function FCSuperHomePage() {
   const { state } = useLocation();
   const UserDetails = state;
@@ -15,12 +14,13 @@ export default function FCSuperHomePage() {
   const [superDetails, setSuperDetails] = useState({});
   const [classHistory, setClassHistory] = useState([]);
   const [classFutre, setClassFutre] = useState([]);
-  const [isOpen,setIsOpen]=useState(false);
-  const [renderAgain,setRenderAgain]=useState(null);
+  const [isOpen, setIsOpen] = useState(false);
+  const [renderAgain, setRenderAgain] = useState(null);
 
   useEffect(() => {
     console.log(UserDetails);
-    const urlGetSuperDetails = "http://localhost:49812/SuperStudent/GetSuperLandingPageDetails";
+    const urlGetSuperDetails =
+      "http://localhost:49812/SuperStudent/GetSuperLandingPageDetails";
     fetch(urlGetSuperDetails, {
       method: "POST",
       body: JSON.stringify(UserDetails),
@@ -54,80 +54,86 @@ export default function FCSuperHomePage() {
           console.log("err post=", error);
         }
       );
-  }, [renderAgain])
+  }, [renderAgain]);
 
   const userDetailsWithId = {
     Email: UserDetails.Email,
     Password: UserDetails.Password,
-    StudentId: superDetails.StudentId
-  }
-  const ShowModal =()=>{
+    StudentId: superDetails.StudentId,
+  };
+  const ShowModal = () => {
     setIsOpen(true);
-  }
-  const CloseModal=()=>{
+  };
+  const CloseModal = () => {
     setIsOpen(false);
-  }
-  const UpdateImage=(newFileToUpload)=>{
-
+  };
+  const UpdateImage = (newFileToUpload) => {
     //UrlApi
-    const urlApi = 'http://localhost:49812/Files/UpdateImage';
+    const urlApi = "http://localhost:49812/Files/UpdateImage";
     //Name Of image.
     const imageName = "ProfileImage-" + superDetails.StudentId + ".jpg";
     //Image file
     const file = newFileToUpload;
     //Type of file.need to be-{image/jpeg}
     const fileType = newFileToUpload.type;
-    if (fileType === 'image/jpeg') {
-      console.log("this is image/jpeg !! continue")
+    if (fileType === "image/jpeg") {
+      console.log("this is image/jpeg !! continue");
       //Create FormData.
       const formData = new FormData();
       formData.append(imageName, file);
       //Fetch
-      fetch(urlApi,
-        {
-          method: 'POST',
-          body: formData
-        }).then((response) => {
-          if (response.ok)
-            console.log("Success");
-            //setRenderAgain for activate useEffect.
-            setIsOpen(false);
-            setRenderAgain(file);
+      fetch(urlApi, {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => {
+          if (response.ok) console.log("Success");
+          //setRenderAgain for activate useEffect.
+          setIsOpen(false);
+          setRenderAgain(file);
         })
-        .then((result) => {
-          console.log("Result =>" + result);
-        }, (error) => {
-          console.log("Error!!! " + error)
-        })
+        .then(
+          (result) => {
+            console.log("Result =>" + result);
+          },
+          (error) => {
+            console.log("Error!!! " + error);
+          }
+        );
+    } else {
+      console.log("this is not image/jpeg");
     }
-    else {
-      console.log("this is not image/jpeg")
-    }
-  }
+  };
 
   return (
-    <Container className="d-flex align-items-center justify-content-center flex-column">
+    <>
       {superDetails !== undefined ? (
-        <>                
+        <Container className="d-flex align-items-center justify-content-center flex-column">
           <LogoComponent />
-          <FCModalUpdateSuperProfileImage isOpen={isOpen} CloseModal={CloseModal} ImagePath={superDetails.ImagePath} 
-          UpdateImage={UpdateImage}
+          <FCModalUpdateSuperProfileImage
+            isOpen={isOpen}
+            CloseModal={CloseModal}
+            ImagePath={superDetails.ImagePath}
+            UpdateImage={UpdateImage}
           />
           <FCBurgerComp userDetails={userDetailsWithId} type="super" />
-            <FCFormSuperDetails  ShowModal={ShowModal}  superDetails={superDetails} />
-            <FCButtonsForSuperHomePage
-              DepartmentName={superDetails.DepartmentName}
-              Description={superDetails.Description}
-              StudyYear={superDetails.StudyYear}
-              UserDetails={userDetailsWithId}
-              superName={superDetails.FullName}
-              HistoryClass={classHistory}
-              FutreClass={classFutre}
-            />
-          </>
-          ) : (
-          ""
-      )}
+          <FCFormSuperDetails
+            ShowModal={ShowModal}
+            superDetails={superDetails}
+          />
+          <FCButtonsForSuperHomePage
+            DepartmentName={superDetails.DepartmentName}
+            Description={superDetails.Description}
+            StudyYear={superDetails.StudyYear}
+            UserDetails={userDetailsWithId}
+            superName={superDetails.FullName}
+            HistoryClass={classHistory}
+            FutreClass={classFutre}
+          />
         </Container>
-      );
+      ) : (
+        ""
+      )}
+    </>
+  );
 }
