@@ -6,6 +6,7 @@ import FCButtonsForSuperHomePage from "../FuncionlComps/FCButtonsForSuperHomePag
 import LogoComponent from "../Elements/LogoComponent";
 import FCBurgerComp from "../FuncionlComps/FCBurgerComp";
 import FCModalUpdateSuperProfileImage from "../FuncionlComps/FCModalUpdateSuperProfileImage";
+import FCModalDeleteImage from "../FuncionlComps/FCModalDeleteImage";
 
 export default function FCSuperHomePage() {
   const { state } = useLocation();
@@ -16,6 +17,7 @@ export default function FCSuperHomePage() {
   const [classFutre, setClassFutre] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [renderAgain, setRenderAgain] = useState(null);
+  const [isOpenDeleteImage, SetIsOpenDeleteImage] = useState(false);
 
   useEffect(() => {
     console.log(UserDetails);
@@ -104,6 +106,31 @@ export default function FCSuperHomePage() {
       console.log("this is not image/jpeg");
     }
   };
+  const CloseModalDelete = () => {
+    SetIsOpenDeleteImage(false);
+  }
+  const ShowModalDelete = () => {
+    SetIsOpenDeleteImage(true);
+  }
+  const DeleteImage = () => {   
+    //Student id for delete image.
+    const superId = superDetails.StudentId;
+    //UrlApi
+    const urlApi = `http://localhost:49812/Files/DeleteImage/${superId}`;
+    fetch(urlApi, {
+      method: "PUT",
+    }).then((response) => {
+      if (response.ok) {
+        console.log("Success");
+        CloseModalDelete();
+        setRenderAgain('renderAgain!');
+      }
+    }).then((result) => {
+      console.log("Result =>" + result);
+    }, (error) => {
+      console.log("Error!!! " + error);
+    });
+  }
 
   return (
     <>
@@ -116,9 +143,15 @@ export default function FCSuperHomePage() {
             ImagePath={superDetails.ImagePath}
             UpdateImage={UpdateImage}
           />
+          <FCModalDeleteImage
+            modalOpen={isOpenDeleteImage}
+            CloseModalDelete={CloseModalDelete}
+            DeleteImage={DeleteImage}
+          />
           <FCBurgerComp userDetails={userDetailsWithId} type="super" />
           <FCFormSuperDetails
             ShowModal={ShowModal}
+            ShowModalDelete={ShowModalDelete}
             superDetails={superDetails}
           />
           <FCButtonsForSuperHomePage
