@@ -2,12 +2,10 @@
   text-align: right;
 }
 
-.modalHeader{
+.modalHeader {
   width: 100%;
   text-align: center;
-
 }
-
 
 .iconModal {
   display: flex;
@@ -21,11 +19,8 @@
   justify-content: center;
 }
 
-.btnBackToHome{
-  /* border-radius: 18%; */
-  /* height: 60px;
-  width: 120px; */
-}
-
-
-
+/* .btnBackToHome {
+  border-radius: 18%;
+  height: 60px;
+  width: 120px;
+} */

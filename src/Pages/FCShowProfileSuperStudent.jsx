@@ -40,7 +40,7 @@ export default function FCShowProfileSuperStudent() {
           setSuperDetails({
             StudentId: data.StudentId,
             FullName: data.FullName,
-            Image: null,
+            ImagePath: data.ImagePath,
             Description: data.Description,
             DepartmentName: data.DepartmentName,
             StudyYear: data.StudyYear,
