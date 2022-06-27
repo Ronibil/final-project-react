@@ -42,7 +42,7 @@ export default function App() {
       <Route path="/ShowProfileSuperStudent" element={<FCShowProfileSuperStudent />} />
       <Route path="/UpdateSuperClassPage" element={<FCUpdateSuperClassPage />} />
       <Route path="/changePasswordPage" element={<FCChangePasswordPage />} />
-      <Route path="classForStudent" element={<FCClassForStudent />} />
+      <Route path="/classForStudent" element={<FCClassForStudent />} />
       <Route path="/newPasswordPage" element={<FCNewPasswordPage />} />
       <Route path="/insertTagsPage" element={<FCTagsInput />} />
       <Route path="/adminTagsPage" element={<FCTgasRequestPage />} />

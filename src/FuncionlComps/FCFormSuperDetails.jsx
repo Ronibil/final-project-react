@@ -9,7 +9,7 @@ export default function FCFormSuperDetails({ superDetails, ShowModal,ShowModalDe
   return (
     <Container
       className="d-flex justify-content-center"
-      style={{ maxWidth: "700px" }}
+      style={{ maxWidth: "700px"}}
     >
       <Card
         style={{

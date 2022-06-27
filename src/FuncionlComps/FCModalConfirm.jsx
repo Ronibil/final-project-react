@@ -8,7 +8,7 @@ function FCModalConfirm({ BackToHomePage, modalOpen, ClassDetailsForModal, text 
     <Modal show={modalOpen}>
       <Modal.Dialog >
         <Modal.Header>
-          <Modal.Title>{text}</Modal.Title>
+          <Modal.Title className='modalHeader'>{text}</Modal.Title>
         </Modal.Header>
 
         <Modal.Body className='ModalBody' >
