@@ -54,7 +54,7 @@ export default function FCUpdateSuperClassPage() {
   //   classEndTime: classEndTime,
   //   classParticipants: classParticipants,
   // };
-
+  
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await axios.get("http://localhost:49812/Tags/getAll");

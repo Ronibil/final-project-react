@@ -13,7 +13,7 @@ export default function FCBottomNavigation({ UserDetails }) {
 
   return (
     <BottomNavigation
-      sx={{ width: '100%', position: 'absolute', bottom: 0 }}
+      sx={{ width: '100%', position: 'fixed', bottom: 0, left: 0, right: 0 }}
       value={value}
       onChange={(event, newValue) => setValue(newValue)}
       showLabels
