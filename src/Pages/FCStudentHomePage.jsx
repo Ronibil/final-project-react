@@ -8,10 +8,10 @@ import FCBurgerComp from "../FuncionlComps/FCBurgerComp";
 export default function StudentHomePage() {
   const navigate = useNavigate();
   const [studentDetails, setStudentDetails] = useState({});
-
+  const [recommendation, setRecommendation] = useState()
   const location = useLocation();
   const { state } = location;
-  const recommendation = "במקום לקרוא עמודים על גבי עמודים ברצף, התרגלו להפסיק את הקריאה בסוף כל תת נושא או סעיף ולספר בקול את עיקרי הדברים שלמדתם כאילו שאתם מסבירים את החומר למישהו אחר. חזרה על החומר במילים שלכם מהווה מדד מצוין למידה שבה הפנמתם את המידע בשעת הקריאה. אם הצלחתם להסביר עברו הלאה ואם לא - חיזרו אחורה וקראו שנית"
+
 
 
   const userDetails = {
@@ -48,11 +48,35 @@ export default function StudentHomePage() {
       );
   }, []);
 
+  useEffect(() => {
+    const url = "http://localhost:49812/tip/GetRandomTip";
+    fetch(url, {
+      method: "GET",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json; charset=UTF-8",
+      }),
+    })
+      .then((res) => {
+        console.log("res.ok", res.ok);
+        return res.json();
+      })
+      .then(
+        (result) => {
+          console.log("FETCH PostRequest= ", result);
+          setRecommendation(result.TipContent);
+        },
+        (error) => {
+          console.log("err post=", error);
+        }
+      );
+  }, []);
+
   return (
     <Container className="min-vh-100 d-flex align-items-center flex-column text-center">
       <LogoComponent />
       <h1>ברוכים הבאים - {studentDetails.FullName}</h1><br />
-      <FCBurgerComp userDetails={userDetails}/>
+      <FCBurgerComp userDetails={userDetails} />
       <h3>:ההמלצה השבועית</h3>
       <div style={{ borderRadius: 25, backgroundColor: "#17815A", padding: "20PX", backgroundColor: "rgba(255, 255, 255, 0.7)" }}>
         <h6>{recommendation}</h6>

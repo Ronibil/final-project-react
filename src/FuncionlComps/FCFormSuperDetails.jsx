@@ -38,7 +38,7 @@ export default function FCFormSuperDetails({ superDetails, ShowModal,ShowModalDe
             width: 25,
             height: 25,            
             background: "white",
-            marginLeft:35,
+            marginLeft: "70%",
             borderRadius: 50,
           }}
         />

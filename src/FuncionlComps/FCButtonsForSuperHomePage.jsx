@@ -41,7 +41,7 @@ export default function FCButtonsForSuperHomePage({
   };
 
   return (
-    <div className="mt-2 mb-2 ">
+    <div>
       <div>
         <Button
           className="btnSuper"

@@ -11,9 +11,9 @@
 
 @media (max-width: 768px) {
   .btnSuper {
-    height: 40vw;
-    width: 40vw;
-    margin: 10px;
+    height: 30vw;
+    width: 43vw;
+    margin: 5px;
   }
   .card {
     width: 100%;
