@@ -1,15 +1,16 @@
 import React from "react";
-import { Card, Container,Row,Col } from "react-bootstrap";
-import { FaUserEdit,FaUserTimes } from "react-icons/fa";
+import { Card, Container, Row, Col } from "react-bootstrap";
+import { FaUserEdit, FaUserTimes } from "react-icons/fa";
+import FCStarsToReturn from "./FCStarsToReturn";
 const emptyImage =
   "https://proj.ruppin.ac.il/bgroup92/prod/ImageFiles/ProfileImage-empty.jpg";
 
-export default function FCFormSuperDetails({ superDetails, ShowModal,ShowModalDelete }) {
+export default function FCFormSuperDetails({ superDetails, ShowModal, ShowModalDelete, type }) {
   let profileSuperImage = `https://proj.ruppin.ac.il/bgroup92/prod/ImageFiles/ProfileImage-${superDetails.ImagePath}.jpg`;
   return (
     <Container
       className="d-flex justify-content-center"
-      style={{ maxWidth: "700px"}}
+      style={{ maxWidth: "700px" }}
     >
       <Card
         style={{
@@ -27,63 +28,65 @@ export default function FCFormSuperDetails({ superDetails, ShowModal,ShowModalDe
             borderRadius: "50%",
             border: "solid 6px white",
           }}
-          src={superDetails.ImagePath !==undefined? profileSuperImage : emptyImage}
+          src={superDetails.ImagePath !== undefined ? profileSuperImage : emptyImage}
           alt={emptyImage}
         />
         <Row>
+          {type !== "student" ? (
+            <Col xs={6}>
+              <FaUserEdit
+                onClick={ShowModal}
+                style={{
+                  width: 25,
+                  height: 25,
+                  background: "white",
+                  marginLeft: "70%",
+                  borderRadius: 50,
+                }}
+              />
+            </Col>
+          ) : ("")}
           <Col xs={6}>
-        <FaUserEdit
-          onClick={ShowModal}
-          style={{
-            width: 25,
-            height: 25,            
-            background: "white",
-            marginLeft: "70%",
-            borderRadius: 50,
-          }}
-        />
-        </Col>
-        <Col xs={6}>
-          {superDetails.ImagePath!==undefined && superDetails.ImagePath!=='empty'?<><FaUserTimes
-          onClick={ShowModalDelete}
-          style={{
-            width: 25,
-            height: 25,
-            marginLeft:25,
-            background: "white",
-            borderRadius: 50,
-          }}/></>:''}
+            {superDetails.ImagePath !== undefined && superDetails.ImagePath !== 'empty' ? <><FaUserTimes
+              onClick={ShowModalDelete}
+              style={{
+                width: 25,
+                height: 25,
+                marginLeft: 25,
+                background: "white",
+                borderRadius: 50,
+              }} /></> : ''}
           </Col>
-          </Row>
-            <Card.Body align="center">
-              <Card.Title>{superDetails.FullName}</Card.Title>
-              <Card.Text>
-                {superDetails.StudyYear} <b>:סטודנט שנה</b>
-                <br />
-                <b>מסלול לימודים:</b> {superDetails.DepartmentName}
-              </Card.Text>
-              <hr />
-              <div className="d-flex justify-content-between">
-                <div className="d-flex flex-column">
-                  <b>דירוג</b>
-                  {superDetails.RankAverage}/5
-                </div>
-                <div className="d-flex flex-column">
-                  <b>מדרגים</b>
-                  {superDetails.NumOfRanks}
-                </div>
-                <div className="d-flex flex-column">
-                  <b>מספר שיעורים</b>
-                  {superDetails.NumOfClass}
-                </div>
-              </div>
-              <hr />
-              <Card.Text>
-                <b>:קצת עלי</b>
-                <br />
-                {superDetails.Description}
-              </Card.Text>
-            </Card.Body>
+        </Row>
+        <Card.Body align="center">
+          <Card.Title>{superDetails.FullName}</Card.Title>
+          <Card.Text>
+            {superDetails.StudyYear} <b>:סטודנט שנה</b>
+            <br />
+            <b>מסלול לימודים:</b> {superDetails.DepartmentName}
+          </Card.Text>
+          <hr />
+          <div className="d-flex justify-content-between">
+            <div>
+              <b>דירוג</b><br />
+              <FCStarsToReturn numbersOfStars={superDetails.RankAverage} />
+            </div>
+            <div className="d-flex flex-column">
+              <b>מדרגים</b>
+              {superDetails.NumOfRanks}
+            </div>
+            <div className="d-flex flex-column">
+              <b>מספר שיעורים</b>
+              {superDetails.NumOfClass}
+            </div>
+          </div>
+          <hr />
+          <Card.Text>
+            <b>:קצת עלי</b>
+            <br />
+            {superDetails.Description}
+          </Card.Text>
+        </Card.Body>
       </Card>
     </Container>
   );

@@ -126,10 +126,20 @@ export default function FCClassCard({
             <div className="text-end">
               <b>שם השיעור:</b> {classToCard.ClassName}
               <br />
+              <b>תיאור:</b> {classToCard.ClassDescription}
+              <br />
               <b>תאריך:</b>{" "}
               {new Date(classToCard.ClassDate).toLocaleDateString("en-GB")}{" "}
               <br />
               <b>שעת התחלה:</b> {classToCard.StartTime}
+              <br />
+              <b>:תגיות השיעור</b>
+              <br />
+              <b>
+                {classToCard.Tags.map((t) => (
+                  t + " "
+                ))}
+              </b>
             </div>
           </Card.Body>
         </Card>

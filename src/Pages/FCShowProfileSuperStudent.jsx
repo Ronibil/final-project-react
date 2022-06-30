@@ -60,7 +60,7 @@ export default function FCShowProfileSuperStudent() {
       <LogoComponent style={{ alignSelf: "center" }} />
       {superDetails !== undefined ? (
         <>
-          <FCFormSuperDetails superDetails={superDetails} />
+          <FCFormSuperDetails superDetails={superDetails} type="student" />
           <FCShowProfileSuperBtns />
           {state.type === 1 ? (
             <ReturnPageButton GoTo={() => navigate("/searchClassesPage", { state: userDetails })} />
