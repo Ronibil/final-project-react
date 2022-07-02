@@ -2,22 +2,23 @@ import React from "react";
 import FCFormSuperDetails from "../FuncionlComps/FCFormSuperDetails";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Container } from "react-bootstrap";
+import { Container, Button } from "react-bootstrap";
 import FCShowProfileSuperBtns from "../FuncionlComps/FCShowProfileSuperBtns";
+import { AiOutlineHome } from "react-icons/ai";
 import LogoComponent from "../Elements/LogoComponent";
-import ReturnPageButton from "../Elements/ReturnPageButton";
+import FCBurgerComp from "../FuncionlComps/FCBurgerComp";
 
 export default function FCShowProfileSuperStudent() {
   const { state } = useLocation();
   const navigate = useNavigate();
   const [superDetails, setSuperDetails] = useState();
-  const [futureClassesSuper, setfutureClassesSuper] = useState();
 
   const superId = state.classToCard.SuperStudentId;
-  const userDetails = {
+  // const studentDetails = state.studentDetails;
+  const StudentDetails = {
     Email: state.studentDetails.Email,
     Password: state.studentDetails.Password,
-    StudentId: state.studentDetails.StudentId
+    StudentId: state.studentDetails.StudentId,
   };
 
   useEffect(() => {
@@ -47,6 +48,8 @@ export default function FCShowProfileSuperStudent() {
             NumOfRanks: data.NumOfRanks,
             RankAverage: data.RankAverage,
             NumOfClass: data.FutreClasses.length,
+            FutreClasses: data.FutreClasses,
+            Phone: data.Phone,
           });
         },
         (error) => {
@@ -55,18 +58,40 @@ export default function FCShowProfileSuperStudent() {
       );
   }, [superId]);
 
+  const BackToStudentHomePage = () => {
+    navigate("/studentHomePage", { state: StudentDetails });
+  };
+  const BackToSearchClassesPage = () => {
+    navigate("/searchClassesPage", { state: StudentDetails });
+  };
   return (
     <Container className="d-flex flex-column mw-700 align-items-center">
       <LogoComponent style={{ alignSelf: "center" }} />
+      <FCBurgerComp userDetails={state.studentDetails} />
       {superDetails !== undefined ? (
         <>
-          <FCFormSuperDetails superDetails={superDetails} type="student" />
-          <FCShowProfileSuperBtns />
+          <FCFormSuperDetails superDetails={superDetails} />
+          <FCShowProfileSuperBtns
+            StudentDetails={StudentDetails}
+            FutreClasses={superDetails.FutreClasses}
+            Phone ={superDetails.Phone}
+          />
           {state.type === 1 ? (
-            <ReturnPageButton GoTo={() => navigate("/searchClassesPage", { state: userDetails })} />
-
+            <Button
+              className="mb-3 mt-auto"
+              variant="outline-primary"
+              onClick={BackToSearchClassesPage}
+            >
+              חזרה לחיפוש שיעור
+            </Button>
           ) : (
-            <ReturnPageButton GoTo={() => navigate("/classForStudent", { state: userDetails })} />
+            <Button
+              className="mb-1 mt-auto"
+              variant="primary"
+              onClick={BackToStudentHomePage}
+            >
+              <AiOutlineHome />
+            </Button>
           )}
         </>
       ) : (

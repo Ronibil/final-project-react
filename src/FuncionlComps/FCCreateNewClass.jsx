@@ -15,7 +15,7 @@ export default function FCCreateNewClass() {
   const superId = state.superId;
   const superName = state.superName;
   const superEmail = state.superEmail;
-  const superPassword = state.superPassword
+  const superPassword = state.superPassword;
   const UserDetails = {
     Email: superEmail,
     Password: superPassword,
@@ -63,23 +63,23 @@ export default function FCCreateNewClass() {
     };
     fetchData();
     if (JSON.parse(localStorage.getItem("classDets")) !== null) {
-      const dets = JSON.parse(localStorage.getItem("classDets"))
-      console.log(dets)
-      let elemnts = document.getElementsByName("hold")
-      console.log(elemnts)
-      elemnts[0].value = dets.ClassName
-      setClassName(dets.ClassName)
-      elemnts[1].value = dets.ClassDescription
-      setClassDescription(dets.ClassDescription)
-      elemnts[2].value = dets.ClassDate
-      setClassDate(dets.ClassDate)
-      elemnts[3].value = dets.StartTime
-      seTclassStartTime(dets.StartTime)
-      elemnts[4].value = dets.EndTime
-      setClassEndTime(dets.EndTime)
-      elemnts[5].value = dets.NumOfParticipants
-      setClassParticipants(dets.NumOfParticipants)
-      elemnts[6].value = dets.Tags
+      const dets = JSON.parse(localStorage.getItem("classDets"));
+      console.log(dets);
+      let elemnts = document.getElementsByName("hold");
+      console.log(elemnts);
+      elemnts[0].value = dets.ClassName;
+      setClassName(dets.ClassName);
+      elemnts[1].value = dets.ClassDescription;
+      setClassDescription(dets.ClassDescription);
+      elemnts[2].value = dets.ClassDate;
+      setClassDate(dets.ClassDate);
+      elemnts[3].value = dets.StartTime;
+      seTclassStartTime(dets.StartTime);
+      elemnts[4].value = dets.EndTime;
+      setClassEndTime(dets.EndTime);
+      elemnts[5].value = dets.NumOfParticipants;
+      setClassParticipants(dets.NumOfParticipants);
+      elemnts[6].value = dets.Tags;
     }
   }, []);
 
@@ -111,7 +111,7 @@ export default function FCCreateNewClass() {
       .then((res) => {
         console.log("res.ok", res.ok);
         if (res.ok) {
-          localStorage.removeItem("classDets")
+          localStorage.removeItem("classDets");
           setModalOpen(true);
         }
         return res.json();
@@ -136,7 +136,7 @@ export default function FCCreateNewClass() {
     ClassName: className,
     superEmail: superEmail,
     superPassword: superPassword,
-  }
+  };
 
   const holdInputAndNav = () => {
     let tagList = tags.map((tag) => tag.label);
@@ -151,20 +151,33 @@ export default function FCCreateNewClass() {
       SuperName: superName,
       Tags: tagList,
     };
-    localStorage.setItem("classDets", JSON.stringify(newClassObj))
-    navigate("/insertTagsPage", { state: tagsRelatedDetails })
-  }
+    localStorage.setItem("classDets", JSON.stringify(newClassObj));
+    navigate("/insertTagsPage", { state: tagsRelatedDetails });
+  };
 
   return (
-    <Container style={{ flexDirection: "column", maxWidth: "700px", justifyContent: "center" }}>
-      <Card style={{ paddingTop: 62, borderRadius: 25, backgroundColor: "rgba(255, 255, 255, 0.7)" }} >
+    <Container
+      style={{
+        flexDirection: "column",
+        maxWidth: "700px",
+        justifyContent: "center",
+      }}
+    >
+      <Card
+        style={{
+          paddingTop: 62,
+          borderRadius: 25,
+          backgroundColor: "rgba(255, 255, 255, 0.7)",
+        }}
+      >
         <Card.Body align="center">
           <ReturnPageButton GoTo={BackToHomePage} />
           <h2 className="text-center mb-4">יצירת שיעור חדש</h2>
           <Form>
-            <Form.Group className="mb-3" >
+            <Form.Group className="mb-3">
               {/* <Form.Label>שם השיעור</Form.Label> */}
               <Form.Control
+                dir="rtl"
                 type="text"
                 style={{ textAlign: "right", borderRadius: 25 }}
                 placeholder="שם השיעור"
@@ -176,6 +189,7 @@ export default function FCCreateNewClass() {
             <Form.Group className="mb-3">
               {/* <Form.Label>תיאור השיעור</Form.Label> */}
               <Form.Control
+                dir="rtl"
                 as="textarea"
                 style={{ textAlign: "right", borderRadius: 25 }}
                 rows={3}
@@ -224,6 +238,7 @@ export default function FCCreateNewClass() {
             <Form.Group className="mb-3">
               <Form.Label>מספר משתתפים</Form.Label>
               <Form.Select
+                dir="rtl"
                 size="sm"
                 style={{ textAlign: "right", borderRadius: 25 }}
                 required
@@ -262,11 +277,7 @@ export default function FCCreateNewClass() {
               </Form.Text>
             </Form.Group>
           </Form>
-          <Button
-            id="subBtn"
-            variant="success"
-            onClick={() => postNewClass()}
-          >
+          <Button id="subBtn" variant="success" onClick={() => postNewClass()}>
             יצירת שיעור
           </Button>
         </Card.Body>

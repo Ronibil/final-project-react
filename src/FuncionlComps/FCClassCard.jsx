@@ -10,37 +10,58 @@ export default function FCClassCard({
   btnFunction,
   studentDetails,
   ShowModalStarsBtn,
-  RegistrationPoint
+  RegistrationPoint,
 }) {
   const navigate = useNavigate();
   switch (type) {
     case "history":
       return (
-        <Card style={{ width: "98%", marginTop: 4, backgroundColor: "rgba(208, 201, 192, 0.8)", marginLeft: 4, borderRadius: 20, border: "solid #7F8487 1px" }}>
+        <Card
+          style={{
+            width: "98%",
+            marginTop: 4,
+            backgroundColor: "rgba(208, 201, 192, 0.8)",
+            marginLeft: 4,
+            borderRadius: 20,
+            border: "solid #7F8487 1px",
+          }}
+        >
           <Card.Body className="text-end">
             <Row>
               <Col xs={4} style={{ alignSelf: "center" }}>
                 {classToCard.RankResults != null ? (
                   <>
-                    5 / {classToCard.RankResults[0].RankValue} < b >:דירוג</b>
+                    5 / {classToCard.RankResults[0].RankValue} <b>:דירוג</b>
                   </>
-                ) : ("")}
+                ) : (
+                  ""
+                )}
               </Col>
               <Col xs={8}>
                 <b>שם השיעור:</b> {classToCard.ClassName}
                 <br />
                 <b>תאריך:</b>{" "}
-                {new Date(classToCard.ClassDate).toLocaleDateString("en-GB")} <br />
+                {new Date(classToCard.ClassDate).toLocaleDateString("en-GB")}{" "}
+                <br />
                 <b>שעת התחלה:</b> {classToCard.StartTime}
                 <br />
               </Col>
             </Row>
           </Card.Body>
-        </Card >
+        </Card>
       );
     case "studentFutre":
       return (
-        <Card style={{ width: "98%", marginTop: 4, backgroundColor: "rgba(218, 234, 241, 0.8)", marginLeft: 4, borderRadius: 20, border: "solid #1C658C 1px" }}>
+        <Card
+          style={{
+            width: "98%",
+            marginTop: 4,
+            backgroundColor: "rgba(218, 234, 241, 0.8)",
+            marginLeft: 4,
+            borderRadius: 20,
+            border: "solid #1C658C 1px",
+          }}
+        >
           <Card.Body className="w-100 d-flex align-items-center justify-content-between">
             <div>
               <Button
@@ -84,7 +105,16 @@ export default function FCClassCard({
       );
     case "Futre":
       return (
-        <Card style={{ width: "98%", marginTop: 4, backgroundColor: "rgba(218, 234, 241, 0.9)", marginLeft: 4, borderRadius: 20, border: "solid #1C658C 1px" }}>
+        <Card
+          style={{
+            width: "98%",
+            marginTop: 4,
+            backgroundColor: "rgba(218, 234, 241, 0.9)",
+            marginLeft: 4,
+            borderRadius: 20,
+            border: "solid #1C658C 1px",
+          }}
+        >
           <Card.Body className="d-flex align-items-center justify-content-between">
             <div className="d-flex flex-column">
               {classToCard.NumOfRegistered > 0 ? (
@@ -135,11 +165,9 @@ export default function FCClassCard({
               <br />
               <b>:תגיות השיעור</b>
               <br />
-              <b>
-                {classToCard.Tags.map((t) => (
-                  t + " "
-                ))}
-              </b>
+              {classToCard.Tags.map((t) => (
+                <span className="badge rounded-pill bg-primary">{t}</span>
+              ))}
             </div>
           </Card.Body>
         </Card>
@@ -147,14 +175,29 @@ export default function FCClassCard({
     case "SearchClass":
       return (
         <>
-          <Card style={{ width: "98%", marginTop: 4, backgroundColor: "rgba(218, 234, 241, 0.9)", marginLeft: 4, borderRadius: 20, border: "solid #1C658C 1px" }}>
+          <Card
+            style={{
+              width: "98%",
+              marginTop: 4,
+              backgroundColor: "rgba(218, 234, 241, 0.9)",
+              marginLeft: 4,
+              borderRadius: 20,
+              border: "solid #1C658C 1px",
+            }}
+          >
             <Card.Body className="w-100 d-flex align-items-center justify-content-between">
               <div>
                 {classToCard.NumOfParticipants - classToCard.NumOfRegistered >
-                  0 ? (
+                0 ? (
                   <Button
-                    onClick={() => btnFunction(classToCard.ClassCode, RegistrationPoint)}
-                    style={{ borderRadius: 15, background: "#A2D5AB", border: "solid #4B8673 2px" }}
+                    onClick={() =>
+                      btnFunction(classToCard.ClassCode, RegistrationPoint)
+                    }
+                    style={{
+                      borderRadius: 15,
+                      background: "#A2D5AB",
+                      border: "solid #4B8673 2px",
+                    }}
                   >
                     הרשמה
                   </Button>
@@ -176,16 +219,23 @@ export default function FCClassCard({
                 <br />
                 <b>
                   {classToCard.Tags.map((t) => (
-                    t + " "
+                    <span className="badge rounded-pill bg-primary">{t}</span>
                   ))}
                 </b>
                 {studentDetails !== undefined ? (
                   <>
                     <br />
-                    <FCStarsToReturn numbersOfStars={classToCard.SuperStudentRank} /> <b>:דירוג</b>
+                    <FCStarsToReturn
+                      numbersOfStars={classToCard.SuperStudentRank}
+                    />{" "}
+                    <b>:דירוג</b>
                     <Button
                       className="badge rounded-pill"
-                      style={{ background: "#A2D5AB", border: "solid #4B8673 2px", marginLeft: 8 }}
+                      style={{
+                        background: "#A2D5AB",
+                        border: "solid #4B8673 2px",
+                        marginLeft: 8,
+                      }}
                       size="sm"
                       onClick={() =>
                         navigate("/ShowProfileSuperStudent", {
@@ -206,10 +256,19 @@ export default function FCClassCard({
       );
     case "studentHistory":
       return (
-        <Card style={{ width: "98%", marginTop: 4, backgroundColor: "rgba(208, 201, 192, 0.8)", marginLeft: 4, borderRadius: 20, border: "solid #7F8487 1px" }}>
+        <Card
+          style={{
+            width: "98%",
+            marginTop: 4,
+            backgroundColor: "rgba(208, 201, 192, 0.8)",
+            marginLeft: 4,
+            borderRadius: 20,
+            border: "solid #7F8487 1px",
+          }}
+        >
           <Card.Body className="w-100 d-flex align-items-center justify-content-between">
             <div>
-              {classToCard.RankResults[0].RankValue == 0 ? (
+              {classToCard.RankResults[0].RankValue === 0 ? (
                 <Button
                   className="m-1"
                   size="sm"
@@ -218,7 +277,9 @@ export default function FCClassCard({
                 >
                   דירוג
                 </Button>
-              ) : ("")}
+              ) : (
+                ""
+              )}
               <br />
               <Button className="m-1" size="sm" variant="outline-primary">
                 לצ'אט

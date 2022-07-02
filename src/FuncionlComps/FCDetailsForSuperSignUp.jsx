@@ -13,16 +13,15 @@ export default function FCDetailsForSuperSignUp(props) {
   const [superDepartmet, setSuperDepartmet] = useState("");
   const [superStudyYear, setSuperStudyYear] = useState("");
   const [superDescription, setSuperDescription] = useState("");
-  const [superImageUrl,setSuperImageUrl]=useState(null);
+  const [superImageUrl, setSuperImageUrl] = useState(null);
   const [superImage, setSuperImage] = useState(null);
-  const [message, setMessage] = useState(<div></div>)
+  const [message, setMessage] = useState(<div></div>);
 
   const altImage =
     "https://www.pngkey.com/png/full/73-730477_first-name-profile-image-placeholder-png.png";
 
   useEffect(() => {
-    const apiUrlDepartments =
-      "http://localhost:49812/department/getall";
+    const apiUrlDepartments = "http://localhost:49812/department/getall";
     fetch(apiUrlDepartments, {
       method: "GET",
       headers: new Headers({
@@ -48,13 +47,16 @@ export default function FCDetailsForSuperSignUp(props) {
   }, []);
 
   const checkFields = () => {
-    if (superDepartmet === "" || superStudyYear === "" || superDescription === "") {
-      alert("כל השדות חובה! נא למלות את כולן בתקינות.")
+    if (
+      superDepartmet === "" ||
+      superStudyYear === "" ||
+      superDescription === ""
+    ) {
+      alert("כל השדות חובה! נא למלות את כולן בתקינות.");
+    } else {
+      btnPostSuperStudentRequest();
     }
-    else {
-      btnPostSuperStudentRequest()
-    }
-  }
+  };
 
   const btnPostSuperStudentRequest = () => {
     const LocalUrl = "http://localhost:49812/requestToJoin/newRequest";
@@ -127,7 +129,7 @@ export default function FCDetailsForSuperSignUp(props) {
         console.log("res=", res);
         console.log("res.status", res.status);
         console.log("res.ok", res.ok);
-        msgBox(res.ok)
+        msgBox(res.ok);
         return res.json();
       })
       .then(
@@ -144,37 +146,38 @@ export default function FCDetailsForSuperSignUp(props) {
 
   const UploadImage = () => {
     //UrlApi
-    const urlApi = 'http://localhost:49812/Files/UploadImage';
+    const urlApi = "http://localhost:49812/Files/UploadImage";
     //Name Of image.
     const imageName = "ProfileImage-" + superDetails.StudentId + ".jpg";
     //Image file
     const file = superImage;
     //Type of file.need to be-{image/jpeg}
     const fileType = superImage.type;
-    if (fileType === 'image/jpeg') {
-      console.log("this is image/jpeg !! continue")
+    if (fileType === "image/jpeg") {
+      console.log("this is image/jpeg !! continue");
       //Create FormData.
       const formData = new FormData();
       formData.append(imageName, file);
       //Fetch
-      fetch(urlApi,
-        {
-          method: 'POST',
-          body: formData
-        }).then((response) => {
-          if (response.ok)
-            console.log("Success")
+      fetch(urlApi, {
+        method: "POST",
+        body: formData,
+      })
+        .then((response) => {
+          if (response.ok) console.log("Success");
         })
-        .then((result) => {
-          console.log("Result =>" + result);
-        }, (error) => {
-          console.log("Error!!! " + error)
-        })
+        .then(
+          (result) => {
+            console.log("Result =>" + result);
+          },
+          (error) => {
+            console.log("Error!!! " + error);
+          }
+        );
+    } else {
+      console.log("this is not image/jpeg");
     }
-    else {
-      console.log("this is not image/jpeg")
-    }
-  }
+  };
 
   const msgBox = (isOk) => {
     let box;
@@ -183,27 +186,38 @@ export default function FCDetailsForSuperSignUp(props) {
         <div className="App-header">
           <div>!הבקשה נשלחה בהצלחה</div>
           <div>אנו נצור איתך קשר לגבי מצב בקשתך דרך המייל איתו הזנת בהרשמה</div>
-          <Button variant="success" onClick={() => navigate("/")}>סגור</Button>
+          <Button variant="success" onClick={() => navigate("/")}>
+            סגור
+          </Button>
         </div>
-      )
-    }
-    else {
+      );
+    } else {
       box = (
         <div className="App-header">
           <div>!שליחת הבקשה נכשלה</div>
           <div>..נא לנסות שוב מאוחר יותר</div>
-          <Button variant="danger" onClick={() => navigate("/")}>סגור</Button>
+          <Button variant="danger" onClick={() => navigate("/")}>
+            סגור
+          </Button>
         </div>
-      )
+      );
     }
-    document.getElementById("card").style.display = "none"
-    setMessage(box)
-  }
+    document.getElementById("card").style.display = "none";
+    setMessage(box);
+  };
 
   return (
-    <Container style={{ flexDirection: "column", maxWidth: "700px", paddingTop: 70 }}>
+    <Container
+      style={{ flexDirection: "column", maxWidth: "700px", paddingTop: 70 }}
+    >
       <div className="App">{message}</div>
-      <Card style={{ borderRadius: 25, backgroundColor: "rgba(255, 255, 255, 0.7)" }} id="card">
+      <Card
+        style={{
+          borderRadius: 25,
+          backgroundColor: "rgba(255, 255, 255, 0.7)",
+        }}
+        id="card"
+      >
         <Card.Body align="center">
           <h2 className="text-center mb-4">יצירת פרופיל אישי</h2>
           <Form>
@@ -220,16 +234,19 @@ export default function FCDetailsForSuperSignUp(props) {
                 id="formFile"
                 onChange={(e) => {
                   setSuperImage(e.target.files[0]);
-                  setSuperImageUrl(URL.createObjectURL(e.target.files[0]))
+                  setSuperImageUrl(URL.createObjectURL(e.target.files[0]));
                 }}
                 style={{ borderRadius: 25 }}
                 required
               />
-              <Button onClick={UploadImage}>העלה תמונה</Button>
+              <Button onClick={UploadImage} className="mt-2">
+                העלה תמונה
+              </Button>
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>שם מחלקה</Form.Label>
               <Form.Select
+                dir="rtl"
                 onChange={(e) => setSuperDepartmet(e.target.value)}
                 style={{ borderRadius: 25 }}
               >
@@ -247,6 +264,7 @@ export default function FCDetailsForSuperSignUp(props) {
               <Form.Label>שנת לימודים</Form.Label>
               {
                 <Form.Select
+                  dir="rtl"
                   onChange={(e) => setSuperStudyYear(e.target.value)}
                   style={{ borderRadius: 25 }}
                 >
@@ -263,6 +281,7 @@ export default function FCDetailsForSuperSignUp(props) {
             <Form.Group className="mb-3">
               <Form.Label>תיאור קצר עלי</Form.Label>
               <Form.Control
+                dir="rtl"
                 as="textarea"
                 rows={3}
                 onChange={(e) => setSuperDescription(e.target.value)}

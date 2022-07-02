@@ -8,16 +8,14 @@ import FCBurgerComp from "../FuncionlComps/FCBurgerComp";
 export default function StudentHomePage() {
   const navigate = useNavigate();
   const [studentDetails, setStudentDetails] = useState({});
-  const [recommendation, setRecommendation] = useState()
+  const [recommendation, setRecommendation] = useState();
   const location = useLocation();
   const { state } = location;
-
-
 
   const userDetails = {
     Email: state.Email,
     Password: state.Password,
-    StudentId: studentDetails.StudentId
+    StudentId: studentDetails.StudentId,
   };
 
   useEffect(() => {
@@ -75,24 +73,33 @@ export default function StudentHomePage() {
   return (
     <Container className="min-vh-100 d-flex align-items-center flex-column text-center">
       <LogoComponent />
-      <h1>ברוכים הבאים - {studentDetails.FullName}</h1><br />
+      <h1>ברוכים הבאים - {studentDetails.FullName}</h1>
+      <br />
       <FCBurgerComp userDetails={userDetails} />
       <h3>:ההמלצה השבועית</h3>
-      <div style={{ borderRadius: 25, backgroundColor: "#17815A", padding: "20PX", backgroundColor: "rgba(255, 255, 255, 0.7)" }}>
-        <h6>{recommendation}</h6>
-      </div><br />
+      <div
+        style={{
+          borderRadius: 25,
+          backgroundColor: "#17815A",
+          padding: "20PX",
+          backgroundColor: "rgba(255, 255, 255, 0.7)",
+        }}
+      >
+        <p style={{ fontWeight: "bold" }}>{recommendation}</p>
+      </div>
+      <br />
       <Button
-        style={
-          {
-            marginTop: "auto",
-            marginBottom: 120,
-            padding: "28px 40px 28px 40px",
-            fontSize: 20,
-            borderRadius: 20,
-            background: "#00417E",
-            border: "solid #01417E 2px"
-          }}
-        onClick={() => navigate("/searchClassesPage", { state: userDetails })}>
+        style={{
+          marginTop: "auto",
+          marginBottom: 120,
+          padding: "28px 40px 28px 40px",
+          fontSize: 20,
+          borderRadius: 20,
+          background: "#00417E",
+          border: "solid #01417E 2px",
+        }}
+        onClick={() => navigate("/searchClassesPage", { state: userDetails })}
+      >
         !מצא את השיעור שמתאים לך
       </Button>
       {userDetails === undefined ? (

@@ -21,6 +21,7 @@ import FCClassForStudent from "./FuncionlComps/FCClassForStudent";
 import FCNewPasswordPage from "./Pages/FCNewPasswordPage";
 import FCTagsInput from "./FuncionlComps/FCTagsInput";
 import FCTgasRequestPage from "./Pages/FCTgasRequestPage";
+import FCShowSuperFutureClasses from "./Pages/FCShowSuperFutureClasses";
 
 export default function App() {
   return (
@@ -32,20 +33,36 @@ export default function App() {
       <Route path="/reqDetails" element={<CCHandleRequest />} />
       <Route path="/searchClassesPage" element={<FCSearchClassesPage />} />
       <Route path="/StudentRequestPage" element={<FCStudentRequestPage />} />
-      <Route path="/SuperStudentRequestPage" element={<FCSuperStudentRequestPage />} />
-      <Route path="/SuperStudentRequestPage2" element={<FCSuperStudentRequestPage2 />} />
+      <Route
+        path="/SuperStudentRequestPage"
+        element={<FCSuperStudentRequestPage />}
+      />
+      <Route
+        path="/SuperStudentRequestPage2"
+        element={<FCSuperStudentRequestPage2 />}
+      />
       <Route path="/typeOfUser" element={<FCTypeOfUser />} />
       <Route path="/CreateNewClass" element={<FCCreateNewClass />} />
       <Route path="/UpdateProfileSuper" element={<FCUpdateProfileSuper />} />
       <Route path="/HistoryClassSuper" element={<FCHistoryClassSuper />} />
       <Route path="/FutreClasses" element={<FCFutreClasses />} />
-      <Route path="/ShowProfileSuperStudent" element={<FCShowProfileSuperStudent />} />
-      <Route path="/UpdateSuperClassPage" element={<FCUpdateSuperClassPage />} />
+      <Route
+        path="/ShowProfileSuperStudent"
+        element={<FCShowProfileSuperStudent />}
+      />
+      <Route
+        path="/UpdateSuperClassPage"
+        element={<FCUpdateSuperClassPage />}
+      />
       <Route path="/changePasswordPage" element={<FCChangePasswordPage />} />
       <Route path="/classForStudent" element={<FCClassForStudent />} />
       <Route path="/newPasswordPage" element={<FCNewPasswordPage />} />
       <Route path="/insertTagsPage" element={<FCTagsInput />} />
       <Route path="/adminTagsPage" element={<FCTgasRequestPage />} />
+      <Route
+        path="/showSuperFutureClasses"
+        element={<FCShowSuperFutureClasses />}
+      />
     </Routes>
   );
 }

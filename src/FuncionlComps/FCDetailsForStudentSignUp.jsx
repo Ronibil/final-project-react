@@ -9,7 +9,6 @@ import FCButton from "../Elements/FCButton";
 import LogoComponent from "../Elements/LogoComponent";
 import ReturnPageButton from "../Elements/ReturnPageButton";
 
-
 export default function FCDetailsForStudentSignUp(props) {
   const navigate = useNavigate();
 
@@ -24,7 +23,7 @@ export default function FCDetailsForStudentSignUp(props) {
   const [sBirthdate, setSBirthdate] = useState("");
   const [birthDateError, setBirthDateError] = useState("");
   const [sCity, setSCity] = useState("");
-  const [message, setMessage] = useState(<div></div>)
+  const [message, setMessage] = useState(<div></div>);
 
   const checkFields = () => {
     const newStudentRequest = {
@@ -84,7 +83,7 @@ export default function FCDetailsForStudentSignUp(props) {
     })
       .then((res) => {
         console.log("res.ok", res.ok);
-        msgBox(res.ok)
+        msgBox(res.ok);
         return res.json();
       })
       .then(
@@ -144,8 +143,7 @@ export default function FCDetailsForStudentSignUp(props) {
           if (result === "found") {
             setEmailError("!מייל זה קיים במערכת");
             setSEmail("");
-          }
-          else {
+          } else {
             setEmailError("(: מייל תקין");
             setSEmail(email);
           }
@@ -176,9 +174,8 @@ export default function FCDetailsForStudentSignUp(props) {
   const handleEmail = (e) => {
     var email = e.target.value;
     if (validator.isEmail(email)) {
-      isEmailExist(email)
-    } 
-    else {
+      isEmailExist(email);
+    } else {
       setEmailError("!מייל לא תקין");
       setSEmail("");
     }
@@ -293,36 +290,52 @@ export default function FCDetailsForStudentSignUp(props) {
         <div className="App-header">
           <div>!הבקשה נשלחה בהצלחה</div>
           <div>אנו נצור איתך קשר לגבי מצב בקשתך דרך המייל איתו הזנת בהרשמה</div>
-          <Button variant="success" onClick={() => navigate("/")}>סגור</Button>
+          <Button variant="success" onClick={() => navigate("/")}>
+            סגור
+          </Button>
         </div>
-      )
-    }
-    else {
+      );
+    } else {
       box = (
         <div className="App-header">
           <div>!שליחת הבקשה נכשלה</div>
           <div>..נא לנסות שוב מאוחר יותר</div>
-          <Button variant="danger" onClick={() => navigate("/")}>סגור</Button>
+          <Button variant="danger" onClick={() => navigate("/")}>
+            סגור
+          </Button>
         </div>
-      )
+      );
     }
-    document.getElementById("card").style.display = "none"
-    setMessage(box)
-  }
+    document.getElementById("card").style.display = "none";
+    setMessage(box);
+  };
 
   return (
-    <Container style={{ flexDirection: "column", maxWidth: "700px", justifyContent: "center", paddingTop: 2 }}>
+    <Container
+      style={{
+        flexDirection: "column",
+        maxWidth: "700px",
+        justifyContent: "center",
+        paddingTop: 2,
+      }}
+    >
       <div className="App">{message}</div>
-      <Card style={{ borderRadius: 25, backgroundColor: "rgba(255, 255, 255, 0.7)" }} id="card">
-        <div style={{ alignSelf: "center" }} >
+      <Card
+        style={{
+          borderRadius: 25,
+          backgroundColor: "rgba(255, 255, 255, 0.7)",
+        }}
+        id="card"
+      >
+        <div style={{ alignSelf: "center" }}>
           <LogoComponent />
           <ReturnPageButton GoTo={() => navigate("/typeOfUser")} />
-        </ div>
+        </div>
         <h3 className="text-center mt-2">הרשמה</h3>
         <Card.Body>
           <Form className="text-end">
             <Form.Group className="mb-2">
-            <Form.Label>תעודת זהות</Form.Label>
+              <Form.Label>תעודת זהות</Form.Label>
               <Form.Control
                 className="text-end"
                 type="text"
@@ -334,7 +347,7 @@ export default function FCDetailsForStudentSignUp(props) {
               />
             </Form.Group>
             <Form.Group className="mb-2">
-            <Form.Label>מייל</Form.Label>
+              <Form.Label>מייל</Form.Label>
               <Form.Control
                 className="text-end"
                 type="email"
@@ -350,9 +363,9 @@ export default function FCDetailsForStudentSignUp(props) {
               {emailMessage()}
             </Form.Group>
             <Form.Group className="mb-2">
-            <Form.Label>שם מלא</Form.Label>
+              <Form.Label>שם מלא</Form.Label>
               <Form.Control
-                className="text-end"
+                dir="rtl"
                 type="text"
                 placeholder="שם מלא"
                 required
@@ -363,7 +376,7 @@ export default function FCDetailsForStudentSignUp(props) {
               {nameMessage()}
             </Form.Group>
             <Form.Group className="mb-2">
-            <Form.Label>מספר טלפון</Form.Label>
+              <Form.Label>מספר טלפון</Form.Label>
               <Form.Control
                 className="text-end"
                 type="text"
@@ -379,7 +392,7 @@ export default function FCDetailsForStudentSignUp(props) {
             <Form.Group className="mb-2">
               <Form.Label>מין</Form.Label>
               <Form.Select
-                className="text-end"
+                dir="rtl"
                 size="sm"
                 onChange={(e) => setSGender(e.target.value)}
                 required
@@ -415,9 +428,11 @@ export default function FCDetailsForStudentSignUp(props) {
             </Form.Group>
           </Form>
           {props.type === "type1" ? (
-            <FCButton onClick={checkFields} >שליחה לאימות נתונים</FCButton >
+            <FCButton onClick={checkFields}>שליחה לאימות נתונים</FCButton>
           ) : (
-            <FCButton style={{}} onClick={checkFields} >המשך למילוי פרופיל אישי</FCButton >
+            <FCButton style={{}} onClick={checkFields}>
+              המשך למילוי פרופיל אישי
+            </FCButton>
           )}
         </Card.Body>
       </Card>
