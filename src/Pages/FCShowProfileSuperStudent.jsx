@@ -2,11 +2,10 @@ import React from "react";
 import FCFormSuperDetails from "../FuncionlComps/FCFormSuperDetails";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Container, Button } from "react-bootstrap";
+import { Container } from "react-bootstrap";
 import FCShowProfileSuperBtns from "../FuncionlComps/FCShowProfileSuperBtns";
-import { AiOutlineHome } from "react-icons/ai";
 import LogoComponent from "../Elements/LogoComponent";
-import FCBurgerComp from "../FuncionlComps/FCBurgerComp";
+import ReturnPageButton from "../Elements/ReturnPageButton";
 
 export default function FCShowProfileSuperStudent() {
   const { state } = useLocation();
@@ -14,7 +13,6 @@ export default function FCShowProfileSuperStudent() {
   const [superDetails, setSuperDetails] = useState();
 
   const superId = state.classToCard.SuperStudentId;
-  // const studentDetails = state.studentDetails;
   const StudentDetails = {
     Email: state.studentDetails.Email,
     Password: state.studentDetails.Password,
@@ -67,31 +65,18 @@ export default function FCShowProfileSuperStudent() {
   return (
     <Container className="d-flex flex-column mw-700 align-items-center">
       <LogoComponent style={{ alignSelf: "center" }} />
-      <FCBurgerComp userDetails={state.studentDetails} />
       {superDetails !== undefined ? (
         <>
           <FCFormSuperDetails superDetails={superDetails} />
           <FCShowProfileSuperBtns
             StudentDetails={StudentDetails}
             FutreClasses={superDetails.FutreClasses}
-            Phone ={superDetails.Phone}
+            Phone={superDetails.Phone}
           />
           {state.type === 1 ? (
-            <Button
-              className="mb-3 mt-auto"
-              variant="outline-primary"
-              onClick={BackToSearchClassesPage}
-            >
-              חזרה לחיפוש שיעור
-            </Button>
+            <ReturnPageButton GoTo={() => navigate("/searchClassesPage", { state: StudentDetails })} />
           ) : (
-            <Button
-              className="mb-1 mt-auto"
-              variant="primary"
-              onClick={BackToStudentHomePage}
-            >
-              <AiOutlineHome />
-            </Button>
+            <ReturnPageButton GoTo={() => navigate("/classForStudent", { state: StudentDetails })} />
           )}
         </>
       ) : (

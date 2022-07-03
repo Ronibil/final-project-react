@@ -5,13 +5,10 @@ import { useNavigate } from "react-router-dom";
 export default function FCShowProfileSuperBtns({
   FutreClasses,
   StudentDetails,
-  Phone,
+  Phone
 }) {
-  // const { state } = useLocation();
 
   const navigate = useNavigate();
-
-
 
   return (
     <div className="d-flex flex-column mt-2 text-center">
@@ -22,9 +19,6 @@ export default function FCShowProfileSuperBtns({
       >
         בקשה ליצירת קשר
       </a>
-      {/* <Button className="m-1" variant="primary">
-        בקשה ליצירת קשר
-      </Button> */}
       <Button
         className="m-1"
         onClick={() => {
@@ -32,7 +26,7 @@ export default function FCShowProfileSuperBtns({
           navigate("/showSuperFutureClasses", {
             state: {
               FutreClasses,
-              StudentDetails,
+              StudentDetails
             },
           });
         }}

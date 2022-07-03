@@ -4,8 +4,8 @@ import { Container } from "react-bootstrap";
 import { useLocation, useNavigate } from "react-router-dom";
 import FCModalConfirm from "../FuncionlComps/FCModalConfirm";
 import LogoComponent from "../Elements/LogoComponent";
-import FCBurgerComp from "../FuncionlComps/FCBurgerComp";
 import FCBottomNavigation from "../FuncionlComps/FCBottomNavigation";
+import ReturnPageButton from "../Elements/ReturnPageButton";
 
 export default function FCShowSuperFutureClasses() {
   const { state } = useLocation();
@@ -13,11 +13,6 @@ export default function FCShowSuperFutureClasses() {
   const navigate = useNavigate();
 
   const userDetails = state.StudentDetails;
-  //  = {
-  //   Email: state.Email,
-  //   Password: state.Password,
-  //   StudentId: state.StudentId,
-  // };
 
   const [classDetails, setClassDetails] = useState([]);
   const [confirmModal, setConfirmModal] = useState(false);
@@ -79,7 +74,7 @@ export default function FCShowSuperFutureClasses() {
   return (
     <Container className="min-vh-100 d-flex align-items-center flex-column text-center">
       <LogoComponent />
-      <FCBurgerComp userDetails={userDetails} />
+      <ReturnPageButton GoTo={() => navigate("/searchClassesPage", { state: userDetails })} />
       {classDetails !== undefined ? (
         <FCModalConfirm
           modalOpen={confirmModal}

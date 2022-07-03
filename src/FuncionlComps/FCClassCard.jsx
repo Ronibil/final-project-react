@@ -29,7 +29,7 @@ export default function FCClassCard({
           <Card.Body className="text-end">
             <Row>
               <Col xs={4} style={{ alignSelf: "center" }}>
-                {classToCard.RankResults != null ? (
+                {(classToCard.RankResults != null && classToCard.RankResults.length > 0) ? (
                   <>
                     5 / {classToCard.RankResults[0].RankValue} <b>:דירוג</b>
                   </>
@@ -188,7 +188,7 @@ export default function FCClassCard({
             <Card.Body className="w-100 d-flex align-items-center justify-content-between">
               <div>
                 {classToCard.NumOfParticipants - classToCard.NumOfRegistered >
-                0 ? (
+                  0 ? (
                   <Button
                     onClick={() =>
                       btnFunction(classToCard.ClassCode, RegistrationPoint)

@@ -21,7 +21,7 @@ export default function FCBottomNavigation({ UserDetails }) {
     >
       <BottomNavigationAction label="מסך הבית" icon={<HomeIcon />} onClick={() => navigate("/studentHomePage", { state: studentDetails })} />
       <BottomNavigationAction label="שיעורים שלי" icon={<MenuBookIcon />} onClick={() => navigate("/classForStudent", { state: studentDetails })} />
-      <BottomNavigationAction label="התראות" icon={<NotificationAddIcon />} />
+      <BottomNavigationAction label="התראות" icon={<NotificationAddIcon />} onClick={() => navigate("/notificationsTagsForStudent", { state: studentDetails })} />
       <BottomNavigationAction label='חיפוש שיעור' icon={<SearchIcon />} onClick={() => navigate("/searchClassesPage", { state: studentDetails })} />
     </BottomNavigation>
   )

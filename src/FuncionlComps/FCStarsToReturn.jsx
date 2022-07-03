@@ -2,19 +2,30 @@ import React from 'react'
 import { AiFillStar } from 'react-icons/ai'
 
 export default function FCStarsToReturn({ numbersOfStars }) {
-  // const starsNumber = (numbersOfStars) => {
-  //   let stars = "";
+  
+  // let stars = "";
+  // // const numOfStars
+  // if (numbersOfStars !== undefined) {
+  //   stars = "";
   //   for (let index = 0; index < { numbersOfStars }; index++) {
-  //     stars += "h" 
+  //     stars += <p>h</p> 
   //   }
-  //   return stars;
-  // }
+  // }else{
+  //   <div></div>
+  //  }
+  
 
   // return (
-  //   <>
-  //   {starsNumber()}<b>:דירוג</b>
-  //   </>
+  //   <div>
+  //     {numbersOfStars !== undefined ?
+  //       <>
+  //         {stars}
+  //       </>
+  //       : ""}
+  //   </div>
   // )
+
+
 
 
   switch (numbersOfStars) {

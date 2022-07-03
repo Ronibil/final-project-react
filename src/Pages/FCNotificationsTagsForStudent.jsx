@@ -9,8 +9,10 @@ import { useLocation, useNavigate } from "react-router-dom";
 import FCModalConfirm from "../FuncionlComps/FCModalConfirm";
 import FCBottomNavigation from "../FuncionlComps/FCBottomNavigation";
 import LogoComponent from "../Elements/LogoComponent";
+import { AiOutlinePlus } from 'react-icons/ai';
+import { TiDelete } from 'react-icons/ti';
 
-export default function SearchClassesPage() {
+export default function NotificationsTagsForStudent() {
   const { state } = useLocation();
   const userDetails = {
     Email: state.Email,
@@ -19,11 +21,10 @@ export default function SearchClassesPage() {
   };
 
   const [tags, setTags] = useState([]);
+  const [tagsNotifications, setTagsNotifications] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const [classes, setClasses] = useState([]);
-  const [suggestionsClasses, setSuggestionsClasses] = useState([])
   const navigate = useNavigate();
-  const [msNoClasses, setMsNoClasses] = useState(false)
 
   //Modal
   const [confirmModal, setConfirmModal] = useState(false);
@@ -53,10 +54,9 @@ export default function SearchClassesPage() {
     fetchData();
   }, []);
 
-  // Get suggestions for lessons if the student has previously registered for other lessons in the system.  
+
   useEffect(() => {
-    console.log(state.StudentId);
-    const url = `http://localhost:49812/Class/GetSuggestionsClasses/${state.StudentId}`
+    const url = `http://localhost:49812/notification/GetNotificationsTags/${userDetails.StudentId}`;
     fetch(url, {
       method: "GET",
       headers: new Headers({
@@ -67,82 +67,32 @@ export default function SearchClassesPage() {
       .then((res) => {
         console.log("res.ok", res.ok);
         if (res.ok == false) {
-          setSuggestionsClasses([]);
+          setTagsNotifications([])
           throw new Error(res.statusText);
         }
         return res.json();
       })
       .then(
         (result) => {
-          console.log("FETCH PostRequest= ", result);
-          setSuggestionsClasses(result);
+          console.log(result);
+          setTagsNotifications(result)
         },
         (error) => {
           console.log("err post=", error);
         }
       );
-  }, [])
 
-  const searchByTags = () => {
+  }, []);
 
-    const url = `http://localhost:49812/Class/GetClassesByTags/${userDetails.StudentId}`;
-    if (tags.length !== 0) {
-      let tagList = tags.map((tag) => ({ TagName: tag.label }));
-
-      fetch(url, {
-        method: "POST",
-        body: JSON.stringify(tagList),
-        headers: new Headers({
-          "Content-Type": "application/json; charset=UTF-8",
-          Accept: "application/json; charset=UTF-8",
-        }),
-      })
-        .then((res) => {
-          console.log("res.ok", res.ok);
-          return res.json();
-        })
-        .then(
-          (result) => {
-            if (result == "Sorry there are still no classes with tags that you sended. please try another tags.") {
-              console.log("not found");
-              setMsNoClasses(true)
-              setClasses([]);
-            }
-            else {
-              console.log(result);
-              setMsNoClasses(false)
-              setClasses(result);
-            }
-
-          },
-          (error) => {
-            console.log("err post=", error);
-          }
-        );
-    }
-  };
 
 
   const register = (classCode, RegistrationPoint) => {
-
     console.log(classCode);
     const requestToRegister = {
       StudentId: userDetails.StudentId, //state.StudentId
       ClassCode: classCode
     };
     console.log(requestToRegister);
-    if (RegistrationPoint == "suggestionsClasses") {
-      const classToModal = suggestionsClasses.find((c) => c.ClassCode === classCode)
-      let classToConfirmModal = {
-        classCode: classToModal.ClassCode,
-        classDate: classToModal.ClassDate,
-        classEndTime: classToModal.EndTime,
-        className: classToModal.ClassName,
-        classParticipants: classToModal.NumOfParticipants,
-        classStartTime: classToModal.StartTime,
-      };
-      setClassDetails(classToConfirmModal);
-    } else {
       const classToModal = classes.find((c) => c.ClassCode === classCode)
       let classToConfirmModal = {
         classCode: classToModal.ClassCode,
@@ -153,7 +103,7 @@ export default function SearchClassesPage() {
         classStartTime: classToModal.StartTime,
       };
       setClassDetails(classToConfirmModal);
-    }
+
     const url = "http://localhost:49812/Student/PostStudentToClass";
 
     fetch(url, {
@@ -181,9 +131,110 @@ export default function SearchClassesPage() {
       );
   };
 
+
   const BackToHomePage = () => {
     navigate("/studentHomePage", { state: userDetails });
   };
+
+  const InsertNewTagsToArray = () => {
+    let newTagsArray = tagsNotifications;
+    for (let index = 0; index < tags.length; index++) {
+      let tag = {
+        TagName: tags[index].label
+      }
+      newTagsArray = [...newTagsArray, tag]
+    }
+    setTagsNotifications(newTagsArray);
+
+    const url = `http://localhost:49812/notification/UpdateTagsNotifications/${userDetails.StudentId}`;
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify(newTagsArray),
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json; charset=UTF-8",
+      }),
+    })
+      .then((res) => {
+        console.log("res.ok", res.ok);
+        return res.json();
+      })
+      .then(
+        (result) => {
+          console.log(result);
+        },
+        (error) => {
+          console.log("err post=", error);
+        }
+      );
+  };
+
+  const removeTag = (tagName) => {
+    console.log(tagName);
+    let newTagsArray = tagsNotifications.filter(t => t.TagName != tagName);
+    setTagsNotifications(newTagsArray)
+    console.log(newTagsArray);
+
+    const url = `http://localhost:49812/notification/UpdateTagsNotifications/${userDetails.StudentId}`;
+    fetch(url, {
+      method: "POST",
+      body: JSON.stringify(newTagsArray),
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json; charset=UTF-8",
+      }),
+    })
+      .then((res) => {
+        console.log("res.ok", res.ok);
+        return res.json();
+      })
+      .then(
+        (result) => {
+          console.log(result);
+        },
+        (error) => {
+          console.log("err post=", error);
+        }
+      );
+  }
+
+
+  useEffect(() => {
+    const url = `http://localhost:49812/Class/GetClassesByTags/${userDetails.StudentId}`;
+    if (tagsNotifications.length !== 0) {
+      // let tagList = tagsNotifications.map((tag) => ({ TagName: tag.label }));
+
+      fetch(url, {
+        method: "POST",
+        body: JSON.stringify(tagsNotifications),
+        headers: new Headers({
+          "Content-Type": "application/json; charset=UTF-8",
+          Accept: "application/json; charset=UTF-8",
+        }),
+      })
+        .then((res) => {
+          console.log("res.ok", res.ok);
+          return res.json();
+        })
+        .then(
+          (result) => {
+            if (result == "Sorry there are still no classes with tags that you sended. please try another tags.") {
+              console.log("not found");
+              setClasses([]);
+            }
+            else {
+              console.log(result);
+              setClasses(result);
+            }
+
+          },
+          (error) => {
+            console.log("err post=", error);
+          }
+        );
+    }
+  }, [tagsNotifications]);
+
 
   return (
     <Container className="min-vh-100 d-flex align-items-center flex-column text-center">
@@ -198,7 +249,7 @@ export default function SearchClassesPage() {
       ) : (
         ""
       )}
-      <h4>!מצא את השיעור שמתאים לך</h4>
+      <h4>הוסף תגיות וקבל התראה כאשר נוסף שיעור למערכת בנושא שאתה רוצה</h4>
       <div className="d-flex w-100 m-3">
         <Select
           theme={customTheme}
@@ -215,20 +266,24 @@ export default function SearchClassesPage() {
         <Button
           className="flex-shrink-1"
           style={{ background: "#A2D5AB", border: "solid #4B8673 1px", margin: 0 }}
-          onClick={searchByTags}
+          onClick={InsertNewTagsToArray}
         >
-          🔍
+          <AiOutlinePlus />
         </Button>
       </div>
-      {msNoClasses == true ? (
+      {tagsNotifications.length !== 0 ? (
         <>
-          <div style={{ margin: "0 auto", color: "black" }}>
-            כרגע לא קיימים שיעורים עם תגית זו, אנו ממליצים להוסיף את התגית להתראות כדי להיות מעודכנים ברגע שהתוסף שיעור בנושא זה
+          <div>
+            {tagsNotifications.map((t) => (
+              <>
+                <span style={{ background: "#00417E" }} className="badge rounded-pill" >
+                  {t.TagName} {" "} <TiDelete onClick={() => removeTag(t.TagName)} style={{ height: 20, width: 20 }} />
+                </span>{" "}
+              </>
+            ))}
           </div>
         </>
-      ) : (
-        ""
-      )}
+      ) : ("")}
 
       {classes.length !== 0 ? (
         <>
@@ -246,27 +301,7 @@ export default function SearchClassesPage() {
           </div>
         </>
       ) : (
-        <>
-          {suggestionsClasses.length !== 0 ? (
-            <>
-              <h5>הצעות לשיעורים שאולי מתאימים לך</h5>
-              <div style={{ width: "100%", height: 500, overflow: "auto", borderRadius: 25 }}>
-                {suggestionsClasses.map((c) => (
-                  <FCClassCard
-                    key={c.ClassCode}
-                    classToCard={c}
-                    type="SearchClass"
-                    btnFunction={register}
-                    RegistrationPoint="suggestionsClasses"
-                    studentDetails={userDetails}
-                  />
-                ))}
-              </div>
-            </>
-          ) : (
-            ""
-          )}
-        </>
+        "במידה ויהיה שיעורים מתאימים הם יופיעו פה"
       )
       }
       {
