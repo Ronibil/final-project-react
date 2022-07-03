@@ -166,7 +166,7 @@ export default function FCClassCard({
               <b>:תגיות השיעור</b>
               <br />
               {classToCard.Tags.map((t) => (
-                <span className="badge rounded-pill bg-primary">{t}</span>
+                <span style={{ background: "#00417E" }} className="badge rounded-pill">{t}</span>
               ))}
             </div>
           </Card.Body>
@@ -219,7 +219,7 @@ export default function FCClassCard({
                 <br />
                 <b>
                   {classToCard.Tags.map((t) => (
-                    <span className="badge rounded-pill bg-primary">{t}</span>
+                    <span style={{ background: "#00417E" }} className="badge rounded-pill">{t}</span>
                   ))}
                 </b>
                 {studentDetails !== undefined ? (
@@ -278,12 +278,8 @@ export default function FCClassCard({
                   דירוג
                 </Button>
               ) : (
-                ""
+                <b>דירגתי</b>
               )}
-              <br />
-              <Button className="m-1" size="sm" variant="outline-primary">
-                לצ'אט
-              </Button>
             </div>
             <div className="text-end">
               <b>שם השיעור:</b> {classToCard.ClassName}
