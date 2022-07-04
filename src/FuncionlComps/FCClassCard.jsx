@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Card, Row, Col, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
 import FCStarsToReturn from "./FCStarsToReturn";
@@ -13,6 +13,38 @@ export default function FCClassCard({
   RegistrationPoint,
 }) {
   const navigate = useNavigate();
+
+  const [superDetails, setSuperDetails] = useState({});
+  const bringPhoneNumber = async (classToCard) => {
+    const superId = classToCard.SuperStudentId;
+    const url = `http://localhost:49812/SuperStudent/ShowSuperDetailsById/${superId}`;
+    await fetch(url, {
+      method: "POST",
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json; charset=UTF-8",
+      }),
+    })
+      .then((res) => {
+        console.log("res.ok", res.ok);
+        return res.json();
+      })
+      .then(
+        (data) => {
+          console.log(data);
+          setSuperDetails({
+            Phone: data.Phone,
+            Email: data.Email,
+          });
+          console.log(superDetails.Phone);
+          window.location.replace(`https://wa.me/${superDetails.Phone}`);
+        },
+        (error) => {
+          console.log("err post=", error);
+        }
+      );
+  };
+
   switch (type) {
     case "history":
       return (
@@ -29,7 +61,8 @@ export default function FCClassCard({
           <Card.Body className="text-end">
             <Row>
               <Col xs={4} style={{ alignSelf: "center" }}>
-                {(classToCard.RankResults != null && classToCard.RankResults.length > 0) ? (
+                {classToCard.RankResults != null &&
+                classToCard.RankResults.length > 0 ? (
                   <>
                     5 / {classToCard.RankResults[0].RankValue} <b>:דירוג</b>
                   </>
@@ -72,7 +105,12 @@ export default function FCClassCard({
               >
                 מחיקה
               </Button>
-              <Button className="m-1" size="sm" variant="outline-primary">
+              <Button
+                className="m-1"
+                size="sm"
+                variant="outline-primary"
+                onClick={() => bringPhoneNumber(classToCard)}
+              >
                 לצ'אט
               </Button>
             </div>
@@ -166,7 +204,13 @@ export default function FCClassCard({
               <b>:תגיות השיעור</b>
               <br />
               {classToCard.Tags.map((t) => (
-                <span style={{ background: "#00417E" }} className="badge rounded-pill">{t}</span>
+                <span
+                  key={t}
+                  style={{ background: "#00417E" }}
+                  className="badge rounded-pill"
+                >
+                  {t}
+                </span>
               ))}
             </div>
           </Card.Body>
@@ -188,7 +232,7 @@ export default function FCClassCard({
             <Card.Body className="w-100 d-flex align-items-center justify-content-between">
               <div>
                 {classToCard.NumOfParticipants - classToCard.NumOfRegistered >
-                  0 ? (
+                0 ? (
                   <Button
                     onClick={() =>
                       btnFunction(classToCard.ClassCode, RegistrationPoint)
@@ -219,16 +263,25 @@ export default function FCClassCard({
                 <br />
                 <b>
                   {classToCard.Tags.map((t) => (
-                    <span style={{ background: "#00417E" }} className="badge rounded-pill">{t}</span>
+                    <span
+                      key={t}
+                      style={{ background: "#00417E" }}
+                      className="badge rounded-pill"
+                    >
+                      {t}
+                    </span>
                   ))}
                 </b>
                 {studentDetails !== undefined ? (
-                  <>
-                    <br />
-                    <FCStarsToReturn
-                      numbersOfStars={classToCard.SuperStudentRank}
-                    />{" "}
-                    <b>:דירוג</b>
+                  <div>
+                    <div className="d-flex flex-row-reverse align-items-center flex-nowrap">
+                      <span>
+                        <b>&nbsp;:דירוג&nbsp;המורה</b>
+                      </span>
+                      <FCStarsToReturn
+                        numbersOfStars={classToCard.SuperStudentRank}
+                      />
+                    </div>
                     <Button
                       className="badge rounded-pill"
                       style={{
@@ -245,7 +298,7 @@ export default function FCClassCard({
                     >
                       {classToCard.SuperName}
                     </Button>
-                  </>
+                  </div>
                 ) : (
                   ""
                 )}

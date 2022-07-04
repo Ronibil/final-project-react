@@ -48,6 +48,7 @@ export default function FCShowProfileSuperStudent() {
             NumOfClass: data.FutreClasses.length,
             FutreClasses: data.FutreClasses,
             Phone: data.Phone,
+            Email: data.Email,
           });
         },
         (error) => {
@@ -72,11 +73,20 @@ export default function FCShowProfileSuperStudent() {
             StudentDetails={StudentDetails}
             FutreClasses={superDetails.FutreClasses}
             Phone={superDetails.Phone}
+            Email={superDetails.Email}
           />
           {state.type === 1 ? (
-            <ReturnPageButton GoTo={() => navigate("/searchClassesPage", { state: StudentDetails })} />
+            <ReturnPageButton
+              GoTo={() =>
+                navigate("/searchClassesPage", { state: StudentDetails })
+              }
+            />
           ) : (
-            <ReturnPageButton GoTo={() => navigate("/classForStudent", { state: StudentDetails })} />
+            <ReturnPageButton
+              GoTo={() =>
+                navigate("/classForStudent", { state: StudentDetails })
+              }
+            />
           )}
         </>
       ) : (

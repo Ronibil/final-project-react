@@ -1,19 +1,17 @@
-import React from 'react'
-import { AiFillStar } from 'react-icons/ai'
+import React from "react";
+import { AiFillStar } from "react-icons/ai";
 
 export default function FCStarsToReturn({ numbersOfStars }) {
-  
   // let stars = "";
   // // const numOfStars
   // if (numbersOfStars !== undefined) {
   //   stars = "";
   //   for (let index = 0; index < { numbersOfStars }; index++) {
-  //     stars += <p>h</p> 
+  //     stars += <p>h</p>
   //   }
   // }else{
   //   <div></div>
   //  }
-  
 
   // return (
   //   <div>
@@ -25,52 +23,45 @@ export default function FCStarsToReturn({ numbersOfStars }) {
   //   </div>
   // )
 
-
-
-
   switch (numbersOfStars) {
     case 1:
-      return (
-        <AiFillStar />
-      )
+      return <AiFillStar />;
     case 2:
       return (
-        <>
-        <AiFillStar />
-        <AiFillStar />
-        </>
-      )
+        <div className="d-flex">
+          <AiFillStar />
+          <AiFillStar />
+        </div>
+      );
     case 3:
       return (
-        <>
-        <AiFillStar />
-        <AiFillStar />
-        <AiFillStar />
-        </>
-      )
+        <div className="d-flex">
+          <AiFillStar />
+          <AiFillStar />
+          <AiFillStar />
+        </div>
+      );
     case 4:
       return (
-        <>
-        <AiFillStar />
-        <AiFillStar />
-        <AiFillStar />
-        <AiFillStar />
-        </>
-      )
+        <div className="d-flex">
+          <AiFillStar />
+          <AiFillStar />
+          <AiFillStar />
+          <AiFillStar />
+        </div>
+      );
     case 5:
       return (
-        <>
-        <AiFillStar />
-        <AiFillStar />
-        <AiFillStar />
-        <AiFillStar />
-        <AiFillStar />
-        </>
-      )
+        <div className="d-flex">
+          <AiFillStar />
+          <AiFillStar />
+          <AiFillStar />
+          <AiFillStar />
+          <AiFillStar />
+        </div>
+      );
 
     default:
-      return (
-        ""
-      )
+      return "";
   }
 }

@@ -9,15 +9,15 @@ import { useLocation, useNavigate } from "react-router-dom";
 import FCModalConfirm from "../FuncionlComps/FCModalConfirm";
 import FCBottomNavigation from "../FuncionlComps/FCBottomNavigation";
 import LogoComponent from "../Elements/LogoComponent";
-import { AiOutlinePlus } from 'react-icons/ai';
-import { TiDelete } from 'react-icons/ti';
+import { AiOutlinePlus } from "react-icons/ai";
+import { TiDelete } from "react-icons/ti";
 
 export default function NotificationsTagsForStudent() {
   const { state } = useLocation();
   const userDetails = {
     Email: state.Email,
     Password: state.Password,
-    StudentId: state.StudentId
+    StudentId: state.StudentId,
   };
 
   const [tags, setTags] = useState([]);
@@ -54,7 +54,6 @@ export default function NotificationsTagsForStudent() {
     fetchData();
   }, []);
 
-
   useEffect(() => {
     const url = `http://localhost:49812/notification/GetNotificationsTags/${userDetails.StudentId}`;
     fetch(url, {
@@ -66,8 +65,8 @@ export default function NotificationsTagsForStudent() {
     })
       .then((res) => {
         console.log("res.ok", res.ok);
-        if (res.ok == false) {
-          setTagsNotifications([])
+        if (res.ok === false) {
+          setTagsNotifications([]);
           throw new Error(res.statusText);
         }
         return res.json();
@@ -75,34 +74,31 @@ export default function NotificationsTagsForStudent() {
       .then(
         (result) => {
           console.log(result);
-          setTagsNotifications(result)
+          setTagsNotifications(result);
         },
         (error) => {
           console.log("err post=", error);
         }
       );
-
   }, []);
-
-
 
   const register = (classCode, RegistrationPoint) => {
     console.log(classCode);
     const requestToRegister = {
       StudentId: userDetails.StudentId, //state.StudentId
-      ClassCode: classCode
+      ClassCode: classCode,
     };
     console.log(requestToRegister);
-      const classToModal = classes.find((c) => c.ClassCode === classCode)
-      let classToConfirmModal = {
-        classCode: classToModal.ClassCode,
-        classDate: classToModal.ClassDate,
-        classEndTime: classToModal.EndTime,
-        className: classToModal.ClassName,
-        classParticipants: classToModal.NumOfParticipants,
-        classStartTime: classToModal.StartTime,
-      };
-      setClassDetails(classToConfirmModal);
+    const classToModal = classes.find((c) => c.ClassCode === classCode);
+    let classToConfirmModal = {
+      classCode: classToModal.ClassCode,
+      classDate: classToModal.ClassDate,
+      classEndTime: classToModal.EndTime,
+      className: classToModal.ClassName,
+      classParticipants: classToModal.NumOfParticipants,
+      classStartTime: classToModal.StartTime,
+    };
+    setClassDetails(classToConfirmModal);
 
     const url = "http://localhost:49812/Student/PostStudentToClass";
 
@@ -131,7 +127,6 @@ export default function NotificationsTagsForStudent() {
       );
   };
 
-
   const BackToHomePage = () => {
     navigate("/studentHomePage", { state: userDetails });
   };
@@ -140,9 +135,9 @@ export default function NotificationsTagsForStudent() {
     let newTagsArray = tagsNotifications;
     for (let index = 0; index < tags.length; index++) {
       let tag = {
-        TagName: tags[index].label
-      }
-      newTagsArray = [...newTagsArray, tag]
+        TagName: tags[index].label,
+      };
+      newTagsArray = [...newTagsArray, tag];
     }
     setTagsNotifications(newTagsArray);
 
@@ -171,8 +166,8 @@ export default function NotificationsTagsForStudent() {
 
   const removeTag = (tagName) => {
     console.log(tagName);
-    let newTagsArray = tagsNotifications.filter(t => t.TagName != tagName);
-    setTagsNotifications(newTagsArray)
+    let newTagsArray = tagsNotifications.filter((t) => t.TagName !== tagName);
+    setTagsNotifications(newTagsArray);
     console.log(newTagsArray);
 
     const url = `http://localhost:49812/notification/UpdateTagsNotifications/${userDetails.StudentId}`;
@@ -196,8 +191,7 @@ export default function NotificationsTagsForStudent() {
           console.log("err post=", error);
         }
       );
-  }
-
+  };
 
   useEffect(() => {
     const url = `http://localhost:49812/Class/GetClassesByTags/${userDetails.StudentId}`;
@@ -218,15 +212,16 @@ export default function NotificationsTagsForStudent() {
         })
         .then(
           (result) => {
-            if (result == "Sorry there are still no classes with tags that you sended. please try another tags.") {
+            if (
+              result ===
+              "Sorry there are still no classes with tags that you sended. please try another tags."
+            ) {
               console.log("not found");
               setClasses([]);
-            }
-            else {
+            } else {
               console.log(result);
               setClasses(result);
             }
-
           },
           (error) => {
             console.log("err post=", error);
@@ -234,7 +229,6 @@ export default function NotificationsTagsForStudent() {
         );
     }
   }, [tagsNotifications]);
-
 
   return (
     <Container className="min-vh-100 d-flex align-items-center flex-column text-center">
@@ -265,7 +259,11 @@ export default function NotificationsTagsForStudent() {
         />
         <Button
           className="flex-shrink-1"
-          style={{ background: "#A2D5AB", border: "solid #4B8673 1px", margin: 0 }}
+          style={{
+            background: "#A2D5AB",
+            border: "solid #4B8673 1px",
+            margin: 0,
+          }}
           onClick={InsertNewTagsToArray}
         >
           <AiOutlinePlus />
@@ -276,18 +274,34 @@ export default function NotificationsTagsForStudent() {
           <div>
             {tagsNotifications.map((t) => (
               <>
-                <span style={{ background: "#00417E" }} className="badge rounded-pill" >
-                  {t.TagName} {" "} <TiDelete onClick={() => removeTag(t.TagName)} style={{ height: 20, width: 20 }} />
+                <span
+                  style={{ background: "#00417E" }}
+                  className="badge rounded-pill"
+                >
+                  {t.TagName}{" "}
+                  <TiDelete
+                    onClick={() => removeTag(t.TagName)}
+                    style={{ height: 20, width: 20 }}
+                  />
                 </span>{" "}
               </>
             ))}
           </div>
         </>
-      ) : ("")}
+      ) : (
+        ""
+      )}
 
       {classes.length !== 0 ? (
         <>
-          <div style={{ width: "100%", height: 500, overflow: "auto", borderRadius: 25 }}>
+          <div
+            style={{
+              width: "100%",
+              height: 500,
+              overflow: "auto",
+              borderRadius: 25,
+            }}
+          >
             {classes.map((c) => (
               <FCClassCard
                 key={c.ClassCode}
@@ -302,17 +316,12 @@ export default function NotificationsTagsForStudent() {
         </>
       ) : (
         "במידה ויהיה שיעורים מתאימים הם יופיעו פה"
-      )
-      }
-      {
-        userDetails === undefined ? (
-          ""
-        ) : (
-          <FCBottomNavigation
-            UserDetails={userDetails}
-          />
-        )
-      }
-    </Container >
+      )}
+      {userDetails === undefined ? (
+        ""
+      ) : (
+        <FCBottomNavigation UserDetails={userDetails} />
+      )}
+    </Container>
   );
 }

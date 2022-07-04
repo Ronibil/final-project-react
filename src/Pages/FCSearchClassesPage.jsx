@@ -15,15 +15,15 @@ export default function SearchClassesPage() {
   const userDetails = {
     Email: state.Email,
     Password: state.Password,
-    StudentId: state.StudentId
+    StudentId: state.StudentId,
   };
 
   const [tags, setTags] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const [classes, setClasses] = useState([]);
-  const [suggestionsClasses, setSuggestionsClasses] = useState([])
+  const [suggestionsClasses, setSuggestionsClasses] = useState([]);
   const navigate = useNavigate();
-  const [msNoClasses, setMsNoClasses] = useState(false)
+  const [msNoClasses, setMsNoClasses] = useState(false);
 
   //Modal
   const [confirmModal, setConfirmModal] = useState(false);
@@ -53,10 +53,10 @@ export default function SearchClassesPage() {
     fetchData();
   }, []);
 
-  // Get suggestions for lessons if the student has previously registered for other lessons in the system.  
+  // Get suggestions for lessons if the student has previously registered for other lessons in the system.
   useEffect(() => {
     console.log(state.StudentId);
-    const url = `http://localhost:49812/Class/GetSuggestionsClasses/${state.StudentId}`
+    const url = `http://localhost:49812/Class/GetSuggestionsClasses/${state.StudentId}`;
     fetch(url, {
       method: "GET",
       headers: new Headers({
@@ -66,7 +66,7 @@ export default function SearchClassesPage() {
     })
       .then((res) => {
         console.log("res.ok", res.ok);
-        if (res.ok == false) {
+        if (res.ok === false) {
           setSuggestionsClasses([]);
           throw new Error(res.statusText);
         }
@@ -81,10 +81,9 @@ export default function SearchClassesPage() {
           console.log("err post=", error);
         }
       );
-  }, [])
+  }, []);
 
   const searchByTags = () => {
-
     const url = `http://localhost:49812/Class/GetClassesByTags/${userDetails.StudentId}`;
     if (tags.length !== 0) {
       let tagList = tags.map((tag) => ({ TagName: tag.label }));
@@ -103,17 +102,18 @@ export default function SearchClassesPage() {
         })
         .then(
           (result) => {
-            if (result == "Sorry there are still no classes with tags that you sended. please try another tags.") {
+            if (
+              result ===
+              "Sorry there are still no classes with tags that you sended. please try another tags."
+            ) {
               console.log("not found");
-              setMsNoClasses(true)
+              setMsNoClasses(true);
               setClasses([]);
-            }
-            else {
+            } else {
               console.log(result);
-              setMsNoClasses(false)
+              setMsNoClasses(false);
               setClasses(result);
             }
-
           },
           (error) => {
             console.log("err post=", error);
@@ -122,17 +122,17 @@ export default function SearchClassesPage() {
     }
   };
 
-
   const register = (classCode, RegistrationPoint) => {
-
     console.log(classCode);
     const requestToRegister = {
       StudentId: userDetails.StudentId, //state.StudentId
-      ClassCode: classCode
+      ClassCode: classCode,
     };
     console.log(requestToRegister);
-    if (RegistrationPoint == "suggestionsClasses") {
-      const classToModal = suggestionsClasses.find((c) => c.ClassCode === classCode)
+    if (RegistrationPoint === "suggestionsClasses") {
+      const classToModal = suggestionsClasses.find(
+        (c) => c.ClassCode === classCode
+      );
       let classToConfirmModal = {
         classCode: classToModal.ClassCode,
         classDate: classToModal.ClassDate,
@@ -143,7 +143,7 @@ export default function SearchClassesPage() {
       };
       setClassDetails(classToConfirmModal);
     } else {
-      const classToModal = classes.find((c) => c.ClassCode === classCode)
+      const classToModal = classes.find((c) => c.ClassCode === classCode);
       let classToConfirmModal = {
         classCode: classToModal.ClassCode,
         classDate: classToModal.ClassDate,
@@ -214,16 +214,21 @@ export default function SearchClassesPage() {
         />
         <Button
           className="flex-shrink-1"
-          style={{ background: "#A2D5AB", border: "solid #4B8673 1px", margin: 0 }}
+          style={{
+            background: "#A2D5AB",
+            border: "solid #4B8673 1px",
+            margin: 0,
+          }}
           onClick={searchByTags}
         >
           🔍
         </Button>
       </div>
-      {msNoClasses == true ? (
+      {msNoClasses === true ? (
         <>
           <div style={{ margin: "0 auto", color: "black" }}>
-            כרגע לא קיימים שיעורים עם תגית זו, אנו ממליצים להוסיף את התגית להתראות כדי להיות מעודכנים ברגע שהתוסף שיעור בנושא זה
+            כרגע לא קיימים שיעורים עם תגית זו, אנו ממליצים להוסיף את התגית
+            להתראות כדי להיות מעודכנים ברגע שהתוסף שיעור בנושא זה
           </div>
         </>
       ) : (
@@ -232,7 +237,14 @@ export default function SearchClassesPage() {
 
       {classes.length !== 0 ? (
         <>
-          <div style={{ width: "100%", height: 500, overflow: "auto", borderRadius: 25 }}>
+          <div
+            style={{
+              width: "100%",
+              height: 500,
+              overflow: "auto",
+              borderRadius: 25,
+            }}
+          >
             {classes.map((c) => (
               <FCClassCard
                 key={c.ClassCode}
@@ -250,7 +262,14 @@ export default function SearchClassesPage() {
           {suggestionsClasses.length !== 0 ? (
             <>
               <h5>הצעות לשיעורים שאולי מתאימים לך</h5>
-              <div style={{ width: "100%", height: 500, overflow: "auto", borderRadius: 25 }}>
+              <div
+                style={{
+                  width: "100%",
+                  height: "55vh",
+                  overflow: "auto",
+                  // borderRadius: 25,
+                }}
+              >
                 {suggestionsClasses.map((c) => (
                   <FCClassCard
                     key={c.ClassCode}
@@ -267,17 +286,12 @@ export default function SearchClassesPage() {
             ""
           )}
         </>
-      )
-      }
-      {
-        userDetails === undefined ? (
-          ""
-        ) : (
-          <FCBottomNavigation
-            UserDetails={userDetails}
-          />
-        )
-      }
-    </Container >
+      )}
+      {userDetails === undefined ? (
+        ""
+      ) : (
+        <FCBottomNavigation UserDetails={userDetails} />
+      )}
+    </Container>
   );
 }

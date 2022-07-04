@@ -5,10 +5,15 @@ import FCStarsToReturn from "./FCStarsToReturn";
 const emptyImage =
   "https://proj.ruppin.ac.il/bgroup92/prod/ImageFiles/ProfileImage-empty.jpg";
 
-export default function FCFormSuperDetails({ superDetails, ShowModal, ShowModalDelete, type }) {
+export default function FCFormSuperDetails({
+  superDetails,
+  ShowModal,
+  ShowModalDelete,
+  type,
+}) {
   let profileSuperImage = `https://proj.ruppin.ac.il/bgroup92/prod/ImageFiles/ProfileImage-${superDetails.ImagePath}.jpg`;
   return (
-    <Container
+    <div
       className="d-flex justify-content-center"
       style={{ maxWidth: "700px" }}
     >
@@ -28,7 +33,11 @@ export default function FCFormSuperDetails({ superDetails, ShowModal, ShowModalD
             borderRadius: "50%",
             border: "solid 6px white",
           }}
-          src={superDetails.ImagePath !== undefined ? profileSuperImage : emptyImage}
+          src={
+            superDetails.ImagePath !== undefined
+              ? profileSuperImage
+              : emptyImage
+          }
           alt={emptyImage}
         />
         <Row>
@@ -45,17 +54,27 @@ export default function FCFormSuperDetails({ superDetails, ShowModal, ShowModalD
                 }}
               />
             </Col>
-          ) : ("")}
+          ) : (
+            ""
+          )}
           <Col xs={6}>
-            {superDetails.ImagePath !== undefined && superDetails.ImagePath !== 'empty' ? <><FaUserTimes
-              onClick={ShowModalDelete}
-              style={{
-                width: 25,
-                height: 25,
-                marginLeft: 25,
-                background: "white",
-                borderRadius: 50,
-              }} /></> : ''}
+            {superDetails.ImagePath !== undefined &&
+            superDetails.ImagePath !== "empty" ? (
+              <>
+                <FaUserTimes
+                  onClick={ShowModalDelete}
+                  style={{
+                    width: 25,
+                    height: 25,
+                    marginLeft: 25,
+                    background: "white",
+                    borderRadius: 50,
+                  }}
+                />
+              </>
+            ) : (
+              ""
+            )}
           </Col>
         </Row>
         <Card.Body align="center">
@@ -66,18 +85,30 @@ export default function FCFormSuperDetails({ superDetails, ShowModal, ShowModalD
             <b>מסלול לימודים:</b> {superDetails.DepartmentName}
           </Card.Text>
           <hr />
-          <div className="d-flex justify-content-between">
-            <div>
-              <b>דירוג</b><br />
+          <div className="d-flex justify-content-between  flex-nowrap">
+            <div
+              className="d-flex flex-column justify-content-between pe-1" //pe-1
+              style={{ borderRight: "thin solid gray" }}
+            >
+              <span>
+                <b>&nbsp;דירוג</b>
+              </span>
               <FCStarsToReturn numbersOfStars={superDetails.RankAverage} />
             </div>
-            <div className="d-flex flex-column">
-              <b>מדרגים</b>
-              {superDetails.NumOfRanks}
+            <div
+              className="d-flex flex-column justify-content-between px-1 " //ms-1 pe-1
+              style={{ borderRight: "thin solid gray" }}
+            >
+              <span>
+                <b>&nbsp;מדרגים</b>
+              </span>
+              <span>{superDetails.NumOfRanks}</span>
             </div>
-            <div className="d-flex flex-column">
-              <b>מספר שיעורים</b>
-              {superDetails.NumOfClass}
+            <div className="d-flex flex-column ps-1">
+              <span>
+                <b>&nbsp;מספר&nbsp;שיעורים</b>
+              </span>
+              <span>{superDetails.NumOfClass}</span>
             </div>
           </div>
           <hr />
@@ -88,6 +119,6 @@ export default function FCFormSuperDetails({ superDetails, ShowModal, ShowModalD
           </Card.Text>
         </Card.Body>
       </Card>
-    </Container>
+    </div>
   );
 }

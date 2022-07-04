@@ -5,9 +5,9 @@ import { useNavigate } from "react-router-dom";
 export default function FCShowProfileSuperBtns({
   FutreClasses,
   StudentDetails,
-  Phone
+  Phone,
+  Email,
 }) {
-
   const navigate = useNavigate();
 
   return (
@@ -26,7 +26,7 @@ export default function FCShowProfileSuperBtns({
           navigate("/showSuperFutureClasses", {
             state: {
               FutreClasses,
-              StudentDetails
+              StudentDetails,
             },
           });
         }}
