@@ -3,26 +3,21 @@ import { Container, Form, Card, Button } from "react-bootstrap";
 import { useState, useEffect } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import ReturnPageButton from "../Elements/ReturnPageButton";
-// import FCModalConfirm from "./FCModalConfirm";
 
 import axios from "axios";
 import Select from "react-select";
 import makeAnimated from "react-select/animated";
+import FCModalUpdateClass from "../FuncionlComps/FCModalUpdateClass";
 
 export default function FCUpdateSuperClassPage() {
   const navigate = useNavigate();
   const { state } = useLocation();
-  // const superId = state.superPassword;
-  // const superName = state.superName;
-  // const superEmail = state.superEmail;
-  // const UserDetails = {
-  //   Email: superEmail,
-  //   Password: superId,
-  // };
+  
   const classDetails = state.classToCard;
   const superDetails = state.studentDetails;
 
-  const [tags, setTags] = useState([classDetails.Tags]);
+  const [tags, setTags] = useState(classDetails.Tags);
+  const [selectedTags, setSelectedTags] = useState([]);
   const [suggestions, setSuggestions] = useState([]);
   const [className, setClassName] = useState(classDetails.ClassName);
   const [classDescription, setClassDescription] = useState(classDetails.ClassDescription);
@@ -30,10 +25,11 @@ export default function FCUpdateSuperClassPage() {
   const [classStartTime, seTclassStartTime] = useState(classDetails.StartTime);
   const [classEndTime, setClassEndTime] = useState(classDetails.EndTime);
   const [classParticipants, setClassParticipants] = useState(classDetails.NumOfParticipants);
-  // const [modalOpen, setModalOpen] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
 
-
-
+  const date = new Date(classDate)
+  const stringDate = date.toLocaleDateString("en-CA") 
+  
   const animatedComponents = makeAnimated();
   const customTheme = (theme) => {
     return {
@@ -46,39 +42,64 @@ export default function FCUpdateSuperClassPage() {
     };
   };
 
-  //Class Details for Modal!
-  // const ClassDetailsForModal = {
-  //   className: className,
-  //   classDate: classDate,
-  //   classStartTime: classStartTime,
-  //   classEndTime: classEndTime,
-  //   classParticipants: classParticipants,
-  // };
-  
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await axios.get("http://localhost:49812/Tags/getAll");
       let suggestionList = data.map((suggestion, index) => {
         return { value: index, label: suggestion };
       });
-
       setSuggestions(suggestionList);
+      const selected = tags.map(t => {
+        let tag = suggestionList.find(tg => tg.label === t)
+        return tag
+      })
+      setSelectedTags(selected)
     };
     fetchData();
   }, []);
 
   const btnShow = () => {
-    console.log(className);
-    console.log(classDescription);
-    console.log(classDate);
-    console.log(classStartTime);
-    console.log(classEndTime);
-    console.log(classParticipants);
-    console.log(tags);
-    console.log("Super DETAILS !!!!!!!!!!!!!!!!");
-    console.log(superDetails);
+    const updateClassUrl = "http://localhost:49812/SuperStudent/UpdateClassDetailsSuperStudent"
+    const Tags = selectedTags.map(t => t.label)
+    const updatedClass = {
+      ClassCode: classDetails.ClassCode,
+      ClassName: className,
+      ClassDate: classDate,
+      ClassDescription: classDescription,
+      NumOfParticipants: classParticipants,
+      StartTime: classStartTime,
+      EndTime: classEndTime,
+      Tags: Tags
+    }
+    console.log(updatedClass)
+    console.log("start")
+    fetch(updateClassUrl, {
+      method: "PUT",
+      body: JSON.stringify(updatedClass),
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json; charset=UTF-8",
+      }),
+    })
+      .then((res) => {
+        console.log("res=", res);
+        console.log("res.status", res.status);
+        console.log("res.ok", res.ok);
+        if (res.ok) {
+          setModalOpen(true)
+        } 
+        return res.json();
+      })
+      .then(
+        (result) => {
+          console.log(result);
+        },
+        (error) => {
+          console.log("err post=", error);
+        }
+      );
+      console.log("end")
   }
-  // PUT
 
   const BackToHomePage = () => {
     navigate("/SuperHomePage", { state: superDetails });
@@ -99,6 +120,7 @@ export default function FCUpdateSuperClassPage() {
                 placeholder={className}
                 required
                 onChange={(e) => setClassName(e.target.value)}
+                defaultValue={className}
               />
             </Form.Group>
             <Form.Group className="mb-3">
@@ -110,15 +132,16 @@ export default function FCUpdateSuperClassPage() {
                 placeholder={classDescription}
                 required
                 onChange={(e) => setClassDescription(e.target.value)}
+                defaultValue={classDescription}
               />
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>תאריך השיעור</Form.Label>
               <Form.Control
                 type="date"
-                placeholder={classDate}
                 required
                 onChange={(e) => setClassDate(e.target.value)}
+                defaultValue={stringDate}
               />
             </Form.Group>
 
@@ -126,9 +149,9 @@ export default function FCUpdateSuperClassPage() {
               <Form.Label>שעת התחלה</Form.Label>
               <Form.Control
                 type="time"
-                placeholder={classStartTime}
                 required
                 onChange={(e) => seTclassStartTime(e.target.value)}
+                defaultValue={classStartTime}
               />
             </Form.Group>
 
@@ -139,6 +162,7 @@ export default function FCUpdateSuperClassPage() {
                 placeholder={classEndTime}
                 required
                 onChange={(e) => setClassEndTime(e.target.value)}
+                defaultValue={classEndTime}
               />
             </Form.Group>
 
@@ -150,8 +174,8 @@ export default function FCUpdateSuperClassPage() {
                 required
                 onChange={(e) => setClassParticipants(e.target.value)}
               >
-                <option value="" defaultValue hidden>
-                  בחר
+                <option value={classParticipants} defaultValue hidden>
+                  {classParticipants}
                 </option>
                 <option value="1"> 1 </option>
                 <option value="2"> 2 </option>
@@ -162,11 +186,12 @@ export default function FCUpdateSuperClassPage() {
             <Form.Group className="mb-3">
               <Form.Label>בחר תגיות</Form.Label>
               <Select
+                value={selectedTags}
                 theme={customTheme}
                 placeholder="בחר תגיות"
                 closeMenuOnSelect={false}
                 components={animatedComponents}
-                onChange={setTags}
+                onChange={setSelectedTags}
                 isMulti
                 isSearchable
                 noOptionsMessage={() => "לא נמצאו תגיות"}
@@ -182,24 +207,8 @@ export default function FCUpdateSuperClassPage() {
           >
             עדכון שיעור
           </Button>
-          {/* <Col xs={6}>
-                <Button
-                  id="subBtn"
-                  variant="outline-primary"
-                  onClick={BackToHomePage}
-                >
-                  חזרה לדף הבית
-                </Button>
-              </Col> */}
-
-
         </Card.Body>
-        {/* <FCModalConfirm
-            BackToHomePage={BackToHomePage}
-            modalOpen={modalOpen}
-            ClassDetailsForModal={ClassDetailsForModal}
-            text="!השיעור התווסף/ עודכן בהצלחה"
-          /> */}
+        <FCModalUpdateClass modalOpen={modalOpen} BackToHomePage={BackToHomePage} />
       </Card>
     </Container>
   );
