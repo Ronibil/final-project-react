@@ -5,6 +5,7 @@ import { Container, Card, Form, Button } from "react-bootstrap";
 import LogoComponent from "../Elements/LogoComponent";
 import VisibilityIcon from '@mui/icons-material/Visibility';
 import VisibilityOffIcon from '@mui/icons-material/VisibilityOff';
+import ReturnPageButton from "../Elements/ReturnPageButton";
 
 export default function FCNewPasswordPage() {
   const [currentPassword, setCurrentPassword] = useState("")
@@ -17,11 +18,11 @@ export default function FCNewPasswordPage() {
   const { state } = location;
   const navigate = useNavigate();
   const userDetails = {
-    Email: state.Email,
-    Password: state.Password,
-    StudentId: state.StudentId
+    Email: state.userDetails.Email,
+    Password: state.userDetails.Password,
+    StudentId: state.userDetails.StudentId
   };
-
+  const user = state.type;
   const fetchUpdatePassword = () => {
     const putPassUrl = "http://localhost:49812/Student/UpdatePassword"
     let updatedPass = {
@@ -29,38 +30,38 @@ export default function FCNewPasswordPage() {
       Password: confirmPassword
     }
     console.log('start');
-      fetch(putPassUrl, {
-        method: "PUT",
-        body: JSON.stringify(updatedPass),
-        headers: new Headers({
-          "Content-Type": "application/json; charset=UTF-8",
-          Accept: "application/json; charset=UTF-8",
-        }),
+    fetch(putPassUrl, {
+      method: "PUT",
+      body: JSON.stringify(updatedPass),
+      headers: new Headers({
+        "Content-Type": "application/json; charset=UTF-8",
+        Accept: "application/json; charset=UTF-8",
+      }),
+    })
+      .then((res) => {
+        console.log("res=", res);
+        console.log("res.status", res.status);
+        console.log("res.ok", res.ok);
+        if (res.ok) {
+          setMessage("..הסיסמא עודכנה בהצלחה! עליך לבצע התחברות מחדש")
+        }
+        else {
+          setMessage("עדכון הסיסמא נכשל!")
+        }
+        return res.json()
       })
-        .then((res) => {
-          console.log("res=", res);
-          console.log("res.status", res.status);
-          console.log("res.ok", res.ok);
-          if (res.ok) {
-            setMessage("..הסיסמא עודכנה בהצלחה! עליך לבצע התחברות מחדש")
-          }
-          else {
-            setMessage("עדכון הסיסמא נכשל!")
-          }
-          return res.json()
-        })
-        .then(
-          (result) => {
-            console.log("fetch updated Password= ", result);
-            setType(result)
-          },
-          (error) => {
-            console.log("err put=", error);
-          }
-        );
-      console.log("end");
+      .then(
+        (result) => {
+          console.log("fetch updated Password= ", result);
+          setType(result)
+        },
+        (error) => {
+          console.log("err put=", error);
+        }
+      );
+    console.log("end");
   }
-  
+
   const handleCurrentPass = (e) => {
     if (e.target.value === userDetails.Password) {
       setCurrentPassword(e.target.value)
@@ -71,17 +72,17 @@ export default function FCNewPasswordPage() {
       e.target.style.border = "1px solid red"
     }
   }
-  
+
   const PasswordVisibility = (e) => {
     let textBoxArr = document.getElementsByName("password")
     if (textBoxArr[0].type === "password") {
-      for(let i = 0; i < textBoxArr.length; i++) {
+      for (let i = 0; i < textBoxArr.length; i++) {
         textBoxArr[i].type = "text"
       }
       setIcon(<VisibilityOffIcon />)
     }
     else {
-      for(let i = 0; i < textBoxArr.length; i++) {
+      for (let i = 0; i < textBoxArr.length; i++) {
         textBoxArr[i].type = "password"
       }
       setIcon(<VisibilityIcon />)
@@ -90,7 +91,7 @@ export default function FCNewPasswordPage() {
 
   const sendNewPass = () => {
     let txtBoxes = document.getElementsByName("password")
-    if (currentPassword !==  userDetails.Password || newPassword !== confirmPassword) {
+    if (currentPassword !== userDetails.Password || newPassword !== confirmPassword) {
       txtBoxes[1].style.border = "1px solid red"
       txtBoxes[2].style.border = "1px solid red"
       alert("אחד או יותר מהפרטים שהזנת שגויים")
@@ -104,8 +105,8 @@ export default function FCNewPasswordPage() {
     }
   }
   const reLogin = () => {
-      window.history.pushState(null, document.title, window.location.href);
-      window.addEventListener('popstate', function(event) {
+    window.history.pushState(null, document.title, window.location.href);
+    window.addEventListener('popstate', function (event) {
       window.history.pushState(null, document.title, window.location.href);
     });
     navigate("/")
@@ -133,10 +134,10 @@ export default function FCNewPasswordPage() {
         display: "block"
       }
       if (type === "superStudent") {
-        redirectBTN = <Button onClick={() => navigate("/superHomePage", {state: userDetails})} variant="danger">חזור לדף הבית</Button>
+        redirectBTN = <Button onClick={() => navigate("/superHomePage", { state: userDetails })} variant="danger">חזור לדף הבית</Button>
       }
       else if (type === "student") {
-        redirectBTN = <Button onClick={() => navigate("/studentHomePage", {state: userDetails})} variant="danger">חזור לדף הבית</Button>
+        redirectBTN = <Button onClick={() => navigate("/studentHomePage", { state: userDetails })} variant="danger">חזור לדף הבית</Button>
       }
     }
     const box = (
@@ -155,6 +156,12 @@ export default function FCNewPasswordPage() {
 
   return (
     <Container className="d-flex justify-content-start align-items-center flex-column ">
+      {user === "super" ? (
+        <ReturnPageButton GoTo={() => navigate("/superHomePage", { state: userDetails })} />
+      ) : (
+        <ReturnPageButton GoTo={() => navigate("/studentHomePage", { state: userDetails })} />
+      )}
+
       <Card style={{ borderRadius: 25, marginTop: 140 }}>
         <div style={{ margin: "0 auto" }} >
           <LogoComponent />
@@ -163,10 +170,10 @@ export default function FCNewPasswordPage() {
           <h3 className="text-center mb-4"> דף שינוי סיסמא</h3>
           <hr />
           <Form id="form">
-              <Button variant="text" onClick={(e) => PasswordVisibility(e)}>{icon}</Button>
+            <Button variant="text" onClick={(e) => PasswordVisibility(e)}>{icon}</Button>
             <Form.Group >
               <Form.Label style={{ display: "block", textAlign: "right", marginRight: 10 }}>
-                :סיסמא נוכחית 
+                :סיסמא נוכחית
               </Form.Label>
               <Form.Control
                 className="mb-2"

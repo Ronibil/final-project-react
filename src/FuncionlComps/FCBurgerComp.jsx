@@ -47,43 +47,52 @@ export default function FCBurgerComp({ userDetails, type }) {
       onKeyDown={toggleDrawer(anchor, false)}
     >
       <List>
-        <ListItem disablePadding>
-          <ListItemButton>
-            <ListItemIcon>
-              <NotificationAddIcon />
-            </ListItemIcon>
-            <ListItemText primary="התראות" />
-          </ListItemButton>
-        </ListItem>
         {type !== "super" ? (
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <SchoolIcon />
-              </ListItemIcon>
-              <ListItemText primary="הפוך לסופר-סטודנט" />
-            </ListItemButton>
-          </ListItem>
+          <>
+            <ListItem disablePadding>
+              <ListItemButton
+                onClick={() => navigate("/notificationsTagsForStudent", { state: userDetails })}
+              >
+                <ListItemIcon>
+                  <NotificationAddIcon />
+                </ListItemIcon>
+                <ListItemText primary="התראות" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton
+                onClick={() => navigate("/newPasswordPage", { state: { userDetails, type: "student" } })}
+              >
+                <ListItemIcon>
+                  <PasswordIcon />
+                </ListItemIcon>
+                <ListItemText primary="שינוי סיסמה" />
+              </ListItemButton>
+            </ListItem>
+          </>
         ) : (
-          <ListItem disablePadding>
-            <ListItemButton>
-              <ListItemIcon>
-                <SchoolIcon />
-              </ListItemIcon>
-              <ListItemText primary="המלצות" />
-            </ListItemButton>
-          </ListItem>
+          <>
+            <ListItem disablePadding>
+              <ListItemButton>
+                <ListItemIcon>
+                  <SchoolIcon />
+                </ListItemIcon>
+                <ListItemText primary="המלצות" />
+              </ListItemButton>
+            </ListItem>
+            <ListItem disablePadding>
+              <ListItemButton
+                onClick={() => navigate("/newPasswordPage", { state: { userDetails, type: "super" } })}
+              >
+                <ListItemIcon>
+                  <PasswordIcon />
+                </ListItemIcon>
+                <ListItemText primary="שינוי סיסמה" />
+              </ListItemButton>
+            </ListItem>
+          </>
         )}
-        <ListItem disablePadding>
-          <ListItemButton
-            onClick={() => navigate("/newPasswordPage", { state: userDetails })}
-          >
-            <ListItemIcon>
-              <PasswordIcon />
-            </ListItemIcon>
-            <ListItemText primary="שינוי סיסמה" />
-          </ListItemButton>
-        </ListItem>
+
         <Divider />
         <ListItem disablePadding>
           <ListItemButton onClick={() => logOut()}>
