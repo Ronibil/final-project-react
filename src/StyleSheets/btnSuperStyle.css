@@ -9,7 +9,7 @@
   border-radius: 50px;
 }
 
-@media (max-width: 768px) {
+@media (max-width: 1200px) {
   .btnSuper {
     height: 30vw;
     width: 43vw;

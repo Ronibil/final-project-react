@@ -313,6 +313,7 @@ export default function FCDetailsForStudentSignUp(props) {
   return (
     <Container
       style={{
+        textAlign: "center",
         flexDirection: "column",
         maxWidth: "700px",
         justifyContent: "center",

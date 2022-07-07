@@ -36,11 +36,11 @@ export default function FCChangePasswordPage() {
   }
   return (
     <Container className="d-flex justify-content-start align-items-center flex-column ">
-      <Card style={{ borderRadius: 25, marginTop: 140 }}>
-        <div style={{ marginLeft: 122 }} >
+      <Card style={{ textAlign: "center", borderRadius: 25, marginTop: 140 }}>
+        <div  >
           <LogoComponent />
-          <ReturnPageButton GoTo={() => navigate("/")} />
         </ div>
+        <ReturnPageButton GoTo={() => navigate("/")} />
         <Card.Body>
           <h3 className="text-center mb-4"> דף שינוי סיסמא</h3>
           <hr />

@@ -162,8 +162,8 @@ export default function FCNewPasswordPage() {
         <ReturnPageButton GoTo={() => navigate("/studentHomePage", { state: userDetails })} />
       )}
 
-      <Card style={{ borderRadius: 25, marginTop: 140 }}>
-        <div style={{ margin: "0 auto" }} >
+      <Card style={{ borderRadius: 25, marginTop: 140, textAlign: "center" }}>
+        <div>
           <LogoComponent />
         </div>
         <Card.Body>

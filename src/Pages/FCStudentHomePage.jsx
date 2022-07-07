@@ -76,7 +76,7 @@ export default function StudentHomePage() {
       <h1>ברוכים הבאים - {studentDetails.FullName}</h1>
       <br />
       <FCBurgerComp userDetails={userDetails} />
-      <h3>:ההמלצה השבועית</h3>
+      <h3>!המלצה ללמידה נכונה</h3>
       <div
         style={{
           borderRadius: 25,

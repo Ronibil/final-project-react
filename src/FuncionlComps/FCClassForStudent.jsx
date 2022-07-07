@@ -191,8 +191,7 @@ export default function FCClassForStudent() {
       ) : (
         ""
       )}
-      <h2 style={{ marginBottom: 25 }}>ברוכים הבאים - {studentDetails.FullName}</h2>
-      <div className="d-flex flex-row" style={{ marginBottom: 10 }}>
+      <div className="d-flex flex-row" style={{ marginBottom: 10, marginTop: 25 }}>
         <Button onClick={() => setClassType("future")} style={{ borderRadius: 15, width: "120%", margin: 5, background: "#A2D5AB", border: "solid #4B8673 2px" }} >שיעורים עתידיים</Button>
         <Button onClick={() => setClassType("history")} style={{ borderRadius: 15, width: "120%", margin: 5, background: "#A2D5AB", border: "solid #4B8673 2px" }}>היסטוריית שיעורים</Button>
       </div >

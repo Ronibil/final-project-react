@@ -1,5 +1,5 @@
 import React from "react";
-import { Card, Button, Container} from "react-bootstrap";
+import { Card, Button, Container } from "react-bootstrap";
 import FCInput from "../Elements/FCInput";
 import LogoComponent from "../Elements/LogoComponent";
 
@@ -12,9 +12,9 @@ export default function FCLoginForm({
 }) {
 
   return (
-    <Container style={{ flexDirection: "row", maxWidth: "700px", paddingTop: 150 }}>
-      <Card style={{ backgroundColor: "rgba(255, 255, 255, 0.7)", borderRadius: 25 }}>
-        <div style={{ alignSelf: "center" }} >
+    <Container style={{ flexDirection: "column", maxWidth: "700px", paddingTop: 150 }} >
+      <Card style={{ textAlign: "center", backgroundColor: "rgba(255, 255, 255, 0.7)", borderRadius: 25 }}>
+        <div>
           <LogoComponent />
         </ div>
         <Card.Body>

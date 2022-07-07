@@ -13,10 +13,7 @@ export default function FCFormSuperDetails({
 }) {
   let profileSuperImage = `https://proj.ruppin.ac.il/bgroup92/prod/ImageFiles/ProfileImage-${superDetails.ImagePath}.jpg`;
   return (
-    <div
-      className="d-flex justify-content-center"
-      style={{ maxWidth: "700px" }}
-    >
+    <Container className="d-flex justify-content-center" style={{ maxWidth: "700px" }}>
       <Card
         style={{
           borderRadius: 25,
@@ -59,7 +56,7 @@ export default function FCFormSuperDetails({
           )}
           <Col xs={6}>
             {superDetails.ImagePath !== undefined &&
-            superDetails.ImagePath !== "empty" ? (
+              superDetails.ImagePath !== "empty" ? (
               <>
                 <FaUserTimes
                   onClick={ShowModalDelete}
@@ -119,6 +116,6 @@ export default function FCFormSuperDetails({
           </Card.Text>
         </Card.Body>
       </Card>
-    </div>
+    </Container>
   );
 }

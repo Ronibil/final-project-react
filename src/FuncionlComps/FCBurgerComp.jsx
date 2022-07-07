@@ -77,7 +77,7 @@ export default function FCBurgerComp({ userDetails, type }) {
                 <ListItemIcon>
                   <SchoolIcon />
                 </ListItemIcon>
-                <ListItemText primary="המלצות" />
+                <ListItemText primary="?מה מומלץ ללמד" />
               </ListItemButton>
             </ListItem>
             <ListItem disablePadding>
