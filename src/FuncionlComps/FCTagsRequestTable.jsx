@@ -101,6 +101,11 @@ export default function FCTagsRequestTable({tagsRequestArr}) {
     let newRequestArr = []
     newRequestArr = requestsArr.map(r => {
       r.Tags.filter(tag => tag.TagName !== t)
+      let toRemove = t
+      let index = r.Tags.indexOf(toRemove) 
+      if (index > -1) {
+        r.Tags.splice(index, 1)
+      }
       return r
     })
     requestsArr = newRequestArr
@@ -116,7 +121,7 @@ export default function FCTagsRequestTable({tagsRequestArr}) {
       </Row>
       <Row>
         <Col sm={12}>
-          <Table responsive variant="dark">
+          <Table responsive variant="light">
             <thead>
                 <tr>
                   <th>שם סטודנט</th>

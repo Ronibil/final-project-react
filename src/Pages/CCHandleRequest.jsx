@@ -27,12 +27,6 @@ class CCHandleRequest extends Component {
     return gender;
   };
 
-  shortDate = (d) => {
-    let date = new Date(d)
-    let short = date.getDate() + "/" + (date.getMonth() + 1) + "/" + date.getFullYear() 
-    return short
-  }
-
   //go back button
   back = () => {
     let prev = (
@@ -76,9 +70,9 @@ class CCHandleRequest extends Component {
   postStudent = (s) => {
     let request = this.state.requestObject;
     let generatedPassword = this.generatePassword(request.RequsetNum)
-    let birthTypeDate = new Date(request.BirthDate)
+    let birthTypeDate = new Date(request.BirthDate).toLocaleDateString("en-CA")
     const StudentUrl ="http://localhost:49812/Student/PostNewStudent";
-    let currentDate = new Date();
+    let currentDate = new Date().toLocaleDateString("en-CA")
     const student = {
       StudentId: request.StudentId,
       FullName: request.FullName,
@@ -86,7 +80,7 @@ class CCHandleRequest extends Component {
       Password: generatedPassword,
       Phone: request.Phone,
       Gender: request.Gender,
-      BirthDate: birthTypeDate,
+      BirthDate: request.BirthDate,
       City: request.City,
       RegistrationDate: currentDate
     };
@@ -254,12 +248,12 @@ class CCHandleRequest extends Component {
 
   requestDetails = () => {
     let request = this.state.requestObject;
-    let head = <h2>בקשה מספר {request.RequsetNum}</h2>;
-    let subHead = <h4> עבור {request.type}</h4>;
     let block = (
-      <div className="col-md-8" style={{margin: "0 auto", direction:"rtl"}}>
+      <div className="col-md-8" style={{margin: "0 auto", direction:"rtl", width: "80%"}}>
               <div className="card mb-3">
                 <div className="card-body">
+                  <h2 className="card-title">בקשה מספר {request.RequsetNum}</h2>
+                  <h4 className="card-subtitle mb-2 text-muted"> עבור {request.type}</h4><hr/>
                   <div className="row">
                     <div className="col-sm-3">
                       <h6 className="mb-0">שם:</h6>
@@ -310,7 +304,7 @@ class CCHandleRequest extends Component {
                       <h6 className="mb-0">שנת לידה:</h6>
                     </div>
                     <div className="col-sm-9 text-secondary">
-                      {this.shortDate(request.BirthDate)}
+                      {request.BirthDate}
                     </div>
                   </div>
                   <hr />
@@ -328,7 +322,7 @@ class CCHandleRequest extends Component {
                       <h6 className="mb-0">תאריך הגשת בקשה:</h6>
                     </div>
                     <div className="col-sm-9 text-secondary">
-                      {this.shortDate(request.RequestDate)}
+                      {request.RequestDate}
                     </div>
                   </div>
                   <hr />
@@ -345,9 +339,10 @@ class CCHandleRequest extends Component {
             </div>
     );
     let superBlock = (
-      <div className="col-md-8" style={{margin: "0 auto", direction:"rtl"}}>
+      <div className="col-md-8" style={{margin: "0 auto", direction:"rtl", width: "80%"}}>
         <div className="card mb-3">
           <div className="card-body">
+            <h4 className="card-title">פרטים נוספים</h4><hr/>
             <div className="row">
               <div className="col-sm-3">
                 <h6 className="mb-0">שנת לימודים:</h6>
@@ -383,8 +378,6 @@ class CCHandleRequest extends Component {
       if (request.type === "סופר סטודנט") {
           let showblock = (
             <div id="fldBlock">
-              {head}
-              {subHead}
               {block}
               {superBlock}
               {this.approveDenyBtns()}
@@ -395,8 +388,6 @@ class CCHandleRequest extends Component {
         else {
           let showBlock = (
             <div id="fldBlock">
-              {head}
-              {subHead}
               {block}
               {this.approveDenyBtns()}
             </div>
@@ -408,8 +399,6 @@ class CCHandleRequest extends Component {
         if (request.type === "סופר סטודנט") {
           let showblock = (
             <div id="fldBlock">
-              {head}
-              {subHead}
               {block}
               {superBlock}
               {this.back()}
@@ -420,8 +409,6 @@ class CCHandleRequest extends Component {
         else {
           let showBlock = (
             <div id="fldBlock">
-              {head}
-              {subHead}
               {block}
               {this.back()}
             </div>

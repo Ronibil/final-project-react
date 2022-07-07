@@ -1,13 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Button, Container, Table } from "react-bootstrap";
+import { Button, Container, Table, Row, Col } from "react-bootstrap";
 import LogoComponent from "../Elements/LogoComponent";
-
 class CCAdminHomePage extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      arrToShow: [],
+      arrToShow: []
     };
   }
 
@@ -127,20 +126,12 @@ class CCAdminHomePage extends Component {
   aplicationStatusMenu = () => {
     let statusMenu = (
       <div style={{ margin: 20, textAlign: "center" }}>
-        
-        <Button size="sm" onClick={() => this.devideRequests("rejected")}>בקשות שנדחו</Button>
-        &nbsp;| <Button size="sm" onClick={() => this.devideRequests("approved")} >בקשות שאושרו</Button>
-        &nbsp;|{" "}
-        <Button size="sm" onClick={() => this.devideRequests("onHold")}>
-          {" "}
-          בקשות ממתינות
-        </Button>
-        <br/> <br/>
-        <Link to="/adminTagsPage">
-          <Button size="sm" variant="secondary">
-            בקשות של תגיות
-          </Button>
-        </Link>
+        <Row style={{direction: "rtl"}}>
+          <Col><Button onClick={() => this.devideRequests("onHold")} variant="warning">בקשות ממתינות</Button></Col>
+          <Col><Button onClick={() => this.devideRequests("approved")} variant="success">בקשות שאושרו</Button></Col>
+          <Col><Button onClick={() => this.devideRequests("rejected")} variant="danger"> בקשות שנדחו</Button></Col>
+          <Col style={{margin: "10px"}}><Link to="/adminTagsPage"><Button size="sm" variant="secondary">#בקשות של תגיות#</Button></Link></Col>
+        </Row>
       </div>
     );
     return statusMenu;
@@ -157,8 +148,6 @@ class CCAdminHomePage extends Component {
   // show request preview table
   showRequestsTable = (arr) => {
     const tableStyle = {
-      margin: "0 auto",
-      border: "1 px solid white",
       direction: "rtl",
       fontSize: "15px",
       display: "none",
@@ -182,7 +171,7 @@ class CCAdminHomePage extends Component {
     });
 
     let table = (
-      <Table striped bordered hover style={tableStyle}>
+      <Table striped bordered hover style={tableStyle} variant="light">
         <thead>
           <tr>
             <td>מס בקשה</td>
@@ -202,7 +191,7 @@ class CCAdminHomePage extends Component {
   render() {
     return (
       <Container>
-        <LogoComponent />
+        <div style={{textAlign: "center"}}><LogoComponent /></div>
         <h2 style={{ textAlign: "center" }}> דף גורם מנהל </h2>
         {this.aplicationStatusMenu()}
         {this.showRequestsTable(this.state.arrToShow)}
