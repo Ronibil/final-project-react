@@ -80,12 +80,14 @@ export default function StudentHomePage() {
       <div
         style={{
           borderRadius: 25,
-          backgroundColor: "#17815A",
+          // backgroundColor: "#17815A",
           padding: "20PX",
           backgroundColor: "rgba(255, 255, 255, 0.7)",
         }}
       >
-        <p style={{ fontWeight: "bold" }}>{recommendation}</p>
+        <p dir="rtl" style={{ fontWeight: "bold" }}>
+          {recommendation}
+        </p>
       </div>
       <br />
       <Button

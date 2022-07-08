@@ -275,6 +275,7 @@ export default function NotificationsTagsForStudent() {
             {tagsNotifications.map((t) => (
               <>
                 <span
+                  key={t.TagName}
                   style={{ background: "#00417E" }}
                   className="badge rounded-pill"
                 >

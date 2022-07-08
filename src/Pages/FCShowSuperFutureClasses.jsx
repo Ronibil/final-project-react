@@ -74,7 +74,9 @@ export default function FCShowSuperFutureClasses() {
   return (
     <Container className="min-vh-100 d-flex align-items-center flex-column text-center">
       <LogoComponent />
-      <ReturnPageButton GoTo={() => navigate("/searchClassesPage", { state: userDetails })} />
+      <ReturnPageButton
+        GoTo={() => navigate("/searchClassesPage", { state: userDetails })}
+      />
       {classDetails !== undefined ? (
         <FCModalConfirm
           modalOpen={confirmModal}
