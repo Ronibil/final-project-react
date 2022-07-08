@@ -239,9 +239,9 @@ export default function FCDetailsForSuperSignUp(props) {
                 style={{ borderRadius: 25 }}
                 required
               />
-              <Button onClick={UploadImage} className="mt-2">
+              {/* <Button onClick={UploadImage} className="mt-2">
                 העלה תמונה
-              </Button>
+              </Button> */}
             </Form.Group>
             <Form.Group className="mb-3">
               <Form.Label>שם מחלקה</Form.Label>
