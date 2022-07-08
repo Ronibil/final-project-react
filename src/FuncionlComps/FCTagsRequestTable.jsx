@@ -5,6 +5,8 @@ import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Table from 'react-bootstrap/Table';
 import Button from 'react-bootstrap/Button';
+import { Link } from "react-router-dom";
+import ReturnPageButton from "../Elements/ReturnPageButton";
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 
@@ -114,6 +116,7 @@ export default function FCTagsRequestTable({tagsRequestArr}) {
 
   return(
     <Container dir='rtl'>
+      <Link to="/adminHomePage"><ReturnPageButton /></Link>
       <Row>
         <Col>
           <h1> בקשות({ requestsArr.length })</h1>
@@ -161,7 +164,7 @@ export default function FCTagsRequestTable({tagsRequestArr}) {
                   
                   <tr>
                     <td colSpan="6">
-                      <div style={{backgroundColor: '#343A40', color: '#FFF', padding: '10px'}}>
+                      <div style={{backgroundColor: 'lightgray', color: 'black', padding: '10px'}}>
                         <h2> תגיות </h2>
                         {request.Tags.map((t) => 
                         <>

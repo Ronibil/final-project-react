@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "../StyleSheets/requestDets.css";
 import { Link } from "react-router-dom";
+import ReturnPageButton from "../Elements/ReturnPageButton";
 class CCHandleRequest extends Component {
   constructor(props) {
     super(props);
@@ -421,6 +422,7 @@ class CCHandleRequest extends Component {
   render() {
     return (
       <div>
+        <Link to="/adminHomePage"><ReturnPageButton /></Link>
         {this.requestDetails()}
         {this.demo()}
         {this.msgBox()}

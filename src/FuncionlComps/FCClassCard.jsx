@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Card, Row, Col, Button } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import FCModalContact from "./FCModalContact";
 import FCStarsToReturn from "./FCStarsToReturn";
 
 export default function FCClassCard({
@@ -15,6 +16,7 @@ export default function FCClassCard({
   const navigate = useNavigate();
 
   const [superDetails, setSuperDetails] = useState({});
+  const [modalShow, setModalShow] = useState(false);
   const bringPhoneNumber = async (classToCard) => {
     const superId = classToCard.SuperStudentId;
     const url = `http://localhost:49812/SuperStudent/ShowSuperDetailsById/${superId}`;
@@ -36,8 +38,8 @@ export default function FCClassCard({
             Phone: data.Phone,
             Email: data.Email,
           });
-          console.log(superDetails.Phone);
-          window.location.replace(`https://wa.me/${superDetails.Phone}`);
+          setModalShow(true)
+          //window.location.replace(`https://wa.me/${superDetails.Phone}`);
         },
         (error) => {
           console.log("err post=", error);
@@ -111,8 +113,9 @@ export default function FCClassCard({
                 variant="outline-primary"
                 onClick={() => bringPhoneNumber(classToCard)}
               >
-                לצ'אט
+                צור קשר
               </Button>
+              <FCModalContact show={modalShow} onHide={() => setModalShow(false)} phone={superDetails.Phone} email={superDetails.Email} style={{direction: "rtl"}}/>
             </div>
             <div className="text-end">
               <b>שם השיעור:</b> {classToCard.ClassName}
