@@ -257,7 +257,9 @@ export default function FCClassCard({
                 <b>תאריך:</b>{" "}
                 {new Date(classToCard.ClassDate).toLocaleDateString("en-GB")}{" "}
                 <br />
-                <b>שעת התחלה:</b> {classToCard.StartTime}
+                <b>משעה:</b> {classToCard.StartTime.slice(0, 5)} <b>עד שעה:</b> {classToCard.EndTime.slice(0,5)}
+                <br />
+                <b>מחיר:</b> 60 - 90 ש"ח (בתיאום עם המורה)
                 <br />
                 <b>:תגיות השיעור</b>
                 <br />
