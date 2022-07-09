@@ -44,7 +44,7 @@ export default function FCUpdateSuperClassPage() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await axios.get("http://localhost:49812/Tags/getAll");
+      const { data } = await axios.get("https://proj.ruppin.ac.il/bgroup92/prod/Tags/getAll");
       let suggestionList = data.map((suggestion, index) => {
         return { value: index, label: suggestion };
       });
@@ -59,7 +59,7 @@ export default function FCUpdateSuperClassPage() {
   }, []);
 
   const btnShow = () => {
-    const updateClassUrl = "http://localhost:49812/SuperStudent/UpdateClassDetailsSuperStudent"
+    const updateClassUrl = "https://proj.ruppin.ac.il/bgroup92/prod/SuperStudent/UpdateClassDetailsSuperStudent"
     const Tags = selectedTags.map(t => t.label)
     const updatedClass = {
       ClassCode: classDetails.ClassCode,

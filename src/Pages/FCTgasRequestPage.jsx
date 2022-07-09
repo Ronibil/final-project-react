@@ -7,7 +7,7 @@ export default function FCTgasRequestPage() {
 
   useEffect(() => {
     const TagsRequestsUrl =
-      "http://localhost:49812/tagRequest/getAll";
+      "https://proj.ruppin.ac.il/bgroup92/prod/tagRequest/getAll";
     fetch(TagsRequestsUrl, {
       method: "GET",
       headers: new Headers({
@@ -39,7 +39,7 @@ export default function FCTgasRequestPage() {
   
   return (
     <div>
-      <h3 style={{textAlign: "center", padding:"20px"}}>דף בקשות של תגיות חדשות</h3>
+      <h3 style={{textAlign: "center", padding:"20px", marginTop: 150}}>דף בקשות של תגיות חדשות</h3>
       <FCTagsRequestTable tagsRequestArr={tagsRequests}/>
     </div>
   )

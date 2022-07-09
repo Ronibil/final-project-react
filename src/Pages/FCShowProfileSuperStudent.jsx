@@ -20,7 +20,7 @@ export default function FCShowProfileSuperStudent() {
   };
 
   useEffect(() => {
-    const url = `http://localhost:49812/SuperStudent/ShowSuperDetailsById/${superId}`;
+    const url = `https://proj.ruppin.ac.il/bgroup92/prod/SuperStudent/ShowSuperDetailsById/${superId}`;
     console.log(superId);
     fetch(url, {
       method: "POST",

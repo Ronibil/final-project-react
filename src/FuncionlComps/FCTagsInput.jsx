@@ -49,7 +49,7 @@ export default function FCTagsInput() {
   }
 
   const demo = () => {
-    const LocalUrl = "http://localhost:49812/tagRequest/NewRequest"
+    const LocalUrl = "https://proj.ruppin.ac.il/bgroup92/prod/tagRequest/NewRequest"
     let requestDate = new Date()
     const tagRequestObj = {
       Tags: tags,

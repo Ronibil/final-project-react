@@ -41,7 +41,7 @@ export default function FCShowSuperFutureClasses() {
     };
     setClassDetails(classToConfirmModal);
 
-    const url = "http://localhost:49812/Student/PostStudentToClass";
+    const url = "https://proj.ruppin.ac.il/bgroup92/prod/Student/PostStudentToClass";
 
     fetch(url, {
       method: "POST",

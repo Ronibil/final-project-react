@@ -19,7 +19,7 @@ export default function FCClassCard({
   const [modalShow, setModalShow] = useState(false);
   const bringPhoneNumber = async (classToCard) => {
     const superId = classToCard.SuperStudentId;
-    const url = `http://localhost:49812/SuperStudent/ShowSuperDetailsById/${superId}`;
+    const url = `https://proj.ruppin.ac.il/bgroup92/prod/SuperStudent/ShowSuperDetailsById/${superId}`;
     await fetch(url, {
       method: "POST",
       headers: new Headers({
@@ -336,7 +336,7 @@ export default function FCClassCard({
                   דירוג
                 </Button>
               ) : (
-                <b>דירגתי</b>
+                <b>דורג</b>
               )}
             </div>
             <div className="text-end">

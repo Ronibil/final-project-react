@@ -22,7 +22,7 @@ export default function FCSuperHomePage() {
   useEffect(() => {
     console.log(UserDetails);
     const urlGetSuperDetails =
-      "http://localhost:49812/SuperStudent/GetSuperLandingPageDetails";
+      "https://proj.ruppin.ac.il/bgroup92/prod/SuperStudent/GetSuperLandingPageDetails";
     fetch(urlGetSuperDetails, {
       method: "POST",
       body: JSON.stringify(UserDetails),
@@ -71,7 +71,7 @@ export default function FCSuperHomePage() {
   };
   const UpdateImage = (newFileToUpload) => {
     //UrlApi
-    const urlApi = "http://localhost:49812/Files/UpdateImage";
+    const urlApi = "https://proj.ruppin.ac.il/bgroup92/prod/Files/UpdateImage";
     //Name Of image.
     const imageName = "ProfileImage-" + superDetails.StudentId + ".jpg";
     //Image file
@@ -116,7 +116,7 @@ export default function FCSuperHomePage() {
     //Student id for delete image.
     const superId = superDetails.StudentId;
     //UrlApi
-    const urlApi = `http://localhost:49812/Files/DeleteImage/${superId}`;
+    const urlApi = `https://proj.ruppin.ac.il/bgroup92/prod/Files/DeleteImage/${superId}`;
     fetch(urlApi, {
       method: "PUT",
     }).then((response) => {

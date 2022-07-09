@@ -57,7 +57,7 @@ export default function FCDetailsForStudentSignUp(props) {
 
   // post new student request to db - fetch post
   const btnPostStudentRequest = () => {
-    const LocalUrl = "http://localhost:49812/requestToJoin/newRequest";
+    const LocalUrl = "https://proj.ruppin.ac.il/bgroup92/prod/requestToJoin/newRequest";
     const currentDate = new Date();
     const newStudentRequest = {
       StudentId: sID,
@@ -104,7 +104,7 @@ export default function FCDetailsForStudentSignUp(props) {
     } else {
       setTimeout(async () => {
         const { data } = await axios.get(
-          "http://localhost:49812/city/getCitiesByInput/" + inputValue
+          "https://proj.ruppin.ac.il/bgroup92/prod/city/getCitiesByInput/" + inputValue
         );
         const tempArray = [];
         data.forEach((element) => {
@@ -119,7 +119,7 @@ export default function FCDetailsForStudentSignUp(props) {
   };
 
   const isEmailExist = (email) => {
-    const Url = "http://localhost:49812/requestToJoin/isEmailExist";
+    const Url = "https://proj.ruppin.ac.il/bgroup92/prod/requestToJoin/isEmailExist";
     const user = {
       Email: email,
     };
@@ -289,7 +289,7 @@ export default function FCDetailsForStudentSignUp(props) {
       box = (
         <div className="App-header">
           <div>!הבקשה נשלחה בהצלחה</div>
-          <div>אנו נצור איתך קשר לגבי מצב בקשתך דרך המייל איתו הזנת בהרשמה</div>
+          <div>אנו ניצור איתך קשר לגבי מצב בקשתך בהקדם, המייל ישלח למייל איתו נרשמת למערכת</div>
           <Button variant="success" onClick={() => navigate("/")}>
             סגור
           </Button>

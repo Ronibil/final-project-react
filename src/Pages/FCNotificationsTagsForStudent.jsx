@@ -44,7 +44,7 @@ export default function NotificationsTagsForStudent() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await axios.get("http://localhost:49812/Tags/getAll");
+      const { data } = await axios.get("https://proj.ruppin.ac.il/bgroup92/prod/Tags/getAll");
       let suggestionList = data.map((suggestion, index) => {
         return { value: index, label: suggestion };
       });
@@ -55,7 +55,7 @@ export default function NotificationsTagsForStudent() {
   }, []);
 
   useEffect(() => {
-    const url = `http://localhost:49812/notification/GetNotificationsTags/${userDetails.StudentId}`;
+    const url = `https://proj.ruppin.ac.il/bgroup92/prod/notification/GetNotificationsTags/${userDetails.StudentId}`;
     fetch(url, {
       method: "GET",
       headers: new Headers({
@@ -100,7 +100,7 @@ export default function NotificationsTagsForStudent() {
     };
     setClassDetails(classToConfirmModal);
 
-    const url = "http://localhost:49812/Student/PostStudentToClass";
+    const url = "https://proj.ruppin.ac.il/bgroup92/prod/Student/PostStudentToClass";
 
     fetch(url, {
       method: "POST",
@@ -141,7 +141,7 @@ export default function NotificationsTagsForStudent() {
     }
     setTagsNotifications(newTagsArray);
 
-    const url = `http://localhost:49812/notification/UpdateTagsNotifications/${userDetails.StudentId}`;
+    const url = `https://proj.ruppin.ac.il/bgroup92/prod/notification/UpdateTagsNotifications/${userDetails.StudentId}`;
     fetch(url, {
       method: "POST",
       body: JSON.stringify(newTagsArray),
@@ -170,7 +170,7 @@ export default function NotificationsTagsForStudent() {
     setTagsNotifications(newTagsArray);
     console.log(newTagsArray);
 
-    const url = `http://localhost:49812/notification/UpdateTagsNotifications/${userDetails.StudentId}`;
+    const url = `https://proj.ruppin.ac.il/bgroup92/prod/notification/UpdateTagsNotifications/${userDetails.StudentId}`;
     fetch(url, {
       method: "POST",
       body: JSON.stringify(newTagsArray),
@@ -194,7 +194,7 @@ export default function NotificationsTagsForStudent() {
   };
 
   useEffect(() => {
-    const url = `http://localhost:49812/Class/GetClassesByTags/${userDetails.StudentId}`;
+    const url = `https://proj.ruppin.ac.il/bgroup92/prod/Class/GetClassesByTags/${userDetails.StudentId}`;
     if (tagsNotifications.length !== 0) {
       // let tagList = tagsNotifications.map((tag) => ({ TagName: tag.label }));
 

@@ -17,7 +17,7 @@ export default function FCBestToTeach() {
   const [hotTags, setHotTags] = useState([])
 
   useEffect(() => {
-    const url = `http://localhost:49812/HotTags/GetTop5HotTags`;
+    const url = `https://proj.ruppin.ac.il/bgroup92/prod/HotTags/GetTop5HotTags`;
     fetch(url, {
       method: "GET",
       headers: new Headers({
@@ -62,7 +62,7 @@ export default function FCBestToTeach() {
       </ div>
       {hotTags.length !== 0 && hotTags.length !== undefined ? (
         <FCHotTagsList tags={hotTags} />
-      ) : ("")}
+      ) : ("אין כרגע נושאים מבוקשים במערכת")}
     </Container>
   )
 }

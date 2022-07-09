@@ -13,9 +13,9 @@ class CCAdminHomePage extends Component {
   // get request - get all requests in db (students/supers) - fetch get
   componentDidMount = () => {
     let requestUrl =
-      "http://localhost:49812/requestToJoin/getall";
+      "https://proj.ruppin.ac.il/bgroup92/prod/requestToJoin/getall";
     let superRequestUrl =
-      "http://localhost:49812/RequestToJoinSuper/getall";
+      "https://proj.ruppin.ac.il/bgroup92/prod/RequestToJoinSuper/getall";
 
     console.log("start1")
     fetch(requestUrl, {

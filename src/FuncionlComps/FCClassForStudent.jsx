@@ -34,7 +34,7 @@ export default function FCClassForStudent() {
   };
 
   useEffect(() => {
-    const url = "http://localhost:49812/Student/GetStudentLandingPageDetails";
+    const url = "https://proj.ruppin.ac.il/bgroup92/prod/Student/GetStudentLandingPageDetails";
     fetch(url, {
       method: "POST",
       body: JSON.stringify(userDetails),
@@ -64,7 +64,7 @@ export default function FCClassForStudent() {
   }, []);
 
   const studentRank = ({ studentId, classCode, rating, ratingDescription }) => {
-    const url = "http://localhost:49812/RegisteredTo/StudentRank";
+    const url = "https://proj.ruppin.ac.il/bgroup92/prod/RegisteredTo/StudentRank";
     console.log();
     const detailsForRank = {
       StudentId: studentId,
@@ -100,7 +100,7 @@ export default function FCClassForStudent() {
 
 
   const DeleteStudentFromClass = (classCode) => {
-    const Url = "http://localhost:49812/Student/DeleteStudentFromClass";
+    const Url = "https://proj.ruppin.ac.il/bgroup92/prod/Student/DeleteStudentFromClass";
     const classToDelete = {
       StudentId: studentDetails.StudentId,
       ClassCode: classCode,
