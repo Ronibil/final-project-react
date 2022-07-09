@@ -23,6 +23,7 @@ import FCTagsInput from "./FuncionlComps/FCTagsInput";
 import FCTgasRequestPage from "./Pages/FCTgasRequestPage";
 import FCShowSuperFutureClasses from "./Pages/FCShowSuperFutureClasses";
 import FCNotificationsTagsForStudent from "./Pages/FCNotificationsTagsForStudent";
+import FCBestToTeach from "./Pages/FCBestToTeach";
 
 export default function App() {
   return (
@@ -50,6 +51,7 @@ export default function App() {
       <Route path="/adminTagsPage" element={<FCTgasRequestPage />} />
       <Route path="/showSuperFutureClasses" element={<FCShowSuperFutureClasses />} />
       <Route path="/notificationsTagsForStudent" element={<FCNotificationsTagsForStudent />} />
+      <Route path="/bestToTeach" element={<FCBestToTeach />} />
     </Routes>
   );
 }

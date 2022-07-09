@@ -39,40 +39,42 @@ export default function FCFormSuperDetails({
         />
         <Row>
           {type !== "student" ? (
-            <Col xs={6}>
-              <FaUserEdit
-                onClick={ShowModal}
-                style={{
-                  width: 25,
-                  height: 25,
-                  background: "white",
-                  marginLeft: "70%",
-                  borderRadius: 50,
-                }}
-              />
-            </Col>
-          ) : (
-            ""
-          )}
-          <Col xs={6}>
-            {superDetails.ImagePath !== undefined &&
-              superDetails.ImagePath !== "empty" ? (
-              <>
-                <FaUserTimes
-                  onClick={ShowModalDelete}
+            <>
+              <Col xs={6}>
+                <FaUserEdit
+                  onClick={ShowModal}
                   style={{
                     width: 25,
                     height: 25,
-                    marginLeft: 25,
                     background: "white",
+                    marginLeft: "70%",
                     borderRadius: 50,
                   }}
                 />
-              </>
-            ) : (
-              ""
-            )}
-          </Col>
+              </Col>
+              <Col xs={6}>
+                {superDetails.ImagePath !== undefined &&
+                  superDetails.ImagePath !== "empty" ? (
+                  <>
+                    <FaUserTimes
+                      onClick={ShowModalDelete}
+                      style={{
+                        width: 25,
+                        height: 25,
+                        marginLeft: 25,
+                        background: "white",
+                        borderRadius: 50,
+                      }}
+                    />
+                  </>
+                ) : (
+                  ""
+                )}
+              </Col>
+            </>
+          ) : (
+            ""
+          )};
         </Row>
         <Card.Body align="center">
           <Card.Title>{superDetails.FullName}</Card.Title>

@@ -166,9 +166,9 @@ export default function FCTagsRequestTable({tagsRequestArr}) {
                     <td colSpan="6">
                       <div style={{backgroundColor: 'lightgray', color: 'black', padding: '10px'}}>
                         <h2> תגיות </h2>
-                        {request.Tags.map((t) => 
+                        {request.Tags.map((t, i) => 
                         <>
-                        <ul key={t} id={t}>
+                        <ul key={i} id={t}>
                             <li>
                               <span><b>שם תגית:</b></span> {' '}
                               <span> {t} </span> {' '}

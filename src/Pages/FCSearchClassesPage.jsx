@@ -9,6 +9,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import FCModalConfirm from "../FuncionlComps/FCModalConfirm";
 import FCBottomNavigation from "../FuncionlComps/FCBottomNavigation";
 import LogoComponent from "../Elements/LogoComponent";
+import spiner from '../Elements/Spiner';
 
 export default function SearchClassesPage() {
   const { state } = useLocation();
@@ -234,13 +235,14 @@ export default function SearchClassesPage() {
       ) : (
         ""
       )}
+      {classes.length !== 0}
 
       {classes.length !== 0 ? (
         <>
           <div
             style={{
               width: "100%",
-              height: 500,
+              height: "62vh",
               overflow: "auto",
               borderRadius: 25,
             }}
@@ -265,9 +267,9 @@ export default function SearchClassesPage() {
               <div
                 style={{
                   width: "100%",
-                  height: "55vh",
+                  height: "62vh",
                   overflow: "auto",
-                  // borderRadius: 25,
+                  borderRadius: 25
                 }}
               >
                 {suggestionsClasses.map((c) => (
@@ -282,9 +284,11 @@ export default function SearchClassesPage() {
                 ))}
               </div>
             </>
-          ) : (
-            ""
-          )}
+          ) :
+            <div>
+              {spiner}
+            </div>
+          }
         </>
       )}
       {userDetails === undefined ? (

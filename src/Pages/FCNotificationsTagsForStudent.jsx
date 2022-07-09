@@ -272,10 +272,10 @@ export default function NotificationsTagsForStudent() {
       {tagsNotifications.length !== 0 ? (
         <>
           <div>
-            {tagsNotifications.map((t) => (
+            {tagsNotifications.map((t, i) => (
               <>
                 <span
-                  key={t.TagName}
+                  key={i}
                   style={{ background: "#00417E" }}
                   className="badge rounded-pill"
                 >

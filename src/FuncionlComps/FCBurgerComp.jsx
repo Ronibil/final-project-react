@@ -73,7 +73,9 @@ export default function FCBurgerComp({ userDetails, type }) {
         ) : (
           <>
             <ListItem disablePadding>
-              <ListItemButton>
+              <ListItemButton
+                onClick={() => navigate("/bestToTeach", { state: userDetails })}
+              >
                 <ListItemIcon>
                   <SchoolIcon />
                 </ListItemIcon>

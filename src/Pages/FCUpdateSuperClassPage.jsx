@@ -12,7 +12,7 @@ import FCModalUpdateClass from "../FuncionlComps/FCModalUpdateClass";
 export default function FCUpdateSuperClassPage() {
   const navigate = useNavigate();
   const { state } = useLocation();
-  
+
   const classDetails = state.classToCard;
   const superDetails = state.studentDetails;
 
@@ -28,8 +28,8 @@ export default function FCUpdateSuperClassPage() {
   const [modalOpen, setModalOpen] = useState(false);
 
   const date = new Date(classDate)
-  const stringDate = date.toLocaleDateString("en-CA") 
-  
+  const stringDate = date.toLocaleDateString("en-CA")
+
   const animatedComponents = makeAnimated();
   const customTheme = (theme) => {
     return {
@@ -87,7 +87,7 @@ export default function FCUpdateSuperClassPage() {
         console.log("res.ok", res.ok);
         if (res.ok) {
           setModalOpen(true)
-        } 
+        }
         return res.json();
       })
       .then(
@@ -98,7 +98,7 @@ export default function FCUpdateSuperClassPage() {
           console.log("err post=", error);
         }
       );
-      console.log("end")
+    console.log("end")
   }
 
   const BackToHomePage = () => {
@@ -116,7 +116,7 @@ export default function FCUpdateSuperClassPage() {
               <Form.Label>שם השיעור</Form.Label>
               <Form.Control
                 type="text"
-                style={{ textAlign: "right" }}
+                style={{ textAlign: "right", borderRadius: 25 }}
                 placeholder={className}
                 required
                 onChange={(e) => setClassName(e.target.value)}
@@ -127,7 +127,7 @@ export default function FCUpdateSuperClassPage() {
               <Form.Label>תיאור השיעור</Form.Label>
               <Form.Control
                 as="textarea"
-                style={{ textAlign: "right" }}
+                style={{ textAlign: "right", borderRadius: 25 }}
                 rows={3}
                 placeholder={classDescription}
                 required
@@ -139,6 +139,7 @@ export default function FCUpdateSuperClassPage() {
               <Form.Label>תאריך השיעור</Form.Label>
               <Form.Control
                 type="date"
+                style={{ textAlign: "right", borderRadius: 25 }}
                 required
                 onChange={(e) => setClassDate(e.target.value)}
                 defaultValue={stringDate}
@@ -149,6 +150,7 @@ export default function FCUpdateSuperClassPage() {
               <Form.Label>שעת התחלה</Form.Label>
               <Form.Control
                 type="time"
+                style={{ textAlign: "right", borderRadius: 25 }}
                 required
                 onChange={(e) => seTclassStartTime(e.target.value)}
                 defaultValue={classStartTime}
@@ -159,6 +161,7 @@ export default function FCUpdateSuperClassPage() {
               <Form.Label>שעת סיום</Form.Label>
               <Form.Control
                 type="time"
+                style={{ textAlign: "right", borderRadius: 25 }}
                 placeholder={classEndTime}
                 required
                 onChange={(e) => setClassEndTime(e.target.value)}
@@ -170,7 +173,7 @@ export default function FCUpdateSuperClassPage() {
               <Form.Label>מספר משתתפים</Form.Label>
               <Form.Select
                 size="sm"
-                style={{ textAlign: "right" }}
+                style={{ textAlign: "right", borderRadius: 25 }}
                 required
                 onChange={(e) => setClassParticipants(e.target.value)}
               >
