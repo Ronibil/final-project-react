@@ -91,7 +91,7 @@ export default function FCNewPasswordPage() {
 
   const sendNewPass = () => {
     let txtBoxes = document.getElementsByName("password")
-    if (currentPassword !== userDetails.Password || newPassword !== confirmPassword) {
+    if (currentPassword !== userDetails.Password || newPassword !== confirmPassword || newPassword === "" || newPassword.length < 8) {
       txtBoxes[1].style.border = "1px solid red"
       txtBoxes[2].style.border = "1px solid red"
       alert("אחד או יותר מהפרטים שהזנת שגויים")

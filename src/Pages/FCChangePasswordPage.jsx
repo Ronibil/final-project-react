@@ -4,10 +4,12 @@ import { useNavigate } from "react-router-dom";
 import { Container, Card, Form, Button } from "react-bootstrap";
 import LogoComponent from "../Elements/LogoComponent";
 import ReturnPageButton from "../Elements/ReturnPageButton";
+import FCModalForgetPassword from "../FuncionlComps/FCModalForgetPassword";
 
 export default function FCChangePasswordPage() {
   const navigate = useNavigate()
   const [id, setId] = useState("")
+  const [modalOpen, setModalOpen] = useState(false);
   const fetchNewPass = () => {
     const newPassUrl = "https://proj.ruppin.ac.il/bgroup92/prod/Student/NewPassword/"
     console.log("start")
@@ -22,6 +24,12 @@ export default function FCChangePasswordPage() {
         console.log("res=", res);
         console.log("res.status", res.status);
         console.log("res.ok", res.ok);
+        if (res.ok) {
+          setModalOpen(true)
+        }
+        if (res.status === 404) {
+          alert("התעודת זהות שהוזנה לא קיימת במערכת..")
+        }
         return res.json();
       })
       .then(
@@ -33,6 +41,9 @@ export default function FCChangePasswordPage() {
         }
       );
     console.log("end")
+  }
+  const BackToHomePage = () => {
+    navigate("/")
   }
   return (
     <Container className="d-flex justify-content-start align-items-center flex-column ">
@@ -68,6 +79,7 @@ export default function FCChangePasswordPage() {
             </Button>
           </Form>
         </Card.Body>
+        <FCModalForgetPassword BackToHomePage={BackToHomePage} modalOpen={modalOpen} />
       </Card>
     </Container>
   );
