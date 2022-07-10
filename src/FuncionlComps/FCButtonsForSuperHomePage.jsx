@@ -41,8 +41,8 @@ export default function FCButtonsForSuperHomePage({
   };
 
   return (
-    <Container className="d-flex align-items-center justify-content-center flex-row">
-      <div>
+    <Container className="d-flex align-items-center justify-content-center flex-column">
+      <div className="d-flex">
         <Button
           className="btnSuper"
           onClick={() =>
@@ -59,7 +59,7 @@ export default function FCButtonsForSuperHomePage({
           + יצירת שיעור חדש
         </Button>
       </div>
-      <div>
+      <div className="d-flex">
         <Button
           className="btnSuper"
           onClick={() =>
@@ -81,6 +81,6 @@ export default function FCButtonsForSuperHomePage({
           היסטורית שיעורים
         </Button>
       </div>
-      </Container>
+    </Container>
   );
 }
