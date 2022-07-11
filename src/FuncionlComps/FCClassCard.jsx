@@ -78,7 +78,7 @@ export default function FCClassCard({
                 <b>תאריך:</b>{" "}
                 {new Date(classToCard.ClassDate).toLocaleDateString("en-GB")}{" "}
                 <br />
-                <b>שעת התחלה:</b> {classToCard.StartTime}
+                <b>משעה:</b> {classToCard.StartTime.slice(0, 5)} <b>עד שעה:</b> {classToCard.EndTime.slice(0, 5)}
                 <br />
               </Col>
             </Row>
@@ -123,7 +123,7 @@ export default function FCClassCard({
               <b>תאריך:</b>{" "}
               {new Date(classToCard.ClassDate).toLocaleDateString("en-GB")}{" "}
               <br />
-              <b>שעת התחלה:</b> {classToCard.StartTime}
+              <b>משעה:</b> {classToCard.StartTime.slice(0, 5)} <b>עד שעה:</b> {classToCard.EndTime.slice(0, 5)}
               {studentDetails !== undefined ? (
                 <Button
                   className="badge rounded-pill"
@@ -202,7 +202,7 @@ export default function FCClassCard({
               <b>תאריך:</b>{" "}
               {new Date(classToCard.ClassDate).toLocaleDateString("en-GB")}{" "}
               <br />
-              <b>שעת התחלה:</b> {classToCard.StartTime}
+              <b>משעה:</b> {classToCard.StartTime.slice(0, 5)} <b>עד שעה:</b> {classToCard.EndTime.slice(0, 5)}
               <br />
               <b>:תגיות השיעור</b>
               <br />
@@ -345,7 +345,7 @@ export default function FCClassCard({
               <b>תאריך:</b>{" "}
               {new Date(classToCard.ClassDate).toLocaleDateString("en-GB")}{" "}
               <br />
-              <b>שעת התחלה:</b> {classToCard.StartTime}
+              <b>משעה:</b> {classToCard.StartTime.slice(0, 5)} <b>עד שעה:</b> {classToCard.EndTime.slice(0, 5)}
             </div>
           </Card.Body>
         </Card>

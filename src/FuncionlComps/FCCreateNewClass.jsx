@@ -84,47 +84,65 @@ export default function FCCreateNewClass() {
   }, []);
 
   const postNewClass = () => {
-    const url = "https://proj.ruppin.ac.il/bgroup92/prod/Class/PostNewClass";
-    let tagList = tags.map((tag) => tag.label);
-    const newClassObj = {
-      ClassDate: classDate,
-      StartTime: classStartTime,
-      EndTime: classEndTime,
-      ClassName: className,
-      SuperStudentId: superId,
-      NumOfParticipants: classParticipants,
-      ClassDescription: classDescription,
-      SuperName: superName,
-      Tags: tagList,
-    };
-
-    console.log(newClassObj);
-    console.log("start");
-    fetch(url, {
-      method: "POST",
-      body: JSON.stringify(newClassObj),
-      headers: new Headers({
-        "Content-Type": "application/json; charset=UTF-8",
-        Accept: "application/json; charset=UTF-8",
-      }),
-    })
-      .then((res) => {
-        console.log("res.ok", res.ok);
-        if (res.ok) {
-          localStorage.removeItem("classDets");
-          setModalOpen(true);
-        }
-        return res.json();
+    let dtStart = new Date(classDate)
+    dtStart.setHours(Number(classStartTime.slice(0,2)))
+    let dtEnd = new Date(classDate)
+    dtEnd.setHours(Number(classEndTime.slice(0,2)))
+    if (className === "" || classDate === "" || classDescription === "" || classStartTime === "" || classEndTime === "" || classParticipants === 0 || tags.length === 0) {
+      alert("כל השדות חובה! עליך למלות את כולן.")
+    }
+    else if (new Date(classDate).getDate() < new Date().getDate()) {
+      alert("תאריך שיעור שגוי!")
+    }
+    else if (new Date(classDate).toLocaleDateString("en-GB") === new Date().toLocaleDateString("en-GB") && dtStart.getHours() <= (new Date().getHours() + 1)) {
+      alert("שעת שיעור מוקדמת מדי! מומלץ לקבוע שעתיים מראש")
+    }
+    else if (dtEnd.getHours() < dtStart.getHours()) {
+      alert("שעת סיום חייבת להיות מאוחרת יותר משעת התחלה..")
+    }
+    else {
+      const url = "https://proj.ruppin.ac.il/bgroup92/prod/Class/PostNewClass";
+      let tagList = tags.map((tag) => tag.label);
+      const newClassObj = {
+        ClassDate: classDate,
+        StartTime: classStartTime,
+        EndTime: classEndTime,
+        ClassName: className,
+        SuperStudentId: superId,
+        NumOfParticipants: classParticipants,
+        ClassDescription: classDescription,
+        SuperName: superName,
+        Tags: tagList,
+      };
+  
+      console.log(newClassObj);
+      console.log("start");
+      fetch(url, {
+        method: "POST",
+        body: JSON.stringify(newClassObj),
+        headers: new Headers({
+          "Content-Type": "application/json; charset=UTF-8",
+          Accept: "application/json; charset=UTF-8",
+        }),
       })
-      .then(
-        (result) => {
-          console.log("FETCH PostRequest= ", result);
-        },
-        (error) => {
-          console.log("err post=", error);
-        }
-      );
-    console.log("end");
+        .then((res) => {
+          console.log("res.ok", res.ok);
+          if (res.ok) {
+            localStorage.removeItem("classDets");
+            setModalOpen(true);
+          }
+          return res.json();
+        })
+        .then(
+          (result) => {
+            console.log("FETCH PostRequest= ", result);
+          },
+          (error) => {
+            console.log("err post=", error);
+          }
+        );
+      console.log("end");
+    }
   };
 
   const BackToHomePage = () => {
