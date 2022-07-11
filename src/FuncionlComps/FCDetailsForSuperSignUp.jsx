@@ -163,9 +163,9 @@ export default function FCDetailsForSuperSignUp(props) {
         method: "POST",
         body: formData,
       })
-        .then((response) => {
-          if (response.ok) //console.log("Success");
-        })
+        // .then((response) => {
+        //   if (response.ok) //console.log("Success");
+        // })
         .then(
           (result) => {
             //console.log("Result =>" + result);
