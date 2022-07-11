@@ -20,16 +20,16 @@ export default function FCShowSuperFutureClasses() {
 
   useEffect(() => {
     setClasses(state.FutreClasses);
-    console.log(classes);
+    //console.log(classes);
   }, [state.FutreClasses, classes]);
 
   const register = (classCode, RegistrationPoint) => {
-    console.log(classCode);
+    //console.log(classCode);
     const requestToRegister = {
       StudentId: userDetails.StudentId, //state.StudentId
       ClassCode: classCode,
     };
-    console.log(requestToRegister);
+    //console.log(requestToRegister);
     const classToModal = classes.find((c) => c.ClassCode === classCode);
     let classToConfirmModal = {
       classCode: classToModal.ClassCode,
@@ -52,7 +52,7 @@ export default function FCShowSuperFutureClasses() {
       }),
     })
       .then((res) => {
-        console.log("res.ok", res.ok);
+        //console.log("res.ok", res.ok);
         if (res.ok) {
           setConfirmModal(true);
         }
@@ -60,10 +60,10 @@ export default function FCShowSuperFutureClasses() {
       })
       .then(
         (result) => {
-          console.log(result);
+          //console.log(result);
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
   };

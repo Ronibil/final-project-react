@@ -20,7 +20,7 @@ export default function FCSuperHomePage() {
   const [isOpenDeleteImage, SetIsOpenDeleteImage] = useState(false);
 
   useEffect(() => {
-    console.log(UserDetails);
+    //console.log(UserDetails);
     const urlGetSuperDetails =
       "https://proj.ruppin.ac.il/bgroup92/prod/SuperStudent/GetSuperLandingPageDetails";
     fetch(urlGetSuperDetails, {
@@ -32,12 +32,12 @@ export default function FCSuperHomePage() {
       }),
     })
       .then((res) => {
-        console.log("res.ok", res.ok);
+        //console.log("res.ok", res.ok);
         return res.json();
       })
       .then(
         (result) => {
-          console.log("FETCH PostRequest= ", result);
+          //console.log("FETCH PostRequest= ", result);
           setSuperDetails({
             StudentId: result.StudentId,
             FullName: result.FullName,
@@ -53,7 +53,7 @@ export default function FCSuperHomePage() {
           setClassFutre(result.FutreClasses);
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
   }, [renderAgain]);
@@ -79,7 +79,7 @@ export default function FCSuperHomePage() {
     //Type of file.need to be-{image/jpeg}
     const fileType = newFileToUpload.type;
     if (fileType === "image/jpeg") {
-      console.log("this is image/jpeg !! continue");
+      //console.log("this is image/jpeg !! continue");
       //Create FormData.
       const formData = new FormData();
       formData.append(imageName, file);
@@ -89,21 +89,21 @@ export default function FCSuperHomePage() {
         body: formData,
       })
         .then((response) => {
-          if (response.ok) console.log("Success");
+          if (response.ok) //console.log("Success");
           //setRenderAgain for activate useEffect.
           setIsOpen(false);
           setRenderAgain(file);
         })
         .then(
           (result) => {
-            console.log("Result =>" + result);
+            //console.log("Result =>" + result);
           },
           (error) => {
-            console.log("Error!!! " + error);
+            //console.log("Error!!! " + error);
           }
         );
     } else {
-      console.log("this is not image/jpeg");
+      //console.log("this is not image/jpeg");
     }
   };
   const CloseModalDelete = () => {
@@ -121,14 +121,14 @@ export default function FCSuperHomePage() {
       method: "PUT",
     }).then((response) => {
       if (response.ok) {
-        console.log("Success");
+        //console.log("Success");
         CloseModalDelete();
         setRenderAgain('renderAgain!');
       }
     }).then((result) => {
-      console.log("Result =>" + result);
+      //console.log("Result =>" + result);
     }, (error) => {
-      console.log("Error!!! " + error);
+      //console.log("Error!!! " + error);
     });
   }
 

@@ -71,8 +71,8 @@ export default function FCUpdateSuperClassPage() {
       EndTime: classEndTime,
       Tags: Tags
     }
-    console.log(updatedClass)
-    console.log("start")
+    //console.log(updatedClass)
+    //console.log("start")
     fetch(updateClassUrl, {
       method: "PUT",
       body: JSON.stringify(updatedClass),
@@ -82,9 +82,9 @@ export default function FCUpdateSuperClassPage() {
       }),
     })
       .then((res) => {
-        console.log("res=", res);
-        console.log("res.status", res.status);
-        console.log("res.ok", res.ok);
+        //console.log("res=", res);
+        //console.log("res.status", res.status);
+        //console.log("res.ok", res.ok);
         if (res.ok) {
           setModalOpen(true)
         }
@@ -92,13 +92,13 @@ export default function FCUpdateSuperClassPage() {
       })
       .then(
         (result) => {
-          console.log(result);
+          //console.log(result);
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
-    console.log("end")
+    //console.log("end")
   }
 
   const BackToHomePage = () => {

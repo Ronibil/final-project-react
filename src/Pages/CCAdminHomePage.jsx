@@ -17,7 +17,7 @@ class CCAdminHomePage extends Component {
     let superRequestUrl =
       "https://proj.ruppin.ac.il/bgroup92/prod/RequestToJoinSuper/getall";
 
-    console.log("start1")
+    //console.log("start1")
     fetch(requestUrl, {
       method: "GET",
       headers: new Headers({
@@ -26,23 +26,23 @@ class CCAdminHomePage extends Component {
       }),
     })
       .then((res) => {
-        console.log("res=", res);
-        console.log("res.status", res.status);
-        console.log("res.ok", res.ok);
+        //console.log("res=", res);
+        //console.log("res.status", res.status);
+        //console.log("res.ok", res.ok);
         return res.json();
       })
       .then(
         (result) => {
-          console.log("fetch btnFetchGetStudentRequests= ", result);
+          //console.log("fetch btnFetchGetStudentRequests= ", result);
           this.setState({ studentRequests: result });
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
-    console.log("end1")
+    //console.log("end1")
 
-    console.log("start2")
+    //console.log("start2")
     fetch(superRequestUrl, {
       method: "GET",
       headers: new Headers({
@@ -51,21 +51,21 @@ class CCAdminHomePage extends Component {
       }),
     })
       .then((res) => {
-        console.log("res=", res);
-        console.log("res.status", res.status);
-        console.log("res.ok", res.ok);
+        //console.log("res=", res);
+        //console.log("res.status", res.status);
+        //console.log("res.ok", res.ok);
         return res.json();
       })
       .then(
         (result) => {
-          console.log("fetch btnFetchGetSuperRequests= ", result);
+          //console.log("fetch btnFetchGetSuperRequests= ", result);
           this.setState({ superRequests: result });
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
-    console.log("end2")
+    //console.log("end2")
   };
 
   devideRequests = (s) => {
@@ -78,8 +78,8 @@ class CCAdminHomePage extends Component {
       );
       return this.buildRequestsArray(superReq, req);
     });
-    console.log("All Requests - ", requestsOnHold);
-    console.log("Combined Requests - ", combinedRequests);
+    //console.log("All Requests - ", requestsOnHold);
+    //console.log("Combined Requests - ", combinedRequests);
     this.setState({ arrToShow: combinedRequests });
     document.getElementsByTagName("table")[0].style.display = "block";
   };

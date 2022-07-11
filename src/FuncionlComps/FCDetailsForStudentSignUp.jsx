@@ -35,7 +35,7 @@ export default function FCDetailsForStudentSignUp(props) {
       BirthDate: sBirthdate,
       City: sCity,
     };
-    console.log(newStudentRequest);
+    //console.log(newStudentRequest);
     if (
       sID === "" ||
       sFullName === "" ||
@@ -70,9 +70,9 @@ export default function FCDetailsForStudentSignUp(props) {
       RequestStatus: "onHold",
       RequestDate: currentDate,
     };
-    console.log(newStudentRequest);
+    //console.log(newStudentRequest);
 
-    console.log("start");
+    //console.log("start");
     fetch(LocalUrl, {
       method: "POST",
       body: JSON.stringify(newStudentRequest),
@@ -82,20 +82,20 @@ export default function FCDetailsForStudentSignUp(props) {
       }),
     })
       .then((res) => {
-        console.log("res.ok", res.ok);
+        //console.log("res.ok", res.ok);
         msgBox(res.ok);
         return res.json();
       })
       .then(
         (result) => {
-          console.log("FETCH PostRequest= ", result);
-          console.log(result.RequsetNum);
+          //console.log("FETCH PostRequest= ", result);
+          //console.log(result.RequsetNum);
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
-    console.log("end");
+    //console.log("end");
   };
 
   const fetchCities = (inputValue, callback) => {
@@ -123,7 +123,7 @@ export default function FCDetailsForStudentSignUp(props) {
     const user = {
       Email: email,
     };
-    console.log(user);
+    //console.log(user);
     fetch(Url, {
       method: "POST",
       body: JSON.stringify(user),
@@ -133,13 +133,13 @@ export default function FCDetailsForStudentSignUp(props) {
       }),
     })
       .then((res) => {
-        console.log("res.status", res.status);
-        console.log("res.ok", res.ok);
+        //console.log("res.status", res.status);
+        //console.log("res.ok", res.ok);
         return res.json();
       })
       .then(
         (result) => {
-          console.log(result);
+          //console.log(result);
           if (result === "found") {
             setEmailError("!מייל זה קיים במערכת");
             setSEmail("");
@@ -149,7 +149,7 @@ export default function FCDetailsForStudentSignUp(props) {
           }
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
   };

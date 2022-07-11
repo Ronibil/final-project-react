@@ -30,18 +30,18 @@ export default function FCDetailsForSuperSignUp(props) {
       }),
     })
       .then((res) => {
-        console.log("res=", res);
-        console.log("res.status", res.status);
-        console.log("res.ok", res.ok);
+        //console.log("res=", res);
+        //console.log("res.status", res.status);
+        //console.log("res.ok", res.ok);
         return res.json();
       })
       .then(
         (result) => {
-          console.log("fetch btnFetchGetDepartments= ", result);
+          //console.log("fetch btnFetchGetDepartments= ", result);
           setDepartments(result);
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
   }, []);
@@ -72,9 +72,9 @@ export default function FCDetailsForSuperSignUp(props) {
       RequestStatus: "onHold",
       RequestDate: currentDate,
     };
-    // console.log(newSuperRequest);
+    // //console.log(newSuperRequest);
 
-    console.log("start");
+    //console.log("start");
     fetch(LocalUrl, {
       method: "POST",
       body: JSON.stringify(newSuperRequest),
@@ -84,22 +84,22 @@ export default function FCDetailsForSuperSignUp(props) {
       }),
     })
       .then((res) => {
-        console.log("res=", res);
-        console.log("res.status", res.status);
-        console.log("res.ok", res.ok);
+        //console.log("res=", res);
+        //console.log("res.status", res.status);
+        //console.log("res.ok", res.ok);
         return res.json();
       })
       .then(
         (result) => {
-          console.log("FETCH PostRequest= ", result);
-          console.log(result.RequsetNum);
+          //console.log("FETCH PostRequest= ", result);
+          //console.log(result.RequsetNum);
           PostSuper(result.RequsetNum);
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
-    console.log("end");
+    //console.log("end");
   };
 
   // post new super student request to db - fetch post
@@ -114,9 +114,9 @@ export default function FCDetailsForSuperSignUp(props) {
       DepartmentName: superDepartmet,
       // Image: superImage,
     };
-    console.log(superRequest);
+    //console.log(superRequest);
 
-    console.log("start");
+    //console.log("start");
     fetch(superUrl, {
       method: "POST",
       body: JSON.stringify(superRequest),
@@ -126,22 +126,22 @@ export default function FCDetailsForSuperSignUp(props) {
       }),
     })
       .then((res) => {
-        console.log("res=", res);
-        console.log("res.status", res.status);
-        console.log("res.ok", res.ok);
+        //console.log("res=", res);
+        //console.log("res.status", res.status);
+        //console.log("res.ok", res.ok);
         msgBox(res.ok);
         return res.json();
       })
       .then(
         (result) => {
-          console.log("FETCH PostSuperRequest= ", result);
+          //console.log("FETCH PostSuperRequest= ", result);
           UploadImage();
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
-    console.log("end");
+    //console.log("end");
   };
 
   const UploadImage = () => {
@@ -154,7 +154,7 @@ export default function FCDetailsForSuperSignUp(props) {
     //Type of file.need to be-{image/jpeg}
     const fileType = superImage.type;
     if (fileType === "image/jpeg") {
-      console.log("this is image/jpeg !! continue");
+      //console.log("this is image/jpeg !! continue");
       //Create FormData.
       const formData = new FormData();
       formData.append(imageName, file);
@@ -164,18 +164,18 @@ export default function FCDetailsForSuperSignUp(props) {
         body: formData,
       })
         .then((response) => {
-          if (response.ok) console.log("Success");
+          if (response.ok) //console.log("Success");
         })
         .then(
           (result) => {
-            console.log("Result =>" + result);
+            //console.log("Result =>" + result);
           },
           (error) => {
-            console.log("Error!!! " + error);
+            //console.log("Error!!! " + error);
           }
         );
     } else {
-      console.log("this is not image/jpeg");
+      //console.log("this is not image/jpeg");
     }
   };
 

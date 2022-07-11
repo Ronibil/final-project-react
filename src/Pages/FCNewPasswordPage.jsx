@@ -29,7 +29,7 @@ export default function FCNewPasswordPage() {
       StudentId: userDetails.StudentId,
       Password: confirmPassword
     }
-    console.log('start');
+    //console.log('start');
     fetch(putPassUrl, {
       method: "PUT",
       body: JSON.stringify(updatedPass),
@@ -39,9 +39,9 @@ export default function FCNewPasswordPage() {
       }),
     })
       .then((res) => {
-        console.log("res=", res);
-        console.log("res.status", res.status);
-        console.log("res.ok", res.ok);
+        //console.log("res=", res);
+        //console.log("res.status", res.status);
+        //console.log("res.ok", res.ok);
         if (res.ok) {
           setMessage("..הסיסמא עודכנה בהצלחה! עליך לבצע התחברות מחדש")
         }
@@ -52,14 +52,14 @@ export default function FCNewPasswordPage() {
       })
       .then(
         (result) => {
-          console.log("fetch updated Password= ", result);
+          //console.log("fetch updated Password= ", result);
           setType(result)
         },
         (error) => {
-          console.log("err put=", error);
+          //console.log("err put=", error);
         }
       );
-    console.log("end");
+    //console.log("end");
   }
 
   const handleCurrentPass = (e) => {
@@ -97,7 +97,7 @@ export default function FCNewPasswordPage() {
       alert("אחד או יותר מהפרטים שהזנת שגויים")
     }
     else {
-      console.log("send!")
+      //console.log("send!")
       txtBoxes[1].style.border = "1px solid green"
       txtBoxes[2].style.border = "1px solid green"
       fetchUpdatePassword()

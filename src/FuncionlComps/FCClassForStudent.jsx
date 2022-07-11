@@ -44,12 +44,12 @@ export default function FCClassForStudent() {
       }),
     })
       .then((res) => {
-        console.log("res.ok", res.ok);
+        //console.log("res.ok", res.ok);
         return res.json();
       })
       .then(
         (result) => {
-          console.log("FETCH PostRequest= ", result);
+          //console.log("FETCH PostRequest= ", result);
           setStudentDetails({
             StudentId: result.StudentId,
             FullName: result.FullName,
@@ -58,21 +58,21 @@ export default function FCClassForStudent() {
           setFutreClasses(result.FutreClasses);
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
   }, []);
 
   const studentRank = ({ studentId, classCode, rating, ratingDescription }) => {
     const url = "https://proj.ruppin.ac.il/bgroup92/prod/RegisteredTo/StudentRank";
-    console.log();
+    //console.log();
     const detailsForRank = {
       StudentId: studentId,
       ClassCode: classCode,
       RankValue: rating,
       RankDescription: ratingDescription
     }
-    console.log(detailsForRank);
+    //console.log(detailsForRank);
     setStarsModal(false);
     fetch(url, {
       method: "PUT",
@@ -83,17 +83,17 @@ export default function FCClassForStudent() {
       }),
     })
       .then((res) => {
-        console.log("res.ok", res.ok);
+        //console.log("res.ok", res.ok);
         return res.json();
       })
       .then(
         (result) => {
-          console.log("FETCH PostRequest= ", result);
+          //console.log("FETCH PostRequest= ", result);
           navigate("/studentHomePage", { state: userDetails })
 
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
   }
@@ -114,7 +114,7 @@ export default function FCClassForStudent() {
       }),
     })
       .then((res) => {
-        console.log("res.ok", res.ok);
+        //console.log("res.ok", res.ok);
         if (res.ok) {
           setAreYouSureModal(false);
           setConfirmModal(true);
@@ -123,14 +123,14 @@ export default function FCClassForStudent() {
       })
       .then(
         (result) => {
-          console.log(result);
+          //console.log(result);
           let newFutreClasses = futreClasses.filter(
             (c) => c.ClassCode !== classCode
           );
           setFutreClasses(newFutreClasses);
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
   };
@@ -153,15 +153,15 @@ export default function FCClassForStudent() {
       classParticipants: ClassDetails2Remove.NumOfParticipants,
       classStartTime: ClassDetails2Remove.StartTime,
     };
-    console.log(classToRemove);
+    //console.log(classToRemove);
     setClassDetails(classToRemove);
   };
 
   const ShowModalStars = (classCode) => {
     setClassCodeRank(classCode)
     setStarsModal(true);
-    console.log(classCode);
-    console.log(studentDetails);
+    //console.log(classCode);
+    //console.log(studentDetails);
   }
 
   const HideModalStars = () => {

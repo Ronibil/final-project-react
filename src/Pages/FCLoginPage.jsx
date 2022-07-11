@@ -24,7 +24,7 @@ export default function FCLoginPage() {
       Email: Email,
       Password: Password,
     };
-    console.log(user);
+    //console.log(user);
     fetch(Url, {
       method: "POST",
       body: JSON.stringify(user),
@@ -34,8 +34,8 @@ export default function FCLoginPage() {
       }),
     })
       .then((res) => {
-        console.log("res.status", res.status);
-        console.log("res.ok", res.ok);
+        //console.log("res.status", res.status);
+        //console.log("res.ok", res.ok);
         if (res.ok) {
           PutDetailsToLocalStorage(user);
         }
@@ -43,11 +43,11 @@ export default function FCLoginPage() {
       })
       .then(
         (TypeOfUser) => {
-          console.log(TypeOfUser);
+          //console.log(TypeOfUser);
           CheckTypeUser(TypeOfUser);
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
   };
@@ -75,7 +75,7 @@ export default function FCLoginPage() {
     } else if (TypeOfUser === "admin") {
       Navigate("/adminHomePage", { state: UserDetails });
     } else {
-      console.log("not found");
+      //console.log("not found");
       MassegeErrorLogin();
     }
   };

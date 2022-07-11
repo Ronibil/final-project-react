@@ -28,12 +28,12 @@ export default function FCClassCard({
       }),
     })
       .then((res) => {
-        console.log("res.ok", res.ok);
+        //console.log("res.ok", res.ok);
         return res.json();
       })
       .then(
         (data) => {
-          console.log(data);
+          //console.log(data);
           setSuperDetails({
             Phone: data.Phone,
             Email: data.Email,
@@ -42,7 +42,7 @@ export default function FCClassCard({
           //window.location.replace(`https://wa.me/${superDetails.Phone}`);
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
   };

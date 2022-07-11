@@ -12,7 +12,7 @@ export default function FCChangePasswordPage() {
   const [modalOpen, setModalOpen] = useState(false);
   const fetchNewPass = () => {
     const newPassUrl = "https://proj.ruppin.ac.il/bgroup92/prod/Student/NewPassword/"
-    console.log("start")
+    //console.log("start")
     fetch(newPassUrl + id, {
       method: "POST",
       headers: new Headers({
@@ -21,9 +21,9 @@ export default function FCChangePasswordPage() {
       }),
     })
       .then((res) => {
-        console.log("res=", res);
-        console.log("res.status", res.status);
-        console.log("res.ok", res.ok);
+        //console.log("res=", res);
+        //console.log("res.status", res.status);
+        //console.log("res.ok", res.ok);
         if (res.ok) {
           setModalOpen(true)
         }
@@ -34,13 +34,13 @@ export default function FCChangePasswordPage() {
       })
       .then(
         (result) => {
-          console.log("FETCH Post Email = ", result);
+          //console.log("FETCH Post Email = ", result);
         },
         (error) => {
-          console.log("err post =", error);
+          //console.log("err post =", error);
         }
       );
-    console.log("end")
+    //console.log("end")
   }
   const BackToHomePage = () => {
     navigate("/")

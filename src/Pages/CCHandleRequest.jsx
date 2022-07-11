@@ -12,7 +12,7 @@ class CCHandleRequest extends Component {
   }
   // stam for check
   demo = () => {
-    console.log(this.state.requestObject);
+    //console.log(this.state.requestObject);
   };
   
   // transform gender from on char to word in order to show
@@ -63,7 +63,7 @@ class CCHandleRequest extends Component {
   generatePassword = (n) => { // n = request number which is uniqe
     let randomPasswordstring = Math.random().toString(36).slice(-5);
     let userPassword = n + randomPasswordstring
-    console.log(userPassword)
+    //console.log(userPassword)
     return userPassword
   }
 
@@ -86,9 +86,9 @@ class CCHandleRequest extends Component {
       RegistrationDate: currentDate
     };
     // debugger;
-    console.log(student);
+    //console.log(student);
 
-    console.log("start")
+    //console.log("start")
     fetch(StudentUrl, {
       method: "POST",
       body: JSON.stringify(student),
@@ -98,9 +98,9 @@ class CCHandleRequest extends Component {
       }),
     })
       .then((res) => {
-        console.log("res=", res);
-        console.log("res.status", res.status);
-        console.log("res.ok", res.ok);
+        //console.log("res=", res);
+        //console.log("res.status", res.status);
+        //console.log("res.ok", res.ok);
         if (res.ok && request.type === "סופר סטודנט") {
           this.postSuper(s)
         }
@@ -111,13 +111,13 @@ class CCHandleRequest extends Component {
       })
       .then(
         (result) => {
-          console.log("FETCH PostStudent= ", result);
+          //console.log("FETCH PostStudent= ", result);
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
-    console.log("end")
+    //console.log("end")
   };
 
   // pass status to detrmine how to continue
@@ -140,7 +140,7 @@ class CCHandleRequest extends Component {
           RequestStatus: status
       }
 
-      console.log('start');
+      //console.log('start');
       fetch(PutStatustUrl, {
         method: "PUT",
         body: JSON.stringify(updatedStatus),
@@ -150,9 +150,9 @@ class CCHandleRequest extends Component {
         }),
       })
         .then((res) => {
-          console.log("res=", res);
-          console.log("res.status", res.status);
-          console.log("res.ok", res.ok);
+          //console.log("res=", res);
+          //console.log("res.status", res.status);
+          //console.log("res.ok", res.ok);
           if (res.ok) {
             this.movePage(status)
           }
@@ -160,33 +160,33 @@ class CCHandleRequest extends Component {
         })
         .then(
           (result) => {
-            console.log("fetch updated Request Status= ", result);
+            //console.log("fetch updated Request Status= ", result);
           },
           (error) => {
-            console.log("err post=", error);
+            //console.log("err post=", error);
           }
         );
-      console.log("end");
+      //console.log("end");
   };
 
   //hide page and show message depending on request status
   movePage = (s) => {
     if (s === "approved") {
-      console.log("aywa aleeeek");
+      //console.log("aywa aleeeek");
       document.getElementById("msgBlock").style.display = "block";
       document.getElementById("fldBlock").style.display = "none";
     }
     else if (s === "rejected") {
-      console.log("you are out dude");
+      //console.log("you are out dude");
       document.getElementById("succesMsg").innerHTML = "הבקשה נדחתה! הסטודנט לא הוכנס למערכת";
       document.getElementById("succesMsg").style.color = "red";
       document.getElementById("msgBlock").style.display = "block";
       document.getElementById("fldBlock").style.display = "none";
     }
     else {
-      console.log("did not got in")
-      console.log(this.state.post)
-      console.log(s)
+      //console.log("did not got in")
+      //console.log(this.state.post)
+      //console.log(s)
     }
   };
 
@@ -201,9 +201,9 @@ class CCHandleRequest extends Component {
       Description: request.Description,
       DepartmentName: request.DepartmentName,
     };
-    console.log(superStudent);
+    //console.log(superStudent);
 
-    console.log("start")
+    //console.log("start")
     fetch(SuperUrl, {
       method: "POST",
       body: JSON.stringify(superStudent),
@@ -213,9 +213,9 @@ class CCHandleRequest extends Component {
       }),
     })
       .then((res) => {
-        console.log("res=", res);
-        console.log("res.status", res.status);
-        console.log("res.ok", res.ok);
+        //console.log("res=", res);
+        //console.log("res.status", res.status);
+        //console.log("res.ok", res.ok);
         if (res.ok) {
           this.updateStatus(s);
         }
@@ -223,13 +223,13 @@ class CCHandleRequest extends Component {
       })
       .then(
         (result) => {
-          console.log("FETCH PostSuperStudent= ", result);
+          //console.log("FETCH PostSuperStudent= ", result);
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
-    console.log("end")
+    //console.log("end")
   };
 
   // show message after approve or deny

@@ -22,7 +22,7 @@ export default function FCFutreClasses() {
   const [confirmModal, setConfirmModal] = useState(false);
 
   const deleteClassByClassCode = (ClassCode) => {
-    console.log(ClassCode);
+    //console.log(ClassCode);
     const url = `https://proj.ruppin.ac.il/bgroup92/prod/Class/DeleteClassByClassCode/${ClassCode}`;
     fetch(url, {
       method: "DELETE",
@@ -32,7 +32,7 @@ export default function FCFutreClasses() {
       }),
     })
       .then((res) => {
-        console.log("res.ok", res.ok);
+        //console.log("res.ok", res.ok);
         if (res.ok) {
           setAreYouSureModal(false);
           setConfirmModal(true);
@@ -41,14 +41,14 @@ export default function FCFutreClasses() {
       })
       .then(
         (result) => {
-          console.log("FETCH PostRequest= ", result);
+          //console.log("FETCH PostRequest= ", result);
           let newFutreClass = futreClass.filter(
             (c) => c.ClassCode !== ClassCode
           );
           setFutreClass(newFutreClass);
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
   };
@@ -67,7 +67,7 @@ export default function FCFutreClasses() {
       classParticipants: ClassDetails2Remove.NumOfParticipants,
       classStartTime: ClassDetails2Remove.StartTime,
     };
-    console.log(classToRemove);
+    //console.log(classToRemove);
     setClassDetails(classToRemove);
   };
 

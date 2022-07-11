@@ -56,7 +56,7 @@ export default function SearchClassesPage() {
 
   // Get suggestions for lessons if the student has previously registered for other lessons in the system.
   useEffect(() => {
-    console.log(state.StudentId);
+    //console.log(state.StudentId);
     const url = `https://proj.ruppin.ac.il/bgroup92/prod/Class/GetSuggestionsClasses/${state.StudentId}`;
     fetch(url, {
       method: "GET",
@@ -66,7 +66,7 @@ export default function SearchClassesPage() {
       }),
     })
       .then((res) => {
-        console.log("res.ok", res.ok);
+        //console.log("res.ok", res.ok);
         if (res.ok === false) {
           setSuggestionsClasses([]);
           throw new Error(res.statusText);
@@ -75,11 +75,11 @@ export default function SearchClassesPage() {
       })
       .then(
         (result) => {
-          console.log("FETCH PostRequest= ", result);
+          //console.log("FETCH PostRequest= ", result);
           setSuggestionsClasses(result);
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
   }, []);
@@ -98,7 +98,7 @@ export default function SearchClassesPage() {
         }),
       })
         .then((res) => {
-          console.log("res.ok", res.ok);
+          //console.log("res.ok", res.ok);
           return res.json();
         })
         .then(
@@ -107,29 +107,29 @@ export default function SearchClassesPage() {
               result ===
               "Sorry there are still no classes with tags that you sended. please try another tags."
             ) {
-              console.log("not found");
+              //console.log("not found");
               setMsNoClasses(true);
               setClasses([]);
             } else {
-              console.log(result);
+              //console.log(result);
               setMsNoClasses(false);
               setClasses(result);
             }
           },
           (error) => {
-            console.log("err post=", error);
+            //console.log("err post=", error);
           }
         );
     }
   };
 
   const register = (classCode, RegistrationPoint) => {
-    console.log(classCode);
+    //console.log(classCode);
     const requestToRegister = {
       StudentId: userDetails.StudentId, //state.StudentId
       ClassCode: classCode,
     };
-    console.log(requestToRegister);
+    //console.log(requestToRegister);
     if (RegistrationPoint === "suggestionsClasses") {
       const classToModal = suggestionsClasses.find(
         (c) => c.ClassCode === classCode
@@ -166,7 +166,7 @@ export default function SearchClassesPage() {
       }),
     })
       .then((res) => {
-        console.log("res.ok", res.ok);
+        //console.log("res.ok", res.ok);
         if (res.ok) {
           setConfirmModal(true);
         }
@@ -174,10 +174,10 @@ export default function SearchClassesPage() {
       })
       .then(
         (result) => {
-          console.log(result);
+          //console.log(result);
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
   };

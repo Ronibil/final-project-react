@@ -64,9 +64,9 @@ export default function FCCreateNewClass() {
     fetchData();
     if (JSON.parse(localStorage.getItem("classDets")) !== null) {
       const dets = JSON.parse(localStorage.getItem("classDets"));
-      console.log(dets);
+      //console.log(dets);
       let elemnts = document.getElementsByName("hold");
-      console.log(elemnts);
+      //console.log(elemnts);
       elemnts[0].value = dets.ClassName;
       setClassName(dets.ClassName);
       elemnts[1].value = dets.ClassDescription;
@@ -115,8 +115,8 @@ export default function FCCreateNewClass() {
         Tags: tagList,
       };
   
-      console.log(newClassObj);
-      console.log("start");
+      //console.log(newClassObj);
+      //console.log("start");
       fetch(url, {
         method: "POST",
         body: JSON.stringify(newClassObj),
@@ -126,7 +126,7 @@ export default function FCCreateNewClass() {
         }),
       })
         .then((res) => {
-          console.log("res.ok", res.ok);
+          //console.log("res.ok", res.ok);
           if (res.ok) {
             localStorage.removeItem("classDets");
             setModalOpen(true);
@@ -135,13 +135,13 @@ export default function FCCreateNewClass() {
         })
         .then(
           (result) => {
-            console.log("FETCH PostRequest= ", result);
+            //console.log("FETCH PostRequest= ", result);
           },
           (error) => {
-            console.log("err post=", error);
+            //console.log("err post=", error);
           }
         );
-      console.log("end");
+      //console.log("end");
     }
   };
 

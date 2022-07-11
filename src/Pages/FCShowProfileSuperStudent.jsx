@@ -21,7 +21,7 @@ export default function FCShowProfileSuperStudent() {
 
   useEffect(() => {
     const url = `https://proj.ruppin.ac.il/bgroup92/prod/SuperStudent/ShowSuperDetailsById/${superId}`;
-    console.log(superId);
+    //console.log(superId);
     fetch(url, {
       method: "POST",
       headers: new Headers({
@@ -30,12 +30,12 @@ export default function FCShowProfileSuperStudent() {
       }),
     })
       .then((res) => {
-        console.log("res.ok", res.ok);
+        //console.log("res.ok", res.ok);
         return res.json();
       })
       .then(
         (data) => {
-          console.log(data);
+          //console.log(data);
           setSuperDetails({
             StudentId: data.StudentId,
             FullName: data.FullName,
@@ -52,7 +52,7 @@ export default function FCShowProfileSuperStudent() {
           });
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
   }, [superId]);

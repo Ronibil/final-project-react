@@ -26,7 +26,7 @@ export default function FCBestToTeach() {
       }),
     })
       .then((res) => {
-        console.log("res.ok", res.ok);
+        //console.log("res.ok", res.ok);
         if (res.ok === false) {
           setHotTags([]);
           throw new Error(res.statusText);
@@ -35,11 +35,11 @@ export default function FCBestToTeach() {
       })
       .then(
         (result) => {
-          console.log(result);
+          //console.log(result);
           setHotTags(result);
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
   }, []);

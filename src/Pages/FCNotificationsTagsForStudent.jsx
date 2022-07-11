@@ -64,7 +64,7 @@ export default function NotificationsTagsForStudent() {
       }),
     })
       .then((res) => {
-        console.log("res.ok", res.ok);
+        //console.log("res.ok", res.ok);
         if (res.ok === false) {
           setTagsNotifications([]);
           throw new Error(res.statusText);
@@ -73,22 +73,22 @@ export default function NotificationsTagsForStudent() {
       })
       .then(
         (result) => {
-          console.log(result);
+          //console.log(result);
           setTagsNotifications(result);
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
   }, []);
 
   const register = (classCode, RegistrationPoint) => {
-    console.log(classCode);
+    //console.log(classCode);
     const requestToRegister = {
       StudentId: userDetails.StudentId, //state.StudentId
       ClassCode: classCode,
     };
-    console.log(requestToRegister);
+    //console.log(requestToRegister);
     const classToModal = classes.find((c) => c.ClassCode === classCode);
     let classToConfirmModal = {
       classCode: classToModal.ClassCode,
@@ -111,7 +111,7 @@ export default function NotificationsTagsForStudent() {
       }),
     })
       .then((res) => {
-        console.log("res.ok", res.ok);
+        //console.log("res.ok", res.ok);
         if (res.ok) {
           setConfirmModal(true);
         }
@@ -119,10 +119,10 @@ export default function NotificationsTagsForStudent() {
       })
       .then(
         (result) => {
-          console.log(result);
+          //console.log(result);
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
   };
@@ -151,24 +151,24 @@ export default function NotificationsTagsForStudent() {
       }),
     })
       .then((res) => {
-        console.log("res.ok", res.ok);
+        //console.log("res.ok", res.ok);
         return res.json();
       })
       .then(
         (result) => {
-          console.log(result);
+          //console.log(result);
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
   };
 
   const removeTag = (tagName) => {
-    console.log(tagName);
+    //console.log(tagName);
     let newTagsArray = tagsNotifications.filter((t) => t.TagName !== tagName);
     setTagsNotifications(newTagsArray);
-    console.log(newTagsArray);
+    //console.log(newTagsArray);
 
     const url = `https://proj.ruppin.ac.il/bgroup92/prod/notification/UpdateTagsNotifications/${userDetails.StudentId}`;
     fetch(url, {
@@ -180,15 +180,15 @@ export default function NotificationsTagsForStudent() {
       }),
     })
       .then((res) => {
-        console.log("res.ok", res.ok);
+        //console.log("res.ok", res.ok);
         return res.json();
       })
       .then(
         (result) => {
-          console.log(result);
+          //console.log(result);
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
   };
@@ -207,7 +207,7 @@ export default function NotificationsTagsForStudent() {
         }),
       })
         .then((res) => {
-          console.log("res.ok", res.ok);
+          //console.log("res.ok", res.ok);
           return res.json();
         })
         .then(
@@ -216,15 +216,15 @@ export default function NotificationsTagsForStudent() {
               result ===
               "Sorry there are still no classes with tags that you sended. please try another tags."
             ) {
-              console.log("not found");
+              //console.log("not found");
               setClasses([]);
             } else {
-              console.log(result);
+              //console.log(result);
               setClasses(result);
             }
           },
           (error) => {
-            console.log("err post=", error);
+            //console.log("err post=", error);
           }
         );
     }

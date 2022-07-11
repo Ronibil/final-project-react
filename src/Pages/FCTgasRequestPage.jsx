@@ -16,14 +16,14 @@ export default function FCTgasRequestPage() {
       }),
     })
       .then((res) => {
-        console.log("res=", res);
-        console.log("res.status", res.status);
-        console.log("res.ok", res.ok);
+        //console.log("res=", res);
+        //console.log("res.status", res.status);
+        //console.log("res.ok", res.ok);
         return res.json();
       })
       .then(
         (result) => {
-          console.log("fetch Get Tags Requests= ", result);
+          //console.log("fetch Get Tags Requests= ", result);
           result.map(r => {
             r.TagRequestNum = newId
             newId++
@@ -32,7 +32,7 @@ export default function FCTgasRequestPage() {
           setTagsRequests(result);
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
   }, []);

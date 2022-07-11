@@ -20,7 +20,7 @@ export default function FCTagsInput() {
   useEffect(() => {
     if (JSON.parse(localStorage.getItem("classDets")) !== undefined) {
       const dets = JSON.parse(localStorage.getItem("classDets"))
-      console.log(dets)
+      //console.log(dets)
       setClassDets(dets)
     }
   }, []);
@@ -59,8 +59,8 @@ export default function FCTagsInput() {
       ClassName: state.ClassName,
       RequestDate: requestDate
     }
-    console.log(tagRequestObj)
-    console.log("start");
+    //console.log(tagRequestObj)
+    //console.log("start");
     fetch(LocalUrl, {
       method: "POST",
       body: JSON.stringify(tagRequestObj),
@@ -70,7 +70,7 @@ export default function FCTagsInput() {
       }),
     })
       .then((res) => {
-        console.log("res.ok", res.ok);
+        //console.log("res.ok", res.ok);
         if (res.ok) {
           setMessage("הבקשה נשלחה בהצלחה")
         }
@@ -84,17 +84,17 @@ export default function FCTagsInput() {
       })
       .then(
         (result) => {
-          console.log("FETCH PostRequest= ", result);
-          console.log(result.substring(0, 6))
+          //console.log("FETCH PostRequest= ", result);
+          //console.log(result.substring(0, 6))
           if (result.substring(0, 6) === "תגיות ") {
             setMessage(result)
           }
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
-    console.log("end");
+    //console.log("end");
   }
 
   const showMessage = () => {

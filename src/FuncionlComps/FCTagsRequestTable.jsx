@@ -35,7 +35,7 @@ export default function FCTagsRequestTable({tagsRequestArr}) {
   const postTag = (t, s) => {
     const newTagUrl = "https://proj.ruppin.ac.il/bgroup92/prod/Tags/PostNewTag"
     const newTag = t
-    console.log("start");
+    //console.log("start");
     fetch(newTagUrl, {
       method: "POST",
       body: JSON.stringify(newTag),
@@ -45,9 +45,9 @@ export default function FCTagsRequestTable({tagsRequestArr}) {
       }),
     })
       .then((res) => {
-        console.log("res=", res);
-        console.log("res.status", res.status);
-        console.log("res.ok", res.ok);
+        //console.log("res=", res);
+        //console.log("res.status", res.status);
+        //console.log("res.ok", res.ok);
         if (res.ok) {
           updateTagStatus(t, s)
         }
@@ -55,13 +55,13 @@ export default function FCTagsRequestTable({tagsRequestArr}) {
       })
       .then(
         (result) => {
-          console.log("FETCH Post Tag= ", result);
+          //console.log("FETCH Post Tag= ", result);
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
-    console.log("end");
+    //console.log("end");
   }
 
   const updateTagStatus = (tag, status) => {
@@ -70,7 +70,7 @@ export default function FCTagsRequestTable({tagsRequestArr}) {
       TagName: tag,
       RequestStatus: status
     }
-    console.log('start');
+    //console.log('start');
       fetch(putTagStatusUrl, {
         method: "PUT",
         body: JSON.stringify(updateTagObj),
@@ -80,9 +80,9 @@ export default function FCTagsRequestTable({tagsRequestArr}) {
         }),
       })
         .then((res) => {
-          console.log("res=", res);
-          console.log("res.status", res.status);
-          console.log("res.ok", res.ok);
+          //console.log("res=", res);
+          //console.log("res.status", res.status);
+          //console.log("res.ok", res.ok);
           if (res.ok) {
             removeRow(tag)
           }
@@ -90,13 +90,13 @@ export default function FCTagsRequestTable({tagsRequestArr}) {
         })
         .then(
           (result) => {
-            console.log("fetch updated Status= ", result);
+            //console.log("fetch updated Status= ", result);
           },
           (error) => {
-            console.log("err put=", error);
+            //console.log("err put=", error);
           }
         );
-      console.log("end");
+      //console.log("end");
   }
 
   const removeRow = (t) => {

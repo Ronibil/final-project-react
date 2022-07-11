@@ -20,7 +20,7 @@ export default function FCShowProfileSuperBtns({
       <Button
         className="m-1"
         onClick={() => {
-          console.log(FutreClasses);
+          //console.log(FutreClasses);
           navigate("/showSuperFutureClasses", {
             state: {
               FutreClasses,

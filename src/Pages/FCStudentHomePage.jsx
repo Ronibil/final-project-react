@@ -29,19 +29,19 @@ export default function StudentHomePage() {
       }),
     })
       .then((res) => {
-        console.log("res.ok", res.ok);
+        //console.log("res.ok", res.ok);
         return res.json();
       })
       .then(
         (result) => {
-          console.log("FETCH PostRequest= ", result);
+          //console.log("FETCH PostRequest= ", result);
           setStudentDetails({
             StudentId: result.StudentId,
             FullName: result.FullName,
           });
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
   }, []);
@@ -56,16 +56,16 @@ export default function StudentHomePage() {
       }),
     })
       .then((res) => {
-        console.log("res.ok", res.ok);
+        //console.log("res.ok", res.ok);
         return res.json();
       })
       .then(
         (result) => {
-          console.log("FETCH PostRequest= ", result);
+          //console.log("FETCH PostRequest= ", result);
           setRecommendation(result.TipContent);
         },
         (error) => {
-          console.log("err post=", error);
+          //console.log("err post=", error);
         }
       );
   }, []);
